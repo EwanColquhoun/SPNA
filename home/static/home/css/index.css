@@ -1,3 +1,5 @@
+/* ------------------------- Hero Section */
+
 #hero-image-section {
     background: url('/media/original/messyhands.png') no-repeat center;
     background-size: cover;
@@ -29,4 +31,19 @@
     height: 100%;
     width: 100%;
     background-color: rgba(0,0,0,0.3);
+}
+
+/* ------------------------- Quote Section */
+
+#quote-section {
+    background-color: #233452;
+    color: antiquewhite;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 30px;
+    font-weight: 500;
+    font-family: 'Moon Dance', cursive;
 }

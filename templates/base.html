@@ -13,7 +13,7 @@
     {% block corecss %}
     <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7_dtp.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Moon+Dance&family=Raleway:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Moon+Dance&family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/base.css' %}"> 
     {% endblock %}
 
@@ -108,8 +108,8 @@
     {% endblock %}
 
 
-    <footer>
-        <div id="footer" class="container-fluid  bg-blue">
+    <footer class=" fixed-bottom">
+        <div id="footer" class="container-fluid bg-blue">
             <div id="mailchimp-row" class="row">
                 <div class="col-12 col-md-2">
                     <img class="pl-3" src="../media/original/cropped-SPNA_logo_icon.png" width="100px" height="100px" alt="Cropped SPNA logo">

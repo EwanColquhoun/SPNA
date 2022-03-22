@@ -5,6 +5,8 @@ html {
 body {
     font-family: 'Raleway', sans-serif;
     font-weight: 800;
+    overflow-y: auto;
+    padding-bottom: 171px;
 }
 
 /* ------------------------------ Base */
@@ -36,6 +38,10 @@ footer a {
 .text-blue {
     color: rgb(55,105,142);
     font-weight: bold;
+}
+
+.bg-ant-white {
+    background-color: antiquewhite;
 }
 
 #footer {
@@ -108,6 +114,12 @@ footer a {
 
     .header-container {
         padding-top: 120px;
+    }
+}
+
+@media (max-width: 992px) {
+    body {
+        padding-bottom: 360px;
     }
 }
 
