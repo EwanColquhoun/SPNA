@@ -32,20 +32,20 @@
   <body>
     <header class="container-fluid fixed-top">
         <div id="topnav" class="bg-blue row pt-lg-2 d-none d-lg-flex">
-            <div class="col-12 col-lg-8 my-auto py-1 py-lg-0">
+            <div class="col-12 col-lg-10 my-auto py-1 py-lg-0">
                 <a href="{% url 'home' %}" class="nav-link main-logo-link">
                     <img src="../media/original/logo.png" alt="SPNA Logo">
                 </a>
             </div>
-            <div class="col-12 col-lg-2 my-auto py-lg-0 d-flex justify-content-end">
+            <!-- <div class="col-12 col-lg-2 my-auto py-lg-0 d-flex justify-content-end">
                 <a href="{% url 'home' %}" class="nav-link">
                     <div class="text-center other-nav">
                         <div><i class="fas fa-regular fa-comments"></i></div>
                         <p class="link-text my-0">Blog</p>
                     </div>
                 </a>
-            </div>           
-            <div class="col-12 col-lg-2 my-auto py-1 py-lg-0">
+            </div>            -->
+            <div class="col-12 col-lg-2 my-auto py-lg-0">
                 <ul class="list-inline list-unstyled text-center text-lg-right my-0">
                     <li class="list-inline-item dropdown">
                         <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -83,6 +83,9 @@
                         <a href="#">News</a>
                     </li>
                     <li class="nav-item">
+                        <a href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#">Contact</a>
                     </li>
                 </ul>
@@ -104,10 +107,11 @@
     <footer>
         <div id="footer" class="container-fluid  bg-blue">
             <div id="mailchimp-row" class="row">
-                <div class="col-12 col-md-4">
-                    <p class="footer-logo text-blue"><strong>SPNA</strong><br> Scottish Private Nursery Association</p>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <img class="pl-3" src="../media/original/cropped-SPNA_logo_icon.png" width="100px" height="100px" alt="Cropped SPNA logo">
+                    <p class="footer-logo text-blue my-auto pl-3">Scottish Private Nursery Association</p>
                 </div>
-                <div class="col-12 col-md-8">
+                <div class="col-12 col-md-6 col-lg-8">
                     <!-- Mail chimp form -->
                     <!-- Begin Mailchimp Signup Form -->
                     <div id="mc_embed_signup">
@@ -123,10 +127,8 @@
                                 <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
                                 <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_291280cf52030472eb64f0704_a51e9f2451" tabindex="-1" value="">
                                 </div>
-                                <div id="mc-submit"class="optionalParent">
-                                    <div>
-                                        <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button btn-blue">
-                                    </div>
+                                <div>
+                                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button btn-blue">
                                 </div>
                             </div>
                         </form>
@@ -136,11 +138,11 @@
             </div>
             <div id="inner-lower-footer" class="row">
                 <div class="col-12 text-center">
-                    <div class="pt-4">
+                    <div class="p-1">
                         <i class="fas fa-envelope"></i>
                         <a class="pl-1" href="mailto:communications@scottishpna.org">communications@scottishpna.org</a>
                     </div>
-                    <p class="text-muted">&copy 2022 E.Colquhoun </p>
+                    <span class="text-muted">&copy 2022 E.Colquhoun </span>
                 </div>
             </div>
         </div>

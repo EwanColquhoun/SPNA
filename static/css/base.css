@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
 
 html {
     height: 100%;
@@ -6,7 +6,7 @@ html {
 
 body {
     font-family: 'Raleway', sans-serif;
-    font-weight: 700;
+    font-weight: 800;
 }
 
 /* ------------------------------ Base */
@@ -37,6 +37,7 @@ footer a {
 
 .text-blue {
     color: rgb(55,105,142);
+    font-weight: bold;
 }
 
 #footer {
@@ -46,10 +47,15 @@ footer a {
     height: fit-content;
 }
 
-/* -------------------------------- Buttons */
-.btn-blue {
-    color: #37698e;
+#inner-lower-footer {
+    background-color: aliceblue;
+    max-height: max-content;
 }
+
+/* -------------------------------- Buttons */
+/* .btn-blue {
+    color: #37698e;
+} */
 
 /* mailchimp */
 #mc_embed_signup {
