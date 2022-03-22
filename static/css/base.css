@@ -40,8 +40,17 @@ footer a {
     font-weight: bold;
 }
 
+.text-ant-white {
+    color: antiquewhite;
+    font-weight: initial;
+}
+
 .bg-ant-white {
     background-color: antiquewhite;
+}
+
+.bg-dark-blue {
+    background-color: #37698e;
 }
 
 #footer {
