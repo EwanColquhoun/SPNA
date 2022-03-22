@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
-
 html {
     height: 100%;
 }
@@ -90,8 +88,6 @@ footer a {
     width: fit-content;
 }
 
-
-
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
@@ -111,7 +107,7 @@ footer a {
     }
 
     .header-container {
-        padding-top: 164px;
+        padding-top: 120px;
     }
 }
 

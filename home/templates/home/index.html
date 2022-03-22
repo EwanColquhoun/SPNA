@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/index.css' %}">
+{% endblock %}
+
 {% block page_header %}
     <div class="container header-container">
         <div class="row">
@@ -11,33 +15,35 @@
 {% endblock %}
 
 {% block content %}
-<section id="hero-image">
-    <div class="container h-100">
-        <div class="row h-100">
-            <div class="col-7 col-md-6 my-auto">
-                <h1>Scottish Private Nursery Association</h1>
+<section id="hero-image-section">
+    <div id="hero-overlay">
+        <div class="container container-fluid h-100">
+            <div class="row h-100">
+                <div id="hero-text-container"class="col-12 my-auto">
+                    <h1 id="hero-text">Scottish Private Nursery Association <br>SPNA</h1>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 
-<section id="quote">
+<section id="quote-section">
 
 </section>
 
 
-<section id="educate">
+<section id="educate-section">
 
 </section>
 
 
-<section id="overview">
+<section id="overview-section">
 
 </section>
 
 
-<section id="quality">
+<section id="quality-section">
 
 </section>
 

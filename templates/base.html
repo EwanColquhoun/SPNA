@@ -10,13 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% endblock %}
 
-    {% block corecss%}
+    {% block corecss %}
     <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7_dtp.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Moon+Dance&family=Raleway:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/base.css' %}"> 
+    {% endblock %}
+
+    {% block extra_css %}
     {% endblock %}
 
     {% block corejs %}
@@ -37,6 +38,9 @@
                     <img src="../media/original/logo.png" alt="SPNA Logo">
                 </a>
             </div>
+
+            <!-- BLOG CONTAINER? -->
+
             <!-- <div class="col-12 col-lg-2 my-auto py-lg-0 d-flex justify-content-end">
                 <a href="{% url 'home' %}" class="nav-link">
                     <div class="text-center other-nav">
@@ -107,11 +111,13 @@
     <footer>
         <div id="footer" class="container-fluid  bg-blue">
             <div id="mailchimp-row" class="row">
-                <div class="col-12 col-md-6 col-lg-4">
+                <div class="col-12 col-md-2">
                     <img class="pl-3" src="../media/original/cropped-SPNA_logo_icon.png" width="100px" height="100px" alt="Cropped SPNA logo">
-                    <p class="footer-logo text-blue my-auto pl-3">Scottish Private Nursery Association</p>
                 </div>
-                <div class="col-12 col-md-6 col-lg-8">
+                <div class="col-12 col-lg-3 my-auto">
+                    <p class="footer-logo text-blue">Scottish Private Nursery Association</p>
+                </div>
+                <div class="col-12 col-md-7">
                     <!-- Mail chimp form -->
                     <!-- Begin Mailchimp Signup Form -->
                     <div id="mc_embed_signup">
