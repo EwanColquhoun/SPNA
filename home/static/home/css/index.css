@@ -47,3 +47,9 @@
     font-weight: 500;
     font-family: 'Moon Dance', cursive;
 }
+
+/* ------------------------- Overview Section */
+#overview-image-div {
+    background: url('/media/original/flower.png') no-repeat center center;
+    background-size: cover;
+}
