@@ -76,31 +76,12 @@
 	text-align: center;
 	overflow: hidden;
 }
-.carousel .carousel-item h4 {
-	font-family: 'Varela Round', sans-serif;
-}
-.carousel .carousel-item img {
+
+.carousel .carousel-item i {
 	max-width: 100%;
 	display: inline-block;
 }
-.carousel .carousel-item .btn {
-	border-radius: 0;
-	font-size: 12px;
-	text-transform: uppercase;
-	font-weight: bold;
-	border: none;
-	background: #a177ff;
-	padding: 6px 15px;
-	margin-top: 5px;
-}
-.carousel .carousel-item .btn:hover {
-	background: #8c5bff;
-}
-.carousel .carousel-item .btn i {
-	font-size: 14px;
-	font-weight: bold;
-	margin-left: 5px;
-}
+
 .carousel .thumb-wrapper {
 	margin: 5px;
 	text-align: left;
@@ -155,6 +136,9 @@
 	background: #555;
 }
 
+.thumb-wrapper i {
+    font-size: larger;
+}
 
 
 /* ------------------------- Governance Section */
