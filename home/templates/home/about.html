@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/index-about.css' %}">
+{% endblock %}
+
+{% block extra_title %}- About{% endblock %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+<section id="about-hero">
+    <div class="container container-fluid h-100">
+        <div class="row h-100">
+            <div id="about-title-container"class="col-12 h-100 w-100 position-relative">
+                <h1 id="about-title" class="position-absolute top-50 start-50">About The SPNA</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="about-section">
+    <div class="container container-fluid">
+        <div class="row text-center">
+            <div class="col">
+                <div class="pb-3">
+                    <h3 class="text-blue">About SPNA</h3>
+                </div>
+                <div>
+                    <p class="pt-2">We believe our staff should receive the recognition they deserve for their training, 
+                        knowledge, dedication, and support, nurturing, and love they provide to the children in our care.
+                    </p>
+                    <p class="pt-2">SPNA supports our members, managers, teachers, and workers, by educating and advocating on behalf of our sector, 
+                        and delivering guidance, support, and encouragement back to our members. 
+                        We do this to ensure we can continue to provide the best start in life for the children in our care, by operating fun, educational, and safe learning environments. 
+                        We support the parents and guardians of the children in our care by providing nurturing, compassionate, and inclusive settings, 
+                        as well as offering information and advice on their children, as well as supporting their own mental health and wellbeing.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="guiding-section">
+    <!-- Carousel from - https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=thumbnail-carousel-with-content -->
+    <div class="container container-fluid">
+        <div class="row">
+            <div class="col-md-10 mx-auto">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                <!-- Carousel indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>   
+                <!-- Wrapper for carousel items -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="thumb-wrapper">
+                                    <div class="img-box">
+                                        <img src="/examples/images/cities/london.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="thumb-content">
+                                        <h4>London</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam.</p>
+                                        <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
+                                    </div>						
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="thumb-wrapper">
+                                    <div class="img-box">
+                                        <img src="/examples/images/cities/new-york.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="thumb-content">
+                                        <h4>New York</h4>
+                                        <p>Vivamus fermentum in arcu in aliquam. Quisque aliqua porta odio in fringilla vivamus.</p>
+                                        <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
+                                    </div>						
+                                </div>
+                            </div>				
+                            <div class="col-sm-4">
+                                <div class="thumb-wrapper">
+                                    <div class="img-box">
+                                        <img src="/examples/images/cities/paris.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="thumb-content">
+                                        <h4>Paris</h4>
+                                        <p>Convallis eget pretium eu, bibendum non leo. Proin susc ipit purus adipiscing dolor.</p>
+                                        <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
+                                    </div>						
+                                </div>					
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="thumb-wrapper">
+                                    <div class="img-box">
+                                        <img src="/examples/images/cities/kuala-lumpur.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="thumb-content">
+                                        <h4>Kuala Lumpur</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam.</p>
+                                        <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
+                                    </div>						
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="thumb-wrapper">
+                                    <div class="img-box">
+                                        <img src="/examples/images/cities/agra.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="thumb-content">
+                                        <h4>Agra</h4>
+                                        <p>Vivamus fermentum in arcu in aliquam. Quisque aliqua porta odio in fringilla vivamus.</p>
+                                        <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
+                                    </div>						
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="thumb-wrapper">
+                                    <div class="img-box">
+                                        <img src="/examples/images/cities/dubai.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="thumb-content">
+                                        <h4>Dubai</h4>
+                                        <p>Convallis eget pretium eu, bibendum non leo. Proin susc ipit purus adipiscing dolor.</p>
+                                        <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
+                                    </div>						
+                                </div>					
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="thumb-wrapper">
+                                    <div class="img-box">
+                                        <img src="/examples/images/cities/rio-de-janeiro.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="thumb-content">
+                                        <h4>Rio De Janeiro</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam.</p>
+                                        <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
+                                    </div>						
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="thumb-wrapper">
+                                    <div class="img-box">
+                                        <img src="/examples/images/cities/giza.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="thumb-content">
+                                        <h4>Giza</h4>
+                                        <p>Vivamus fermentum in arcu in aliquam. Quisque aliqua porta odio in fringilla vivamus.</p>
+                                        <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
+                                    </div>						
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="thumb-wrapper">
+                                    <div class="img-box">
+                                        <img src="/examples/images/cities/sydney.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="thumb-content">
+                                        <h4>Sydney</h4>
+                                        <p>Convallis eget pretium eu, bibendum non leo. Proin susc ipit purus adipiscing dolor.</p>
+                                        <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
+                                    </div>						
+                                </div>					
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Carousel controls -->
+                <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="governace-section">
+    <div class="">
+        <div class="row">
+            <div id="governance-text-div" class="col-12 col-lg-6 p-5 bg-ant-white text-center">
+                <div class="pb-3">
+                    <h3 class="text-blue">Governance</h3>
+                </div>
+                <div>
+                    <p class="pt-2">Scottish Private Nurseries Association is Scotland's newest industry association for the nursery sector, and the only one which is completely run, 
+                        managed, and funded by owners, managers, and the staff of the sector. We receive no funding from Government and remain completely independent.
+                    </p>
+                    <p class="pt-2">As we continue to build our membership base, we will move to a formal incorporated structure, and have started this process. 
+                        We are keen to receive expressions of interest from those involved in the sector who are willing to be involved with SPNA in a formal manner, 
+                        whether that be as a board director or some other form.
+                    </p>
+                </div>
+            </div>
+            <div id="governance-image-div" class="col-12 col-lg-6">
+                <!-- <img src="{{ MEDIA_URL }}/media/original/folding.png" width="100%" alt="Baby holding a ball image"> -->
+            </div>
+        </div>
+    </div>
+</section>
+<section id="tag-line-section"></section>
+<section id="people-section">
+    <div class="container container-fluid">
+        <div class="row text-center">
+            <div class="col">
+                <div class="pb-3">
+                    <h3 class="text-blue">People</h3>
+                </div>
+                <div class="pb-3">
+                    <p class="text-blue">Sharon Fairley - CEO and Executive Director</p>
+                </div>
+                <div>
+                    <p class="pt-2">While working at Edinburgh Airport, and especially when she was on shift work, Sharon struggled to find good quality, 
+                        formal child-care for her young children, in an area which was convenient for her work patterns. She opened her first child-care centre, 
+                        Little Flyers at Ingliston, in 1999, and has since grown the business to include 3 other Early Years settings, plus 4 out-of-hours care for school aged children.
+                         Recognising the difficulties of sourcing high-quality staff at short notice, Sharon has also opened a recruitment company for nursery careworkers
+                    </p>
+                    <p class="pt-2">Sharon is passionate that all children should be recognised as individuals and supported from the very start of their wee lives to become confident and great achievers. 
+                        She believes this starts with learning-through-play, as well as care and nurturing, which continues through-out their childcare journey.
+                         Her husband and children have dyslexia undiagnosed until too late and so did not have the best experience through their education system.
+                          Sharon still believes in continually improving standards in all of her settings, and has the ambition to achieve this over all Early Years providers,
+                           which makes her proud to be part of children's early learning.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

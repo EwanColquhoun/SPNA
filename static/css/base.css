@@ -9,6 +9,10 @@ body {
     padding-bottom: 171px;
 }
 
+.container {
+    padding: 30px 0px;
+}
+
 /* ------------------------------ Base */
 
 #topnav {
@@ -122,7 +126,7 @@ footer a {
     }
 
     .header-container {
-        padding-top: 120px;
+        padding-top: 90px;
     }
 }
 
