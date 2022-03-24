@@ -31,8 +31,8 @@
 
     <body>
      
-        <header class="container-fluid fixed-top">
-            <div id="topnav" class="bg-blue row pt-lg-2 d-none d-lg-flex">
+        <header class="fixed-top bg-blue">
+            <div id="topnav" class="row pt-lg-2 d-none d-lg-flex">
                 <div class="col-12 col-lg-10 my-auto py-1 py-lg-0">
                     <a href="{% url 'home' %}" class="nav-link main-logo-link">
                         <img src="../media/original/logo.png" alt="SPNA Logo">
@@ -74,25 +74,37 @@
                     </ul>
                 </div>        
             </div>
-            <div class="bg-blue row d-flex justify-content-center">
-                <div class="navbar navbar-expand-md my-auto sticky-top" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="{% url 'home' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'about' %}">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#">News</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a id="contact-button" data-bs-toggle="modal" data-bs-target="#myModal" href="#myModal">Contact</a>
-                        </li>
-                    </ul>
+
+            <div class="row cover">
+                <div class="col-12">
+                    <div class="navbar navbar-expand-md my-auto sticky-top bg-blue h-100 w-100" id="navbarNav">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"><i class="fas fa-caret-down text-ant-white"></i></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="main-nav">
+                            <ul class="navbar-nav my-auto sticky-top">
+                                <li class="nav-item d-block d-lg-none">
+                                    <a href="{% url 'home' %}">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'about' %}">About Us</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">News</a>
+                                    <div class="dropdown-menu border-0" aria-labelledby="clothing-link">
+                                        <a href="#" class="dropdown-item">Campaigns</a>
+                                        <a href="#" class="dropdown-item">Initiatives</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="contact-button" data-bs-toggle="modal" data-bs-target="#myModal" href="#myModal">Contact</a>
+                                </li>
+                            </ul>
+                        </div>  
+                    </div>
                 </div>
             </div>
         </header>
@@ -100,18 +112,18 @@
         
    <!-- Modal -->
     <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="staticBackdropLabel">Contact Form</h5>
+                <button type="button" class="btn-close modal-close-button" data-bs-dismiss="modal" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
-                ...
+                <!-- contact form to go here -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
+                <button type="button" class="btn btn-secondary modal-close-button" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="contact-form-submit" class="btn btn-primary">Understood</button>
             </div>
             </div>
         </div>

@@ -1,17 +1,19 @@
-$('#contact-button').click('shown.bs.modal', function() {
-    console.log('button press')
-})
-
 let button = document.getElementById('contact-button')
 let modal = document.getElementById('myModal')
+let closeButtons = document.querySelectorAll('.modal-close-button')
+
 
 button.addEventListener('click', function() {
     modal.classList.add('show')
     modal.style.display = 'block'
-    console.log('show')
-})
+    close()
+});
     
-modal.addEventListener('shown.bs.modal', function () {
-    button.focus()
-    console.log('focus')
-  })
+   
+function close() {
+    closeButtons.forEach((close) => 
+        close.addEventListener('click', function() {
+            modal.style.display = 'none'
+            modal.classList.remove('show')
+        }));
+};

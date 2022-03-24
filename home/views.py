@@ -6,10 +6,10 @@ from django.contrib import messages
 def index(request):
     """A view to return index page."""
     # message eg:
-    if request.GET:
-        messages.success(request, 'Well done on the message')
-    else:
-        messages.info(request, 'This is an error message')
+    # if request.GET:
+    #     messages.success(request, 'Well done on the message')
+    # else:
+    #     messages.info(request, 'This is an error message')
 
     return render(request, 'home/index.html')
 

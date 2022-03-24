@@ -16,7 +16,15 @@ body {
 /* ------------------------------ Base */
 
 #topnav {
-    height: 80px;   
+    height: 85px;   
+}
+
+.cover {
+    min-height: 60px;
+}
+
+#main-nav {
+    justify-content: center;
 }
 
 .nav-item a,
