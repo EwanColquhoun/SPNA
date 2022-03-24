@@ -2,52 +2,32 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
+    <head>
 
-    {% block meta %}
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {% endblock %}
+        {% block meta %}
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% endblock %}
 
-    {% block corecss %}
-    <link rel="stylesheet"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
-    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7_dtp.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Moon+Dance&family=Raleway&display=swap" rel="stylesheet">
- 
-    <link rel="stylesheet" href="{% static 'css/base.css' %}"> 
-    {% endblock %}
+        {% block corecss %}
+        <link rel="stylesheet"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+        <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7_dtp.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Moon+Dance&family=Raleway&display=swap" rel="stylesheet">
+    
+        <link rel="stylesheet" href="{% static 'css/base.css' %}"> 
+        {% endblock %}
 
-    {% block extra_css %}
-    {% endblock %}
+        {% block extra_css %}
+        {% endblock %}
 
-    {% block corejs %}
-    <script src="https://kit.fontawesome.com/48b20a3378.js" crossorigin="anonymous"></script>
-    {% endblock %}
+        {% block corejs %}
+        <script src="https://kit.fontawesome.com/48b20a3378.js" crossorigin="anonymous"></script>
+        {% endblock %}
 
-    <title>SPNA {% block extra_title %}{% endblock %}</title>
-  </head>
-
-   <!-- Modal -->
-    <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
-            </div>
-            </div>
-        </div>
-    </div>  
-
+        <title>SPNA {% block extra_title %}{% endblock %}</title>
+    </head>
 
     <body>
      
@@ -117,6 +97,25 @@
             </div>
         </header>
 
+        
+   <!-- Modal -->
+    <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+            </div>
+        </div>
+    </div>  
 
         {% if messages %}
         <div class="messages-container">
