@@ -1,0 +1,8 @@
+#news-image {
+    background: url('/media/original/reading.png') no-repeat center;
+    background-color: #96b1e0;
+    background-size: cover;
+    height: 40vh;
+    width: 100vw;
+    position: relative;
+}

@@ -1,8 +1,10 @@
 from django.contrib import admin
+from django_summernote.admin import SummernoteModelAdmin
 from .models import Articles
 
 
-class ArticleAdmin(admin.ModelAdmin):
+@admin.register(Articles)
+class ArticleAdmin(SummernoteModelAdmin):
     """
     Article admin for the superuser(admin)
     """
@@ -18,5 +20,4 @@ class ArticleAdmin(admin.ModelAdmin):
         'campaign',
     )
     ordering = ('created_on',)
-
-admin.site.register(Articles, ArticleAdmin)
+    summernote_fields = ('content')

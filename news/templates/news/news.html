@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/news.css' %}">
 {% endblock %}
 
 {% block extra_title %}- News{% endblock %}
@@ -18,7 +19,7 @@
 {% block content %}
 
 <section id="news-image">
-    <div class="conatiner-fluid">
+    <div class="conatiner-fluid text-center">
         <div class="row">
             <div class="col-12">
                 <h1>SPNA News and Campaigns</h1>
@@ -27,10 +28,16 @@
     </div>
 </section>
 
-<section id="news-articles">
+<section id="news-articles-section">
     <div class="conatiner-fluid">
+        <div class="row">
+            <div class="col text-center">
+                <h2>News</h2>
+            </div>
+        </div>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for article in articles %}
+            {% if not article.campaign %}
             <div class="col">
                 <div class="card h-100">
                     {% if not article.image %}
@@ -47,11 +54,63 @@
                     </div>
                 </div>
             </div>
-              {% endfor %}
+            {% endif %}
+            {% if forloop.counter|divisibleby:1 %}
+                        <div class="col-12 d-sm-none mb-5">
+                            <hr>
+                        </div>
+                    {% endif %}                        
+                    {% if forloop.counter|divisibleby:2 %}
+                        <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
+                            <hr>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter|divisibleby:3 %}
+                        <div class="col-12 d-none d-lg-block d-xl-none mb-5">
+                            <hr>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter|divisibleby:4 %}
+                        <div class="col-12 d-none d-xl-block mb-5">
+                            <hr>
+                        </div>
+                    {% endif %}
+            {% endfor %}
        
     </div>
 </section>
 
-<section id="campaign-articles"></section>
+<section id="campaign-articles-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center">
+                <h2>Campaigns</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for article in articles %}
+                {% if article.campaign %}
+                <div class="col">
+                    <div class="card h-100">
+                        {% if not article.image %}
+                            <img src="{{ MEDIA_URL }}cropped-SPNA_logo_icon.png" class="card-img-top" alt="...">
+                        {% else %}
+                            <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <p class="card-text">{{ article.content}}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">{{ article.created_on}}</small>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+        </div>
+    </div>
+</section>
 
 {% endblock %}

@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'django_summernote',
+    'crispy_forms',
 
     # custom
     'home',
@@ -72,6 +74,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'spna.urls'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {
