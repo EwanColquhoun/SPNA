@@ -65,6 +65,14 @@ footer a {
     background-color: #37698e;
 }
 
+.title-text {
+    color: antiquewhite;
+    font-size: 50px;
+    font-family: 'Moon Dance', cursive;
+    letter-spacing: 4px;
+    line-height: l.5;
+}
+
 #footer {
     position: absolute;
     bottom: 0;
