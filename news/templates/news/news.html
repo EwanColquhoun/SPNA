@@ -17,7 +17,41 @@
 
 {% block content %}
 
-<h1>News</h1>
+<section id="news-image">
+    <div class="conatiner-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1>SPNA News and Campaigns</h1>
+            </div>
+        </div>
+    </div>
+</section>
 
+<section id="news-articles">
+    <div class="conatiner-fluid">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for article in articles %}
+            <div class="col">
+                <div class="card h-100">
+                    {% if not article.image %}
+                        <img src="{{ MEDIA_URL }}cropped-SPNA_logo_icon.png" class="card-img-top" alt="...">
+                    {% else %}
+                        <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text">{{ article.content}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">{{ article.created_on}}</small>
+                    </div>
+                </div>
+            </div>
+              {% endfor %}
+       
+    </div>
+</section>
+
+<section id="campaign-articles"></section>
 
 {% endblock %}
