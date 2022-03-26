@@ -27,3 +27,13 @@
     top: 61%;
     left: 11%;
 }
+
+.article-content {
+    overflow-y: scroll;
+    height: 30rem;
+}
+
+.image-holder {
+    height: 30%;
+    overflow: hidden;
+}
