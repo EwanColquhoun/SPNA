@@ -1,23 +1,23 @@
 let articleModal = document.getElementById('articleModal')
 let articleButton = document.querySelectorAll('.modal-button')
 let newsCloseBtn = document.querySelectorAll('.modal-close-button')
-let title = document.querySelector('news-modal-title')
-let body = document.getElementsByClassName('news-modal-body')
-let cardTitle = document.getElementsByClassName('card-title')
-let cardBody = document.getElementsByClassName('card-body')
+// let title = document.querySelector('news-modal-title')
+let body = document.querySelectorAll('.news-modal-body')
+let cardTitle = document.querySelectorAll('.card-title')
+let cardBody = document.querySelectorAll('.card-body')
 
 console.log(articleButton)
 
 articleButton.forEach((button) => 
     button.addEventListener('click', function(event) {
-        let info = event.button.firstChild.value
-        console.log(info, 'info')
+        
 // trying to get modal to show the news article that was clicked on in the modal.
         close()
         articleModal.classList.add('show')
         articleModal.style.display = 'block'
-        title.innerText = text
-    }));
+        changeContent()
+        })
+    );
     
    
 function close() {
@@ -27,6 +27,15 @@ function close() {
             articleModal.classList.remove('show')
         }));
 };
+
+function changeContent() {
+    let title = document.getElementById('title').textContent
+    let modalTitle = document.getElementById('modalTitle')
+    let content = document.getElementById('content').textContent
+
+    modalTitle.innerText = title
+}
+
 
 articleModal.addEventListener('show.bs.modal', function (event) {
     // Button that triggered the modal
