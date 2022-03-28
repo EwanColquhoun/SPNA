@@ -101,20 +101,22 @@
                 {% if article.campaign %}
                 <div class="p-5 col-12 col-md-4 col-lg-6">
                     <div class="card h-100">
-                        <div class="image-holder">
-                            {% if not article.image %}
-                            <img src="{{ MEDIA_URL }}cropped-SPNA_logo_icon.png" class="card-img-top" alt="...">
-                            {% else %}
-                            <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
-                            {% endif %}
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ article.title }}</h5>
-                            <p class="card-text">{{ article.content}}</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">{{ article.created_on | date:"D d M "}}</small>
-                        </div>
+                        <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button">
+                            <div class="image-holder">
+                                {% if not article.image %}
+                                <img src="{{ MEDIA_URL }}cropped-SPNA_logo_icon.png" class="card-img-top" alt="...">
+                                {% else %}
+                                <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
+                                {% endif %}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title title">{{ article.title }}</h5>
+                                <p class="card-text content">{{ article.content}}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">{{ article.created_on | date:"D d M "}}</small>
+                            </div>
+                        </button>
                     </div>
                 </div>
                 {% endif %}

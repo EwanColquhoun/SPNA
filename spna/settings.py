@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     # custom
     'home',
     'news',
+    'contact',
 ]
 
 MIDDLEWARE = [

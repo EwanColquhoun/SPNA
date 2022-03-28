@@ -1,8 +1,4 @@
-// Contact modal activation
-// $('#contact-button').click(function(){
-//     $('#myModal').modal('show');
-// });
-
-// $('.modal-close-button').click(function(){
-//     $('#myModal').modal('hide');
-// })
+// Back to top button
+$('.btt-link').click(function(e) {
+    window.scrollTo(0,0)
+})

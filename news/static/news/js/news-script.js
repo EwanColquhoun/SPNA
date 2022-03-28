@@ -1,52 +1,23 @@
 // // News modals
 
-
-
-$( document ).ready( function(){
-
+// $( document ).ready( function(){
+// 
+    // Gets the modal
     var articleModal = document.getElementById('articleModal')
 
+    // Listens for it's activation
     articleModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget
+
+        // Gets article content
         var title = button.querySelector('.title').innerText
         var content = button.querySelector('.content').innerText
-
+        
+        // Changes modal content
         let modalTitle = document.getElementById('modalTitle')
         let modalBody = document.getElementById('modalBody')
 
         modalTitle.innerText = title
         modalBody.innerText = content
-        console.log(content, 'title')
     })
-
-    // $('#articleModal').on('show', function(event){
-    //     // event.preventDefault();
-    //     var e = $(this);
-    //     var title = e.find('.title').html();
-    //     var content = e.find('.content');
-    //     $('#articleModal').modal('show');
-    //     $('#modalTitle').replaceWith(title);
-    //     $('#modalBody').replaceWith(content);
-    
-    // });
-//     closeModal();
-//     $.when("click", "hide").then(removeText());
-//     // removeText();
-} );
-
-
-
-// function removeText() {
-//     $('.modal').change('hide', function() {
-//         $('#modalTitle').text("Title");
-//         $('#modalBody').text("Content");
-//         console.log('click!');
-//         console.log('hide!');
-//     });
-// };
-
-// function closeModal() {
-//     $('.art-modal-close-button').click(function(){
-//         $('#articleModal').modal('hide');
-//     })
-// }
+// } );

@@ -111,6 +111,19 @@ footer a {
     color: #37698e;
 } */
 
+.btt-button {
+    height: 42px;
+    width: 42px;
+    position: fixed;
+    bottom: 200px;
+    right: 10px;
+}
+
+.btt-link {
+    cursor: pointer;
+}
+
+
 /* mailchimp */
 #mc_embed_signup {
     float: right;
