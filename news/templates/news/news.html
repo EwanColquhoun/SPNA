@@ -18,23 +18,25 @@
 
 {% block content %}
 
-<div class="modal fade" id="articleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="articleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="news-modal-title" id="modalTitle"></h5>
-          <button type="button" class="btn-close modal-close-button" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="news-modal-title " id="modalTitle">MODAL TITLE</h5>
+          <button type="button" class="btn-close art-modal-close-button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="news-modal-body">
-          {{ article.content }}
+        <div id="modalBody" class="body news-modal-body">
+            <p>
+                {{ article.content }}
+            </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary modal-close-button" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary art-modal-close-button" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
-  </div>
+</div>
   
 
 <section id="news-image">
@@ -61,7 +63,7 @@
             {% if not article.campaign %}
             <div class="p-5 col-12 col-md-4">
                 <div class="card article-content">
-                    <a onClick="changeContent()"class="modal-button">
+                    <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button">
                         <div class="image-holder">
                             {% if not article.image %}
                             <img src="{{ MEDIA_URL }}cropped-SPNA_logo_icon.png" class="card-img-top" alt="...">
@@ -71,13 +73,13 @@
 
                         </div>
                         <div class="card-body h-100">
-                            <h5 id="title" class="card-title">{{ article.title }}</h5>
-                            <p class="card-text overflow-auto">{{ article.content}}</p>
+                            <h5 id="title" data-title="title" class="card-title title">{{ article.title }}</h5>
+                            <p id="content" data-content="content" class="card-text content overflow-auto">{{ article.content}}</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">{{ article.created_on}}</small>
                         </div>
-                    </a>
+                    </button>
                 </div>
             </div>
             {% endif %}
@@ -121,10 +123,23 @@
     </div>
 </section>
 
+{% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV</a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"></a>NEXT &raquo; </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
 {% endblock %}
 
 {% block postloadjs %}
-{{ block.super }}
+    {{ block.super }}
 
     <script type="text/javascript" src="{% static 'news/js/news-script.js' %}"></script>
     

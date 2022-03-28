@@ -37,3 +37,9 @@
     height: 30%;
     overflow: hidden;
 }
+
+.modal-button {
+    background: none;
+    border: none;
+    
+}
