@@ -93,6 +93,10 @@ footer a {
     max-height: max-content;
 }
 
+.dropdown-menu {
+    padding: 1.5rem;
+}
+
 /* ------------------------------- bootstrap toasts */
 #msg {
     font-size: 17px;

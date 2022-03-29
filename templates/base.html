@@ -51,30 +51,14 @@
                         <div><i class="fas fa-user fa-lg"></i></div>
                         <p class="my-0 link-text">My Account</p>
                     </div>
-                    <div class="dropdown-menu my-0">
+                    <div class="dropdown-menu my-0 pl-2">
                         <!-- will need to be django login form in context? -->
-                        <form class="px-4 py-3">
-                            <div class="mb-3">
-                                <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
-                            </div>
-                            <div class="mb-3">
-                                <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                <label class="form-check-label" for="dropdownCheck">
-                                    Remember me
-                                </label>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
-                        </form>
+
+                        {% include 'includes/account/spna_login.html' %}
+
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">New around here? Sign up</a>
-                        <a class="dropdown-item" href="#">Forgot password?</a>
+                        <a class="dropdown-item" href="{% url 'account_signup' %}">New around here? Sign up</a>
+                        <a class="dropdown-item" href="{% url 'account_reset_password' %}">Forgot password?</a>
                       </div>
 
 
@@ -107,6 +91,10 @@
             <div class="row cover">
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg my-auto bg-blue h-100 w-100" id="navbarNav">
+                        <div class="d-lg-none">
+                            <span><Strong><img src="../media/original/logo.png" alt="SPNA Logo"></Strong>
+                            </span>
+                        </div>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"><i class="fas fa-caret-down text-ant-white"></i></span>
                         </button>
@@ -195,10 +183,10 @@
         <footer class=" fixed-bottom">
             <div id="footer" class="container-fluid bg-blue">
                 <div id="mailchimp-row" class="row">
-                    <div class="col-12 col-md-2">
+                    <div class="col-12 col-md-2 d-none d-md-block ">
                         <img class="pl-3" src="../media/original/cropped-SPNA_logo_icon.png" width="100px" height="100px" alt="Cropped SPNA logo">
                     </div>
-                    <div class="col-12 col-lg-3 my-auto">
+                    <div class="col-12 col-lg-3 pb-0 mb-0 my-auto">
                         <p class="footer-logo text-blue">Scottish Private Nursery Association</p>
                     </div>
                     <div class="col-12 col-md-7">
@@ -217,7 +205,7 @@
                                     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
                                     <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_291280cf52030472eb64f0704_a51e9f2451" tabindex="-1" value="">
                                     </div>
-                                    <div>
+                                    <div class="d-inline">
                                         <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button btn-blue">
                                     </div>
                                 </div>
