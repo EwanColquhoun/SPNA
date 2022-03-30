@@ -14,3 +14,12 @@ def news_view(request):
         'form': form,
     }
     return render(request, template, context)
+
+
+def initiatives_view(request):
+    """A view to return initiatives page """
+    
+    template = 'news/initiatives.html'
+    context = {}
+
+    return render(request, template, context)

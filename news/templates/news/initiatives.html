@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'news/css/news-init.css' %}">
+{% endblock %}
+
+{% block extra_title %}- Initiatives{% endblock %}
+
+{% block page_header %}
+    <div class="container-fluid header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+
+<section id="initiatives-image">
+    <div class="conatiner-fluid text-center">
+        <div class="overlay">
+            <div class="row h-100 w-100">
+                <div class="col-12 h-100 w-100 position-relative">
+                    <h1 id="init-title" class="position-absolute title-text">SPNA Initiatives</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="init-1">
+    <div class="container-fluid">
+        <div class="row text-center bg-ant-white">
+            <div class="col-12 p-4">
+                <div class="pt-3">
+                    <h3 class="text-blue">Recognition of early years childcare</h3>
+                </div>
+            </div>
+            <div class="col-12 col-md-10 p-5 mx-auto">
+                <div>
+                    <p class="pt-2">SPNA believes that early year’s childcare is part of the full spectrum of the educational journey from birth to adulthood. 
+                        Children do not start their journey when they walk through the school gates on their first day
+                         they have been on their journey since the day they were born, and their parents have been on the journey for even longer.
+                    </p>
+                    <p class="pt-2">Early years childcare is not simply baby-sitting. This is true no matter what sort of nursery a child attends,
+                         whether it is private, Local Authority, or child minding. Settings are regulated by the Care Inspectorate, 
+                         while our staff are regulated by the Scottish Social Services Council.
+                    </p>
+                    <p class="pt-2">In the recent report into the importance of early years, the Royal Foundation Centre for Early Childhood noted that 
+                        “the time from pregnancy to five…fundamentally shape our whole lives”. The Duchess of Cambridge is quoted as saying 
+                        “the early years are not simply about how we raise our children. They are about the society we will become.”</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="init-gap" class="bg-dark-blue text-ant-white p-5">
+    <div class="row font-weight-bold">
+        <div class="col-12 mx-auto">
+            <div class="my-auto p-2 d-flex justify-content-center">
+                <span class="">“When we succeed, we succeed because of our individual initiative, but also because we do things together.”</span>
+            </div>
+        </div>
+        <div class="col-12 mx-auto">
+            <div class="my-auto p-2 d-flex justify-content-center">
+                <span> - Barack Obama</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="init-2" class="bg-light-blue">
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-12 p-4">
+                <div class="pt-3">
+                    <h3 class="text-blue">Mental health, wellbeing, and support for parents and their children</h3>
+                </div>
+            </div>
+            <div class="col-12 col-md-10 p-5 mx-auto">
+                <div>
+                    <p class="pt-2">There can almost be no greater change to the lives of parents than when their children are born. For many, 
+                        it is a time of low sleep, high stress, and complete and utter love, devotion, and wonderment.
+                    </p>
+                    <p class="pt-2">It can also be a period of isolation, loneliness, and bewilderment, especially for first time, young, or single parents.
+                    </p>
+                    <p class="pt-2">For those parents with children under the age of three, and who cannot afford childcare, especially when they are out of work, 
+                        cannot work, or are studying, both the parent and the child will all too frequently miss out on the fundamental support and advice which childcare staff provide. 
+                        The mental health and wellbeing of these parents and children can suffer enormously, which can have an impact through the rest of their lives.
+                    </p>
+                    <p class="pt-2">
+                        SPNA will be looking to partner with Government, Local Authorities, and charities and social enterprises to ensure that all parents understand
+                         and receive all the support which they need and deserve.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+
+    <script type="text/javascript" src="{% static 'news/js/news-script.js' %}"></script>
+    
+{% endblock %}

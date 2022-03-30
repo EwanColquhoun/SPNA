@@ -6,7 +6,7 @@
     width: 100vw;
     position: relative;
 }
-
+/* 
 #news-image-overlay {
     position: absolute;
     top: 0;
@@ -14,7 +14,7 @@
     height: 100%;
     width: 100%;
     background-color: rgba(0,0,0,0.3);
-}
+} */
 
 #news-title-container {
     width: 100%;
@@ -42,4 +42,26 @@
     background: none;
     border: none;
     
+}
+
+/* ------------ Initiatives Page----------------- */
+#initiatives-image {
+    background: url('/media/original/clapping.png') no-repeat center;
+    background-color: #96b1e0;
+    background-size: cover;
+    height: 50vh;
+    width: 100vw;
+    position: relative;
+}
+
+#init-title {
+    top: 60%;
+    left: 20%;
+}
+
+#init-gap {
+    font-size: 30px;
+    font-weight: 500;
+    font-family: 'Caveat', cursive;
+    letter-spacing: 1px;
 }

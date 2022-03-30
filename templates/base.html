@@ -15,7 +15,7 @@
         {% block corecss %}
         <link rel="stylesheet"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
         <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7_dtp.css" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Moon+Dance&family=Raleway&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Moon+Dance&family=Raleway:ital,wght@0,400;0,500;0,600;0,900;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    
         <link rel="stylesheet" href="{% static 'css/base.css' %}"> 
         {% endblock %}
@@ -26,7 +26,6 @@
         <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-        <!-- <script type="text/javascript" src="{% static 'js/script.js' %}"></script> -->
         {% endblock %}
 
         {% block extra_css %}
@@ -40,16 +39,16 @@
      
         <header class="fixed-top bg-blue">
             <div id="topnav" class="row pt-lg-2 d-none d-lg-flex">
-                <div class="col-12 col-lg-10 my-auto py-1 py-lg-0">
+                <div class="col-12 col-md-8 mx-auto my-auto py-1 py-lg-0">
                     <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                        <img src="../media/original/logo.png" alt="SPNA Logo">
+                        <img src="{{ spna }}/media/original/logo.png" alt="SPNA Logo">
                     </a>
                 </div>
 
-                <div class="col-12 col-lg-2 my-auto py-lg-0">
+                <div class="col-12 col-md-2 mx-auto my-auto py-lg-0">
                     <div class="text-center other-nav" data-bs-toggle="dropdown">
                         <div><i class="fas fa-user fa-lg"></i></div>
-                        <p class="my-0 link-text">My Account</p>
+                        <p class="my-0 link-text">{% if request.user.is_authenticated %}<span class="italic">{{user.username}}</span>{% else %}Join/Login{% endif %}</p>
                     </div>
                     <div class="dropdown-menu my-0 pl-2">
                         <!-- will need to be django login form in context? -->
@@ -89,10 +88,10 @@
             </div>
 
             <div class="row cover">
-                <div class="col-12">
+                <div class="col-12 col-md-10 mx-auto">
                     <nav class="navbar navbar-expand-lg my-auto bg-blue h-100 w-100" id="navbarNav">
                         <div class="d-lg-none">
-                            <span><Strong><img src="../media/original/logo.png" alt="SPNA Logo"></Strong>
+                            <span><Strong><img src="{{ spna }}/media/original/logo.png" alt="SPNA Logo"></Strong>
                             </span>
                         </div>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,7 +109,7 @@
                                     <a href="{% url 'news' %}">News & Campaigns</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#">Initiatives</a>
+                                    <a href="{% url 'initiatives' %}">Initiatives</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#">Blog</a>
@@ -160,7 +159,7 @@
             <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg"
             role="alert">
             {{ message | safe }} 
-            <button type="button" class="alert-button" data-bs-dismiss="alert" aria-label="Close"><i class="fa-solid fa-circle-xmark"></i>
+            <button type="button" class="alert-button" data-bs-dismiss="alert" aria-label="Close">X<i class="fa-solid fa-circle-xmark"></i>
             </button>
         
             </div>
@@ -175,8 +174,8 @@
         {% endblock %}
 
         <div class="btt-button shadow-sm rounded-0 border border-black">
-            <a class="btt-link d-flex h-100">
-                <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
+            <a id="btt-link"class="btt-link d-flex h-100">
+                <i id="btt-arrow" class="fas fa-arrow-up text-black mx-auto my-auto"></i>
             </a>
         </div>
 
@@ -184,7 +183,7 @@
             <div id="footer" class="container-fluid bg-blue">
                 <div id="mailchimp-row" class="row">
                     <div class="col-12 col-md-2 d-none d-md-block ">
-                        <img class="pl-3" src="../media/original/cropped-SPNA_logo_icon.png" width="100px" height="100px" alt="Cropped SPNA logo">
+                        <img class="pl-3" src="{{ spna }}/media/original/cropped-SPNA_logo_icon.png" width="100px" height="100px" alt="Cropped SPNA logo">
                     </div>
                     <div class="col-12 col-lg-3 pb-0 mb-0 my-auto">
                         <p class="footer-logo text-blue">Scottish Private Nursery Association</p>
@@ -225,10 +224,9 @@
                 </div>
             </div>
         </footer>
+       
+        <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 
-        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
-
-        
        
         {% block postloadjs %}
          

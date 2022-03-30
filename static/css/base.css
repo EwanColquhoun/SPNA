@@ -1,10 +1,11 @@
 html {
     height: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
     font-family: 'Raleway', sans-serif;
-    font-weight: 800;
+    font-weight: 600;
     overflow-y: auto;
     padding-bottom: 171px;
 }
@@ -18,6 +19,16 @@ body {
 }
 
 /* ------------------------------ Base */
+
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.3);
+}
 
 .fixed-top {
     z-index: 10;
@@ -57,7 +68,7 @@ footer a {
 
 .text-blue {
     color: rgb(55,105,142);
-    font-weight: bold;
+
 }
 
 .text-ant-white {
@@ -71,6 +82,10 @@ footer a {
 
 .bg-dark-blue {
     background-color: #37698e;
+}
+
+.bg-light-blue {
+    background-color: #DFF1FF;
 }
 
 .title-text {
@@ -97,6 +112,11 @@ footer a {
     padding: 1.5rem;
 }
 
+.italic {
+    font-style: italic;
+}
+
+
 /* ------------------------------- bootstrap toasts */
 #msg {
     font-size: 17px;
@@ -111,24 +131,6 @@ footer a {
     -moz-box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
   }
 
-.alert-button {
-    border: none;
-    background: none;
-}
-
-.alert-button i {
-    color: black;
-    width: 30px;
-    height: 30px;
-    border: 1 px grey;
-}
-/* .messages-container {
-    position: fixed;
-    top: 72px;
-    right: 15px;
-    z-index: 999;
-} */
-
 .custom-toast {
     overflow: visible;
 }
@@ -138,9 +140,10 @@ footer a {
 }
 
 /* -------------------------------- Buttons */
-/* .btn-blue {
-    color: #37698e;
-} */
+#btt-arrow{
+    mix-blend-mode: difference;
+    color: antiquewhite;
+}
 
 .btt-button {
     height: 42px;
@@ -152,6 +155,18 @@ footer a {
 
 .btt-link {
     cursor: pointer;
+}
+
+.alert-button {
+    border: none;
+    background: none;
+}
+
+.alert-button i {
+    color: black;
+    width: 30px;
+    height: 30px;
+    border: 1 px grey;
 }
 
 

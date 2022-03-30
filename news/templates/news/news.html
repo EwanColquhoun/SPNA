@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'news/css/news.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/news-init.css' %}">
 {% endblock %}
 
 {% block extra_title %}- News{% endblock %}
@@ -40,7 +40,7 @@
   
 
 <section id="news-image">
-    <div id="news-image-overlay">
+    <div class="overlay">
         <div class="conatiner-fluid w-100 h-100 text-center">
             <div class="row h-100 w-100">
                 <div id="news-title-container"class="col-12 text-ant-white">
