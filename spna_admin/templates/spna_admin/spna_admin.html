@@ -24,14 +24,14 @@
 <section id="admin-header">
     <div class="conatiner-fluid text-center">
         <div class="row h-100 w-100">
-            <div class="col-12 h-100 w-100 position-relative">
-                <h1 id="admin-title" class="position-absolute title-text">SPNA Admin Dashboard</h1>
+            <div class="col-12 p-5 h-100 w-100 text-center">
+                <h1 id="admin-title" class="text-blue">SPNA Admin Dashboard</h1>
             </div>
         </div>
     </div>
 </section>
 
-<section id="admin-dashboard">
+<section id="admin-dashboard" class="bg-light-grey">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 mx-auto">
@@ -54,6 +54,9 @@
                 </table>
             </div>
             <div class="col-12 col-md-6 text-center mx-auto">
+                <div class="">
+                    <h2>Add an Article</h2>
+                </div>
                 <!-- Add news form -->
                 <form action="" method="POST">
                     {% csrf_token %}

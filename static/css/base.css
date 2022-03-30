@@ -66,9 +66,14 @@ footer a {
     background-color: #96b1e0;
 }
 
+.bg-light-grey {
+    background-color: lightgrey;
+}
+
 .text-blue {
     color: rgb(55,105,142);
 }
+
 
 .text-whitesmoke {
     color: whitesmoke;
