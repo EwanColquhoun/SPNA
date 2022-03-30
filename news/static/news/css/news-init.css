@@ -71,7 +71,7 @@
 
 .card {
     position: relative;
-    min-height: 150px;
+    min-height: 220px;
     width: 300px;
 	display: inline-block;
 	vertical-align: middle;
@@ -115,7 +115,7 @@
 #card2:hover #member-shots2,
 #card3:hover #member-shots3 {
     background: rgba(33, 96, 130, 0.5);
-    height: 250px;
+    height: 200px;
     padding: 0 1rem;
 }
 
@@ -138,8 +138,7 @@
 
 .member-infos {
 	padding: 10px;
-	text-align: left;
-	position: relative;
+    position: relative;
 }
 
 #member-shots1,
