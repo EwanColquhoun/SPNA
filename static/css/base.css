@@ -68,7 +68,10 @@ footer a {
 
 .text-blue {
     color: rgb(55,105,142);
+}
 
+.text-white {
+    color: whitesmoke;
 }
 
 .text-ant-white {
