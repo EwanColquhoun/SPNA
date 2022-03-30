@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'home',
     'news',
     'contact',
+    'spna_admin',
 ]
 
 MIDDLEWARE = [

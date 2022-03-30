@@ -1,5 +1,5 @@
-from .models import Articles
 from django import forms
+from .models import Articles
 
 
 class ArticleForm(forms.ModelForm):
@@ -7,7 +7,7 @@ class ArticleForm(forms.ModelForm):
 
     class Meta:
         model = Articles
-        fields = ('title', 'content', 'image')
+        fields = ('title', 'content', 'image', 'campaign')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -15,3 +15,4 @@ class ArticleForm(forms.ModelForm):
         self.fields['title'].label = 'Article Title'
         self.fields['content'].label = 'Article Content'
         self.fields['image'].label = 'Image'
+        self.fields['campaign'].label = 'Campaign'

@@ -117,6 +117,13 @@
                                 <li class="nav-item">
                                     <a id="contact-button" data-bs-toggle="modal" data-bs-target="#myModal" href="#myModal">Contact</a>
                                 </li>
+                                {% if request.user.is_authenticated %}
+                                    {% if request.user.is_superuser %}
+                                    <li class="nav-item">
+                                        <a href="{% url 'spna_admin' %}">Admin</a>
+                                    </li>
+                                    {% endif %}
+                                {% endif %}
                             </ul>
                         </div> 
                     </nav>
