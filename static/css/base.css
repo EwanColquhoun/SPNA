@@ -129,7 +129,7 @@ footer a {
 #msg {
     font-size: 17px;
     text-align: center;
-    position: absolute;
+    position: fixed;
     top:10px;
     left: 10%;
     width: 80%;

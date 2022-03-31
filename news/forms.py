@@ -1,6 +1,5 @@
 from django import forms
-from django_summernote.widgets import SummernoteInplaceWidget, SummernoteWidget
-from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
+from django_summernote.widgets import SummernoteWidget
 from spna_admin.widgets import CustomClearableFileInput
 from .models import Articles
 
