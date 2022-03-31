@@ -8,11 +8,10 @@ class ArticleAdmin(SummernoteModelAdmin):
     """
     Article admin for the superuser(admin)
     """
-    prepopulated_fields = {'slug': ('title',)}
+    # prepopulated_fields = {'slug': ('title',)}
     search_fields = ['title', 'content', 'created_on', 'campaign']
     list_display = (
         'title',
-        'slug',
         'content',
         'created_on',
         'image_url',
