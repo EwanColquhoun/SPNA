@@ -79,7 +79,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'spna.urls'
 
+X_FRAME_OPTIONS = "SAMEORIGIN"
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+SUMMERNOTE_THEME = 'bs4'
+
+SUMMERNOTE_CONFIG = {
+    # Or, you can set it to `False` to use SummernoteInplaceWidget by default - no iframe mode
+    # In this case, you have to load Bootstrap/jQuery sources and dependencies manually.
+    # Use this when you're already using Bootstrap/jQuery based themes.
+    'iframe': False,
+}
 
 TEMPLATES = [
     {
@@ -97,6 +108,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'contact.context.contact_modal',
             ],
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]

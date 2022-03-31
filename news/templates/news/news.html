@@ -68,7 +68,7 @@
                         <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button">
                             <div class="image-holder">
                                 {% if not article.image %}
-                                <img src="{{ MEDIA_URL }}cropped-SPNA_logo_icon.png" class="card-img-top" alt="...">
+                                <img src="{{ spna }}/media/original/cropped-SPNA_logo_icon.png" class="card-img-top" alt="...">
                                 {% else %}
                                 <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
                                 {% endif %}
@@ -108,24 +108,31 @@
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 {% for article in articles %}
                 {% if article.campaign %}
-                <div class="p-5 col-12 col-md-4 col-lg-6">
-                    <div class="card h-100">
-                        <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button">
-                            <div class="image-holder">
-                                {% if not article.image %}
-                                <img src="{{ MEDIA_URL }}cropped-SPNA_logo_icon.png" class="card-img-top" alt="...">
-                                {% else %}
-                                <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
+                <div class="p-5 col-12 col-md-4">
+                    <div class="card">
+                        <div class="article-content">
+                            <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button">
+                                <div class="image-holder">
+                                    {% if not article.image %}
+                                    <img src="{{ spna }}/cropped-SPNA_logo_icon.png" class="card-img-top" alt="...">
+                                    {% else %}
+                                    <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
+                                    {% endif %}
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title title">{{ article.title }}</h5>
+                                    <p class="card-text content">{{ article.content}}</p>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">{{ article.created_on | date:"D d M "}}</small>
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_superuser %}
+                                <a href="{% url 'edit_article' article.id %}"><i class="fas fa-pen"></i></a>
                                 {% endif %}
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title title">{{ article.title }}</h5>
-                                <p class="card-text content">{{ article.content}}</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">{{ article.created_on | date:"D d M "}}</small>
-                            </div>
-                        </button>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
                 {% endif %}

@@ -233,6 +233,11 @@ footer a {
         z-index: 10;
     }
 
+    #msg {
+        width: 50%;
+        left: 25%;
+    }
+
     .header-container {
         padding-top: 140px;
     }

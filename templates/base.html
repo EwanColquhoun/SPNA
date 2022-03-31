@@ -112,9 +112,6 @@
                                     <a href="{% url 'initiatives' %}">Initiatives</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#">Blog</a>
-                                </li>
-                                <li class="nav-item">
                                     <a id="contact-button" data-bs-toggle="modal" data-bs-target="#myModal" href="#myModal">Contact</a>
                                 </li>
                                 {% if request.user.is_authenticated %}
@@ -148,6 +145,8 @@
                     {% csrf_token %}
                     
                     {{ contact_form|crispy }}
+
+
                     <button type="submit" id="toastbtn" class="btn btn-primary">Submit</button>
 
                 </form>
@@ -184,12 +183,9 @@
         {% if messages %}
 
             {% for message in messages %}
-            <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg"
-            role="alert">
-            {{ message | safe }} 
-            <button type="button" class="alert-button" data-bs-dismiss="alert" aria-label="Close">X<i class="fa-solid fa-circle-xmark"></i>
-            </button>
-        
+            <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                {{ message | safe }} 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             {% endfor %}
        

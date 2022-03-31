@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, re
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.utils.text import slugify
 from news.forms import ArticleForm
 from news.models import Articles
 
@@ -46,15 +45,10 @@ def edit_article(request, article_id):
     form = ArticleForm(instance=article)
 
     if request.method == 'POST':
-        
-        # print(request.POST)
-        # slug = slugify(request.POST.get('title'))
         form = ArticleForm(request.POST, request.FILES,)
-        # form.instance.slug = slug
-        # form.save(commit=False)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Successfully added product!')
+            messages.success(request, f'Successfully added {article.title}.')
             return redirect(reverse('spna_admin'))
         else:
             messages.error(request, 'Failed to add article. Please ensure the form is valid.')
@@ -87,7 +81,7 @@ def add_article(request):
         form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Successfully added product!')
+            messages.success(request, 'Article successfully added!')
             return redirect(reverse('spna_admin'))
         else:
             messages.error(request, 'Failed to add article. Please ensure the form is valid.')

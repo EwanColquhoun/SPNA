@@ -53,21 +53,15 @@
                 
                 </table>
             </div>
-            <div class="col-12 col-md-6 text-center mx-auto">
-                <div class="">
+            <div class="col-12 col-md-6 mx-auto">
+                <div class="text-center">
                     <h2>Add an Article</h2>
                 </div>
                 <!-- Add news form -->
-                <form action="{% url 'add_article' %}" method="POST" enctype="multipart/form-data">
+                <form class="admin-form" action="{% url 'add_article' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% for field in form %}
-                    {% if field.name != 'image' %}
-                        {{ field | as_crispy_field }}
-                    {% else %}
-                        {{ field }}
-                    {% endif %}
-                {% endfor %}
-                    <button class="btn btn-danger">Submit Article</button>
+                    {{ form|crispy }}
+                    <button class="btn btn-success">Submit Article</button>
                 </form>
 
                 <a id="delete-button" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#delete-modal"><i class="fas fa-trash">Delete</i></a>
@@ -81,5 +75,5 @@
 {% endblock %}
 
 {% block postloadjs %}
-    
+  
 {% endblock %}
