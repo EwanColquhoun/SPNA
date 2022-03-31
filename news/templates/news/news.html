@@ -85,8 +85,7 @@
                         <small class="text-muted">{{ article.created_on}}</small>
                         {% if request.user.is_authenticated %}
                             {% if request.user.is_superuser %}
-                                <a href=""><i class="fas fa-pen"></i></a>
-                                <a href="{% url 'delete_article' article.id %}"><i class="fas fa-trash"></i></a>
+                                <a href="{% url 'edit_article' article.id %}"><i class="fas fa-pen"></i></a>
                             {% endif %}
                         {% endif %}
                     </div>

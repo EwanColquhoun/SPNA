@@ -132,7 +132,7 @@
         </header>
 
         
-   <!-- Modal -->
+   <!-- Contact Modal -->
     <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
@@ -160,6 +160,27 @@
         </div>
     </div>  
 
+    <!-- Delete Modal -->
+   
+    <div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title scots" id="staticBackdropLabel">Delete Booking</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
+                    <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this booking? <i class="fas fa-exclamation-triangle"></i></p>
+                </div>
+                <div class="modal-footer" id="delete-modal-buttons">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a aria-label="Delete" href="/delete/{{article.id}}" class="btn btn-back delete-button">DELETE</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Messages Container -->
         {% if messages %}
 
             {% for message in messages %}
@@ -180,11 +201,15 @@
         {% block content %}
         {% endblock %}
 
+    <!-- BTT Button -->
+
         <div class="btt-button shadow-sm rounded-0 border border-black">
             <a id="btt-link"class="btt-link d-flex h-100">
                 <i id="btt-arrow" class="fas fa-arrow-up text-black mx-auto my-auto"></i>
             </a>
         </div>
+
+    <!-- Footer -->
 
         <footer class=" fixed-bottom">
             <div id="footer" class="container-fluid bg-blue">

@@ -27,3 +27,18 @@ def delete_article(request, article_id):
     article.delete()
     messages.success(request, 'Article deleted successfully!')
     return HttpResponseRedirect(reverse('spna_admin'))
+
+
+def edit_article(request, article_id):
+    """
+    A view to edit the article on the spna_admin page.
+    """
+    article = get_object_or_404(Articles, id=article_id)
+    form = ArticleForm(instance=article)
+
+    context = {
+        'article': article,
+        'form': form,
+    }
+
+    return render(request, 'spna_admin/spna_admin.html', context)
