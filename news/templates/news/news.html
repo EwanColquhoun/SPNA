@@ -59,8 +59,7 @@
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for article in articles %}
-            {% if not article.campaign %}
+            {% for article in articles_list %}
             <div class="p-5 col-12 col-md-4">
                 <div class="card">
                     <div class="article-content">
@@ -82,7 +81,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <small class="text-muted">{{ article.created_on}}</small>
+                        <small class="text-muted">{{ article.created_on|date:"d M, Y"}}</small>
                         {% if request.user.is_authenticated %}
                             {% if request.user.is_superuser %}
                                 <a href="{% url 'edit_article' article.id %}"><i class="fas fa-pen"></i></a>
@@ -91,68 +90,24 @@
                     </div>
                 </div>
             </div>
-            {% endif %}
             {% endfor %}
-       
-    </div>
-</section>
-
-<section id="campaign-articles-section">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col text-center">
-                <h2>Campaigns</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                {% for article in articles %}
-                {% if article.campaign %}
-                <div class="p-5 col-12 col-md-4">
-                    <div class="card">
-                        <div class="article-content">
-                            <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button">
-                                <div class="image-holder">
-                                    {% if not article.image %}
-                                    <img src="{{ spna }}/cropped-SPNA_logo_icon.png" class="card-img-top" alt="...">
-                                    {% else %}
-                                    <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
-                                    {% endif %}
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title title">{{ article.title }}</h5>
-                                    <p class="card-text content">{{ article.content}}</p>
-                                </div>
-                            </button>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">{{ article.created_on | date:"D d M "}}</small>
-                            {% if request.user.is_authenticated %}
-                                {% if request.user.is_superuser %}
-                                <a href="{% url 'edit_article' article.id %}"><i class="fas fa-pen"></i></a>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                {% endfor %}
+            {% if is_paginated %}
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV</a></li>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"></a>NEXT &raquo; </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
         </div>
     </div>
 </section>
 
-{% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV</a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"></a>NEXT &raquo; </li>
-            {% endif %}
-        </ul>
-    </nav>
-{% endif %}
+
 
 {% endblock %}
 

@@ -71,7 +71,7 @@ footer a {
 }
 
 .text-blue {
-    color: rgb(55,105,142);
+    color: #37698e;
 }
 
 
@@ -118,6 +118,12 @@ footer a {
 
 .dropdown-menu {
     padding: 1.5rem;
+    border-radius: 10px;
+    z-index: 10000;
+    border: 2px solid #37698e;
+}
+
+
 }
 
 .italic {
@@ -175,6 +181,20 @@ footer a {
     width: 30px;
     height: 30px;
     border: 1 px grey;
+}
+
+.spna-btn {
+    border-radius: 5px;
+    background: #37698e;
+    font-weight: 600;
+    color: whitesmoke;
+    border: 1px solid #37698e;
+}
+
+.spna-btn:hover {
+    background: whitesmoke;
+    color: #37698e;
+    transition: 500ms;
 }
 
 

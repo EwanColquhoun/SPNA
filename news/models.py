@@ -6,6 +6,10 @@ class Articles(models.Model):
     A model for generating news and campaign articles
     """
 
+    class Meta:
+        """To correct the Django admin page"""
+        verbose_name_plural = "Articles"
+
     title = models.CharField(max_length=256, blank=False, null=False)
     content = models.TextField(blank=False, null=False)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -15,3 +19,4 @@ class Articles(models.Model):
 
     def __str__(self):
         return str(self.title)
+

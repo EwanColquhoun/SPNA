@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from news.forms import ArticleForm
 from news.models import Articles
+from contact.models import Contact
 
 
 @login_required
@@ -12,10 +13,12 @@ def spna_admin(request):
 
     form = ArticleForm()
     users = User.objects.all()
+    contacts = Contact.objects.all()
 
     context = {
         'form': form,
-        'users': users
+        'users': users,
+        'contacts': contacts,
     }
 
     return render(request, 'spna_admin/spna_admin.html', context)

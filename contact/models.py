@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import RegexValidator
 
 
-REPLIED = ((0, 'No'), (1, 'Yes'))
+REPLIED = (('No', 0), ('Yes', 1))
 
 
 class Contact(models.Model):

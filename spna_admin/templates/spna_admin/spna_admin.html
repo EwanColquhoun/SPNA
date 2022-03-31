@@ -35,23 +35,54 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 mx-auto">
-                <table>
-                    <tr>
-                        <th>Full Name</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                    </tr>
-                    {% for user in users %}
-                    <tr>
-                        <td>{{user.first_name}} {{user.last_name}}</td>
-                        <td>{{user.username}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.phone}}</td>
-                    </tr>
-                    {% endfor %}
-                
-                </table>
+                <div>
+                    <div class="member-table-head">
+                        <h2>Member Information</h2>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Full Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                        </tr>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{user.first_name}} {{user.last_name}}</td>
+                            <td>{{user.username}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.phone}}</td>
+                        </tr>
+                        {% endfor %}
+                        
+                    </table>
+                </div>
+                <div class="div">
+                    <div class="contact-table-head">
+                        <h2>Contact Information</h2>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Message</th>
+                            <th>Replied</th>
+                        </tr>
+                        {% for contact in contacts %}
+                        <tr>
+                            <td>{{contact.created|date:"d M, Y" }}</td>
+                            <td>{{contact.name}}</td>
+                            <td>{{contact.email}}</td>
+                            <td>{{contact.phone}}</td>
+                            <td>{{contact.message}}</td>
+                            <td>{{contact.replied}}</td>
+                        </tr>
+                        {% endfor %}
+                        
+                    </table>
+                </div>
             </div>
             <div class="col-12 col-md-6 mx-auto">
                 <div class="text-center">

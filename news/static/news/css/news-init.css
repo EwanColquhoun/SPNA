@@ -33,6 +33,10 @@
     height: 30rem;
 }
 
+/* #news-articles-section {
+    max-height: 1000px;
+} */
+
 .image-holder {
     height: 30%;
     overflow: hidden;
