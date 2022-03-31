@@ -62,24 +62,34 @@
             {% for article in articles %}
             {% if not article.campaign %}
             <div class="p-5 col-12 col-md-4">
-                <div class="card article-content">
-                    <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button">
-                        <div class="image-holder">
-                            {% if not article.image %}
-                            <img src="{{ MEDIA_URL }}cropped-SPNA_logo_icon.png" class="card-img-top" alt="...">
-                            {% else %}
-                            <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
-                            {% endif %}
+                <div class="card">
+                    <div class="article-content">
 
-                        </div>
-                        <div class="card-body h-100">
-                            <h5 id="title" data-title="title" class="card-title title">{{ article.title }}</h5>
-                            <p id="content" data-content="content" class="card-text content overflow-auto">{{ article.content}}</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">{{ article.created_on}}</small>
-                        </div>
-                    </button>
+                        <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button">
+                            <div class="image-holder">
+                                {% if not article.image %}
+                                <img src="{{ MEDIA_URL }}cropped-SPNA_logo_icon.png" class="card-img-top" alt="...">
+                                {% else %}
+                                <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
+                                {% endif %}
+                                
+                            </div>
+                            <div class="card-body h-100">
+                                <h5 id="title" data-title="title" class="card-title title">{{ article.title }}</h5>
+                                <p id="content" data-content="content" class="card-text content overflow-auto">{{ article.content}}</p>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="card-footer">
+                        <small class="text-muted">{{ article.created_on}}</small>
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_superuser %}
+                                <a href=""><i class="fas fa-pen"></i></a>
+                                <a href="{% url 'delete_article' article.id %}"><i class="fas fa-trash"></i></a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             {% endif %}

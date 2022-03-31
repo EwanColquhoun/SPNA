@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, reverse
 from django.contrib.auth.models import User
+from django.contrib import messages
 from news.forms import ArticleForm
+from news.models import Articles
 
 
 def spna_admin(request):
@@ -15,3 +17,13 @@ def spna_admin(request):
     }
 
     return render(request, 'spna_admin/spna_admin.html', context)
+
+
+def delete_article(request, article_id):
+    """
+    Deletes the article when called.
+    """
+    article = get_object_or_404(Articles, id=article_id)
+    article.delete()
+    messages.success(request, 'Article deleted successfully!')
+    return HttpResponseRedirect(reverse('spna_admin'))
