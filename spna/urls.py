@@ -26,4 +26,5 @@ urlpatterns = [
     path('news/', include('news.urls')),
     path('contact/', include('contact.urls')),
     path('spna_admin/', include('spna_admin.urls')),
+    path('member/', include('member.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -115,6 +115,13 @@
                                     <a id="contact-button" data-bs-toggle="modal" data-bs-target="#myModal" href="#myModal">Contact</a>
                                 </li>
                                 {% if request.user.is_authenticated %}
+                         
+                                <li class="nav-item">
+                                    <a href="{% url 'member_area' %}"><strong>Members Area</strong></a>
+                                </li>
+                             
+                                {% endif %}
+                                {% if request.user.is_authenticated %}
                                     {% if request.user.is_superuser %}
                                     <li class="nav-item">
                                         <a href="{% url 'spna_admin' %}">Admin</a>

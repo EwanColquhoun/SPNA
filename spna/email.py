@@ -14,7 +14,7 @@ def contact_email(contact):
         You have a new contact request from {contact.name}
         Telephone - {contact.phone_number}
         Email - {contact.email}
-        Message - {contact.message}
+        Message - {contact.message|cut:"<p>"|cut:"</p>"}
         Click here to visit the admin site
         https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu38.gitpod.io/spna_admin/
         Thanks.""",
@@ -37,7 +37,7 @@ def register_email(user):
         First Name - {user.first_name}
         Last Name - {user.last_name}
         Email - {user.email}
-        Message - {user.message}
+        Message - {user.message|cut:"<p>"|cut:"</p>"}
         Click here to visit the admin site
         https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu38.gitpod.io/spna_admin/
         Thanks.""",
