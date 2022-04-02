@@ -90,6 +90,16 @@ SUMMERNOTE_CONFIG = {
     # In this case, you have to load Bootstrap/jQuery sources and dependencies manually.
     # Use this when you're already using Bootstrap/jQuery based themes.
     'iframe': False,
+
+    'summernote': {
+        # As an example, using Summernote Air-mode
+        'airMode': False,
+
+        # Change editor size
+        'width': '100%',
+        'height': '360',
+    }
+
 }
 
 TEMPLATES = [

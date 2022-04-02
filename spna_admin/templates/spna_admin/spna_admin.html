@@ -92,10 +92,12 @@
                 <form class="admin-form" action="{% url 'add_article' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <button class="btn btn-success">Submit Article</button>
+                    <div>
+                        <button class="btn btn-success">Submit Article</button>
+                        <a id="delete-button" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#delete-modal"><i class="fas fa-trash"></i>Delete</a>
+                    </div>
                 </form>
 
-                <a id="delete-button" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#delete-modal"><i class="fas fa-trash">Delete</i></a>
 
             </div>
         </div>

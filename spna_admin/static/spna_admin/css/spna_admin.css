@@ -8,5 +8,21 @@
 }
 
 #delete-button {
-    padding: 5px;
+    padding: 10px 20px;
+    float:right;
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+#delete-button i {
+    color: red;
+    padding-right: 1.5rem;
+}
+
+#delete-button:hover,
+#delete-button:hover i {
+    background: red;
+    color: whitesmoke;
 }
