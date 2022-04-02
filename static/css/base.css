@@ -233,6 +233,9 @@ footer a {
 
 /* -------------Contact Modal-------------------- */
 
+.modal-body .form-group {
+    padding: 8px 0px;
+}
 /* -------------Summernote-------------------- */
 /* .summernote-div iframe,
 .summernote-div iframe .note-editor {

@@ -132,10 +132,10 @@
    <!-- Contact Modal -->
     <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
+            <div class="modal-content bg-ant-white text-blue">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Contact Form</h5>
-                <button type="button" class="btn-close modal-close-button" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <button type="button" class="btn-close modal-close-button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!-- contact form to go here -->
@@ -147,13 +147,13 @@
                     {{ contact_form|crispy }}
 
 
-                    <button type="submit" id="toastbtn" class="btn btn-primary">Submit</button>
+                    <!-- <button type="submit" id="toastbtn" class="btn btn-primary">Submit</button> -->
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary modal-close-button" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="toastbtn" class="btn spna-btn">Submit</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary modal-close-button" data-bs-dismiss="modal">Close</button>
-                <button type="button" id="contact-form-submit" class="btn btn-primary">Understood</button>
             </div>
             </div>
         </div>
