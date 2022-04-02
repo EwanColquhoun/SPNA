@@ -31,9 +31,21 @@
 
 <section id="documents-section">
     <div class="row text-center">
-        <div class="col-12 col-md-3 mx-auto my-auto">Doc 1</div>
-        <div class="col-12 col-md-3 mx-auto my-auto">Doc 2</div>
-        <div class="col-12 col-md-3 mx-auto my-auto">Doc 3</div>
+        {% for doc in docs %}
+        <div class="col-12 col-md-3 mx-auto my-auto">
+            <div>
+                {{doc.title}}
+            </div>
+            <div>
+                <!-- need to get this to show something better! -->
+                {{doc.doc.url}}
+                <a href="{{doc.doc.url}}">Download File</a>
+            </div>
+            <div>
+                {{doc.date_uploaded | date:"d M, Y"}}
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </section>
 
