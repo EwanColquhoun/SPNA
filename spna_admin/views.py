@@ -5,17 +5,21 @@ from django.contrib import messages
 from news.forms import ArticleForm
 from news.models import Articles
 from contact.models import Contact
+from member.models import Document
+from member.forms import DocumentForm
 
 
 @login_required
 def spna_admin(request):
     """A view for the admin page. """
 
+    docForm = DocumentForm()
     form = ArticleForm()
     users = User.objects.all()
     contacts = Contact.objects.all()
 
     context = {
+        'docForm': docForm,
         'form': form,
         'users': users,
         'contacts': contacts,
