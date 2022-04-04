@@ -33,9 +33,10 @@
 
 <section id="admin-dashboard" class="bg-light-grey">
     <div class="container-fluid">
+
         <div class="row">
-            <div class="col-12 col-md-6 mx-auto">
-                <div>
+            <div class="col-12 col-md-6 p-2 p-sm-5 mx-auto">
+                
                     <div class="member-table-head">
                         <h2>Member Information</h2>
                     </div>
@@ -45,6 +46,8 @@
                             <th>Username</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Select</th>
+
                         </tr>
                         {% for user in users %}
                         <tr>
@@ -52,41 +55,66 @@
                             <td>{{user.username}}</td>
                             <td>{{user.email}}</td>
                             <td>{{user.phone}}</td>
+                            <td><input type="checkbox" id="select" class="select-box" name="email" value="{{user.email}}"></td>
+
                         </tr>
                         {% endfor %}
                         
                     </table>
-                </div>
-                <div class="div">
-                    <div class="contact-table-head">
-                        <h2>Contact Information</h2>
-                    </div>
-                    <table>
-                        <tr>
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Message</th>
-                            <th>Replied</th>
-                            <th>Select</th>
-                        </tr>
-                        {% for contact in contacts %}
-                        <tr>
-                            <td>{{contact.created|date:"d M y" }}</td>
-                            <td>{{contact.name}}</td>
-                            <td>{{contact.email|truncatechars:15}}</td>
-                            <td>{{contact.phone}}</td>
-                            <td>{{contact.message|cut:"<p>"|cut:"</p>"}}</td>
-                            <td>{{contact.replied}}</td>
-                            <td><input type="checkbox" id="select" name="email" value="{{contact.email}}"></td>
-                        </tr>
-                        {% endfor %}
-                        
-                    </table>
-                </div>
             </div>
-            <div class="col-12 col-md-6 mx-auto">
+
+            <div class="col-12 col-md-6 p-2 p-sm-5 mx-auto">
+                <div class="contact-table-head">
+                    <h2>Contact Information</h2>
+                </div>
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Message</th>
+                        <th>Replied</th>
+                        <th>Select</th>
+                    </tr>
+                    {% for contact in contacts %}
+                    <tr>
+                        <td>{{contact.created|date:"d M y" }}</td>
+                        <td>{{contact.name}}</td>
+                        <td>{{contact.email|truncatechars:15}}</td>
+                        <td>{{contact.phone}}</td>
+                        <td>{{contact.message|cut:"<p>"|cut:"</p>"}}</td>
+                        <td>{{contact.replied}}</td>
+                        <td><input type="checkbox" id="select" name="email" class="select-box" value="{{contact.email}}"></td>
+                    </tr>
+                    {% endfor %}
+                    
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 mx-auto p-2 p-sm-5">
+                <div class="text-center">
+                    <h2>Email</h2>
+                </div>
+                <!-- action will be to send email view -->
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ emailForm|crispy }}
+                    <!-- <label for="email-to">To:</label><br>
+                    <input type="text" id="email-to" name="email-to"><br>
+                    <label for="email-subject">Subject:</label>:</label><br>
+                    <input type="text" id="email-subject" name="email-subject"><br>
+                    <label for="email-body">Body:</label><br>
+                    <input type="text" id="email-body" name="email-body"><br> -->
+                    <button class="btn btn-success" type="submit">Send Email</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6 p-2 p-sm-5 mx-auto">
                 <div class="text-center">
                     <h2>Add an Article</h2>
                 </div>
@@ -98,21 +126,24 @@
                         <button class="btn btn-success">Submit Article</button>
                         <a id="delete-button" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#delete-modal"><i class="fas fa-trash"></i>Delete</a>
                     </div>
-                </form>
-
-
+                </form>       
             </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-md-6 p-2 p-sm-5 mx-auto">
+                <div class="text-center">
+                    <h2>Add Document</h2>
+                </div>
                 <form class="admin-form" action="{% url 'add_document' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ docForm|crispy }}
                     <div>
-                        <button class="btn btn-success">Submit Article</button>
+                        <button class="btn btn-success">Submit Document</button>
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div class="row">
+            
         </div>
     </div>
 </section>
@@ -121,5 +152,9 @@
 {% endblock %}
 
 {% block postloadjs %}
+    {{block.super}}
 
+    
+    <script type="text/javascript" src="{% static 'spna_admin/js/spna_admin.js' %}"></script>
+    
 {% endblock %}

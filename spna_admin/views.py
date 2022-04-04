@@ -7,7 +7,7 @@ from news.forms import ArticleForm
 from news.models import Articles
 from contact.models import Contact
 from member.models import Document
-from member.forms import DocumentForm
+from member.forms import DocumentForm, EmailForm
 
 
 @login_required
@@ -18,12 +18,14 @@ def spna_admin(request):
         messages.error(request, "Sorry only SPNA Admin can access this page.")
         return redirect(reverse('home'))
 
+    emailForm = EmailForm()
     docForm = DocumentForm()
     form = ArticleForm()
     users = User.objects.all()
     contacts = Contact.objects.all()
 
     context = {
+        'emailForm': emailForm,
         'docForm': docForm,
         'form': form,
         'users': users,
