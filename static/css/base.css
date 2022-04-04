@@ -254,13 +254,6 @@ footer a {
 .modal-body .form-group {
     padding: 8px 0px;
 }
-/* -------------Summernote-------------------- */
-/* .summernote-div iframe,
-.summernote-div iframe .note-editor {
-    width: 100%;
-} */
-
-
 
 /* -------------------------------- Media Queries */
 
@@ -292,7 +285,7 @@ footer a {
 
 @media (max-width: 992px) {
     body {
-        padding-bottom: 360px;
+        padding-bottom: 215px;
     }
 }
 

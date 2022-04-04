@@ -61,27 +61,29 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% if article %}
                 {% for article in articles_list %}
-                <div class="p-3 p-md-2 p-lg-4 col-12 col-md-4">
+                <div class="p-3 p-md-2 p-lg-4 mb-0 mb-md-5 col-12 col-md-4 col-lg-3 mx-auto">
                     <div class="card">
                         <div class="article-content">
 
                             <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button">
-                                <div class="image-holder">
-                                    {% if not article.image %}
-                                    <img src="{{ spna }}/media/original/cropped-SPNA_logo_icon.png" class="card-img-top" alt="...">
-                                    {% else %}
-                                    <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
-                                    {% endif %}
-                                    
-                                </div>
+                                {% if not article.image %}
+                                    <div class="image-holder" style="background-image: url(/media/original/cropped-SPNA_logo_icon.png)">
+                                    </div>
+                                {% else %}
+                                    <div class="image-holder" style="background-image: url({{ article.image.url }})">
+                                    </div>
+
+                                {% endif %}  
+                                    <!-- <img src="{{ spna }}/media/original/cropped-SPNA_logo_icon.png" class="card-img-top" alt="..."> -->
+                                    <!-- <img src="{{ article.image.url }}" class="card-img-top"alt="{{ article.title }}"> -->
                                 <div class="card-body h-100">
                                     <h5 id="title" data-title="title" class="card-title title">{{ article.title }}</h5>
-                                    <p id="content" data-content="content" class="card-text content overflow-auto">{{ article.content}}</p>
+                                    <p id="content" data-content="content" class="card-text content overflow-auto">{{ article.content|striptags}}</p>
                                 </div>
                             </button>
                         </div>
 
-                        <div class="card-footer">
+                        <div class="card-footer d-flex justify-content-around">
                             <small class="text-muted">{{ article.created_on|date:"d M, Y"}}</small>
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_superuser %}
@@ -112,13 +114,6 @@
         </div>
     </div>
 </section>
-
-<div class="page-footer">
-    <div class="row">
-        <div class="col"></div>
-    </div>
-</div>
-
 
 {% endblock %}
 

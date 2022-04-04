@@ -115,15 +115,19 @@
 	text-shadow: none;
 	font-weight: bold;
 }
+
 .carousel-control-prev i {
 	margin-left: -3px;
 }
+
 .carousel-control-next i {
 	margin-right: -3px;
 }
+
 .carousel-indicators {
 	bottom: -50px;
 }
+
 .carousel-indicators li, .carousel-indicators li.active {
 	width: 10px;
 	height: 10px;
@@ -131,22 +135,19 @@
 	margin: 4px;
 	border: none;
 }
+
 .carousel-indicators li {	
 	background: #ababab;
 }
+
 .carousel-indicators li.active {	
 	background: #555;
-}
-
-.thumb-wrapper i {
-    font-size: larger;
 }
 
 .carousel-item i {
     font-size: xx-large;
     padding: 1.5rem;
 }
-
 
 /* ------------------------- Governance Section */
 #governance-image-div {
@@ -156,6 +157,13 @@
 }
 
 /* ------------------------- Tag line Section */
+#tag-line-section {
+    font-size: 25px;
+    font-weight: 500;
+    font-family: 'Caveat', cursive;
+    letter-spacing: 1px;
+}
+
 #tag-line-container {
     min-height: 150px;
     display: flex;

@@ -6,15 +6,6 @@
     width: 100vw;
     position: relative;
 }
-/* 
-#news-image-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0,0,0,0.3);
-} */
 
 #news-title-container {
     width: 100%;
@@ -37,12 +28,11 @@
     height: 30rem;
 }
 
-/* #news-articles-section {
-    max-height: 1000px;
-} */
-
 .image-holder {
-    height: 30%;
+    height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     overflow: hidden;
 }
 
