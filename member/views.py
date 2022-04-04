@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 
 from .models import Document
@@ -18,7 +18,7 @@ def member_area(request):
     return render(request, 'member/member-area.html', context)
 
 
-@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def delete_document(request, document_id):
     """
     Deletes the document when called.

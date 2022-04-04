@@ -10,7 +10,7 @@ class DocumentForm(forms.ModelForm):
         Document form for spna_admin
         """
         model = Document
-        fields = ('title', 'doc',)
+        fields = ('title', 'category', 'doc',)
         # widgets = {
         #     'content': SummernoteWidget(),
         #     'image': CustomClearableFileInput()
@@ -21,3 +21,4 @@ class DocumentForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['title'].label = 'Document Title'
         self.fields['doc'].label = 'Document Upload'
+        self.fields['category'].label = 'Document Category'

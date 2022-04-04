@@ -74,7 +74,6 @@ footer a {
     color: #37698e;
 }
 
-
 .text-whitesmoke {
     color: whitesmoke;
 }
@@ -123,11 +122,14 @@ footer a {
     border: 2px solid #37698e;
 }
 
-
-}
-
 .italic {
     font-style: italic;
+}
+
+.small-hr {
+    width: 40%;
+    color: #37698e;
+    margin: auto;
 }
 
 
@@ -197,6 +199,18 @@ footer a {
     transition: 500ms;
 }
 
+#modal-delete-button {
+    background-color: red;
+    color: whitesmoke;
+    border-radius: 5px;
+}
+
+#modal-delete-button:hover {
+    background-color: whitesmoke;
+    color: red;
+    transition: 500ms;
+    border: 1px solid red;
+}
 
 /* mailchimp */
 #mc_embed_signup {

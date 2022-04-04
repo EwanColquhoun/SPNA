@@ -48,27 +48,130 @@
     </div>
 </section>
 
-<section id="documents-section">
-    <div class="row text-center pb-5">
-        {% for doc in docs %}
-        <div class="col-12 col-md-3 mx-auto my-auto">
-            <div>
-                {{doc.title}}
-            </div>
-            <div>
-                <!-- need to get this to show something better! -->
-                <img src="{{ spna }}/media/original/cropped-SPNA_logo_icon.png" class="card-img-top" alt="SPNA cropped logo">
-                <a href="{{doc.doc.url}}">Download File</a>
-            </div>
-            <div>
-                {{doc.date_uploaded | date:"d M, Y"}}
-            </div>
-            <div>
-                <a class="delete-button" data-bs-toggle="modal" data-name="{{doc.id}}" data-bs-target="#delete-modal" href="#delete-doc-modal"><i class="fas fa-trash"></i>Delete</a>
-            </div>
+<section id="documents-section" class="">
+    <div id="doc-1-row" class="row text-center p-1 p-sm-5 bg-ant-white">
+        <div class="cat-title col-12 p-4">
+            <h2 class="category-title">Media Release</h2>
         </div>
-        {% endfor %}
+        {% for doc in docs %}
+            {% if doc.category == '1' %}
+                <div class="col-12 col-md-3 mx-auto my-auto">
+                    <div class="doc-1-title" class="pt-4">
+                        <h3 class="doc-title">
+                            {{doc.title}}
+                        </h3>
+                        <hr class="small-hr"> 
+                        <p class="text-muted pt-1">
+                            <small>
+                                {{doc.date_uploaded | date:"d M, Y"}}
+                            </small>
+                        </p>
+                    </div>
+                    <div class="doc-holder">
+                        <!-- need to get this to show something better! -->
+                        <embed src="{{doc.doc.url}}" width="100%" height="100%" />
+                        <!-- <object data="{{doc.doc.url}}" type="application/pdf" width="100%" height="100%">
+                            <p>Your web browser doesn't have a PDF plugin.
+                                Instead you can <a href="{{doc.doc.url}}">click here to
+                                download the PDF file.</a></p>
+                        </object> -->
+                        <!-- <iframe src="{{doc.doc.url}}" frameborder="0"></iframe> -->
+                    </div>
+                    <div class="doc-1-ancil pt-2 d-flex justify-content-around">
+                        <div>
+                            <a href="{{doc.doc.url}}"><i class="fas fa-download"></i></a>
+                        </div>
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_superuser %}
+                                <div>
+                                    <a class="delete-doc-button p-2" data-bs-toggle="modal" data-name="{{doc.id}}" data-bs-target="#delete-modal" href="#delete-doc-modal"><i class="fas fa-trash"></i></a>
+                                </div>
+                            {% endif %}
+                        {% endif %}   
+                    </div>
+                </div>
+            {% endif %}
+         {% endfor %}
     </div>
+    <div id="doc-2-row" class="row text-center p-1 p-sm-5">
+        <div class="cat-title col-12 p-4">
+            <h2 class="category-title">Media Mentions</h2>
+        </div>
+
+        {% for doc in docs %}
+            {% if doc.category == '2' %}
+                <div class="col-12 col-md-3 mx-auto my-auto">
+                    <div class="doc-2-title pt-4">
+                        <h3 class="doc-title">
+                            {{doc.title}}
+                        </h3>
+                        <hr class="small-hr"> 
+                        <p class="text-muted pt-1">
+                            <small>
+                                {{doc.date_uploaded | date:"d M, Y"}}
+                            </small>
+                        </p>
+                    </div>
+                    <div class="doc-holder">
+                        <!-- need to get this to show something better! -->
+                        <embed src="{{doc.doc.url}}" width="100%" height="100%" />
+                    </div>
+                    <div class="doc-2-ancil pt-2 d-flex justify-content-around">
+                        <div>
+                            <a href="{{doc.doc.url}}"><i class="fas fa-download"></i></a>
+                        </div>
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_superuser %}
+                                <div>
+                                    <a class="delete-doc-button p-2" data-bs-toggle="modal" data-name="{{doc.id}}" data-bs-target="#delete-modal" href="#delete-doc-modal"><i class="fas fa-trash"></i></a>
+                                </div>
+                            {% endif %}
+                        {% endif %}                        
+                    </div>
+                </div>
+            {% endif %}
+         {% endfor %}
+    </div>
+    <div class="doc-3-row row text-center p-1 p-sm-5 bg-ant-white">
+        <div class="cat-title col-12 p-4">
+            <h2 class="category-title">Letters to and responses from Government</h2>
+        </div>
+
+        {% for doc in docs %}
+            {% if doc.category == '3' %}
+                <div class="col-12 col-md-3 mx-auto my-auto pb-5">
+                    <div class="doc-3-title pt-4">
+                        <h3 class="doc-title">
+                            {{doc.title}}
+                        </h3>
+                        <hr class="small-hr"> 
+                        <p class="text-muted pt-1">
+                            <small>
+                                {{doc.date_uploaded | date:"d M, Y"}}
+                            </small>
+                        </p>
+                    </div>
+                    <div class="doc-holder">
+                        <!-- need to get this to show something better! -->
+                        <embed src="{{doc.doc.url}}" width="100%" height="100%" />
+                    </div>
+                    <div class="doc-3-ancil pt-2 d-flex justify-content-around">
+                        <div>
+                            <a href="{{doc.doc.url}}"><i class="fas fa-download"></i></a>
+                        </div>
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_superuser %}
+                                <div>
+                                    <a class="delete-doc-button p-2" data-bs-toggle="modal" data-name="{{doc.id}}" data-bs-target="#delete-modal" href="#delete-doc-modal"><i class="fas fa-trash"></i></a>
+                                </div>
+                            {% endif %}
+                        {% endif %}   
+                    </div>
+                </div>
+            {% endif %}
+         {% endfor %}
+    </div>
+     
 </section>
 
 

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, reverse, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from news.forms import ArticleForm
 from news.models import Articles
@@ -12,6 +13,10 @@ from member.forms import DocumentForm
 @login_required
 def spna_admin(request):
     """A view for the admin page. """
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry only SPNA Admin can access this page.")
+        return redirect(reverse('home'))
 
     docForm = DocumentForm()
     form = ArticleForm()
@@ -29,6 +34,7 @@ def spna_admin(request):
 
 
 @login_required
+@staff_member_required
 def delete_article(request, article_id):
     """
     Deletes the article when called.
@@ -40,6 +46,7 @@ def delete_article(request, article_id):
 
 
 @login_required
+@staff_member_required
 def edit_article(request, article_id):
     """
     A view to edit the article on the spna_admin page.
@@ -76,6 +83,7 @@ def edit_article(request, article_id):
 
 
 @login_required
+@staff_member_required
 def add_article(request):
     """
     A view to add articles from the spna_admin page.
@@ -107,6 +115,7 @@ def add_article(request):
 
 
 @login_required
+@staff_member_required
 def add_document(request):
     """
     A view to add documents from the spna_admin page.
