@@ -23,7 +23,7 @@ class Contact(models.Model):
     objects = models.Manager()
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
 
     def __str__(self):
         return str(self.name)

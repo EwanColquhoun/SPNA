@@ -78,7 +78,7 @@
                                     <!-- <img src="{{ article.image.url }}" class="card-img-top"alt="{{ article.title }}"> -->
                                 <div class="card-body h-100">
                                     <h5 id="title" data-title="title" class="card-title title">{{ article.title }}</h5>
-                                    <p id="content" data-content="content" class="card-text content overflow-auto">{{ article.content|striptags}}</p>
+                                    <p id="content" data-content="content" class="card-text content overflow-auto">{{ article.content|safe}}</p>
                                 </div>
                             </button>
                         </div>

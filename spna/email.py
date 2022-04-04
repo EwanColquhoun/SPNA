@@ -52,7 +52,9 @@ def send_admin_email(form):
     Retrieves the form data and send email accordingly.
     """
     subject = form.email_subject
-    message = form.email_body
+    msg = form.email_body.strip('<p>')  #does not work. need to strip characters or get rid of html tags.
+    print(msg, 'msg')
+    message = msg
     from_email = 'info@scottishpna.org'
     
     addys = form.email_to

@@ -26,3 +26,18 @@
     background: red;
     color: whitesmoke;
 }
+
+.table-holder {
+    max-height:400px;
+    overflow: auto;
+}
+
+.base-table {
+    width: 100%;
+}
+
+.base-table,
+.base-table td,
+.base-table th {
+    border: 1px solid lightslategray;
+}

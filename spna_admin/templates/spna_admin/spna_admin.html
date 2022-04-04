@@ -37,24 +37,24 @@
         <div class="row">
             
             <!-- Members -->
-            <div class="col-12 col-lg-6 p-2 p-sm-5 mx-auto">
+            <div class="col-12 col-lg-6 p-1 p-sm-3 mx-auto text-center">
                 <div class="member-table-head">
                     <h2>Member Information</h2>
                 </div>
-                <table>
+                <table class="base-table">
                     <tr>
                         <th>Full Name</th>
                         <th>Nursery</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Select</th>
-                        <th><input id="members-select-all" type="checkbox" ></th>
+                        <th>All <input id="members-select-all" type="checkbox" ></th>
+                        <!-- <th><input id="members-select-all" type="checkbox" ></th> -->
                     </tr>
                     {% for user in users %}
                     <tr>
                         <td>{{user.first_name}} {{user.last_name}}</td>
                         <td>NURSERY</td>
-                        <td>{{user.email}}</td>
+                        <td>{{user.email|truncatechars:15}}</td>
                         <td>{{user.phone}}</td>
                         <td><input type="checkbox" id="select" class="member-select-box select-box" name="email" value="{{user.email}}"></td>
 
@@ -65,34 +65,37 @@
             </div>
 
             <!-- Contacts -->
-            <div class="col-12 col-lg-6 p-2 p-sm-5 mx-auto">
+            <div class="col-12 col-lg-6 p-1 p-sm-3 mx-auto text-center">
                 <div class="contact-table-head">
                     <h2>Contact Information</h2>
                 </div>
-                <table>
-                    <tr>
-                        <th>Date</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Message</th>
-                        <th>Replied</th>
-                        <th>Select</th>
-                        <th><input id="contacts-select-all" type="checkbox" ></th>
-                    </tr>
-                    {% for contact in contacts %}
-                    <tr>
-                        <td>{{contact.created|date:"d M y" }}</td>
-                        <td>{{contact.name}}</td>
-                        <td>{{contact.email|truncatechars:15}}</td>
-                        <td>{{contact.phone}}</td>
-                        <td>{{contact.message|cut:"<p>"|cut:"</p>"}}</td>
-                        <td>{{contact.replied}}</td>
-                        <td><input type="checkbox" id="select" name="email" class="contact-select-box select-box" value="{{contact.email}}"></td>
-                    </tr>
-                    {% endfor %}
-                    
-                </table>
+                <div class="table-holder">
+
+                    <table class="base-table">
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Message</th>
+                            <th>Replied</th>
+                            <th>All <input id="contacts-select-all" type="checkbox" ></th>
+                            <!-- <th><input id="contacts-select-all" type="checkbox" ></th> -->
+                        </tr>
+                        {% for contact in contacts %}
+                        <tr>
+                            <td>{{contact.created|date:"d M y" }}</td>
+                            <td>{{contact.name}}</td>
+                            <td>{{contact.email|truncatechars:15}}</td>
+                            <td>{{contact.phone}}</td>
+                            <td>{{contact.message|safe}}</td>
+                            <td>{{contact.replied}}</td>
+                            <td><input type="checkbox" id="select" name="email" class="contact-select-box select-box" value="{{contact.email}}"></td>
+                        </tr>
+                        {% endfor %}
+                        
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -102,7 +105,7 @@
             <!-- Email Admin -->
             <div class="col-12 mx-auto p-2 p-sm-5">
                 <div class="text-center">
-                    <h2>Email</h2>
+                    <h2>Send Email</h2>
                 </div>
                 <form action="{% url 'send_email' %}" method="POST">
                     {% csrf_token %}
@@ -117,7 +120,7 @@
             <!-- Article Admin -->
             <div class="col-12 col-md-6 p-2 p-sm-5 mx-auto">
                 <div class="text-center">
-                    <h2>Add an Article</h2>
+                    <h2>Add Article</h2>
                 </div>
                 <!-- Add news form -->
                 <form class="admin-form" action="{% url 'add_article' %}" method="POST" enctype="multipart/form-data">
@@ -151,13 +154,6 @@
     </div>
 </section>
     
-
-<div class="page-footer">
-    <div class="row">
-        <div class="col"></div>
-    </div>
-</div>
-
 {% endblock %}
 
 {% block postloadjs %}
