@@ -6,3 +6,14 @@ btt.addEventListener('click', function(){
 })
 
 
+function alerts() {
+  setTimeout(function () {
+    let messages = document.getElementById('msg');
+    let alert = new bootstrap.Alert(messages);
+    if (messages) {
+      messages.classList.remove('show');
+    }
+  }, 4000);
+}
+
+document.addEventListener('DOMContentLoaded', alerts())

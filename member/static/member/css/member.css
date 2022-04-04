@@ -57,4 +57,9 @@
     .doc-holder {
         height: 250px;
     }
+
+    #member-text {
+        bottom: 44%;
+        font-size: xx-large;
+    }
 }
