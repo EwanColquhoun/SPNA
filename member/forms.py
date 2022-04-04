@@ -30,10 +30,19 @@ class EmailForm(forms.Form):
     email_to = forms.CharField()
     email_subject = forms.CharField()
     email_body = forms.CharField()
-    email_date = forms.DateTimeField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['email_to'].label = 'To:'
         self.fields['email_subject'].label = 'Subject:'
         self.fields['email_body'].label = 'Body:'
+
+    def save(self):
+        """
+        Creates a save method
+        """
+        data = self.cleaned_data
+        self.email_to = data['email_to']
+        self.email_subject = data['email_subject']
+        self.email_body = data['email_body']
+        return self

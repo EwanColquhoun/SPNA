@@ -45,3 +45,22 @@ def register_email(user):
         ['info@scottishpna.org'],
         fail_silently=True,
     )
+
+
+def send_admin_email(form):
+    """
+    Retrieves the form data and send email accordingly.
+    """
+    subject = form.email_subject
+    message = form.email_body
+    from_email = 'info@scottishpna.org'
+    
+    addys = form.email_to
+    # print(type(addys), 'addys type')
+    email_list = addys.strip('][').split(', ')
+    # print(type(email_list), 'email list type')
+    recipient_list = email_list
+
+    # print(subject, message, from_email, recipient_list)
+    
+    send_mail(subject, message, from_email, recipient_list)

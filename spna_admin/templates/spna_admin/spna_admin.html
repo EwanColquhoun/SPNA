@@ -99,7 +99,7 @@
                     <h2>Email</h2>
                 </div>
                 <!-- action will be to send email view -->
-                <form action="" method="POST">
+                <form action="{% url 'send_email' %}" method="POST">
                     {% csrf_token %}
                     {{ emailForm|crispy }}
                     <!-- <label for="email-to">To:</label><br>

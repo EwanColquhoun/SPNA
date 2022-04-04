@@ -8,6 +8,7 @@ from news.models import Articles
 from contact.models import Contact
 from member.models import Document
 from member.forms import DocumentForm, EmailForm
+from spna.email import send_admin_email
 
 
 @login_required
@@ -146,3 +147,36 @@ def add_document(request):
     }
 
     return render(request, template, context)
+
+
+@login_required
+@staff_member_required
+def send_admin_email_view(request):
+    """
+    A method to handle the sending of admin emails.
+    """
+    if request.method == 'POST':
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print(form, 'view')
+        #  call to send email
+            send_admin_email(form)
+         
+            messages.success(request, 'Email successfully sent!')
+            return redirect(reverse('spna_admin'))
+        else:
+            messages.error(request, 'Failed to send email. Please ensure the form is valid.')
+    else:
+        form = EmailForm()
+
+    users = User.objects.all()
+
+    template = 'spna_admin/spna_admin.html'
+    context = {
+        'form': form,
+        'users': users,
+    }
+
+    return render(request, template, context)
+    
