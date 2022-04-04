@@ -105,12 +105,11 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <form class="admin-form" action="" method="POST" enctype="multipart/form-data">
+                <form class="admin-form" action="{% url 'add_document' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ docForm|crispy }}
                     <div>
                         <button class="btn btn-success">Submit Article</button>
-                        <a id="delete-button" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#delete-modal"><i class="fas fa-trash"></i>Delete</a>
                     </div>
                 </form>
             </div>
@@ -122,5 +121,5 @@
 {% endblock %}
 
 {% block postloadjs %}
-  
+
 {% endblock %}

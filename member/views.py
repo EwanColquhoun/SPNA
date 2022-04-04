@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 from .models import Document
 
-# Create your views here.
+
+@login_required
 def member_area(request):
     """ 
     A view to return the members area
@@ -12,3 +16,14 @@ def member_area(request):
         'docs': docs,
     }
     return render(request, 'member/member-area.html', context)
+
+
+@login_required
+def delete_document(request, document_id):
+    """
+    Deletes the document when called.
+    """
+    doc = get_object_or_404(Document, id=document_id)
+    doc.delete()
+    messages.success(request, 'Document deleted successfully!')
+    return HttpResponseRedirect(reverse('member_area'))

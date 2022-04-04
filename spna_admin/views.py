@@ -81,7 +81,7 @@ def add_article(request):
     A view to add articles from the spna_admin page.
     """
     if not request.user.is_superuser:
-        messages.error(request, "Sorry only store owners can access this page.")
+        messages.error(request, "Sorry only Admin can access this page.")
         return redirect(reverse('home'))
 
     if request.method == 'POST':
@@ -94,6 +94,37 @@ def add_article(request):
             messages.error(request, 'Failed to add article. Please ensure the form is valid.')
     else:
         form = ArticleForm()
+
+    users = User.objects.all()
+
+    template = 'spna_admin/spna_admin.html'
+    context = {
+        'form': form,
+        'users': users,
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def add_document(request):
+    """
+    A view to add documents from the spna_admin page.
+    """
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry only Admin can access this page.")
+        return redirect(reverse('home'))
+
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Document successfully added!')
+            return redirect(reverse('spna_admin'))
+        else:
+            messages.error(request, 'Failed to add document. Please ensure the form is valid.')
+    else:
+        form = DocumentForm()
 
     users = User.objects.all()
 
