@@ -100,7 +100,11 @@ footer a {
     font-size: 50px;
     font-family: 'Moon Dance', cursive;
     letter-spacing: 4px;
-    line-height: l.5;
+    line-height: 2;
+}
+
+.page-footer {
+    height: 179px;
 }
 
 #footer {

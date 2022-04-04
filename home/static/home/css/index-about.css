@@ -72,6 +72,7 @@
 	margin: 30px auto 60px;
 	padding: 0 80px;
 }
+
 .carousel .carousel-item {
 	text-align: center;
 	overflow: hidden;
@@ -92,6 +93,7 @@
 	padding: 15px;
 	font-size: 13px;
 }
+
 .carousel-control-prev, .carousel-control-next {
 	height: 44px;
 	width: 44px;
@@ -138,6 +140,11 @@
 
 .thumb-wrapper i {
     font-size: larger;
+}
+
+.carousel-item i {
+    font-size: xx-large;
+    padding: 1.5rem;
 }
 
 

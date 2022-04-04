@@ -37,14 +37,14 @@
         <div class="row">
             
             <!-- Members -->
-            <div class="col-12 col-md-6 p-2 p-sm-5 mx-auto">
+            <div class="col-12 col-lg-6 p-2 p-sm-5 mx-auto">
                 <div class="member-table-head">
                     <h2>Member Information</h2>
                 </div>
                 <table>
                     <tr>
                         <th>Full Name</th>
-                        <th>Username</th>
+                        <th>Nursery</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Select</th>
@@ -53,7 +53,7 @@
                     {% for user in users %}
                     <tr>
                         <td>{{user.first_name}} {{user.last_name}}</td>
-                        <td>{{user.username}}</td>
+                        <td>NURSERY</td>
                         <td>{{user.email}}</td>
                         <td>{{user.phone}}</td>
                         <td><input type="checkbox" id="select" class="member-select-box select-box" name="email" value="{{user.email}}"></td>
@@ -65,7 +65,7 @@
             </div>
 
             <!-- Contacts -->
-            <div class="col-12 col-md-6 p-2 p-sm-5 mx-auto">
+            <div class="col-12 col-lg-6 p-2 p-sm-5 mx-auto">
                 <div class="contact-table-head">
                     <h2>Contact Information</h2>
                 </div>
@@ -151,6 +151,12 @@
     </div>
 </section>
     
+
+<div class="page-footer">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
 
 {% endblock %}
 
