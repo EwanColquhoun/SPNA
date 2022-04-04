@@ -1,4 +1,5 @@
 from django import forms
+from django_summernote.widgets import SummernoteWidget
 from .models import Document
 
 
@@ -29,7 +30,7 @@ class EmailForm(forms.Form):
 
     email_to = forms.CharField()
     email_subject = forms.CharField()
-    email_body = forms.CharField()
+    email_body = forms.CharField(widget=SummernoteWidget())
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

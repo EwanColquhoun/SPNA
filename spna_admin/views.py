@@ -59,14 +59,14 @@ def edit_article(request, article_id):
         return redirect(reverse('home'))
     
     article = get_object_or_404(Articles, id=article_id)
-    form = ArticleForm(instance=article)
 
     if request.method == 'POST':
-        form = ArticleForm(request.POST, request.FILES,)
+        # form = ArticleForm(instance=article)
+        form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Successfully added {article.title}.')
-            return redirect(reverse('spna_admin'))
+            messages.success(request, f'Successfully changed {article.title}.')
+            return redirect(reverse('news'))
         else:
             messages.error(request, 'Failed to add article. Please ensure the form is valid.')
     else:

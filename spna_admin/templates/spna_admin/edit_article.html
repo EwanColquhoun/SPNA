@@ -35,25 +35,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 mx-auto">
-                <table>
-                    <tr>
-                        <th>Full Name</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                    </tr>
-                    {% for user in users %}
-                    <tr>
-                        <td>{{user.first_name}} {{user.last_name}}</td>
-                        <td>{{user.username}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.phone}}</td>
-                    </tr>
-                    {% endfor %}
-                
-                </table>
-            </div>
-            <div class="col-12 col-md-6 mx-auto">
                 <div class="">
                     <h2>Edit an Article</h2>
                 </div>
@@ -68,11 +49,12 @@
                             {{ field }}
                         {% endif %}
                     {% endfor %}
-                
-                    <button class="btn btn-danger">Submit Article</button>
+                    <div>
+                        <button class="btn btn-danger">Submit Article</button>
+                        <a id="delete-button" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#delete-modal"><i class="fas fa-trash">Delete</i></a>
+                    </div>
                 </form>
 
-                <a id="delete-button" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#delete-modal"><i class="fas fa-trash">Delete</i></a>
 
             </div>
         </div>

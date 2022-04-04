@@ -22,6 +22,10 @@
     position: relative;
 }
 
+#news-articles-section {
+    min-height: 50vh;
+}
+
 #news-title {
     position:absolute;
     top: 61%;

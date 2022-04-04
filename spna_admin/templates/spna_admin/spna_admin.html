@@ -35,34 +35,36 @@
     <div class="container-fluid">
 
         <div class="row">
+            
+            <!-- Members -->
             <div class="col-12 col-md-6 p-2 p-sm-5 mx-auto">
-                
-                    <div class="member-table-head">
-                        <h2>Member Information</h2>
-                    </div>
-                    <table>
-                        <tr>
-                            <th>Full Name</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Select</th>
+                <div class="member-table-head">
+                    <h2>Member Information</h2>
+                </div>
+                <table>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Select</th>
+                        <th><input id="members-select-all" type="checkbox" ></th>
+                    </tr>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{user.first_name}} {{user.last_name}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.phone}}</td>
+                        <td><input type="checkbox" id="select" class="member-select-box select-box" name="email" value="{{user.email}}"></td>
 
-                        </tr>
-                        {% for user in users %}
-                        <tr>
-                            <td>{{user.first_name}} {{user.last_name}}</td>
-                            <td>{{user.username}}</td>
-                            <td>{{user.email}}</td>
-                            <td>{{user.phone}}</td>
-                            <td><input type="checkbox" id="select" class="select-box" name="email" value="{{user.email}}"></td>
-
-                        </tr>
-                        {% endfor %}
-                        
-                    </table>
+                    </tr>
+                    {% endfor %}
+                    
+                </table>
             </div>
 
+            <!-- Contacts -->
             <div class="col-12 col-md-6 p-2 p-sm-5 mx-auto">
                 <div class="contact-table-head">
                     <h2>Contact Information</h2>
@@ -76,6 +78,7 @@
                         <th>Message</th>
                         <th>Replied</th>
                         <th>Select</th>
+                        <th><input id="contacts-select-all" type="checkbox" ></th>
                     </tr>
                     {% for contact in contacts %}
                     <tr>
@@ -85,7 +88,7 @@
                         <td>{{contact.phone}}</td>
                         <td>{{contact.message|cut:"<p>"|cut:"</p>"}}</td>
                         <td>{{contact.replied}}</td>
-                        <td><input type="checkbox" id="select" name="email" class="select-box" value="{{contact.email}}"></td>
+                        <td><input type="checkbox" id="select" name="email" class="contact-select-box select-box" value="{{contact.email}}"></td>
                     </tr>
                     {% endfor %}
                     
@@ -93,27 +96,25 @@
             </div>
         </div>
 
+    
         <div class="row">
+
+            <!-- Email Admin -->
             <div class="col-12 mx-auto p-2 p-sm-5">
                 <div class="text-center">
                     <h2>Email</h2>
                 </div>
-                <!-- action will be to send email view -->
                 <form action="{% url 'send_email' %}" method="POST">
                     {% csrf_token %}
                     {{ emailForm|crispy }}
-                    <!-- <label for="email-to">To:</label><br>
-                    <input type="text" id="email-to" name="email-to"><br>
-                    <label for="email-subject">Subject:</label>:</label><br>
-                    <input type="text" id="email-subject" name="email-subject"><br>
-                    <label for="email-body">Body:</label><br>
-                    <input type="text" id="email-body" name="email-body"><br> -->
                     <button class="btn btn-success" type="submit">Send Email</button>
                 </form>
             </div>
         </div>
 
         <div class="row">
+
+            <!-- Article Admin -->
             <div class="col-12 col-md-6 p-2 p-sm-5 mx-auto">
                 <div class="text-center">
                     <h2>Add an Article</h2>
@@ -124,10 +125,12 @@
                     {{ form|crispy }}
                     <div>
                         <button class="btn btn-success">Submit Article</button>
-                        <a id="delete-button" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#delete-modal"><i class="fas fa-trash"></i>Delete</a>
+                        <!-- <a id="delete-button" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#delete-modal"><i class="fas fa-trash"></i>Delete</a> -->
                     </div>
                 </form>       
             </div>
+
+            <!-- Document Admin -->
             <div class="col-12 col-md-6 p-2 p-sm-5 mx-auto">
                 <div class="text-center">
                     <h2>Add Document</h2>
