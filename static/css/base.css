@@ -70,6 +70,10 @@ footer a {
     background-color: lightgrey;
 }
 
+.bg-dark-green {
+    background-color: rgb(35, 83, 35);
+}
+
 .text-blue {
     color: #37698e;
 }
@@ -101,6 +105,14 @@ footer a {
     font-family: 'Moon Dance', cursive;
     letter-spacing: 4px;
     line-height: 2;
+}
+
+.sub-title {
+    color: antiquewhite;
+    font-size: 30px;
+    font-family: 'Moon Dance', cursive;
+    letter-spacing: 3px;
+    font-weight: normal;
 }
 
 .page-footer {

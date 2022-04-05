@@ -66,10 +66,9 @@
 
 /* Cards inspired from https://codepen.io/onediv/pen/nggJjz */
 
-
 .i-card {
     position: relative;
-    min-height: 220px;
+    min-height: 200px;
     width: 300px;
 	display: inline-block;
 	vertical-align: middle;
@@ -104,6 +103,12 @@
     background-size: cover;
 }
 
+#card4,
+#card5,
+#card6 {
+    background-color: rgba(41, 90, 37, 0.5);
+}
+
 .card-image {
     overflow: hidden;
     width: 17.5rem;
@@ -114,12 +119,23 @@
 #card3:hover #member-shots3 {
     background: rgba(33, 96, 130, 0.5);
     height: 200px;
-    padding: 0 1rem;
+    padding: 1rem;
+}
+
+#card4:hover #member-shots4,
+#card5:hover #member-shots5,
+#card6:hover #member-shots6 {
+    background: rgba(41, 90, 37, 0.5);
+    height: 400px;
+    padding: 1rem;
 }
 
 #card1:hover .member-infos i,
 #card2:hover .member-infos i,
-#card3:hover .member-infos i {
+#card3:hover .member-infos i,
+#card4:hover .member-infos i,
+#card5:hover .member-infos i,
+#card6:hover .member-infos i {
     -webkit-transform: rotateX(180deg);
 	-moz-transform: rotateX(180deg);
 	-o-transform: rotateX(180deg);
@@ -141,7 +157,10 @@
 
 #member-shots1,
 #member-shots2,
-#member-shots3 {
+#member-shots3,
+#member-shots4,
+#member-shots5,
+#member-shots6 {
 	height: 0px;
 	overflow: auto;
 	border-radius: 0 0px 3px 3px;
@@ -152,4 +171,16 @@
 	-o-transition: all 1000ms cubic-bezier(.45,.17,.39,1.39);
 	-ms-transition: all 1000ms cubic-bezier(.45,.17,.39,1.39);
 	transition: all 1000ms cubic-bezier(.45,.17,.39,1.39);
+}
+
+/* ------------Campaigns Section---------------- */
+#campaign-header {
+    height: 10rem;
+}
+
+#campaign-body {
+    height: 80vh;
+    background: url('/media/jumping-kids.jpg') no-repeat center;
+    background-color: rgba(41, 90, 37, 0.5);
+    background-size: cover;
 }
