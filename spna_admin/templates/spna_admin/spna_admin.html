@@ -58,7 +58,11 @@
                                 {{user.email|truncatechars:15}}
                             </button>
                         </td>
-                        <td>{{user.phone}}</td>
+                        <td>
+                            <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.phone}}">
+                                {{user.phone|truncatechars:5}}
+                            </button>
+                        </td>
                         <td><input type="checkbox" id="select" class="member-select-box select-box" name="email" value="{{user.email}}"></td>
 
                     </tr>
@@ -93,7 +97,11 @@
                                     {{contact.email|truncatechars:15}}
                                 </button>
                             </td>
-                            <td>{{contact.phone}}</td>
+                            <td>
+                                <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{contact.phone}}">
+                                    {{contact.phone|truncatechars:5}}
+                                </button>
+                            </td>
                             <td> 
                                 <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{contact.message|safe}}">
                                     {{contact.message|safe|truncatechars:30}}
