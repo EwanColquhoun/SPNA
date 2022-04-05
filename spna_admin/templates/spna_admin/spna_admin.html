@@ -48,13 +48,16 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>All <input id="members-select-all" type="checkbox" ></th>
-                        <!-- <th><input id="members-select-all" type="checkbox" ></th> -->
                     </tr>
                     {% for user in users %}
                     <tr>
                         <td>{{user.first_name}} {{user.last_name}}</td>
                         <td>NURSERY</td>
-                        <td>{{user.email|truncatechars:15}}</td>
+                        <td>
+                            <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.email}}">
+                                {{user.email|truncatechars:15}}
+                            </button>
+                        </td>
                         <td>{{user.phone}}</td>
                         <td><input type="checkbox" id="select" class="member-select-box select-box" name="email" value="{{user.email}}"></td>
 
@@ -78,18 +81,27 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Message</th>
-                            <th>Replied</th>
+                            <th>Delete</th>
                             <th>All <input id="contacts-select-all" type="checkbox" ></th>
-                            <!-- <th><input id="contacts-select-all" type="checkbox" ></th> -->
                         </tr>
                         {% for contact in contacts %}
-                        <tr>
+                        <tr class="{% if contact.replied %}bg-green{% else %}bg-red{% endif %}">
                             <td>{{contact.created|date:"d M y" }}</td>
                             <td>{{contact.name}}</td>
-                            <td>{{contact.email|truncatechars:15}}</td>
+                            <td> 
+                                <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{contact.email}}">
+                                    {{contact.email|truncatechars:15}}
+                                </button>
+                            </td>
                             <td>{{contact.phone}}</td>
-                            <td>{{contact.message|safe}}</td>
-                            <td>{{contact.replied}}</td>
+                            <td> 
+                                <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{contact.message|safe}}">
+                                    {{contact.message|safe|truncatechars:30}}
+                                </button>
+                            </td>
+                            <td> 
+                                <a class="delete-cont-button p-2" data-bs-toggle="modal" data-name="{{contact.id}}" data-bs-target="#delete-cont-modal" href="#delete-cont-modal"><i class="fas fa-trash"></i></a>
+                            </td>
                             <td><input type="checkbox" id="select" name="email" class="contact-select-box select-box" value="{{contact.email}}"></td>
                         </tr>
                         {% endfor %}

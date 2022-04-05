@@ -50,6 +50,18 @@ def delete_article(request, article_id):
 
 @login_required
 @staff_member_required
+def delete_contact(request, contact_id):
+    """
+    Deletes the contact when called.
+    """
+    contact = get_object_or_404(Contact, id=contact_id)
+    contact.delete()
+    messages.success(request, 'Contact deleted successfully!')
+    return HttpResponseRedirect(reverse('spna_admin'))
+
+
+@login_required
+@staff_member_required
 def edit_article(request, article_id):
     """
     A view to edit the article on the spna_admin page.

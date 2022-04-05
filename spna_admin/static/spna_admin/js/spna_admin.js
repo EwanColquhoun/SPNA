@@ -43,7 +43,6 @@ function checkAllMembers() {
     };
 };
 
-
 function checkAllContacts() {
     var cbs = document.querySelectorAll('.contact-select-box');
 
@@ -53,3 +52,28 @@ function checkAllContacts() {
         }
     }
 }
+
+
+// Bootstrap tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
+
+// Gets the delete modal working
+const modal_buttons = document.getElementById('delete-cont-modal-buttons');
+const delete_buttons = document.querySelectorAll('.delete-cont-button');
+let modal = document.querySelector('#delete-cont-modal')
+
+if (delete_buttons.length !== 0) {
+delete_buttons.forEach((button) => {
+    button.addEventListener('click', function () {
+    const contact_id = button.getAttribute('data-name');
+    let modalButton = document.querySelector('#cont-modal-delete-button')
+
+    modal.addEventListener('shown.bs.modal', function () {
+        modalButton.setAttribute('href', `/spna_admin/delete/contact/${contact_id}`);
+    });
+});
+})};

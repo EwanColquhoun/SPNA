@@ -41,3 +41,16 @@
 .base-table th {
     border: 1px solid lightslategray;
 }
+
+.email-tt {
+    border: none;
+    background: none;
+}
+
+.bg-green {
+    background-color: rgba(130, 216, 130, 0.3);
+}
+
+.bg-red {
+    background-color: rgba(246, 0, 0, 0.3);
+}
