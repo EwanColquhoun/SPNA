@@ -276,15 +276,37 @@ footer a {
     background: url('/media/hammock.jpg') no-repeat center;
     background-color: rgb(236, 136, 136);
     background-size: cover;
+}
+
+.title-section {
     height: 35vh;
     width: 100vw;
     position: relative;
 }
 
-#login-title-section .title-text {
+#login-title-section .title-text,
+#logout-title-section .title-text,
+#email-title-section .title-text {
     position: absolute;
-    top: 30%;
-    left: 40%;
+    top: 64%;
+    left: 31%;
+}
+
+#logout-title-section {
+    background: url('/media/blocks.jpg') no-repeat center;
+    background-color: #96b1e0;
+    background-size: cover;
+}
+
+#logout-body-section {
+    height: 65vh;
+    width: 100%;
+}
+
+#email-title-section {
+    background: url('/media/colouring.jpg') no-repeat center;
+    background-color: #96b1e0;
+    background-size: cover;
 }
 
 /* -------------------------------- Media Queries */
@@ -325,4 +347,12 @@ footer a {
     #mc_embed_signup {
         width: 100%;
     }
+
+    #login-title-section .title-text,
+    #logout-title-section .title-text,
+    #email-title-section .title-text {
+    position: absolute;
+    top: 32%;
+    left: 10%;
+}
 }

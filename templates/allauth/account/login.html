@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<section id="login-title-section">
+<section id="login-title-section" class="title-section">
   <div class="container-fluid w-100">
     <div class="overlay"></div>
     <div class="row w-100 h-100">
@@ -39,7 +39,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
 {% else %}
 <section id="create-acc-section" class="bg-ant-white">  
-  <div class="row g-0 w-100">
+  <div class="row g-0 p-4 w-100">
     <div class="col-12 col-sm-10 p-1 p-sm-5 mx-auto my-auto text-center">
       <p>{% blocktrans %}If you have not created an account yet, then please
         <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
@@ -49,7 +49,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 {% endif %}
 
 <section id="signup-form-section" class="bg-ant-white">
-  <div class="row g-0 w-100">
+  <div class="row g-0 p-1 p-sm-4 w-100">
     <div class="col-12 col-md-8 p-1 p-sm-4 mx-auto my-auto">
       <form class="login" method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
@@ -58,7 +58,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
         <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-        <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+        <button class="spna-btn primaryAction" type="submit">{% trans "Sign In" %}</button>
       </form>
     </div>
   </div>
