@@ -20,7 +20,9 @@
 }
 
 #documents-section {
-    height: 70vh;
+    min-height: fit-content;
+    max-height: 1800px;
+    overflow-y: auto;
 }
 
 .category-title {
