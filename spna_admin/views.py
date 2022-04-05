@@ -167,6 +167,7 @@ def send_admin_email_view(request):
     """
     A method to handle the sending of admin emails.
     """
+    contacts = Contact.objects.all()
     if request.method == 'POST':
         form = EmailForm(request.POST)
         if form.is_valid():
@@ -174,8 +175,16 @@ def send_admin_email_view(request):
             print(form, 'view')
         #  call to send email
             send_admin_email(form)
-         
             messages.success(request, 'Email successfully sent!')
+
+            if Contact.objects.filter(email=form.data['email_to']).exists():
+                print(form.data)
+                for contact in contacts:
+                    if contact.email == form.data['email_to']:
+                        contact.replied = True
+                        contact.created = contact.created
+                        contact.save()
+                 
             return redirect(reverse('spna_admin'))
         else:
             messages.error(request, 'Failed to send email. Please ensure the form is valid.')

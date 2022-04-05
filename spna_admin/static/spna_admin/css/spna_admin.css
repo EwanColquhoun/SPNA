@@ -52,5 +52,13 @@
 }
 
 .bg-red {
-    background-color: rgba(246, 0, 0, 0.3);
+    background-color: rgba(245, 63, 63, 0.3);
+}
+
+.admin-hr,
+.email-hr {
+    color: #37698e;
+    width: 70%;
+    opacity: 0.6;
+    border-radius: 10px;
 }
