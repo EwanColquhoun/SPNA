@@ -1,21 +1,51 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 
 {% load i18n %}
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
+{% block page_header %}
+    <div class="container-fluid header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+<section id="join-title-section" class="title-section">
+  <div class="container-fluid w-100">
+    <div class="overlay"></div>
+    <div class="row w-100 h-100">
+      <div class="col-12 p-5">
+        <h1 class="title-text">{% trans "Sign Up" %}</h1>
+      </div>
+    </div>
+  </div>
+</section>
 
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-</form>
+<section id="join-body-section" class="bg-ant-white text-blue">
+  <div class="row g-0 w-100">
+    <div class="col-12 col-md-10 mx-auto my-auto">
+      <p class="p-2">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+    </div>
+    <div class="col-10 col-md-8 p-2 p-sm-5 mx-auto">
+
+      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <div class="pt-3">
+          <button class="spna-btn" type="submit">{% trans "Sign Up" %} &raquo;</button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</section>
 
 {% endblock %}

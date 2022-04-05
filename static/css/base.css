@@ -286,7 +286,9 @@ footer a {
 
 #login-title-section .title-text,
 #logout-title-section .title-text,
-#email-title-section .title-text {
+#email-title-section .title-text,
+#reset-title-section .title-text,
+#join-title-section .title-text {
     position: absolute;
     top: 64%;
     left: 31%;
@@ -305,6 +307,18 @@ footer a {
 
 #email-title-section {
     background: url('/media/colouring.jpg') no-repeat center;
+    background-color: #96b1e0;
+    background-size: cover;
+}
+
+#reset-title-section {
+    background: url('/media/puzzles.jpg') no-repeat center;
+    background-color: #96b1e0;
+    background-size: cover;
+}
+
+#join-title-section {
+    background: url('/media/bubbles.jpg') no-repeat center;
     background-color: #96b1e0;
     background-size: cover;
 }
@@ -350,7 +364,9 @@ footer a {
 
     #login-title-section .title-text,
     #logout-title-section .title-text,
-    #email-title-section .title-text {
+    #email-title-section .title-text,
+    #reset-title-section .title-text,
+    #join-title-section .title-text {
     position: absolute;
     top: 32%;
     left: 10%;
