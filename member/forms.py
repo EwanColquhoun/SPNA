@@ -1,49 +1,52 @@
 from django import forms
 from django_summernote.widgets import SummernoteWidget
+
 from allauth.account.forms import SignupForm
-from .models import Document, Member
+from .models import Document, SPNAMember
 
 
 class CustomSignupForm(SignupForm):
     """
     Takes the default AllAuth user form, adds and modifies as below.
     """
-    class Meta:
-        model = Member
-        fields = fields = '__all__'
-        # fields = ('username', 'first_name', 'last_name',
-        #           'email', 'password1', 'password2', 'nursery', 'street_address1')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].required = True
+        self.fields['email'].label = 'Email'
+        self.fields['password1'].label = 'Password'
+        self.fields['password2'].label = 'Password again'
+        self.fields['fullname'].label = 'Full Name'
 
-        username = forms.CharField(max_length=30,
-                               required=True,
-                               help_text='Required. 150 characters or fewer. \
-                                    Letters, digits and @/./+/-/_ only.')
-        first_name = forms.CharField(max_length=30,
-                                    required=True,
-                                    help_text='Required')
-        last_name = forms.CharField(max_length=30,
-                                    required=True,
-                                    help_text='Required')
-        email = forms.CharField(max_length=100,
-                                widget=forms.EmailInput
-                            (attrs={'placeholder': 'youremail@mail.com'}))
-        nursery = forms.CharField(max_length=40,
-                               required=False,
-                               help_text='Please enter the name of the Nursery you are affiliated with.')
-  
+    class Meta:
+        model = SPNAMember
+        fields = '__all__'
+
+    fullname = forms.CharField(max_length=40, required=False)
+    nursery = forms.CharField(max_length=40, required=False,
+                            help_text='Please enter the name of the Nursery you are affiliated with.')
+    street_address1 = forms.CharField(max_length=40, required=False)
+    street_address2 = forms.CharField(max_length=40, required=False)
+    town_or_city = forms.CharField(max_length=40, required=False)
+    county = forms.CharField(max_length=40, required=False)
+    postcode = forms.CharField(max_length=40, required=False)  
+    country = forms.CharField(max_length=40, required=False)
 
     def save(self, request):
 
         # Ensure you call the parent class's save.
         # .save() returns a User object.
-        user = super(CustomSignupForm, self).save(request)
-        user.message = self.cleaned_data['message']
-        user.message = self.cleaned_data['message']
-        user.message = self.cleaned_data['message']
-        user.message = self.cleaned_data['message']
-        user.message = self.cleaned_data['message']
-        user.save()
-        return user
+        
+        member = super().save(request)
+        member.fullname = self.cleaned_data['fullname']
+        member.nursery = self.cleaned_data['nursery']
+        member.street_address1 = self.cleaned_data['street_address1']
+        member.street_address2 = self.cleaned_data['street_address2']
+        member.town_or_city = self.cleaned_data['town_or_city']
+        member.county = self.cleaned_data['county']
+        member.postcode = self.cleaned_data['postcode']
+        member.country = self.cleaned_data['country']
+        member.save()
+        return member
 
 
 class DocumentForm(forms.ModelForm):

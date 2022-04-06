@@ -138,7 +138,7 @@ EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = "info@scottishpna.org"
 
 # for the messages
-# AUTH_USER_MODEL = 'member.CustomUser'
+# AUTH_USER_MODEL = 'member.SPNAMember'
 ACCOUNT_FORMS = {'signup': 'member.forms.CustomSignupForm'}
 
 MESSAGE_TAGS = {

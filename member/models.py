@@ -1,4 +1,6 @@
-from django.contrib.auth.models import AbstractUser, UserManager, User
+from django.contrib.auth.models import User, UserManager
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django_countries.fields import CountryField
 from django.db import models
 
@@ -32,12 +34,13 @@ class Document(models.Model):
         return str(self.title)
 
     
-class Member(models.Model):
+class SPNAMember(models.Model):
     """
     Extends the default User into the Member class
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    nursery = models.CharField(max_length=255, unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    nursery = models.CharField(max_length=255)
+    fullname = models.CharField(max_length=50, null=False, blank=False, default='')
     street_address1 = models.CharField(max_length=80, null=False, blank=False)
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
     town_or_city = models.CharField(max_length=40, null=False, blank=False)
@@ -48,3 +51,10 @@ class Member(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        SPNAMember.objects.create(user=instance)
+    instance.spnamember.save()
