@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'django_summernote',
+    'django_countries',
     'crispy_forms',
 
     # custom
@@ -137,6 +138,8 @@ EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = "info@scottishpna.org"
 
 # for the messages
+# AUTH_USER_MODEL = 'member.CustomUser'
+ACCOUNT_FORMS = {'signup': 'member.forms.CustomSignupForm'}
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
