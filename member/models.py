@@ -2,6 +2,7 @@ from django.contrib.auth.models import User, UserManager
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django_countries.fields import CountryField
+from django.conf import settings
 from django.db import models
 
 # Create your models here.
@@ -38,7 +39,7 @@ class SPNAMember(models.Model):
     """
     Extends the default User into the Member class
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     nursery = models.CharField(max_length=255)
     fullname = models.CharField(max_length=50, null=False, blank=False, default='')
     street_address1 = models.CharField(max_length=80, null=False, blank=False)
@@ -55,6 +56,16 @@ class SPNAMember(models.Model):
 
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
+    """
+    Create of update the member profile
+    """
+    
     if created:
-        SPNAMember.objects.create(user=instance)
-    instance.spnamember.save()
+        spnamember, created = SPNAMember.objects.get_or_create(user=instance)
+
+
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         spnamember, created = SPNAMember.objects.get_or_create(user=instance)
+
+# post_save.connect(create_user_profile, sender=User)
