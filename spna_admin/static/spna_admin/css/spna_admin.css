@@ -1,6 +1,7 @@
 #admin-header {
-    height: 10vh;
-    color: black;
+    background: url('/media/admin.jpg') no-repeat center;
+    background-color: rgb(236, 136, 136);
+    background-size: cover;
 }
 
 .admin-form label {

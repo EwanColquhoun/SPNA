@@ -21,44 +21,49 @@
 {% block content %}
 
 
-<section id="admin-header">
-    <div class="conatiner-fluid text-center">
-        <div class="row h-100 w-100">
-            <div class="col-12 p-5 h-100 w-100 text-center">
-                <h1 id="admin-title" class="text-blue">SPNA Admin Dashboard</h1>
+<section id="admin-header" class="title-section">
+    <div class="container-fluid h-100 w-100 text-center">
+        <div class="overlay">
+            <div class="row h-100 w-100">
+                <div class="col-12 text-center my-auto">
+                    <h1 id="admin-title" class="title-text">SPNA Admin Dashboard</h1>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <section id="admin-dashboard" class="bg-light-grey">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-6 mx-auto">
-                <div class="">
-                    <h2>Edit an Article</h2>
-                </div>
-                <!-- Add news form -->
-                <form class="admin-form" action="{% url 'edit_article' article.id %}" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    
-                    {% for field in form %}
-                        {% if field.name != 'image' %}
-                            {{ field | as_crispy_field }}
-                        {% else %}
-                            {{ field }}
-                        {% endif %}
-                    {% endfor %}
-                    <div>
-                        <button class="btn btn-danger">Submit Article</button>
-                        <a id="delete-button" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#delete-modal"><i class="fas fa-trash">Delete</i></a>
-                    </div>
-                </form>
-
-
+    <div class="row g-0 w-100 p-2 p-sm-5 bg-light-blue">
+        <div class="col-12 col-md-6 mx-auto">
+            <div class="">
+                <h2 class="p-3">Edit an Article</h2>
             </div>
+            <!-- Add news form -->
+            <form class="admin-form" action="{% url 'edit_article' article.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                {% for field in form %}
+                    {% if field.name != 'image' %}
+                        {{ field | as_crispy_field }}
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
+                {% endfor %}
+                <div>
+                    <button class="btn btn-success">Submit Article</button>
+                    
+                    <a id="delete-button" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#delete-modal"><i class="fas fa-trash">Delete</i></a>
+                </div>
+            </form>
+            <div class="pt-3">
+                <button class="btn btn-secondary">Cancel</button>
+            </div>
+
+
         </div>
     </div>
+
 </section>
     
 

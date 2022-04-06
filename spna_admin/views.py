@@ -45,7 +45,7 @@ def delete_article(request, article_id):
     article = get_object_or_404(Articles, id=article_id)
     article.delete()
     messages.success(request, 'Article deleted successfully!')
-    return HttpResponseRedirect(reverse('spna_admin'))
+    return HttpResponseRedirect(reverse('news'))
 
 
 @login_required

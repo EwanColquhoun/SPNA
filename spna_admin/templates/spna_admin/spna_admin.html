@@ -21,17 +21,19 @@
 {% block content %}
 
 
-<section id="admin-header">
-    <div class="container-fluid h-100 w-100 text-center bg-ant-white">
-        <div class="row h-100 w-100">
-            <div class="col-12 text-center my-auto">
-                <h1 id="admin-title" class="text-blue">SPNA Admin Dashboard</h1>
+<section id="admin-header" class="title-section">
+    <div class="container-fluid h-100 w-100 text-center">
+        <div class="overlay">
+            <div class="row h-100 w-100">
+                <div class="col-12 text-center my-auto">
+                    <h1 id="admin-title" class="title-text">SPNA Admin Dashboard</h1>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<section id="admin-dashboard" class="bg-light-grey">
+<section id="admin-dashboard" class="bg-light-blue">
     <div class="container-fluid">
 
         <div class="row">
@@ -39,46 +41,48 @@
             <!-- Members -->
             <div class="col-12 col-lg-6 p-1 p-sm-3 mx-auto text-center">
                 <div class="member-table-head p-1 p-sm-3">
-                    <h2>Member Information</h2>
+                    <h2 class="text-blue">Member Information</h2>
                 </div>
-                <table class="base-table">
-                    <tr>
-                        <th>Full Name</th>
-                        <th>Nursery</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Date Joined</th>
-                        <th>All <input id="members-select-all" type="checkbox" ></th>
-                    </tr>
-                    {% for user in users %}
-                    <tr>
-                        <td>{{user.first_name}} {{user.last_name}}</td>
-                        <td>NURSERY</td>
-                        <td>
-                            <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.email}}">
-                                {{user.email|truncatechars:15}}
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.phone}}">
-                                {{user.phone|truncatechars:5}}
-                            </button>
-                        </td>
-                        <td>{{user.date_joined|date:"d M y" }}</td>
-                        <td><input type="checkbox" id="select" class="member-select-box select-box" name="email" value="{{user.email}}"></td>
+                <div class="table-holder">
+                    <table class="base-table">
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Nursery</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Date Joined</th>
+                                <th>All <input id="members-select-all" type="checkbox" ></th>
+                            </tr>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{user.first_name}} {{user.last_name}}</td>
+                                <td>NURSERY</td>
+                                <td>
+                                    <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.email}}">
+                                        {{user.email|truncatechars:15}}
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.phone}}">
+                                        {{user.phone|truncatechars:5}}
+                                    </button>
+                                </td>
+                                <td>{{user.date_joined|date:"d M y" }}</td>
+                                <td><input type="checkbox" id="select" class="member-select-box select-box" name="email" value="{{user.email}}"></td>
 
-                    </tr>
-                    {% endfor %}
-                    
-                </table>
+                            </tr>
+                            {% endfor %}
+                            
+                        </table>
+                </div>
             </div>
 
-            <hr class="d-block p-2 d-lg-none mx-auto admin-hr">
+            <hr class="d-block p-1 d-lg-none mx-auto admin-hr">
 
             <!-- Contacts -->
             <div class="col-12 col-lg-6 p-1 p-sm-3 mx-auto text-center">
                 <div class="contact-table-head p-1 p-sm-3">
-                    <h2>Contact Information</h2>
+                    <h2 class="text-blue">Contact Information</h2>
                 </div>
                 <div class="table-holder">
 
@@ -122,19 +126,19 @@
                 </div>
             </div>
 
-            <hr class="d-block p-2 d-md-none mx-auto admin-hr">
+            <hr class="d-block p-1 d-md-none mx-auto admin-hr">
         </div>
 
-        <hr class="d-none d-md-block p-2 mx-auto email-hr">
+        <hr class="d-none d-md-block p-1 mx-auto email-hr">
     
         <div class="row">
 
             <!-- Email Admin -->
             <div class="col-12 col-lg-10 mx-auto p-2 p-sm-3">
                 <div class="text-center">
-                    <h2>Send Email</h2>
+                    <h2 class="text-blue">Send Email</h2>
                 </div>
-                <form action="{% url 'send_email' %}" method="POST">
+                <form action="{% url 'send_email' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ emailForm|crispy }}
                     <div class="pt-3">
@@ -144,16 +148,16 @@
             </div>
         </div>
 
-        <hr class="d-none d-md-block p-2 mx-auto email-hr">
+        <hr class="d-none d-md-block p-1 mx-auto email-hr">
 
-        <hr class="d-block p-2 d-md-none mx-auto admin-hr">
+        <hr class="d-block p-1 d-md-none mx-auto admin-hr">
 
         <div class="row">
 
             <!-- Article Admin -->
             <div class="col-12 col-md-6 p-2 p-sm-3 mx-auto">
                 <div class="text-center">
-                    <h2>Add Article</h2>
+                    <h2 class="text-blue">Add Article</h2>
                 </div>
                 <!-- Add news form -->
                 <form class="admin-form" action="{% url 'add_article' %}" method="POST" enctype="multipart/form-data">
@@ -165,12 +169,12 @@
                 </form>       
             </div>
 
-            <hr class="d-block p-2 d-md-none mx-auto admin-hr">
+            <hr class="d-block p-1 d-md-none mx-auto admin-hr">
 
             <!-- Document Admin -->
             <div class="col-12 col-md-6 p-2 p-sm-3 mx-auto">
                 <div class="text-center">
-                    <h2>Add Document</h2>
+                    <h2 class="text-blue">Add Document</h2>
                 </div>
                 <form class="admin-form" action="{% url 'add_document' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
