@@ -100,6 +100,10 @@ footer a {
     background-color: #DFF1FF;
 }
 
+.bg-whitesmoke {
+    background-color: whitesmoke;
+}
+
 .title-text {
     color: antiquewhite;
     font-size: 50px;
@@ -200,6 +204,16 @@ footer a {
     width: 30px;
     height: 30px;
     border: 1 px grey;
+}
+
+.inline-contact {
+    text-decoration: none;
+}
+
+.inline-contact:hover {
+    color: #37698e;
+    transform: scale(1.1);
+    transition: 200ms;
 }
 
 .spna-btn {

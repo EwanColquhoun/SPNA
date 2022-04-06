@@ -18,21 +18,30 @@
 
 {% block content %}
 
-<div class="modal fade" id="articleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="articleModal" tabindex="-1" aria-labelledby="articleModal" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="news-modal-title " id="modalTitle">MODAL TITLE</h5>
-          <button type="button" class="btn-close art-modal-close-button" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-content bg-whitesmoke">
+        <div class="modal-header row g-0 bg-light-blue">
+            <div class="col-10 p-3 text-center mx-auto">
+                <h5 class="news-modal-title" id="newsModalTitle">News</h5>
+            </div>
+            <div class="col-2 p-1 text-center mx-auto">
+                <button type="button" class="btn-close art-modal-close-button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
         </div>
         <div id="modalBody" class="body news-modal-body">
-            <p>
-                {{ article.content }}
-            </p>
+            <div id="newsModalImage" class="col-12 col-sm-8 mx-auto p-2">
+                    <div class="image-holder" style="background-image: url(/media/original/cropped-SPNA_logo_icon.png)">
+                    </div>
+            </div>
+            <div id="newsModalBody" class="col-12 p-3 mx-auto my-auto text-center">
+                <p class="p-5">We are sorry there is no content here! <br> 
+                    Please <span ><a class="inline-contact" data-bs-toggle="modal" data-bs-target="#myModal" href="#myModal">contact us</a></span> for more information on this story.
+                </p>
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary art-modal-close-button" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+        <div class="modal-footer bg-light-blue">
+          <button type="button" class="spna-btn art-modal-close-button" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -55,30 +64,31 @@
     <div class="container-fluid ">
         <div class="row">
             <div class="col text-center pt-4">
-                <h2 class="category-title">News</h2>
+                <h2 class="news-title text-blue">News</h2>
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% if article %}
                 {% for article in articles_list %}
-                <div class="p-3 p-md-2 p-lg-4 mb-0 mb-md-5 col-12 col-md-4 col-lg-3 mx-auto">
+                <div class="p-3 p-md-2 p-lg-4 mb-0 mb-md-5 col-12 col-md-4 mx-auto">
                     <div class="card">
-                        <div class="article-content">
+                        <div class="article-content w-100 mx-auto bg-whitesmoke">
 
-                            <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button">
-                                {% if not article.image %}
+                            <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button w-100">
+                                <div id="news-image-holder">
+                                    {% if not article.image %}
                                     <div class="image-holder" style="background-image: url(/media/original/cropped-SPNA_logo_icon.png)">
                                     </div>
-                                {% else %}
+                                    {% else %}
                                     <div class="image-holder" style="background-image: url({{ article.image.url }})">
                                     </div>
-
-                                {% endif %}  
-                                    <!-- <img src="{{ spna }}/media/original/cropped-SPNA_logo_icon.png" class="card-img-top" alt="..."> -->
-                                    <!-- <img src="{{ article.image.url }}" class="card-img-top"alt="{{ article.title }}"> -->
+                                    {% endif %}  
+                                </div>
                                 <div class="card-body h-100">
                                     <h5 id="title" data-title="title" class="card-title title">{{ article.title }}</h5>
-                                    <p id="content" data-content="content" class="card-text content overflow-auto">{{ article.content|safe}}</p>
+                                    <div id="content-holder">
+                                        <p id="content" data-content="content" class="card-text content overflow-auto">{{ article.content|safe }}</p>
+                                    </div>
                                 </div>
                             </button>
                         </div>

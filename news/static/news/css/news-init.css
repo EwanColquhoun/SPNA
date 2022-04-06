@@ -39,7 +39,19 @@
 .modal-button {
     background: none;
     border: none;
-    
+}
+
+body.modal-open {
+    font-weight: unset;
+}
+
+#newsModalTitle {
+    color: #37698e;
+    font-size: 35px;
+    font-family: 'Moon Dance', cursive;
+    letter-spacing: 4px;
+    line-height: 1;
+    font-weight: 600;
 }
 
 /* ------------ Initiatives Page----------------- */
