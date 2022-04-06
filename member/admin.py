@@ -41,7 +41,7 @@ class MemberInline(admin.StackedInline):
 
 class CustomUserAdmin(UserAdmin):
     inlines = (MemberInline, )
-    list_display = ('username', 'email', 'date_joined', 'get_nursery', 'get_fullname')
+    list_display = ('username', 'email', 'date_joined', 'get_nursery', 'get_fullname' , 'get_subscription')
     list_select_related = ('spnamember', )
 
     def get_nursery(self, instance):
@@ -51,6 +51,10 @@ class CustomUserAdmin(UserAdmin):
     def get_fullname(self, instance):
         return instance.spnamember.fullname
     get_fullname.short_description = 'Full Name'
+
+    def get_subscription(self, instance):
+        return instance.spnamember.subscription
+    get_subscription.short_description = 'Plan'
 
     def get_inline_instances(self, request, obj=None):
         if not obj:

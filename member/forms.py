@@ -5,6 +5,12 @@ from allauth.account.forms import SignupForm
 from .models import Document, SPNAMember
 
 
+PLAN = (
+    (1, 'Monthly'),
+    (2, '6 Monthly'),
+    (3, 'Yearly'),
+)
+
 class CustomSignupForm(SignupForm):
     """
     Takes the default AllAuth user form, adds and modifies as below.
@@ -30,6 +36,7 @@ class CustomSignupForm(SignupForm):
     county = forms.CharField(max_length=40, required=False)
     postcode = forms.CharField(max_length=40, required=False)  
     country = forms.CharField(max_length=40, required=False)
+    subscription = forms.ChoiceField(choices=PLAN, required=True)
 
     def save(self, request):
 
@@ -45,6 +52,7 @@ class CustomSignupForm(SignupForm):
         user.spnamember.county = self.cleaned_data['county']
         user.spnamember.postcode = self.cleaned_data['postcode']
         user.spnamember.country = self.cleaned_data['country']
+        user.spnamember.subscription = request.POST['subscription']
         return user
 
 

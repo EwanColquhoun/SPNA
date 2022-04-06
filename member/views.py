@@ -52,6 +52,7 @@ class CustomSignUpView(SignupView):
         user.spnamember.county = form.cleaned_data['county']
         user.spnamember.postcode = form.cleaned_data['postcode']
         user.spnamember.country = form.cleaned_data['country']
+        user.spnamember.subscription = self.request.POST['subscription']
         user.spnamember.save()
         print(user.spnamember.nursery, 'spna')
         print(user.spnamember.fullname, 'fullname')

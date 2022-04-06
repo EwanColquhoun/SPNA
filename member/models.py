@@ -12,6 +12,12 @@ CATEGORIES = (
     ('2', 'Media Mentions'),
     ('3', 'Letters to and responses from Government'))
 
+PLAN = (
+    (1, 'Monthly'),
+    (2, '6 Monthly'),
+    (3, 'Yearly'),
+)
+
 class Document(models.Model):
     """
     A model for generating news and campaign articles
@@ -48,6 +54,7 @@ class SPNAMember(models.Model):
     county = models.CharField(max_length=80, null=True, blank=True)
     postcode = models.CharField(max_length=20, null=True, blank=True)
     country = CountryField(blank_label='Country', null=False, blank=False)
+    subscription = models.CharField(max_length=10, choices=PLAN, default=1, null=False, blank=False)
     objects = UserManager()
 
     def __str__(self):
@@ -62,10 +69,3 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     
     if created:
         spnamember, created = SPNAMember.objects.get_or_create(user=instance)
-
-
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         spnamember, created = SPNAMember.objects.get_or_create(user=instance)
-
-# post_save.connect(create_user_profile, sender=User)
