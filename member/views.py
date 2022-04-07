@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
@@ -7,6 +8,7 @@ from allauth.account.utils import complete_signup
 from allauth.exceptions import ImmediateHttpResponse
 
 from .models import Document
+from .forms import CustomSignupForm
 
 
 @login_required
@@ -33,36 +35,71 @@ def delete_document(request, document_id):
     return HttpResponseRedirect(reverse('member_area'))
 
 
-class CustomSignUpView(SignupView):
-    """
-    Overides the default (AllAuth) signup methods.
-    """
-    success_url = 'home'
+# class CustomSignUpView(SignupView):
+#     """
+#     Overides the default (AllAuth) signup methods.
+#     """
+#     success_url = 'home'
 
-    def form_valid(self, form):
-        # User initiated here to gain access
+#     def form_valid(self, form):
+#         # User initiated here to gain access
 
-        user = form.save(self.request)
-        user.refresh_from_db()
-        user.spnamember.fullname = form.cleaned_data['fullname']
-        user.spnamember.nursery = form.cleaned_data['nursery']
-        user.spnamember.street_address1 = form.cleaned_data['street_address1']
-        user.spnamember.town_or_city = form.cleaned_data['town_or_city']
-        user.spnamember.postcode = form.cleaned_data['postcode']
-        user.spnamember.country = form.cleaned_data['country']
-        user.spnamember.subscription = self.request.POST['subscription']
-        user.spnamember.save()
-        print(user.spnamember.nursery, 'spna')
-        print(user.spnamember.fullname, 'fullname')
-        self.user = user
-        try:
-            # register_email(form.instance)
-            messages.success(self.request, 'Registration successful!')
-            return complete_signup(
-                self.request,
-                self.user,
-                settings.EMAIL_VERIFICATION,
-                self.success_url,
-            )
-        except ImmediateHttpResponse as error:
-            return error.response
+#         user = form.save(self.request)
+#         user.refresh_from_db()
+#         user.spnamember.fullname = form.cleaned_data['fullname']
+#         user.spnamember.nursery = form.cleaned_data['nursery']
+#         user.spnamember.street_address1 = form.cleaned_data['street_address1']
+#         user.spnamember.town_or_city = form.cleaned_data['town_or_city']
+#         user.spnamember.postcode = form.cleaned_data['postcode']
+#         user.spnamember.country = form.cleaned_data['country']
+#         user.spnamember.subscription = self.request.POST['subscription']
+#         user.spnamember.save()
+#         print(user.spnamember.nursery, 'spna')
+#         print(user.spnamember.fullname, 'fullname')
+#         self.user = user
+#         try:
+#             # register_email(form.instance)
+#             messages.success(self.request, 'Registration successful!')
+#             return complete_signup(
+#                 self.request,
+#                 self.user,
+#                 settings.EMAIL_VERIFICATION,
+#                 self.success_url,
+#             )
+#         except ImmediateHttpResponse as error:
+#             return error.response
+
+def custom_signup_view(request):
+    """ 
+    A custom signup view for allauth and spna members.
+    """
+    # form = CustomSignupForm()
+    if request.method == 'POST':
+        form = CustomSignupForm(instance = request.POST)
+        if form.is_valid():
+            print('formvalid')
+            user = form.save(request)
+            user.refresh_from_db()
+            user.spnamember.fullname = form.cleaned_data['fullname']
+            user.spnamember.nursery = form.cleaned_data['nursery']
+            user.spnamember.street_address1 = form.cleaned_data['street_address1']
+            user.spnamember.town_or_city = form.cleaned_data['town_or_city']
+            user.spnamember.postcode = form.cleaned_data['postcode']
+            user.spnamember.country = form.cleaned_data['country']
+            user.spnamember.subscription = request.POST.get['subscription']
+            user.spnamember.paid_until = datetime.date() 
+            user.spnamember.save()
+
+            print(user.spnamember.paid_until, 'paiduntil')
+            print(user.spanmember.subscription, 'sub')
+
+            subscription = user.subscription
+        else:
+            print('notvalid')
+
+
+    template = 'member/accounts/signup.html'
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)

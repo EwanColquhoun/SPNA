@@ -1,20 +1,27 @@
 from django import forms
+from django_countries import countries
 from django_summernote.widgets import SummernoteWidget
 
 from allauth.account.forms import SignupForm
 from .models import Document, SPNAMember
 
 
-PLAN = (
-    (1, 'Monthly'),
-    (2, '6 Monthly'),
-    (3, 'Yearly'),
-)
-
 class CustomSignupForm(SignupForm):
     """
     Takes the default AllAuth user form, adds and modifies as below.
     """
+    M = 'Monthly'
+    M6 = 'Six Monthly'
+    Y = 'Yearly'
+
+    PLAN = (
+        (M, '£10 monthly'),
+        (M6, '£55 six monthly'),
+        (Y, '£100 yearly'),
+    )
+
+    COUNTRY_CHOICES = tuple(countries)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['email'].required = True
@@ -22,6 +29,7 @@ class CustomSignupForm(SignupForm):
         self.fields['password1'].label = 'Password'
         self.fields['password2'].label = 'Password again'
         self.fields['fullname'].label = 'Full Name'
+        self.fields['country'].initial = 'GB'
 
     class Meta:
         model = SPNAMember
@@ -33,8 +41,10 @@ class CustomSignupForm(SignupForm):
     street_address1 = forms.CharField(max_length=40, required=False)
     town_or_city = forms.CharField(max_length=40, required=False)
     postcode = forms.CharField(max_length=40, required=False)  
-    country = forms.CharField(max_length=40, required=False)
+    country = forms.ChoiceField(choices=COUNTRY_CHOICES, required=True)
+    phone = forms.CharField(max_length=15, required=False)
     subscription = forms.ChoiceField(choices=PLAN, required=True)
+
 
     field_order = [
         'fullname',
@@ -45,6 +55,7 @@ class CustomSignupForm(SignupForm):
         'town_or_city',
         'postcode',
         'country',
+        'phone',
         'subscription',
         'password1',
         'password2',
@@ -62,6 +73,7 @@ class CustomSignupForm(SignupForm):
         user.spnamember.town_or_city = self.cleaned_data['town_or_city']
         user.spnamember.postcode = self.cleaned_data['postcode']
         user.spnamember.country = self.cleaned_data['country']
+        user.spnamember.phone = self.cleaned_data['phone']
         user.spnamember.subscription = request.POST['subscription']
         return user
 

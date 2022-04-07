@@ -143,9 +143,13 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 # EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 DEFAULT_FROM_EMAIL = "info@scottishpna.org"
 
-# for the messages
+
+# Allauth
+ACCOUNT_ADAPTER = 'member.adapter.MyAccountAdapter'
 # AUTH_USER_MODEL = 'member.SPNAMember'
 ACCOUNT_FORMS = {'signup': 'member.forms.CustomSignupForm'}
+
+# for the messages
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
@@ -220,3 +224,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# STRIPE variables
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE PUBLISHABLE_KEY')
+STRIPE_PLAN_MONTHLY_ID = os.environ.get('STRIPE_PLAN_MONTHLY_ID')
+STRIPE_PLAN_SIXMONTHLY_ID = os.environ.get('STRIPE_PLAN_SIXMONTHLY_ID')
+STRIPE_PLAN_YEARLY_ID = os.environ.get('STRIPE_PLAN_YEARLY_ID')

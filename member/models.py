@@ -7,21 +7,15 @@ from django.db import models
 
 # Create your models here.
 
-CATEGORIES = (
-    ('1', 'Media Releases'),
-    ('2', 'Media Mentions'),
-    ('3', 'Letters to and responses from Government'))
-
-PLAN = (
-    (1, 'Monthly'),
-    (2, '6 Monthly'),
-    (3, 'Yearly'),
-)
 
 class Document(models.Model):
     """
     A model for generating news and campaign articles
     """
+    CATEGORIES = (
+    ('1', 'Media Releases'),
+    ('2', 'Media Mentions'),
+    ('3', 'Letters to and responses from Government'))
 
     class Meta:
         """To correct the Django admin page"""
@@ -45,6 +39,16 @@ class SPNAMember(models.Model):
     """
     Extends the default User into the Member class
     """
+    M = 'Monthly'
+    M6 = 'Six Monthly'
+    Y = 'Yearly'
+
+    PLAN = (
+        (M, '£10 monthly'),
+        (M6, '£55 six monthly'),
+        (Y, '£100 yearly'),
+    )
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     nursery = models.CharField(max_length=255)
     fullname = models.CharField(max_length=50, null=False, blank=False, default='')
@@ -52,8 +56,9 @@ class SPNAMember(models.Model):
     town_or_city = models.CharField(max_length=40, null=False, blank=False)
     postcode = models.CharField(max_length=20, null=True, blank=True)
     country = CountryField(blank_label='Country', null=False, blank=False)
-    subscription = models.CharField(max_length=10, choices=PLAN, default=1, null=False, blank=False)
-    paid_until = models.DateField()
+    phone = models.CharField(max_length=15, null=True, blank=True)
+    subscription = models.CharField(max_length=16, choices=PLAN, default=1, null=False, blank=False)
+    paid_until = models.DateField(null=True, blank=True)
     objects = UserManager()
 
     def __str__(self):
