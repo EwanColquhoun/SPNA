@@ -49,12 +49,11 @@ class SPNAMember(models.Model):
     nursery = models.CharField(max_length=255)
     fullname = models.CharField(max_length=50, null=False, blank=False, default='')
     street_address1 = models.CharField(max_length=80, null=False, blank=False)
-    street_address2 = models.CharField(max_length=80, null=True, blank=True)
     town_or_city = models.CharField(max_length=40, null=False, blank=False)
-    county = models.CharField(max_length=80, null=True, blank=True)
     postcode = models.CharField(max_length=20, null=True, blank=True)
     country = CountryField(blank_label='Country', null=False, blank=False)
     subscription = models.CharField(max_length=10, choices=PLAN, default=1, null=False, blank=False)
+    paid_until = models.DateField()
     objects = UserManager()
 
     def __str__(self):

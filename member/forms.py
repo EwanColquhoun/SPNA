@@ -31,12 +31,24 @@ class CustomSignupForm(SignupForm):
     nursery = forms.CharField(max_length=40, required=False,
                             help_text='Please enter the name of the Nursery you are affiliated with.')
     street_address1 = forms.CharField(max_length=40, required=False)
-    street_address2 = forms.CharField(max_length=40, required=False)
     town_or_city = forms.CharField(max_length=40, required=False)
-    county = forms.CharField(max_length=40, required=False)
     postcode = forms.CharField(max_length=40, required=False)  
     country = forms.CharField(max_length=40, required=False)
     subscription = forms.ChoiceField(choices=PLAN, required=True)
+
+    field_order = [
+        'fullname',
+        'nursery',
+        'email',
+        'email2',
+        'street_address1',
+        'town_or_city',
+        'postcode',
+        'country',
+        'subscription',
+        'password1',
+        'password2',
+    ]
 
     def save(self, request):
 
@@ -47,9 +59,7 @@ class CustomSignupForm(SignupForm):
         user.spnamember.fullname = self.cleaned_data['fullname']
         user.spnamember.nursery = self.cleaned_data['nursery']
         user.spnamember.street_address1 = self.cleaned_data['street_address1']
-        user.spnamember.street_address2 = self.cleaned_data['street_address2']
         user.spnamember.town_or_city = self.cleaned_data['town_or_city']
-        user.spnamember.county = self.cleaned_data['county']
         user.spnamember.postcode = self.cleaned_data['postcode']
         user.spnamember.country = self.cleaned_data['country']
         user.spnamember.subscription = request.POST['subscription']
