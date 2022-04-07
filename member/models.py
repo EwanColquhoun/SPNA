@@ -62,14 +62,4 @@ class SPNAMember(models.Model):
     objects = UserManager()
 
     def __str__(self):
-        return str(self.user)
-
-
-@receiver(post_save, sender=User)
-def create_or_update_user_profile(sender, instance, created, **kwargs):
-    """
-    Create of update the member profile
-    """
-    
-    if created:
-        spnamember, created = SPNAMember.objects.get_or_create(user=instance)
+        return str(self.fullname)

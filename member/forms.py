@@ -61,22 +61,6 @@ class CustomSignupForm(SignupForm):
         'password2',
     ]
 
-    def save(self, request):
-
-        # Ensure you call the parent class's save.
-        # .save() returns a user object.
-        
-        user = super().save(request)
-        user.spnamember.fullname = self.cleaned_data['fullname']
-        user.spnamember.nursery = self.cleaned_data['nursery']
-        user.spnamember.street_address1 = self.cleaned_data['street_address1']
-        user.spnamember.town_or_city = self.cleaned_data['town_or_city']
-        user.spnamember.postcode = self.cleaned_data['postcode']
-        user.spnamember.country = self.cleaned_data['country']
-        user.spnamember.phone = self.cleaned_data['phone']
-        user.spnamember.subscription = request.POST['subscription']
-        return user
-
 
 class DocumentForm(forms.ModelForm):
     """Article form management."""

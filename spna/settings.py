@@ -145,9 +145,11 @@ DEFAULT_FROM_EMAIL = "info@scottishpna.org"
 
 
 # Allauth
-ACCOUNT_ADAPTER = 'member.adapter.MyAccountAdapter'
+# ACCOUNT_ADAPTER = 'member.adapter.MyAccountAdapter'
 # AUTH_USER_MODEL = 'member.SPNAMember'
 ACCOUNT_FORMS = {'signup': 'member.forms.CustomSignupForm'}
+
+
 
 # for the messages
 
