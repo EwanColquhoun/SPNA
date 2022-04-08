@@ -20,6 +20,13 @@
     <button type="submit">{% trans 'Confirm' %}</button>
 </form>
 
+{{secret_key}}
+{{STRIPE_PUBLIC_KEY}}
+{{customer_email}}
+{{payment_intent_id}}
+{{automatic}}
+{{stripe_plan_id}}
+
 {% else %}
 
 {% url 'account_email' as email_url %}

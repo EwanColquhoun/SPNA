@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'member/css/member.css' %}">
+{% endblock %}
+
+{% block corejs %}
+{{block.super}}
+<script src="https://js.stripe.com/v3/"></script>
+
+{% endblock %}
+
+{% block extra_title %}- Payment{% endblock %}
+
+{% block page_header %}
+    <div class="container-fluid header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+<section id="member-image-section">
+    <div class="overlay">
+        <div class="container-fluid h-100">
+            <div class="row h-100">
+                <div id="member-text-container"class="col-12 my-auto">
+                    <h1 id="member-text" class="title-text">SPNA Sign Up - Payment</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="join-body-section" class="bg-ant-white text-blue">
+    <div class="row g-0 w-100">
+      <div class="col-12">
+          <p>Well done for this... so far. User email = {{customer_email}}</p>
+          <p>user plan = {{plan}}</p>
+
+          <!-- stripe card element form -->
+          <form id="payment-form">
+            <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+            <button id="submit">
+              <div class="spinner hidden" id="spinner"></div>
+              <span id="button-text">Pay now</span>
+            </button>
+            <p id="card-error" role="alert"></p>
+            <p class="result-message hidden">
+              Payment succeeded, see the result in your
+              <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+            </p>
+            <input type="hidden" id="client_secret" value="{{client_secret}}" name="client_secret">
+            <input type="hidden" id="stripe_public_key" value="{{stripe_public_key}}" name="stripe_public_key">
+          </form>
+
+      </div>
+    </div>
+</section>
+
+{% endblock %}
+{% block postloadjs %}
+{{block.super}}
+<script type="text/javascript" src="{% static 'member/js/member.js' %}"></script>
+{% endblock %}
