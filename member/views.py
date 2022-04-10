@@ -1,8 +1,8 @@
 from datetime import datetime
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
+# from django.views.decorators.http import require_POST
+# from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib import messages
 from django.conf import settings
@@ -189,7 +189,6 @@ def card(request):
         stripe.PaymentIntent.modify(
             latest_invoice.payment_intent,
             payment_method=payment_method_id,
-            # customer=customer.id
         )
         ret = stripe.PaymentIntent.confirm(
             latest_invoice.payment_intent  
@@ -268,33 +267,33 @@ def card(request):
 
 
 # stripe webhooks from https://github.com/Django-Lessons/video-store-proj
-@require_POST
-@csrf_exempt
-def stripe_webhooks(request):
+# @require_POST
+# @csrf_exempt
+# def stripe_webhooks(request):
 
-    payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-    event = None
+#     payload = request.body
+#     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+#     event = None
 
-    try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, settings.STRIPE_WEBHOOK_SIGNING_KEY
-        )
-        print("Event constructed correctly")
-    except ValueError:
-        # Invalid payload
-        print("Invalid Payload")
-        return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError:
-        # Invalid signature
-        print("Invalid signature")
-        return HttpResponse(status=400)
+#     try:
+#         event = stripe.Webhook.construct_event(
+#             payload, sig_header, settings.STRIPE_WEBHOOK_SIGNING_KEY
+#         )
+#         print("Event constructed correctly")
+#     except ValueError:
+#         # Invalid payload
+#         print("Invalid Payload")
+#         return HttpResponse(status=400)
+#     except stripe.error.SignatureVerificationError:
+#         # Invalid signature
+#         print("Invalid signature")
+#         return HttpResponse(status=400)
 
-    # Handle the event
-    if event.type == 'charge.succeeded':
-        # object has  payment_intent attr
-        messages.success(request, 'payment recieved, thank you')
-        set_paid_until(request, event.data.object)
+#     # Handle the event
+#     if event.type == 'charge.succeeded':
+#         # object has  payment_intent attr
+#         messages.success(request, 'payment recieved, thank you')
+#         set_paid_until(request, event.data.object)
 
-    return HttpResponse(status=200)
+#     return HttpResponse(status=200)
 

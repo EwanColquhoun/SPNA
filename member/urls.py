@@ -1,4 +1,5 @@
 from django.urls import path
+from .webhooks import webhook
 # from .views import CustomSignUpView
 
 from . import views
@@ -11,4 +12,5 @@ urlpatterns = [
     path('signup/', views.membership, name='membership'),
     path('subscribe/', views.subscribe, name='subscribe'),
     path('card/', views.card, name='card'),
+    path('stripe-webhooks/', webhook, name='webhook'),
 ]
