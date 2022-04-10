@@ -5,12 +5,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'member/css/member.css' %}">
 {% endblock %}
 
-{% block corejs %}
-{{block.super}}
-<script src="https://js.stripe.com/v3/"></script>
-
-{% endblock %}
-
 {% block extra_title %}- Payment{% endblock %}
 
 {% block page_header %}
@@ -36,6 +30,7 @@
     </div>
 </section>
 
+<!-- Stripe Card section -->
 <section id="join-body-section" class="bg-ant-white text-blue">
     <div class="row g-0 w-100">
       <div class="col-12">
@@ -43,9 +38,9 @@
           <p>user plan = {{plan}}</p>
 
           <!-- stripe card element form -->
-          <form id="payment-form">
+            <form id="payment-form">
             <div id="card-element"><!--Stripe.js injects the Card Element--></div>
-            <button id="submit">
+            <button id="submit-payment">
               <div class="spinner hidden" id="spinner"></div>
               <span id="button-text">Pay now</span>
             </button>
@@ -54,8 +49,8 @@
               Payment succeeded, see the result in your
               <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
             </p>
-            <input type="hidden" id="client_secret" value="{{client_secret}}" name="client_secret">
-            <input type="hidden" id="stripe_public_key" value="{{stripe_public_key}}" name="stripe_public_key">
+            <input type="hidden" id="client_secret" value="{{secret_key}}" name="client_secret">
+            <input type="hidden" id="stripe_public_key" value="{{STRIPE_PUBLIC_KEY}}" name="stripe_public_key">
           </form>
 
       </div>

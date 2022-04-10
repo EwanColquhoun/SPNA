@@ -44,7 +44,7 @@
                     <h2 class="text-blue">Member Information</h2>
                 </div>
                 <div class="table-holder">
-                    <table class="base-table">
+                    <table class="base-table bg-ant-white">
                             <tr>
                                 <th>Full Name</th>
                                 <th>Nursery</th>
@@ -55,8 +55,8 @@
                             </tr>
                             {% for user in users %}
                             <tr>
-                                <td>{{user.first_name}} {{user.last_name}}</td>
-                                <td>NURSERY</td>
+                                <td>{{user.spnamember.fullname}}</td>
+                                <td>{{user.spnamember.nursery}}</td>
                                 <td>
                                     <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.email}}">
                                         {{user.email|truncatechars:15}}
@@ -64,7 +64,7 @@
                                 </td>
                                 <td>
                                     <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.phone}}">
-                                        {{user.phone|truncatechars:5}}
+                                        {{user.spnamember.phone|truncatechars:5}}
                                     </button>
                                 </td>
                                 <td>{{user.date_joined|date:"d M y" }}</td>

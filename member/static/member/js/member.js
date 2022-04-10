@@ -18,8 +18,8 @@ delete_buttons.forEach((button) => {
 })};
 
 // stripe
-var stripePublicKey = document.getElementById('id_stripe_public_key').value();
-var clientSecret = document.getElementById('client_secret').value();
+var stripePublicKey = document.querySelector('#stripe_public_key').value;
+var clientSecret = document.querySelector('#client_secret').value;
 var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
 var style = {
@@ -38,4 +38,21 @@ var style = {
     }
 };
 var card = elements.create('card', {style: style});
+console.log('card', card)
 card.mount('#card-element');
+
+// Handle realtime validation errors on the card element
+card.addEventListener('change', function (event) {
+    var errorDiv = document.getElementById('card-error');
+    if (event.error) {
+        var html = `
+            <span class="icon" role="alert">
+                <i class="fas fa-times"></i>
+            </span>
+            <span>${event.error.message}</span>
+        `;
+        $(errorDiv).html(html);
+    } else {
+        errorDiv.textContent = '';
+    }
+});
