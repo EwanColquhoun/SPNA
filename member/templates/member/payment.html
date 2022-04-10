@@ -5,6 +5,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'member/css/member.css' %}">
 {% endblock %}
 
+{% block extra_js %}
+
+{% endblock extra_js %}
+
 {% block extra_title %}- Payment{% endblock %}
 
 {% block page_header %}
@@ -33,27 +37,31 @@
 <!-- Stripe Card section -->
 <section id="join-body-section" class="bg-ant-white text-blue">
     <div class="row g-0 w-100">
-      <div class="col-12">
-          <p>Well done for this... so far. User email = {{customer_email}}</p>
-          <p>user plan = {{plan}}</p>
+        <div class="col-12">
+            <p>Well done for this... so far. User email = {{customer_email}}</p>
+            <p>user plan = {{plan}}</p>
 
           <!-- stripe card element form -->
-            <form id="payment-form">
-            <div id="card-element"><!--Stripe.js injects the Card Element--></div>
-            <button id="submit-payment">
-              <div class="spinner hidden" id="spinner"></div>
-              <span id="button-text">Pay now</span>
-            </button>
-            <p id="card-error" role="alert"></p>
-            <p class="result-message hidden">
-              Payment succeeded, see the result in your
-              <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
-            </p>
-            <input type="hidden" id="client_secret" value="{{secret_key}}" name="client_secret">
-            <input type="hidden" id="stripe_public_key" value="{{STRIPE_PUBLIC_KEY}}" name="stripe_public_key">
-          </form>
-
-      </div>
+            <form action="{% url 'card' %}" method="POST" id="payment-form">
+                {% csrf_token %}
+                <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+                <p id="card-errors" role="alert"></p>
+                <p class="result-message hidden">
+                    Payment succeeded, see the result in your
+                    <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+                </p>
+                <div id="payment-element"></div>
+                <input type="hidden" id="client_secret" value="{{secret_key}}" name="client_secret">
+                <input type="hidden" id="stripe_public_key" value="{{STRIPE_PUBLIC_KEY}}" name="stripe_public_key">
+                <input type="hidden" id="payment_intent_id" value="{{payment_intent_id}}" name="payment_intent_id">
+                <input type="hidden" id="stripe_plan_id" value="{{stripe_plan_id}}" name="stripe_plan_id">
+                <input type="hidden" id="customer_email" value="{{customer_email}}" name="customer_email">
+                <button id="submit-button">
+                <div class="spinner hidden" id="spinner"></div>
+                <span id="button-text">Pay now</span>
+                </button>
+            </form>
+        </div>
     </div>
 </section>
 
@@ -61,4 +69,7 @@
 {% block postloadjs %}
 {{block.super}}
 <script type="text/javascript" src="{% static 'member/js/member.js' %}"></script>
+<script>
+    card('{{STRIPE_PUBLIC_KEY}}', '{{customer_email}}');
+</script>
 {% endblock %}
