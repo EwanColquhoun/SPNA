@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.conf import settings
 from allauth.account.views import SignupView
+from allauth.account.forms import LoginForm
 from allauth.account.utils import complete_signup
 from allauth.exceptions import ImmediateHttpResponse
 
@@ -201,9 +202,10 @@ def card(request):
             context = {
                 'payment_intent_secret': intent.client_secret,
                 'STRIPE_PUBLISHABLE_KEY': stripe_public_key,
+                'form': LoginForm,
             }
 
-            return render(request, 'member/3dsec.html', context)
+            return render(request, 'account/login.html', context)
 
     else:
         stripe.PaymentIntent.modify(
