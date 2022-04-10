@@ -19,7 +19,6 @@ from .stripe import set_paid_until
 
 stripe_secret_key = settings.STRIPE_SECRET_KEY
 stripe_public_key = settings.STRIPE_PUBLISHABLE_KEY
-payment_method = 'card'
 
 
 @login_required
@@ -119,7 +118,7 @@ def subscribe(request):
     plan =request.POST.get('subscription')
 
     if plan == 'Monthly':
-        spi = 'price_1Km19mGCYrQmZVcjZJYfhUCu'
+        spi = settings.STRIPE_PLAN_MONTHLY_ID
         amount = '1000'
     elif plan == 'Six Monthly':
         spi = settings.STRIPE_PLAN_SIXMONTHLY_ID
@@ -159,19 +158,40 @@ def subscribe(request):
     # return render(request, 'member/membership.html', context)
 
 def card(request):
+    """
+    Processes payment from card view.
+    """
 
     payment_intent_id = request.POST['payment_intent_id']
     payment_method_id = request.POST['payment_method_id']
+    stripe_plan_id = request.POST['stripe_plan_id']
+    automatic = request.POST['automatic']
+    customer_email = request.POST['customer_email']
     stripe.api_key = stripe_secret_key
 
-    stripe.PaymentIntent.modify(
-        payment_intent_id,
-        payment_method=payment_method_id,
-    )
-    stripe.PaymentIntent.confirm(
-        payment_intent_id
-    )
-
+    if automatic:
+        customer = stripe.Customer.create(
+            email=customer_email,
+            payment_method=payment_method_id,
+            invoice_settings={
+                'default_payment_method': payment_method_id
+            }
+        )
+        stripe.Subscription.create(
+            customer=customer.id,
+            items=[
+                {
+                    'plan': stripe_plan_id
+                },
+            ]
+        )
+    else:
+        stripe.PaymentIntent.modify(
+            payment_intent_id,
+            payment_method=payment_method_id,
+            customer=customer.id
+        )
+    
     return render(request, 'home/index.html')
 
 
