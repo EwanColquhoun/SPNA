@@ -100,7 +100,7 @@
 	background: none;	
 	margin: auto 0;
 	border-radius: 50%;
-	border: 3px solid rgba(0, 0, 0, 0.8);
+	border: 3px solid rgba(36, 53, 82, 0.8)
 }
 .carousel-control-prev i, .carousel-control-next i {
 	font-size: 36px;

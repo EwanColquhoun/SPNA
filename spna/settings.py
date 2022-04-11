@@ -31,8 +31,8 @@ SECRET_KEY = 'django-insecure-_ylo1*@ojc-7wbhp(ys6d+x^79x(n)$=8++s=-w99-6b5t=*g4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu39.gitpod.io']
-CSRF_TRUSTED_ORIGINS = ["https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu39.gitpod.io"]
+ALLOWED_HOSTS = ['localhost', 'https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu38.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ["https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu38.gitpod.io"]
 
 SITE_ID = 1
 
@@ -136,7 +136,7 @@ TEMPLATES = [
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 EMAIL_VERIFICATION = 'mandatory'
-EMIAL_REQUIRED = True
+EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'

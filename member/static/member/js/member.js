@@ -65,20 +65,17 @@ function card(stripe_publishable_key, customer_email) {
     var form = document.getElementById('payment-form');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        // add js to disoplay loading spinner
-        // $('#payment-form').fadeToggle(100);
-        // $('#loading-overlay').fadeToggle(100);
-
+     
         stripe.createToken(card).then(function(result) {
         if (result.error) {
             // Inform the user if there was an error.
             var errorElement = document.getElementById('card-errors');
             errorElement.textContent = result.error.message;
         } else {
-            form.classList.add('fade');
-            spinner = document.getElementById('loading-overlay')
-            spinner.classList.add('show')
-            spinner.style.display = "block"
+            // hides card and shows spinner
+            let spinner = document.getElementById('loading-overlay')
+            form.classList.add('fade-payment');
+            spinner.style.display = 'block'
             // Create Payment Method BEGIN
             console.log('paymentmethod')
             stripe.createPaymentMethod({
@@ -90,8 +87,9 @@ function card(stripe_publishable_key, customer_email) {
             },
             }).then(function(payment_method_result){ 
             if (payment_method_result.error) {
+                 // hides spinner and shows card
                 spinner.stlye.display = "none"
-                form.classList.replace('fade', 'show')
+                form.classList.replace('fade-payment', 'show-payment')
                 console.log(payment_method_result, 'PMR')
                 var errorElement = document.getElementById('card-errors');
                 errorElement.textContent = payment_method_result.error.message;

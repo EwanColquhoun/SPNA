@@ -36,22 +36,19 @@
 </section>
 
 <!-- Stripe Card section -->
-<section id="join-body-section" class="bg-ant-white text-blue">
-    <div class="row g-0 w-100">
-        <div class="col-12">
-            <p>Well done for this... so far. User email = {{customer_email}}</p>
-            <p>user plan = {{plan}}</p>
-
+<section id="payment-body-section" class="bg-ant-white text-blue">
+    <div class="row g-0 w-100 pb-5">
+        <div class="col-12 col-md-10 mx-auto my-auto text-center pt-3">
+            <p>Payment for account email: <span class="payment-variables">{{customer_email}}.</span></p>
+            <p>Total to be charged will be <span class="payment-variables bold">{% if plan == 'Monthly' %} £10{% elif plan == 'Six Monthly' %} £55{% else %} £100{% endif %}.</span></p>
+        </div>
+        <div class="col-12 col-md-10 mx-auto my-auto">
             <!-- need to display cost, stripe tag, other ui improvements -->
           <!-- stripe card element form -->
-            <form action="{% url 'card' %}" method="POST" id="payment-form">
+            <form action="{% url 'card' %}" method="POST" class="bg-whitesmoke" id="payment-form">
                 {% csrf_token %}
                 <div id="card-element"><!--Stripe.js injects the Card Element--></div>
                 <p id="card-errors" role="alert"></p>
-                <p class="result-message hidden">
-                    Payment succeeded, see the result in your
-                    <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
-                </p>
                 <div id="payment-element"></div>
                 <input type="hidden" id="client_secret" value="{{secret_key}}" name="client_secret">
                 <input type="hidden" id="stripe_public_key" value="{{STRIPE_PUBLIC_KEY}}" name="stripe_public_key">

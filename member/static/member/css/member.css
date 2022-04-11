@@ -55,6 +55,17 @@
     transition: 500ms;
 }
 
+/* ----------Payments page------------- */
+
+#payment-body-section {
+  height: 100vh;
+}
+
+/* ----------3d secure page------------- */
+#join-body-section {
+  height: 100vh;
+
+}
 /* STRIPE */
 /* Variables */
 * {
@@ -69,6 +80,7 @@
       0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
     border-radius: 7px;
     padding: 40px;
+    margin: inherit;
   }
   
   #payment-form input {
@@ -81,6 +93,14 @@
     width: 100%;
     background: white;
   }
+
+  .payment-variables {
+    box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
+    0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+    border-radius: 5px;
+    background: whitesmoke;
+    font-size: larger;
+  }
   
   .result-message {
     line-height: 22px;
@@ -88,7 +108,7 @@
   }
   
   .result-message a {
-    color: rgb(89, 111, 214);
+    color: #37698e;
     font-weight: 600;
     text-decoration: none;
   }
@@ -120,10 +140,10 @@
     margin-bottom: 32px;
   }
   #payment-form button {
-    background: #5469d4;
+    background: #258bd9;
     color: #ffffff;
     font-family: Arial, sans-serif;
-    border-radius: 0 0 4px 4px;
+    border-radius: 4px;
     border: 0;
     padding: 12px 16px;
     font-size: 16px;
@@ -135,39 +155,17 @@
     width: 100%;
   }
   #payment-form button:hover {
-    filter: contrast(115%);
+    background: #37698e;
   }
   #payment-form button:disabled {
     opacity: 0.5;
     cursor: default;
   }
   
-  /* spinner/processing state, errors */
-/*   
-  @-webkit-keyframes loading {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
-  }
-  @keyframes loading {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
-  }
-   */
+
 @media only screen and (max-width: 600px) {
     #payment-form {
-      width: 80vw;
+      min-width: -webkit-fill-available;
     }
   }
  

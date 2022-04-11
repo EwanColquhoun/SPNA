@@ -35,8 +35,8 @@ class CustomSignupForm(SignupForm):
         model = SPNAMember
         fields = '__all__'
 
-    fullname = forms.CharField(max_length=40, required=False)
-    nursery = forms.CharField(max_length=40, required=False,
+    fullname = forms.CharField(max_length=40, required=True)
+    nursery = forms.CharField(max_length=40, required=True,
                             help_text='Please enter the name of the Nursery you are affiliated with.')
     street_address1 = forms.CharField(max_length=40, required=False)
     town_or_city = forms.CharField(max_length=40, required=False)
