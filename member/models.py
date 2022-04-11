@@ -1,3 +1,5 @@
+import datetime
+from datetime import date
 from django.contrib.auth.models import User, UserManager
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -63,3 +65,32 @@ class SPNAMember(models.Model):
 
     def __str__(self):
         return str(self.fullname)
+        
+
+    def set_paid_until(self, date_or_timestamp):
+        """
+        Sets the paid until date based on stripe wh return
+        """
+        if isinstance(date_or_timestamp, int):
+            # input date as timestamp integer
+            paid_until = date.fromtimestamp(date_or_timestamp)
+        elif isinstance(date_or_timestamp, str):
+            # input date as timestamp string
+            paid_until = date.fromtimestamp(int(date_or_timestamp))
+        else:
+            paid_until = date_or_timestamp
+
+        self.paid_until = paid_until
+        self.save()
+
+    def has_paid(
+        self,
+        current_date=datetime.date.today()
+    ):
+        """
+        Defines if spnamember has paid according to stripe wh return
+        """
+        if self.paid_until is None:
+            return False
+
+        return current_date < self.paid_until

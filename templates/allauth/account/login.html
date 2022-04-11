@@ -1,16 +1,9 @@
 {% extends "base.html" %}
-{% load static %}
-
 
 {% load i18n %}
 {% load account socialaccount %}
 
 {% block extra_js %}
-{{block.super}}
-<script type="text/javascript" src="{% static 'member/js/3dsec.js' %}"></script>
-<script>
-  _3dsec('{{ STRIPE_PUBLISHABLE_KEY }}', '{{payment_intent_secret}}');
-</script>
 {% endblock %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
@@ -79,14 +72,6 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
         <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
         <button class="spna-btn primaryAction" type="submit">{% trans "Sign In" %}</button>
       </form>
-    </div>
-  </div>
-  <div class="row py-3">
-    <div class="col-lg-12 col-md-12">
-       <div class="container">
-          <div id="3ds_result">
-          </div>
-       </div>
     </div>
   </div>
 </section>

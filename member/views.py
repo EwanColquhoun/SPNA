@@ -16,7 +16,7 @@ import stripe
 from .models import Document
 from .forms import CustomSignupForm
 from .signals import save_spnamember
-from .stripe import set_paid_until
+# from .wh_handler import set_paid_until
 
 stripe_secret_key = settings.STRIPE_SECRET_KEY
 stripe_public_key = settings.STRIPE_PUBLISHABLE_KEY
@@ -96,6 +96,15 @@ def membership(request):
     }
     return render(request, 'member/subscribe.html', context)
 
+
+def welcome(request):
+    """ 
+    A view to show on successful payment completion
+    """
+    
+    # messages.success(request, f'Welcome {user.fullname} to the SPNA.')
+    return render(request, 'member/welcome.html')
+
 # payment methods
 def subscribe(request):
     # This view creates a payment intent..! Next is to set up stripe card element properly. Also might be helpful to add the user once payment has been made and not before.
@@ -106,57 +115,56 @@ def subscribe(request):
     # if request.method == 'POST':
     form = CustomSignupForm(request.POST)
     print('post')
-        # if form.is_valid():
-    print('valid')
+    if form.is_valid():
+        print('valid')
 
-# creates and saves user (maybe once payment approved?)
-    # user = form.save(request)
-    # user.refresh_from_db()
-    # save_spnamember(user, form)
-    # user.save()
+    # creates and saves user (maybe once payment approved?)
+        user = form.save(request)
+        user.refresh_from_db()
+        save_spnamember(user, form)
+        user.save()
 
-    # messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
-    plan =request.POST.get('subscription')
+        messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
+        plan =request.POST.get('subscription')
 
-    if plan == 'Monthly':
-        spi = settings.STRIPE_PLAN_MONTHLY_ID
-        amount = '1000'
-    elif plan == 'Six Monthly':
-        spi = settings.STRIPE_PLAN_SIXMONTHLY_ID
-        amount = '5500'
+        if plan == 'Monthly':
+            spi = settings.STRIPE_PLAN_MONTHLY_ID
+            amount = '1000'
+        elif plan == 'Six Monthly':
+            spi = settings.STRIPE_PLAN_SIXMONTHLY_ID
+            amount = '5500'
+        else:
+            spi = settings.STRIPE_PLAN_YEARLY_ID
+            amount = '10000'
+
+        automatic = True
+
+    # creates the intent
+        stripe.api_key = stripe_secret_key
+        payment_intent = stripe.PaymentIntent.create(
+            amount=amount,
+            payment_method_types=['card'],
+            currency='GBP',
+        )
+        context = {
+            'customer_email': request.POST.get('email'),
+            'fullname': request.POST.get('fullname'),
+            'plan': plan,
+            'STRIPE_PUBLIC_KEY': stripe_public_key,
+            'secret_key': payment_intent.client_secret,
+            'payment_intent_id': payment_intent.id,
+            'automatic': automatic,
+            'stripe_plan_id': spi,
+            'form': form,
+        }
+        return render(request, 'member/payment.html', context)
     else:
-        spi = settings.STRIPE_PLAN_YEARLY_ID
-        amount = '10000'
+        form = CustomSignupForm(data=request.POST)
+        print(form.data)
+        messages.error(request, 'Please ensure the form is correct.')
+        
+        return redirect('membership')
 
-    automatic = True
-
-# creates the intent
-    stripe.api_key = stripe_secret_key
-    payment_intent = stripe.PaymentIntent.create(
-        amount=amount,
-        payment_method_types=['card'],
-        currency='GBP',
-    )
-    context = {
-        'customer_email': request.POST.get('email'),
-        'plan': plan,
-        'STRIPE_PUBLIC_KEY': stripe_public_key,
-        'secret_key': payment_intent.client_secret,
-        'payment_intent_id': payment_intent.id,
-        'automatic': automatic,
-        'stripe_plan_id': spi,
-        'form': form,
-    }
-    return render(request, 'member/payment.html', context)
-    #     else:
-    #         messages.error(request, 'Failed to add User. Please ensure the form is valid.')
-    # else:
-    #     form = CustomSignupForm()
-
-    # context = {
-    #     'form': form,
-    # }
-    # return render(request, 'member/membership.html', context)
 
 def card(request):
     """
@@ -170,6 +178,7 @@ def card(request):
     customer_email = request.POST['customer_email']
     stripe.api_key = stripe_secret_key
 
+ 
     if automatic:
         customer = stripe.Customer.create(
             email=customer_email,
@@ -187,33 +196,34 @@ def card(request):
             ]
         )
         latest_invoice = stripe.Invoice.retrieve(sub.latest_invoice)
-        stripe.PaymentIntent.modify(
-            latest_invoice.payment_intent,
-            payment_method=payment_method_id,
-        )
-        ret = stripe.PaymentIntent.confirm(
-            latest_invoice.payment_intent  
-        )
-
-        if ret.status == 'requires_action':
-            intent = stripe.PaymentIntent.retrieve(
-                latest_invoice.payment_intent
+        if latest_invoice.paid:
+            # ADD USER SAVE or variation here? or with webhook?
+       
+            return render(request, 'member/welcome.html')
+        else:
+            ret = stripe.PaymentIntent.confirm(
+                latest_invoice.payment_intent,
             )
-            context = {
-                'payment_intent_secret': intent.client_secret,
-                'STRIPE_PUBLISHABLE_KEY': stripe_public_key,
-                'form': LoginForm,
-            }
 
-            return render(request, 'account/login.html', context)
+            if ret.status == 'requires_action':
+                intent = stripe.PaymentIntent.retrieve(
+                    latest_invoice.payment_intent
+                )
+                context = {
+                    'payment_intent_secret': intent.client_secret,
+                    'STRIPE_PUBLISHABLE_KEY': stripe_public_key,
+                }
+            # ADD USER SAVE or variation here? or with webhook?
 
+                return render(request, 'member/welcome.html', context)
     else:
         stripe.PaymentIntent.modify(
             payment_intent_id,
             payment_method=payment_method_id,
         )
-    
-    return render(request, 'home/index.html')
+                    # ADD USER SAVE or variation here? or with webhook?
+
+    return render(request, 'member/welcome.html')
 
 
 # def card(request):

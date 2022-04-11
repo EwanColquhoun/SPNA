@@ -2,24 +2,29 @@ from django.conf import settings
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import HttpResponse
+from .wh_handler import set_paid_until
 
 import stripe
+import json
 
-from .webhook_handler import StripeWH_Handler
+
+endpoint_secret = settings.STRIPE_WEBHOOK_SIGNING_KEY
 
 @require_POST
 @csrf_exempt
 def webhook(request):
+    """
+    Handles returning webhook response
+    """
     stripe.api_key = settings.STRIPE_SECRET_KEY
-    wh_secret = settings.STRIPE_WEBHOOK_SIGNING_KEY
 
     payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    sig_header = request.headers.get('stripe-signature')
     event = None
 
     try:
         event = stripe.Webhook.construct_event(
-            payload, sig_header, wh_secret
+            payload, sig_header, endpoint_secret
         )
         print("Event constructed correctly")
     except ValueError as e:
@@ -33,5 +38,10 @@ def webhook(request):
     except Exception as e:
         return HttpResponse(content=e, status=400)
 
-    print('Success!')
+    if event.type =='charge.succeeded':
+        # Code to action when payment is all good (user login, update user paid until etc)
+        print('Success!')
+
+        set_paid_until(request, event.data.object)
+    
     return HttpResponse(status=200)

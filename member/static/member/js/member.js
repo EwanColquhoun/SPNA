@@ -65,7 +65,6 @@ function card(stripe_publishable_key, customer_email) {
     var form = document.getElementById('payment-form');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        console.log('form submitted')
         stripe.createToken(card).then(function(result) {
         if (result.error) {
             // Inform the user if there was an error.
@@ -79,6 +78,7 @@ function card(stripe_publishable_key, customer_email) {
                 card: card,
                 billing_details: {
                     email: customer_email,
+                    name: fullname,
             },
             }).then(function(payment_method_result){ 
             if (payment_method_result.error) {

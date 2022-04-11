@@ -12,5 +12,6 @@ urlpatterns = [
     path('signup/', views.membership, name='membership'),
     path('subscribe/', views.subscribe, name='subscribe'),
     path('card/', views.card, name='card'),
+    path('welcome/', views.welcome, name='welcome'),
     path('stripe-webhooks/', webhook, name='webhook'),
 ]
