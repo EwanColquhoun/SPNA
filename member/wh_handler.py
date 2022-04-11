@@ -12,8 +12,6 @@ def set_paid_until(request, charge):
     """
     print('setpaid until')
 
-    messages.info(request, f"set_paid_until with {charge}")
-
     stripe.api_key = settings.STRIPE_SECRET_KEY
     pi = stripe.PaymentIntent.retrieve(charge.payment_intent)
 
@@ -40,9 +38,29 @@ def set_paid_until(request, charge):
             return False
 
         user.spnamember.set_paid_until(current_period_end)
-        messages.info(
-            request,
-            f"Profile with {current_period_end} saved for user {email}"
-        )
+   
     else:
         pass
+
+def update_user(request):
+    """
+    Saves the spna details to the user.
+    """
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    pi = stripe.PaymentIntent.retrieve(charge.payment_intent)
+
+    if pi.customer:
+        customer = stripe.Customer.retrieve(pi.customer)
+        email = customer.email
+
+    user = User.objects.get(email=email)
+    user.refresh_from_db()
+    user.spnamember.subscription=request.session['subscription']
+    user.spnamember.fullname=request.session['fullname']
+    user.spnamember.phone=request.session['phone']
+    user.spnamember.country=request.session['country']
+    user.spnamember.postcode=request.session['postcode']
+    user.spnamember.town_or_city=request.session['town_or_city']
+    user.spnamember.street_address1=request.session['street_address1']
+    user.spnamember.nursery=request.session['nursery']
+    user.save()

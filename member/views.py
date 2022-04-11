@@ -191,12 +191,11 @@ def card(request):
     automatic = request.POST['automatic']
     customer_email = request.POST['customer_email']
     stripe.api_key = stripe_secret_key
-    user = request.session.get('user')
 
-    print(user, 'user in view')
     if automatic:
         customer = stripe.Customer.create(
             email=customer_email,
+            name=request.session['fullname'],
             payment_method=payment_method_id,
             invoice_settings={
                 'default_payment_method': payment_method_id
@@ -229,6 +228,7 @@ def card(request):
         else:
             ret = stripe.PaymentIntent.confirm(
                 latest_invoice.payment_intent,
+                return_url="https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu39.gitpod.io/member/welcome/"
             )
 
             if ret.status == 'requires_action':
@@ -246,13 +246,12 @@ def card(request):
                 user.spnamember.street_address1=request.session['street_address1']
                 user.spnamember.nursery=request.session['nursery']
                 user.save()
-                messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
+                # messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
                 context = {
                     'payment_intent_secret': intent.client_secret,
                     'STRIPE_PUBLISHABLE_KEY': stripe_public_key,
                 }
-            # ADD USER SAVE or variation here? or with webhook?
-
+           
                 return render(request, 'member/welcome.html', context)
     else:
         stripe.PaymentIntent.modify(

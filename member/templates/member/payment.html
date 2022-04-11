@@ -7,10 +7,7 @@
 
 {% block extra_js %}
 {{block.super}}
-<script type="text/javascript" src="{% static 'member/js/3dsec.js' %}"></script>
-<script>
-  _3dsec('{{ STRIPE_PUBLISHABLE_KEY }}', '{{payment_intent_secret}}');
-</script>
+<script type="text/javascript" src="{% static 'member/js/member.js' %}"></script>
 {% endblock extra_js %}
 
 {% block extra_title %}- Payment{% endblock %}
@@ -38,18 +35,6 @@
     </div>
 </section>
 
-<section id="3dsecure">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div id="3ds_result">
-                  <!-- 3d Verification results get passed into here. -->
-                </div>
-              </div>
-        </div>
-    </div>
-</section>
-
 <!-- Stripe Card section -->
 <section id="join-body-section" class="bg-ant-white text-blue">
     <div class="row g-0 w-100">
@@ -57,6 +42,7 @@
             <p>Well done for this... so far. User email = {{customer_email}}</p>
             <p>user plan = {{plan}}</p>
 
+            <!-- need to display cost, stripe tag, other ui improvements -->
           <!-- stripe card element form -->
             <form action="{% url 'card' %}" method="POST" id="payment-form">
                 {% csrf_token %}
@@ -80,13 +66,17 @@
                 </button>
             </form>
         </div>
+        <div id="loading-overlay" class="col-12 text-center">
+            <h1 class="text-light logo-font loading-spinner">
+                <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+            </h1>
+        </div>
     </div>
 </section>
 
 {% endblock %}
 {% block postloadjs %}
 {{block.super}}
-<script type="text/javascript" src="{% static 'member/js/member.js' %}"></script>
 <script>
     card('{{STRIPE_PUBLIC_KEY}}', '{{customer_email}}');
 </script>

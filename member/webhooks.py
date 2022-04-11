@@ -3,6 +3,7 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import HttpResponse
 from .wh_handler import set_paid_until
+# from .wh_handler import update_user
 
 import stripe
 import json
@@ -41,7 +42,7 @@ def webhook(request):
     if event.type =='charge.succeeded':
         # Code to action when payment is all good (user login, update user paid until etc)
         print('Success!')
-
+        # update_user(request)
         set_paid_until(request, event.data.object)
     
     return HttpResponse(status=200)
