@@ -6,7 +6,7 @@ from django.contrib import messages
 from news.forms import ArticleForm
 from news.models import Articles
 from contact.models import Contact
-from member.models import Document
+from member.models import Document, SPNAMember, get_model_fields
 from member.forms import DocumentForm, EmailForm
 from spna.email import send_admin_email
 
@@ -159,6 +159,20 @@ def add_document(request):
     }
 
     return render(request, template, context)
+
+
+@login_required
+@staff_member_required
+def get_csv_of_users(request):
+    """
+    As the title suggests, gets a downloadable csv for Admin
+    """
+    model = SPNAMember
+    sfields = get_model_fields(model)
+    ufields = get_model_fields(User)
+    print(sfields)
+    print(ufields)
+    return redirect('spna_admin')
 
 
 @login_required

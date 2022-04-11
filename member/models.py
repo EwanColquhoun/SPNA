@@ -94,3 +94,10 @@ class SPNAMember(models.Model):
             return False
 
         return current_date < self.paid_until
+
+
+def get_model_fields(model):
+    """
+    Gets all fields for CSV writer.
+    """
+    return model._meta.get_fields()
