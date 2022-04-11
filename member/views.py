@@ -3,6 +3,7 @@ from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_o
 from django.contrib.auth.decorators import login_required, user_passes_test
 # from django.views.decorators.http import require_POST
 # from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 
 from django.contrib import messages
 from django.conf import settings
@@ -12,10 +13,11 @@ from allauth.account.utils import complete_signup
 from allauth.exceptions import ImmediateHttpResponse
 
 import stripe
+import json
 
 from .models import Document
 from .forms import CustomSignupForm
-from .signals import save_spnamember
+from .signals import get_fname, get_sname
 # from .wh_handler import set_paid_until
 
 stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -94,6 +96,7 @@ def membership(request):
     context = {
         'form': form,
     }
+
     return render(request, 'member/subscribe.html', context)
 
 
@@ -105,26 +108,37 @@ def welcome(request):
     # messages.success(request, f'Welcome {user.fullname} to the SPNA.')
     return render(request, 'member/welcome.html')
 
+
 # payment methods
 def subscribe(request):
-    # This view creates a payment intent..! Next is to set up stripe card element properly. Also might be helpful to add the user once payment has been made and not before.
+    # This view creates a payment intent..!
     """
-    This view is activated from the 'Sign Up' button. Needs to instanciate the User.
+    This view is activated from the 'Sign Up' button.
     """
 
-    # if request.method == 'POST':
     form = CustomSignupForm(request.POST)
     print('post')
     if form.is_valid():
-        print('valid')
 
     # creates and saves user (maybe once payment approved?)
         user = form.save(request)
-        user.refresh_from_db()
-        save_spnamember(user, form)
+        user.first_name=get_fname(form)
+        user.last_name=get_sname(form)
         user.save()
+        request.session['fullname'] = form.cleaned_data['fullname']
+        request.session['email'] = form.cleaned_data['email']
+        request.session['nursery'] = form.cleaned_data['nursery']
+        request.session['phone'] = form.cleaned_data['phone']
+        request.session['postcode'] = form.cleaned_data['postcode']
+        request.session['street_address1'] = form.cleaned_data['street_address1']
+        request.session['subscription'] = form.cleaned_data['subscription']
+        request.session['town_or_city'] = form.cleaned_data['town_or_city']
+        request.session['country'] = form.cleaned_data['country']
+        # user.refresh_from_db()
+        # save_spnamember(user, form)
+        # user.save(commit=False)
 
-        messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
+        # messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
         plan =request.POST.get('subscription')
 
         if plan == 'Monthly':
@@ -155,7 +169,7 @@ def subscribe(request):
             'payment_intent_id': payment_intent.id,
             'automatic': automatic,
             'stripe_plan_id': spi,
-            'form': form,
+            # 'user': user,
         }
         return render(request, 'member/payment.html', context)
     else:
@@ -177,8 +191,9 @@ def card(request):
     automatic = request.POST['automatic']
     customer_email = request.POST['customer_email']
     stripe.api_key = stripe_secret_key
+    user = request.session.get('user')
 
- 
+    print(user, 'user in view')
     if automatic:
         customer = stripe.Customer.create(
             email=customer_email,
@@ -197,8 +212,19 @@ def card(request):
         )
         latest_invoice = stripe.Invoice.retrieve(sub.latest_invoice)
         if latest_invoice.paid:
-            # ADD USER SAVE or variation here? or with webhook?
-       
+            user = User.objects.get(email=request.session['email'])
+            user.refresh_from_db()
+            user.spnamember.subscription=request.session['subscription']
+            user.spnamember.fullname=request.session['fullname']
+            user.spnamember.phone=request.session['phone']
+            user.spnamember.country=request.session['country']
+            user.spnamember.postcode=request.session['postcode']
+            user.spnamember.town_or_city=request.session['town_or_city']
+            user.spnamember.street_address1=request.session['street_address1']
+            user.spnamember.nursery=request.session['nursery']
+            user.save()
+            messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
+
             return render(request, 'member/welcome.html')
         else:
             ret = stripe.PaymentIntent.confirm(
@@ -209,6 +235,18 @@ def card(request):
                 intent = stripe.PaymentIntent.retrieve(
                     latest_invoice.payment_intent
                 )
+                user = User.objects.get(email=request.session['email'])
+                user.refresh_from_db()
+                user.spnamember.subscription=request.session['subscription']
+                user.spnamember.fullname=request.session['fullname']
+                user.spnamember.phone=request.session['phone']
+                user.spnamember.country=request.session['country']
+                user.spnamember.postcode=request.session['postcode']
+                user.spnamember.town_or_city=request.session['town_or_city']
+                user.spnamember.street_address1=request.session['street_address1']
+                user.spnamember.nursery=request.session['nursery']
+                user.save()
+                messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
                 context = {
                     'payment_intent_secret': intent.client_secret,
                     'STRIPE_PUBLISHABLE_KEY': stripe_public_key,
@@ -221,7 +259,7 @@ def card(request):
             payment_intent_id,
             payment_method=payment_method_id,
         )
-                    # ADD USER SAVE or variation here? or with webhook?
+        messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
 
     return render(request, 'member/welcome.html')
 

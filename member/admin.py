@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin, User
 from .models import Document, SPNAMember
 
+
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
     """
@@ -34,15 +35,22 @@ class DocumentAdmin(admin.ModelAdmin):
 #     ordering = ('date_joined',)
  
 class MemberInline(admin.StackedInline):
+    """
+    Adds SPNAMember inline with User model
+    """
     model = SPNAMember
     can_delete = False
     verbose_name_plural = 'Member'
     fk_name = 'user'
 
 class CustomUserAdmin(UserAdmin):
+    """
+    Defines SPNAMember inline with User model
+    """
     inlines = (MemberInline, )
     list_display = ('username', 'email', 'date_joined', 'get_nursery', 'get_fullname' , 'get_subscription', 'get_paid_until')
     list_select_related = ('spnamember', )
+    ordering = ('date_joined',)
 
     def get_nursery(self, instance):
         return instance.spnamember.nursery
