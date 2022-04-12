@@ -164,7 +164,6 @@ def add_document(request):
 
 @login_required
 @staff_member_required
-# @user_passes_test(lambda u: u.is_superuser)
 def get_csv_of_users(request):
     """
     Gets a csv of the spnamember model

@@ -26,7 +26,7 @@
         {% block corejs %}
         <script src="https://kit.fontawesome.com/48b20a3378.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+        <!-- <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script> -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
         <script src="https://js.stripe.com/v3/"></script>
@@ -41,157 +41,160 @@
     <body>
      
         <header class="fixed-top bg-blue">
-            <div id="topnav" class="row pt-lg-2 d-none d-lg-flex">
-                <div class="col-12 col-md-8 mx-auto my-auto py-1 py-lg-0">
-                    <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                        <img src="{{ spna }}/media/original/logo.png" alt="SPNA Logo">
-                    </a>
+            <div class="container-fluid">
+
+                <div id="topnav" class="row pt-lg-2 d-none d-lg-flex g-0">
+                    <div class="col-12 col-md-8 mx-auto my-auto py-1 py-lg-0">
+                        <a href="{% url 'home' %}" class="nav-link main-logo-link">
+                            <img src="{{ spna }}/media/original/logo.png" alt="SPNA Logo">
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-md-2 mx-auto my-auto py-lg-0">
+                        <div class="text-center other-nav" data-bs-toggle="dropdown">
+                            <div><i class="fas fa-user fa-lg"></i></div>
+                            <p class="my-0 link-text">{% if request.user.is_authenticated %}<span class="italic">{{user.username}}</span>{% else %}Join/Login{% endif %}</p>
+                        </div>
+                        <div id="menu-dropdown"class="dropdown-menu my-0 pl-2">                    
+                            {% include 'includes/account/spna_login.html' %}
+                        </div>
+                    </div>        
                 </div>
 
-                <div class="col-12 col-md-2 mx-auto my-auto py-lg-0">
-                    <div class="text-center other-nav" data-bs-toggle="dropdown">
-                        <div><i class="fas fa-user fa-lg"></i></div>
-                        <p class="my-0 link-text">{% if request.user.is_authenticated %}<span class="italic">{{user.username}}</span>{% else %}Join/Login{% endif %}</p>
-                    </div>
-                    <div id="menu-dropdown"class="dropdown-menu my-0 pl-2">                    
-                        {% include 'includes/account/spna_login.html' %}
-                    </div>
-                </div>        
-            </div>
-
-            <div class="row g-0 cover">
-                <div class="col-12 col-lg-12 mx-auto">
-                    <nav class="navbar navbar-expand-lg my-auto bg-blue h-100 w-100" id="navbarNav">
-                        <div class="d-lg-none">
-                            <span><a href="{% url 'home' %}"><img src="{{ spna }}/media/original/logo.png" alt="SPNA Logo"></a>
-                            </span>
-                        </div>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"><i class="fas fa-caret-down text-ant-white"></i></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="main-nav">
-                            <ul class="navbar-nav my-auto sticky-top">
-                                <!-- <li class="nav-item d-block d-lg-none">
-                                    <a href="{% url 'home' %}">Home</a>
-                                </li> -->
-                                <li class="nav-item">
-                                    <a href="{% url 'about' %}">About Us</a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a href="{% url 'news' %}">News</a>
-                                </li>
-                                <li class="nav-item">
-                                    
-                                    <a href="{% url 'initiatives' %}">Initiatives | Campaigns</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a id="contact-button" data-bs-toggle="modal" data-bs-target="#myModal" href="#myModal">Contact</a>
-                                </li>
-                                {% if request.user.is_authenticated %}
+                <div class="row g-0 cover">
+                    <div class="col-12 col-lg-12 mx-auto">
+                        <nav class="navbar navbar-expand-lg my-auto bg-blue h-100 w-100" id="navbarNav">
+                            <div class="d-lg-none">
+                                <span><a href="{% url 'home' %}"><img src="{{ spna }}/media/original/logo.png" alt="SPNA Logo"></a>
+                                </span>
+                            </div>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"><i class="fas fa-caret-down text-ant-white"></i></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="main-nav">
+                                <ul class="navbar-nav my-auto sticky-top">
+                                    <!-- <li class="nav-item d-block d-lg-none">
+                                        <a href="{% url 'home' %}">Home</a>
+                                    </li> -->
                                     <li class="nav-item">
-                                        <a href="{% url 'member_area' %}">Members Area</a>
+                                        <a href="{% url 'about' %}">About Us</a>
                                     </li>
-                                {% endif %}
-                                {% if request.user.is_authenticated %}
-                                    {% if request.user.is_superuser %}
+                                    <li class="nav-item ">
+                                        <a href="{% url 'news' %}">News</a>
+                                    </li>
                                     <li class="nav-item">
-                                        <a href="{% url 'spna_admin' %}">Admin</a>
+                                        
+                                        <a href="{% url 'initiatives' %}">Initiatives | Campaigns</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a id="contact-button" data-bs-toggle="modal" data-bs-target="#myModal" href="#myModal">Contact</a>
+                                    </li>
+                                    {% if request.user.is_authenticated %}
+                                        <li class="nav-item">
+                                            <a href="{% url 'member_area' %}">Members Area</a>
+                                        </li>
+                                    {% endif %}
+                                    {% if request.user.is_authenticated %}
+                                        {% if request.user.is_superuser %}
+                                        <li class="nav-item">
+                                            <a href="{% url 'spna_admin' %}">Admin</a>
+                                        </li>
+                                        {% endif %}
+                                        <li class="nav-item d-lg-none">
+                                            <a href="#">Profile</a>
+                                        </li>
+                                        <li class="nav-item d-lg-none">
+                                            <a href="{% url 'account_logout' %}">Logout</a>
+                                        </li>
+                                    {% else %}
+                                    <li class="nav-item d-lg-none">
+                                        <a href="{% url 'membership' %}">Join</a>
+                                    </li>
+                                    <li class="nav-item d-lg-none">
+                                        <a href="{% url 'account_login' %}">Login</a>
                                     </li>
                                     {% endif %}
-                                    <li class="nav-item d-lg-none">
-                                        <a href="#">Profile</a>
-                                    </li>
-                                    <li class="nav-item d-lg-none">
-                                        <a href="{% url 'account_logout' %}">Logout</a>
-                                    </li>
-                                {% else %}
-                                <li class="nav-item d-lg-none">
-                                    <a href="{% url 'membership' %}">Join</a>
-                                </li>
-                                <li class="nav-item d-lg-none">
-                                    <a href="{% url 'account_login' %}">Login</a>
-                                </li>
-                                {% endif %}
-                            </ul>
-                        </div> 
-                    </nav>
+                                </ul>
+                            </div> 
+                        </nav>
+                    </div>
                 </div>
             </div>
         </header>
 
-        
-   <!-- Contact Modal -->
-    <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content row g-0 text-blue">
-                <div class="modal-header col-12 bg-light-blue">
-                    <h5 class="modal-title" id="staticBackdropLabel">Contact Form</h5>
-                    <button type="button" class="btn-close modal-close-button" data-bs-dismiss="modal" aria-label="Close"></button>
+            
+        <!-- Contact Modal -->
+        <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content row g-0 text-blue">
+                    <div class="modal-header col-12 bg-light-blue">
+                        <h5 class="modal-title" id="staticBackdropLabel">Contact Form</h5>
+                        <button type="button" class="btn-close modal-close-button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- contact form to go here -->
+                    <div class="modal-body col-12 bg-whitesmoke">
+                    
+                        <form action="{% url 'post_contact' %}" method="POST">
+                            
+                            
+                            {% csrf_token %}
+                            
+                            {{ contact_form|crispy }}
+                            
+                            
+                            <!-- <button type="submit" id="toastbtn" class="btn btn-primary">Submit</button> -->
+                            
+                            <div class="modal-footer bg-light-blue">
+                                <button type="button" class="btn btn-secondary modal-close-button" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" id="toastbtn" class="btn spna-btn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <!-- contact form to go here -->
-                <div class="modal-body col-12 bg-whitesmoke">
-                
-                    <form action="{% url 'post_contact' %}" method="POST">
-                        
-                        
-                        {% csrf_token %}
-                        
-                        {{ contact_form|crispy }}
-                        
-                        
-                        <!-- <button type="submit" id="toastbtn" class="btn btn-primary">Submit</button> -->
-                        
-                        <div class="modal-footer bg-light-blue">
-                            <button type="button" class="btn btn-secondary modal-close-button" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" id="toastbtn" class="btn spna-btn">Submit</button>
-                        </div>
-                    </form>
+            </div>
+        </div>  
+
+        <!-- Delete Article Modal -->
+    
+        <div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title scots" id="staticBackdropLabel">Delete Article</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
+                        <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this Article? <i class="fas fa-exclamation-triangle"></i></p>
+                    </div>
+                    <div class="modal-footer" id="delete-modal-buttons">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a id="modal-delete-button" aria-label="Delete" href="/spna_admin/delete/article/{{article.id}}" class="btn btn-back delete-button">DELETE</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>  
 
-    <!-- Delete Article Modal -->
-   
-    <div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title scots" id="staticBackdropLabel">Delete Article</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
-                    <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this Article? <i class="fas fa-exclamation-triangle"></i></p>
-                </div>
-                <div class="modal-footer" id="delete-modal-buttons">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a id="modal-delete-button" aria-label="Delete" href="/spna_admin/delete/article/{{article.id}}" class="btn btn-back delete-button">DELETE</a>
+        <!-- Delete Contact Modal -->
+    
+        <div class="modal fade" id="delete-cont-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title scots" id="staticBackdropLabel">Delete Contact</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
+                        <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this Contact? <i class="fas fa-exclamation-triangle"></i></p>
+                    </div>
+                    <div class="modal-footer" id="delete-cont-modal-buttons">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a id="cont-modal-delete-button" aria-label="Delete" href="/spna_admin/delete/contact/{{contact.id}}" class="btn btn-back delete-button">DELETE</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-      <!-- Delete Contact Modal -->
-   
-      <div class="modal fade" id="delete-cont-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title scots" id="staticBackdropLabel">Delete Contact</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
-                    <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this Contact? <i class="fas fa-exclamation-triangle"></i></p>
-                </div>
-                <div class="modal-footer" id="delete-cont-modal-buttons">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a id="cont-modal-delete-button" aria-label="Delete" href="/spna_admin/delete/contact/{{contact.id}}" class="btn btn-back delete-button">DELETE</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Messages Container -->
+        <!-- Messages Container -->
         {% if messages %}
 
             {% for message in messages %}
@@ -209,7 +212,7 @@
         {% block content %}
         {% endblock %}
 
-    <!-- BTT Button -->
+        <!-- BTT Button -->
 
         <div class="btt-button shadow-sm rounded-0 border border-black">
             <a id="btt-link"class="btt-link d-flex h-100">
@@ -217,54 +220,39 @@
             </a>
         </div>
 
-    <!-- Footer -->
+        <!-- Footer -->
 
         <footer class=" fixed-bottom">
             <div id="footer" class="container-fluid bg-blue">
-                <div id="mailchimp-row" class="row">
-                    <div class="col-12 col-md-2 d-none d-lg-block ">
+                <div id="footer-row" class="row g-0">
+                    <div class="col-12 col-lg-4 d-none d-lg-block ">
                         <img class="pl-3" src="{{ spna }}/media/original/cropped-SPNA_logo_icon.png" width="100px" height="100px" alt="Cropped SPNA logo">
                     </div>
-                    <div class="col-12 col-lg-3 pb-0 mb-0 my-auto">
-                        <p class="footer-logo text-blue">Scottish Private Nursery Association</p>
+                    <div class="col-12 col-lg-4 m-2 my-auto mx-auto text-center">
+                        <p class="footer-logo text-blue text-center">Scottish Private Nursery Association 
+                            <a class="" href="mailto:communications@scottishpna.org"><i class="d-inline-block d-lg-none fas fa-envelope"></i></a>
+                        </p>
+                        <p class="d-none d-lg-inline-block">
+                            <i class="fas fa-envelope"></i>
+                            <a class="" href="mailto:communications@scottishpna.org">communications@scottishpna.org</a>
+                        </p>
                     </div>
-                    <div class="col-12 col-md-7">
-                        <!-- Mail chimp form -->
-                        <!-- Begin Mailchimp Signup Form -->
-                        <div id="mc_embed_signup">
-                            <form action="https://hotmail.us14.list-manage.com/subscribe/post?u=291280cf52030472eb64f0704&amp;id=a51e9f2451" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                                <div id="mc_embed_signup_scroll">
-                                    <div class="mc-field-group">
-                                        <input placeholder="Email Address" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-                                    </div>
-                                    <div id="mce-responses" class="clear foot">
-                                        <div class="response" id="mce-error-response" style="display:none"></div>
-                                        <div class="response" id="mce-success-response" style="display:none"></div>
-                                    </div>    
-                                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
-                                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_291280cf52030472eb64f0704_a51e9f2451" tabindex="-1" value="">
-                                    </div>
-                                    <div class="d-inline">
-                                        <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button btn-blue">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!--End mc_embed_signup-->
+                    <div class="col-12 col-lg-4 text-center my-auto mx-auto">
+                        <ul class="social-networks text-blue">
+                            <li><a href="#" target="_blank" rel="noopener" aria-label="Visit our Facebook page (opens in a new tab)"><i class="fab fa-facebook-f socials"></i></a></li>
+                            <li><a href="#" target="_blank" rel="noopener" aria-label="Visit our Instagram page (opens in a new tab)"><i class="fab fa-instagram socials"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/ewan-colquhoun-2b3535213/" target="_blank" rel="noopener" aria-label="Visit our LinkedIn page (opens in a new tab)"><i class="fab fa-linkedin-in socials"></i></a></li>
+                        </ul>
                     </div>
                 </div>
                 <div id="inner-lower-footer" class="row">
                     <div class="col-12 text-center">
-                        <div class="p-1">
-                            <i class="fas fa-envelope"></i>
-                            <a class="pl-1" href="mailto:communications@scottishpna.org">communications@scottishpna.org</a>
-                        </div>
                         <span class="text-muted">&copy 2022 E.Colquhoun </span>
                     </div>
                 </div>
             </div>
         </footer>
-       
+        
         <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 
        
