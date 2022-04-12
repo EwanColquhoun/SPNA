@@ -170,10 +170,6 @@ def get_csv_of_users(request):
     Gets a csv of the spnamember model
     """
 
-    # response = export_qs_to_csv(model_class = SPNAMember)
-
-    # print(response)
-
     return export_qs_to_csv(model_class = SPNAMember)
 
 
