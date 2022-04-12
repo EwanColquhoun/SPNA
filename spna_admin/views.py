@@ -9,6 +9,7 @@ from contact.models import Contact
 from member.models import Document, SPNAMember, get_model_fields
 from member.forms import DocumentForm, EmailForm
 from spna.email import send_admin_email
+from .get_csv import export_qs_to_csv
 
 
 @login_required
@@ -163,16 +164,17 @@ def add_document(request):
 
 @login_required
 @staff_member_required
+# @user_passes_test(lambda u: u.is_superuser)
 def get_csv_of_users(request):
     """
-    As the title suggests, gets a downloadable csv for Admin
+    Gets a csv of the spnamember model
     """
-    model = SPNAMember
-    sfields = get_model_fields(model)
-    ufields = get_model_fields(User)
-    print(sfields)
-    print(ufields)
-    return redirect('spna_admin')
+
+    # response = export_qs_to_csv(model_class = SPNAMember)
+
+    # print(response)
+
+    return export_qs_to_csv(model_class = SPNAMember)
 
 
 @login_required
