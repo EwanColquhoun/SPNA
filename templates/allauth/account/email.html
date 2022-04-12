@@ -45,19 +45,19 @@
 
     {{ emailaddress.email }}
     {% if emailaddress.verified %}
-    <span class="verified">{% trans "Verified" %}</span>
+    <span class="verified"> | {% trans "Verified" %}</span>
     {% else %}
-    <span class="unverified">{% trans "Unverified" %}</span>
+    <span class="unverified"> | {% trans "Unverified" %}</span>
     {% endif %}
-    {% if emailaddress.primary %}<span class="primary">{% trans "Primary" %}</span>{% endif %}
+    {% if emailaddress.primary %}<span class="primary"> | {% trans "Primary" %}</span>{% endif %}
     </label>
     </div>
     {% endfor %}
 
     <div class="buttonHolder pt-3 pb-3">
-          <button class="spna-btn secondaryAction" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
-          <button class="spna-btn secondaryAction" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
-          <button class="spna-btn primaryAction" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+          <button class="btn spna-btn secondaryAction" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
+          <button class="btn spna-btn secondaryAction" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
+          <button class="btn spna-btn primaryAction" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
         </div>
         
       </fieldset>
@@ -77,7 +77,7 @@
       <form method="post" action="{% url 'account_email' %}" class="add_email">
         {% csrf_token %}
         {{ form.as_p }}
-        <button name="action_add" class="spna-btn" type="submit">{% trans "Add E-mail" %}</button>
+        <button name="action_add" class="btn spna-btn" type="submit">{% trans "Add E-mail" %}</button>
       </form>
     </div>
     {% endif %}

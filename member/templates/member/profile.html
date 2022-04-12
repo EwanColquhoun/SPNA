@@ -34,7 +34,7 @@
     <div class="container-fluid">
         <div class="row g-0 mx-auto">
             <div class="col-12 p-2 text-center">
-                <h2>SPNA member: {{member.fullname}}.</h2>
+                <h2>SPNA member: {{member.fullname}}</h2>
             </div>
 
             <hr class="d-block p-1 mx-auto admin-hr">
@@ -43,13 +43,13 @@
                 <h3>Current Details</h3>
                 <div>
                     <ul>
-                        <li>Nursery: {{member.nursery}}</li>
-                        <li>Email: {{member.email}}</li>
-                        <li>Address: {{member.street_address1}}</li>
-                        <li>Town: {{member.town_or_city}}</li>
-                        <li>Postcode: {{member.postcode}}</li>
-                        <li>Phone: {{member.phone}}</li>
-                        <li>Subscription: {{member.subscription}}</li>
+                        <li>Nursery:        {{member.nursery}}</li>
+                        <li>Email:          {{member.user.email}}</li>
+                        <li>Address:        {{member.street_address1}}</li>
+                        <li>Town:           {{member.town_or_city}}</li>
+                        <li>Postcode:       {{member.postcode}}</li>
+                        <li>Phone:          {{member.phone}}</li>
+                        <li>Subscription:   {{member.subscription}}</li>
                     </ul>
                 </div>
             </div>
@@ -59,7 +59,8 @@
                     {% csrf_token%}
                     {{ form|crispy }}
                     <div class="p-2">
-                        <button class="spna-btn" type="submit">Update</button>
+                        <button class="btn spna-btn" type="submit">Update</button>
+                        <a href="{% url 'account_email' %}" class="btn btn-success">Change Email</a>
                     </div>
                 </form>
             </div>

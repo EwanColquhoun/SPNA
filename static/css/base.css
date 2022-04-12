@@ -73,6 +73,16 @@ footer a {
     color: antiquewhite;
 }
 
+.menu-link {
+    text-decoration: none;
+    color: #37698e;
+}
+
+.menu-link:hover {
+    color: #96b1e0;
+    font-style: italic;
+}
+
 .bg-blue {
     background-color: #96b1e0;
 }
@@ -141,6 +151,7 @@ footer a {
     height: fit-content;
 }
 
+
 #inner-lower-footer {
     background-color: aliceblue;
     max-height: max-content;
@@ -152,8 +163,11 @@ footer a {
 
 /* provides enhanced UX with feedback over the icons */
 
-.socials:hover {
+.socials:hover,
+.email-link:hover {
     transform: scale(1.3,1.3);
+    color: #DFF1FF;
+    transition: 300ms;
 }
 
 .dropdown-menu {
@@ -307,21 +321,6 @@ footer a {
     color: red;
     transition: 500ms;
     border: 1px solid red;
-}
-
-/* mailchimp */
-#mc_embed_signup {
-    float: right;
-    width: 70%;
-}
-
-#mc_embed_signup .mc-field-group {
-    width: 98%;
-    /* position: relative; */
-} 
-
-#mc_embed_signup #mc-submit {
-    float: right;
 }
 
 /* from Bulma */

@@ -15,11 +15,11 @@
       <h3 class="text-blue">Account Menu:</h3>
       <ul>
         {% if user.is_authenticated %}
-        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
-        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+        <li><a href="{% url 'account_email' %}" class="menu-link">Change E-mail</a></li>
+        <li><a href="{% url 'account_logout' %}" class="menu-link">Sign Out</a></li>
         {% else %}
-        <li><a href="{% url 'account_login' %}">Sign In</a></li>
-        <li><a href="{% url 'membership' %}">Sign Up</a></li>
+        <li><a href="{% url 'account_login' %}" class="menu-link">Sign In</a></li>
+        <li><a href="{% url 'membership' %}" class="menu-link">Sign Up</a></li>
         {% endif %}
       </ul>
     
