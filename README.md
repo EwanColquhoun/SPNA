@@ -26,8 +26,8 @@ been added and some removed as the design process progressed.
         * [**Home**](<#home-page>)
             * [Navigation bar](<#navigation-bar>)
             * [Footer](<#footer>)
-        * [**Calendar**](<#calendar-page>)
-        * [**Bookings**](<#bookings-page>)
+        * [**About Us**](<#about-us-page>)
+        * [**Initiatives | Campaigns**](<#initiatives-campaigns-page>)
         * [**Contact Modal**](<#contact-modal>)
         * [**Members Area**](<#members-area-page>)
         * [**SPNA Admin Page**](<#spna-admin-page>)
@@ -65,18 +65,36 @@ The above user stories were created in conjunction with the Client and their dev
 [Back to top](<#contents>)
 
 ## Wireframes
+ <!-- NEED TO ADD MOBILE WIREFRAMES -->
 
-<!-- * Home page 
-![home page wireframe](media/readme-images/home.png)
+* Home page 
 
-* Calendar page
-![calendar page wireframe](media/readme-images/calendar.png)
+    ![home page wireframe](media/readme-images/home.png)
 
-* Bookings page
-![booking page wireframe](media/readme-images/booking.png)
+* About Us page
+
+    ![About us page wireframe](media/readme-images/about-us.png)
+
+* News page
+
+    ![News page wireframe](media/readme-images/news.png)
+
+* Initiatives|Campaigns page
+
+    ![campaigns page wireframe](media/readme-images/init.png)
 
 * Contact page
-![contact page wireframe](media/readme-images/contact.png) -->
+
+    ![contact page wireframe](media/readme-images/contact.png)
+
+* SPNA Admin page
+
+    ![SPNA Admin page wireframe](media/readme-images/spna-admin.png)
+
+* Sign Up page
+
+    ![Sign Up page wireframe](media/readme-images/signup.png)
+
 
 
 [Back to top](<#contents>)

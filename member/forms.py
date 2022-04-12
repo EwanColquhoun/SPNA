@@ -79,6 +79,17 @@ class CustomSignupForm(SignupForm):
         return user
 
 
+class ProfileForm(forms.ModelForm):
+    """Profile update form"""
+
+    class Meta:
+        model = SPNAMember
+        exclude = ('user', 'subscription', 'paid_until')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['street_address1'].label = 'Street Address'
+
 
 
 class DocumentForm(forms.ModelForm):

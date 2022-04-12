@@ -14,4 +14,5 @@ urlpatterns = [
     path('card/', views.card, name='card'),
     path('3dsec/', views.secure, name='3dsec'),
     path('stripe-webhooks/', webhook, name='webhook'),
+    path('profile/', views.profile_view, name='profile'),
 ]

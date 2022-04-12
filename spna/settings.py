@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-_ylo1*@ojc-7wbhp(ys6d+x^79x(n)$=8++s=-w99-6b5t=*g4
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu39a.gitpod.io']
-CSRF_TRUSTED_ORIGINS = ["https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu39a.gitpod.io"]
+CSRF_TRUSTED_ORIGINS = ["https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu39b.gitpod.io"]
 
 SITE_ID = 1
 
