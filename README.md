@@ -50,12 +50,14 @@ As a **USER** I want to **GOAL** so that i can **RESULT**.
 * As a **USER** I want to **KNOW MORE ABOUT THE SPNA** so that I can **DETERMINE IF I WANT TO JOIN**.
 * As a **USER** I want to **JOIN THE SPNA** so that I can **BENIFIT FROM MEMBER PREVILAGES**.
 * As a **USER** I want to **SEE WHAT NEWS ARITCLES RELATING TO THE SPNA** so that I can **BE MORE INFORMED ABOUT THEIR ACTIVITIES**.
-* As a **USER** I want to **KNOW WHAT CAMPAIGNS ARE ACTIVE** so that I can **TAILOR MY INPUTS ACCORDINGLY**.
+* As a **USER** I want to **KNOW WHAT CAMPAIGNS THE SPNA ARE INVOLVED WITH** so that I can **LEARN AND VIEW THEIR CAUSES**.
+* As a **USER** I want to **KNOW WHAT INITIATIVES THE SPNA ARE RUNNING** so that I can **DO MY PART AND HELP**.
 * As a **USER** I want to **CONTACT THE SPNA** so that I can **DIRECT ANY ENQUIRES APPROPRIATELY**.
 
 * As an **ADMIN** I want to **TAKE PAYMENTS** so that I can **BUILD UP A REVENUE STREAM FROM MEMBERS**.
 * As an **ADMIN** I want to **COLLECT MEMBER DETAILS** so that I can **CONTACT THEM REGARDING UPDATES AND NEWS**.
 * As an **ADMIN** I want to **UPDATE THE NEWS ARTICLES** so that I can **KEEP THE WEBSITE NEWS PAGE CURRENT**.
+* As an **ADMIN** I want to **UPDATE THE MEMBER DOCUMENTS** so that I can **LET THE MEMBERS KNOW THE LATEST INFORMATION**.
 * As an **ADMIN** I want to **LINK TO SOCIAL MEDIA SITES** so that I can **INCREASE THE MEMBERSHIP**.
 
 
@@ -104,8 +106,17 @@ The above user stories were created in conjunction with the Client and their dev
 ## Design Choices
 
  * ### Typography
+    - The fonts chosen for the SPNA were:
+        - Title and sub title - Caveat, cursive.
+        - Body is Raleway, sans-serif.
+    
+        These both give a relaxed and welcoming appearance to the page whilst being easily readable. 'Moon dance' was used initially as the title font but upon consultation with the client was changed to 'Caveat'.
 
  * ### Colour Scheme
+    - The color schemes were compiled from [colorpeek](https://colorpeek.com/) based on the existing SPNA site colours with addition of some of my own from [mycolorspace](https://mycolor.space/).
+    ![Color peek palate](media/readme-images/peek.png)
+    ![MyColor space palate](media/readme-images/space.png)
+
  
 [Back to top](<#contents>)
 
@@ -305,7 +316,7 @@ The method for cloning a project from GitHub is below:
 
 * The font came from [Google Fonts](https://fonts.google.com/).
 * [Stack Overflow](https://stackoverflow.com/) for general hints and tips.
-* The colour palate was compiled by [Colormind](http://colormind.io/).
+* The colour selection was compiled by [MyColorSpace](https://mycolor.space/) and [colorpeek](https://colorpeek.com/).
 * The icons came from [Font Awesome](https://fontawesome.com/).
 
 ### Media
