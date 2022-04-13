@@ -3,6 +3,7 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import HttpResponse
 from .wh_handler import set_paid_until
+from member.views import payment_failed
 
 import stripe
 import json
@@ -29,13 +30,17 @@ def webhook(request):
         print("Event constructed correctly")
     except ValueError as e:
         # Invalid payload
+        payment_failed(request, e)
         print("Invalid Payload")
         return HttpResponse(content=e, status=400)
-    except stripe.error.SignatureVerificationError:
+    except stripe.error.SignatureVerificationError as e:
         # Invalid signature
+        payment_failed(request, e)
         print("Invalid signature")
         return HttpResponse(status=400)
     except Exception as e:
+        payment_failed(request, e)
+        print('last error')
         return HttpResponse(content=e, status=400)
 
     if event.type =='charge.succeeded':

@@ -89,7 +89,8 @@ function card(stripe_publishable_key, customer_email) {
             if (payment_method_result.error) {
                  // hides spinner and shows card
                 spinner.stlye.display = "none"
-                form.classList.replace('fade-payment', 'show-payment')
+                form.classList.remove('fade-payment')
+                form.classList.add('show-payment')
                 console.log(payment_method_result, 'PMR')
                 var errorElement = document.getElementById('card-errors');
                 errorElement.textContent = payment_method_result.error.message;

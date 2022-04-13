@@ -15,4 +15,5 @@ urlpatterns = [
     path('3dsec/', views.secure, name='3dsec'),
     path('stripe-webhooks/', webhook, name='webhook'),
     path('profile/', views.profile_view, name='profile'),
+    path('payment_failed/', views.payment_failed, name='payment_failed'),
 ]

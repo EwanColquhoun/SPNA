@@ -245,6 +245,7 @@ def card(request):
                 }
            
                 return render(request, 'member/3dsec.html', context)
+        
     else:
         stripe.PaymentIntent.modify(
             payment_intent_id,
@@ -258,3 +259,15 @@ def card(request):
 
     return render(request, 'account/login.html', context)
 
+
+def payment_failed(request, e):
+
+    form = CustomSignupForm()
+
+    messages.error(request, f'There was a problem with your payment. Please try again. Error: {e}')
+
+    context = {
+        'form':form,
+    }
+
+    return render(request, 'member/subscribe.html', context)
