@@ -11,6 +11,8 @@ def export_qs_to_csv(model_class = None):
 
     fields = [
         'user__email',
+        'user__first_name',
+        'user__last_name',
         'user',
         'nursery',
         'fullname',
