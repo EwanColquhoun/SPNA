@@ -356,6 +356,10 @@ footer a {
     background-size: cover;
 }
 
+#login-form-section {
+    height:70vh;
+}
+
 .title-section {
     height: 35vh;
     width: 100vw;

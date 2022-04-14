@@ -61,11 +61,13 @@ class SPNAMember(models.Model):
     phone = models.CharField(max_length=15, null=True, blank=True)
     subscription = models.CharField(max_length=16, choices=PLAN, default=1, null=False, blank=False)
     paid_until = models.DateField(null=True, blank=True)
+    paid = models.BooleanField(null=True, blank=True, default=False)
     objects = UserManager()
 
     def __str__(self):
         return str(self.fullname)
-        
+
+# Below methods from https://www.youtube.com/watch?v=Mw__Pw1iGgA
 
     def set_paid_until(self, date_or_timestamp):
         """
@@ -92,13 +94,8 @@ class SPNAMember(models.Model):
         Defines if spnamember has paid according to stripe wh return
         """
         if self.paid_until is None:
-            return False
+            self.paid = False
+        elif current_date < self.paid_until:
+            self.paid = True
 
-        return current_date < self.paid_until
-
-
-def get_model_fields(model):
-    """
-    Gets all fields for CSV writer.
-    """
-    return model._meta.get_fields()
+        self.save()

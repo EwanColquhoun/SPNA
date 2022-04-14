@@ -1,4 +1,5 @@
 import stripe
+import datetime
 from django.contrib.auth.models import User
 
 from django.contrib import messages
@@ -38,6 +39,7 @@ def set_paid_until(request, charge):
             return False
 
         user.spnamember.set_paid_until(current_period_end)
+        user.spnamember.has_paid(current_date=datetime.date.today())
    
     else:
         pass

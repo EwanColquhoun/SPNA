@@ -48,7 +48,7 @@ class CustomUserAdmin(UserAdmin):
     Defines SPNAMember inline with User model
     """
     inlines = (MemberInline, )
-    list_display = ('username', 'email', 'date_joined', 'get_nursery', 'get_fullname' , 'get_subscription', 'get_paid_until')
+    list_display = ('username', 'email', 'date_joined', 'get_nursery', 'get_fullname' , 'get_subscription', 'get_paid_until', 'paid')
     list_select_related = ('spnamember', )
     ordering = ('date_joined',)
 
@@ -67,6 +67,10 @@ class CustomUserAdmin(UserAdmin):
     def get_paid_until(self, instance):
         return instance.spnamember.paid_until
     get_paid_until.short_description = 'Expiry'
+
+    def paid(self, instance):
+        return instance.spnamember.paid
+    paid.short_description = 'Paid'
 
     def get_inline_instances(self, request, obj=None):
         if not obj:

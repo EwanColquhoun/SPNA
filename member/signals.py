@@ -32,14 +32,12 @@ def save_spnamember(user, form):
     user.spnamember.paid_until = '2022-02-23'
     user.spnamember.save()
 
-def get_fname(form):
-    fn = form.cleaned_data['fullname']
-    fname = fn.split()[0]
+def get_fname(fullname):
+    fname = fullname.split()[0]
     return fname
 
-def get_sname(form):
-    sn = form.cleaned_data['fullname']
-    sname = sn.split()[1]
+def get_sname(fullname):
+    sname = fullname.split()[1]
     return sname
 
 

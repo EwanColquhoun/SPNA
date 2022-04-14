@@ -6,7 +6,7 @@ from django.contrib import messages
 from news.forms import ArticleForm
 from news.models import Articles
 from contact.models import Contact
-from member.models import Document, SPNAMember, get_model_fields
+from member.models import Document, SPNAMember
 from member.forms import DocumentForm, EmailForm
 from spna.email import send_admin_email
 from .get_csv import export_qs_to_csv

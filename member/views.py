@@ -27,7 +27,7 @@ def member_area(request):
     """ 
     A view to return the members area
     """
-    if not request.user.is_authenticated:
+    if not request.user.spnamember.has_paid:
         messages.error(request, "Sorry only SPNA Members can access this page.")
         return redirect(reverse('home'))
 
@@ -77,18 +77,18 @@ def delete_document(request, document_id):
 
 
 # A trial to get it to work with stripe payments below.
-@csrf_protect
-def membership(request):
-    """
-    a signup form view
-    """
-    form = CustomSignupForm()
+# @csrf_protect
+# def membership(request):
+#     """
+#     a signup form view
+#     """
+#     form = CustomSignupForm()
 
-    context = {
-        'form': form,
-    }
+#     context = {
+#         'form': form,
+#     }
 
-    return render(request, 'member/subscribe.html', context)
+#     return render(request, 'member/subscribe.html', context)
 
 
 def secure(request):
@@ -106,15 +106,12 @@ def subscribe(request):
     This view is activated from the 'Sign Up' button.
     """
 
-    form = CustomSignupForm(request.POST)
-    print('post')
     if request.method == 'POST':
+        form = CustomSignupForm(request.POST)
         if form.is_valid():
-
+            
         # creates and saves user attributes into the session
             user = form.save(request)
-            user.first_name=get_fname(form)
-            user.last_name=get_sname(form)
             user.save()
             request.session['fullname'] = form.cleaned_data['fullname']
             request.session['email'] = form.cleaned_data['email']
@@ -144,9 +141,10 @@ def subscribe(request):
             stripe.api_key = stripe_secret_key
             payment_intent = stripe.PaymentIntent.create(
                 amount=amount,
-                payment_method_types=['card'],
+                setup_future_usage='on_session',
                 currency='GBP',
             )
+
             context = {
                 'customer_email': request.POST.get('email'),
                 'fullname': request.POST.get('fullname'),
@@ -157,29 +155,47 @@ def subscribe(request):
                 'automatic': automatic,
                 'stripe_plan_id': spi,
             }
+
+            # messages.success(request, f'Congratulations on joining the SPNA {user.spnamember.fullname}.')
             return render(request, 'member/payment.html', context)
+
         else:
-            form = CustomSignupForm(data=request.POST)
-            print(form.data)
-            messages.error(request, 'Please ensure the form has been correctly filled in.')
+            # form = CustomSignupForm(request.POST)
+            messages.error(request, 'There was an error in the form. \
+                Please ensure the form has been correctly filled in.')
             
-            return redirect('membership')
+            return redirect(reverse('subscribe'))
+    else:
+        # messages.error(request, 'TESTING')
+        form = CustomSignupForm()
+        context = {
+            'form': form,
+            }
+        return render(request, 'member/subscribe.html', context)
 
 
-def card(request):
+def payment(request):
+
     """
-    Processes payment from card view.
+    A view to pay the SPNA, create a customer and an associated subscription.
     """
+
     payment_intent_id = request.POST['payment_intent_id']
     payment_method_id = request.POST['payment_method_id']
+    print(payment_intent_id, 'intent')
+    # print(payment_method_id, 'method')
+
     stripe_plan_id = request.POST['stripe_plan_id']
-    automatic = request.POST['automatic']
+    print(stripe_plan_id, 'plan_id')
+
     customer_email = request.POST['customer_email']
     stripe.api_key = stripe_secret_key
     log_form = LoginForm()
 
-    # Automatic renewal for potential future development.
-    if automatic:
+    if request.method == 'POST':
+
+        # # Automatic renewal for potential future development.
+    
         customer = stripe.Customer.create(
             email=customer_email,
             name=request.session['fullname'],
@@ -188,6 +204,7 @@ def card(request):
                 'default_payment_method': payment_method_id
             }
         )
+        print(customer, 'customer')
         sub = stripe.Subscription.create(
             customer=customer.id,
             items=[
@@ -199,8 +216,11 @@ def card(request):
         latest_invoice = stripe.Invoice.retrieve(sub.latest_invoice)
         # Generates an instance of the SPNA member once invoice is paid.
         if latest_invoice.paid:
+            fn = request.session['fullname']
             user = User.objects.get(email=request.session['email'])
             user.refresh_from_db()
+            user.first_name=get_fname(fn)
+            user.last_name=get_sname(fn)
             user.spnamember.subscription=request.session['subscription']
             user.spnamember.fullname=request.session['fullname']
             user.spnamember.phone=request.session['phone']
@@ -217,6 +237,7 @@ def card(request):
             }
 
             return render(request, 'account/login.html', context)
+        
         else:
             ret = stripe.PaymentIntent.confirm(
                 latest_invoice.payment_intent,
@@ -228,6 +249,9 @@ def card(request):
                 )
                 user = User.objects.get(email=request.session['email'])
                 user.refresh_from_db()
+                fn = request.session['fullname']
+                user.first_name=get_fname(fn)
+                user.last_name=get_sname(fn)
                 user.spnamember.subscription=request.session['subscription']
                 user.spnamember.fullname=request.session['fullname']
                 user.spnamember.phone=request.session['phone']
@@ -245,29 +269,202 @@ def card(request):
                 }
            
                 return render(request, 'member/3dsec.html', context)
-        
-    else:
-        stripe.PaymentIntent.modify(
-            payment_intent_id,
-            payment_method=payment_method_id,
-        )
-        messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
+
+            
+            messages.success(request, 'Successfully paid?')
     
-    context = {
-        'form': log_form,
-    }
+            context = {
+                'form':log_form,
+            }
 
-    return render(request, 'account/login.html', context)
+            return render(request, 'account/login.html', context)
+        
+
+    else:
+        messages.info(request, 'payment page through payment view')
+        return render(request, 'member/payment.html')
 
 
-def payment_failed(request, e):
 
-    form = CustomSignupForm()
+# ORIGINAL VIEWS BELOW
 
-    messages.error(request, f'There was a problem with your payment. Please try again. Error: {e}')
 
-    context = {
-        'form':form,
-    }
+# def subscribe(request):
+#     # This view creates a payment intent..!
+#     """
+#     This view is activated from the 'Sign Up' button.
+#     """
 
-    return render(request, 'member/subscribe.html', context)
+   
+#     if request.method == 'POST':
+#         form = CustomSignupForm(request.POST)
+#         if form.is_valid():
+
+#         # creates and saves user attributes into the session
+#             user = form.save(request)
+#             user.first_name=get_fname(form)
+#             user.last_name=get_sname(form)
+#             # user.save()
+#             request.session['fullname'] = form.cleaned_data['fullname']
+#             request.session['email'] = form.cleaned_data['email']
+#             request.session['nursery'] = form.cleaned_data['nursery']
+#             request.session['phone'] = form.cleaned_data['phone']
+#             request.session['postcode'] = form.cleaned_data['postcode']
+#             request.session['street_address1'] = form.cleaned_data['street_address1']
+#             request.session['subscription'] = form.cleaned_data['subscription']
+#             request.session['town_or_city'] = form.cleaned_data['town_or_city']
+#             request.session['country'] = form.cleaned_data['country']
+
+#             plan =request.POST.get('subscription')
+
+#             if plan == 'Monthly':
+#                 spi = settings.STRIPE_PLAN_MONTHLY_ID
+#                 amount = '1000'
+#             elif plan == 'Six Monthly':
+#                 spi = settings.STRIPE_PLAN_SIXMONTHLY_ID
+#                 amount = '5500'
+#             else:
+#                 spi = settings.STRIPE_PLAN_YEARLY_ID
+#                 amount = '10000'
+
+#             automatic = True
+
+#         # creates the intent
+#             stripe.api_key = stripe_secret_key
+#             payment_intent = stripe.PaymentIntent.create(
+#                 amount=amount,
+#                 payment_method_types=['card'],
+#                 currency='GBP',
+#             )
+
+#             context = {
+#                 'customer_email': request.POST.get('email'),
+#                 'fullname': request.POST.get('fullname'),
+#                 'plan': plan,
+#                 'STRIPE_PUBLIC_KEY': stripe_public_key,
+#                 'secret_key': payment_intent.client_secret,
+#                 'payment_intent_id': payment_intent.id,
+#                 'automatic': automatic,
+#                 'stripe_plan_id': spi,
+#             }
+#             return render(request, 'member/payment.html', context)
+
+#         else:
+#             # form = CustomSignupForm(request.POST)
+#             messages.error(request, 'There was an error in the form. \
+#                 Please ensure the form has been correctly filled in.')
+            
+#             return redirect(reverse('subscribe'))
+#     else:
+#         form = CustomSignupForm()
+#         context = {
+#             'form': form,
+#             }
+#         return render(request, 'member/subscribe.html', context)
+
+
+# def card(request):
+#     """
+#     Processes payment from card view.
+#     """
+#     payment_intent_id = request.POST['payment_intent_id']
+#     payment_method_id = request.POST['payment_method_id']
+#     stripe_plan_id = request.POST['stripe_plan_id']
+#     automatic = request.POST['automatic']
+#     customer_email = request.POST['customer_email']
+#     stripe.api_key = stripe_secret_key
+#     log_form = LoginForm()
+
+#     # Automatic renewal for potential future development.
+#     if automatic:
+#         customer = stripe.Customer.create(
+#             email=customer_email,
+#             name=request.session['fullname'],
+#             payment_method=payment_method_id,
+#             invoice_settings={
+#                 'default_payment_method': payment_method_id
+#             }
+#         )
+#         sub = stripe.Subscription.create(
+#             customer=customer.id,
+#             items=[
+#                 {
+#                     'plan': stripe_plan_id
+#                 },
+#             ]
+#         )
+#         latest_invoice = stripe.Invoice.retrieve(sub.latest_invoice)
+#         # Generates an instance of the SPNA member once invoice is paid.
+#         if latest_invoice.paid:
+#             user = User.objects.get(email=request.session['email'])
+#             user.refresh_from_db()
+#             user.spnamember.subscription=request.session['subscription']
+#             user.spnamember.fullname=request.session['fullname']
+#             user.spnamember.phone=request.session['phone']
+#             user.spnamember.country=request.session['country']
+#             user.spnamember.postcode=request.session['postcode']
+#             user.spnamember.town_or_city=request.session['town_or_city']
+#             user.spnamember.street_address1=request.session['street_address1']
+#             user.spnamember.nursery=request.session['nursery']
+#             user.save()
+#             messages.success(request, f'Successfully created user {user.spnamember.fullname}.')
+    
+#             context = {
+#                 'form':log_form,
+#             }
+
+#             return render(request, 'account/login.html', context)
+#         # else:
+#         #     ret = stripe.PaymentIntent.confirm(
+#         #         latest_invoice.payment_intent,
+#         #     )
+#         #     # 3D Secure
+#         #     if ret.status == 'requires_action':
+#         #         intent = stripe.PaymentIntent.retrieve(
+#         #             latest_invoice.payment_intent
+#         #         )
+#         #         user = User.objects.get(email=request.session['email'])
+#         #         user.refresh_from_db()
+#         #         user.spnamember.subscription=request.session['subscription']
+#         #         user.spnamember.fullname=request.session['fullname']
+#         #         user.spnamember.phone=request.session['phone']
+#         #         user.spnamember.country=request.session['country']
+#         #         user.spnamember.postcode=request.session['postcode']
+#         #         user.spnamember.town_or_city=request.session['town_or_city']
+#         #         user.spnamember.street_address1=request.session['street_address1']
+#         #         user.spnamember.nursery=request.session['nursery']
+#         #         user.save()
+#         #         # messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
+                
+#         #         context = {
+#         #             'payment_intent_secret': intent.client_secret,
+#         #             'STRIPE_PUBLISHABLE_KEY': stripe_public_key,
+#         #         }
+           
+#         #         return render(request, 'member/3dsec.html', context)
+        
+#     else:
+#         stripe.PaymentIntent.modify(
+#             payment_intent_id,
+#             payment_method=payment_method_id,
+#         )
+#         messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
+    
+#     context = {
+#         'form': log_form,
+#     }
+
+#     return render(request, 'account/login.html', context)
+
+
+# def payment_failed(request, e):
+
+#     form = CustomSignupForm()
+
+#     messages.error(request, f'There was a problem with your payment. Please try again. Error: {e}')
+
+#     context = {
+#         'form':form,
+#     }
+
+#     return render(request, 'member/subscribe.html', context)

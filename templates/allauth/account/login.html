@@ -32,12 +32,12 @@
   <div class="row g-0 p-4 w-100">
     <div class="col-12 col-sm-10 p-1 p-sm-5 mx-auto my-auto text-center">
       <p>If you have not created an account yet, then please
-        <a href="{% url 'membership' %}">sign up</a> first.</p>
+        <a href="{% url 'subscribe' %}">sign up</a> first.</p>
       </div>
     </div>
 </section>
 
-<section id="signup-form-section" class="bg-ant-white">
+<section id="login-form-section" class="bg-ant-white">
   <div class="row g-0 p-1 p-sm-4 w-100">
     <div class="col-12 col-md-8 p-1 mx-auto my-auto">
       <form class="login" method="POST" action="{% url 'account_login' %}">

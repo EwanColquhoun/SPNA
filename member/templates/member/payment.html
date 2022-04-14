@@ -8,6 +8,9 @@
 {% block extra_js %}
 {{block.super}}
 <script type="text/javascript" src="{% static 'member/js/member.js' %}"></script>
+<script>
+    card('{{STRIPE_PUBLIC_KEY}}', '{{customer_email}}');
+</script>
 {% endblock extra_js %}
 
 {% block extra_title %}- Payment{% endblock %}
@@ -45,7 +48,7 @@
         <div class="col-12 col-md-10 mx-auto my-auto">
             <!-- need to display cost, stripe tag, other ui improvements -->
           <!-- stripe card element form -->
-            <form action="{% url 'card' %}" method="POST" class="bg-whitesmoke" id="payment-form">
+            <form action="{% url 'payment' %}" method="POST" class="bg-whitesmoke" id="payment-form">
                 {% csrf_token %}
                 <div id="card-element"><!--Stripe.js injects the Card Element--></div>
                 <p id="card-errors" role="alert"></p>
@@ -62,6 +65,10 @@
                     <span id="button-text">Pay now</span>
                 </button>
             </form>
+            <p class="result-message hidden">
+                Payment succeeded, see the result in your
+                <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+            </p>
         </div>
         <div id="loading-overlay" class="col-12 text-center">
             <h1 class="text-light logo-font loading-spinner">
@@ -74,7 +81,5 @@
 {% endblock %}
 {% block postloadjs %}
 {{block.super}}
-<script>
-    card('{{STRIPE_PUBLIC_KEY}}', '{{customer_email}}');
-</script>
+
 {% endblock %}
