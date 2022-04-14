@@ -292,7 +292,6 @@ def payment(request):
                     user.spnamember.street_address1=request.session['street_address1']
                     user.spnamember.nursery=request.session['nursery']
                     user.save()
-                    # messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
                     
                     context = {
                         'payment_intent_secret': intent.client_secret,

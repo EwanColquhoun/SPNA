@@ -5,6 +5,13 @@
     <link rel="stylesheet" type="text/css" href="{% static 'member/css/member.css' %}">
 {% endblock %}
 
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'member/js/3dsec.js' %}"></script>
+<script>
+  _3dsec('{{ STRIPE_PUBLISHABLE_KEY }}', '{{payment_intent_secret}}');
+</script>
+{% endblock %}
+
 {% block extra_title %}- 3D Secure{% endblock %}
 
 {% block page_header %}
