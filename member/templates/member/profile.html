@@ -59,9 +59,12 @@
                 <form action="{% url 'profile' %}" method="POST">
                     {% csrf_token%}
                     {{ form|crispy }}
-                    <div class="p-2">
-                        <button class="btn spna-btn" type="submit">Update</button>
-                        <a href="{% url 'account_email' %}" class="btn btn-success">Change Email</a>
+                    <div class="p-2 d-block d-md-flex justify-content-between">
+                        <button class="btn spna-btn m-1" type="submit">Update</button>
+                        <a href="{% url 'account_email' %}" class="btn btn-success m-1">Change Email</a>
+                        {% if request.user.spnamember.paid %}
+                        <a href="{% url 'cancel_subscription' %}" class="btn btn-danger m-1">Cancel Subscription</a>
+                        {% endif %}
                     </div>
                 </form>
             </div>

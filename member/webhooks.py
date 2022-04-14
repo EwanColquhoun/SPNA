@@ -46,6 +46,7 @@ def webhook(request):
 
     data = request_data['data']
     event_type = request_data['type']
+    print(event_type, 'TYPE')
 
     # data_object = data['object']
 

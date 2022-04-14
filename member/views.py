@@ -27,7 +27,7 @@ def member_area(request):
     """ 
     A view to return the members area
     """
-    if not request.user.spnamember.has_paid:
+    if not request.user.spnamember.paid:
         messages.error(request, "Sorry only SPNA Members can access this page.")
         return redirect(reverse('home'))
 
@@ -44,6 +44,10 @@ def profile_view(request):
     """
     A view to show the user profile.
     """
+    if not request.user.spnamember.paid:
+        messages.error(request, "Sorry only SPNA Members can access this page.")
+        return redirect(reverse('home'))
+
     member = get_object_or_404(SPNAMember, user=request.user)
 
     if request.method == 'POST':
@@ -61,6 +65,21 @@ def profile_view(request):
     }
 
     return render(request, template, context)
+
+
+def cancel_subscription(request):
+    try:
+        stripe.api_key = stripe_secret_key
+        sub = request.user.spnamember.sub_id
+        stripe.Subscription.delete(sub)
+
+        # customer.cancel_subscription(at_period_end=True)
+        request.user.spnamember.paid = False
+        messages.success(request, f'Your subscription will end at the end of the next billing period: {request.user.spnamember.paid_until}.')
+    except Exception as e:
+        messages.error(request, f'There has been an error. Please contact the SPNA. Error={e}.')
+
+    return render(request, 'home/index.html')
 
 
 
@@ -109,7 +128,6 @@ def subscribe(request):
     if request.method == 'POST':
         form = CustomSignupForm(request.POST)
         if form.is_valid():
-            
         # creates and saves user attributes into the session
             user = form.save(request)
             user.save()
@@ -166,7 +184,6 @@ def subscribe(request):
             
             return redirect(reverse('subscribe'))
     else:
-        # messages.error(request, 'TESTING')
         form = CustomSignupForm()
         context = {
             'form': form,
@@ -193,26 +210,37 @@ def payment(request):
     log_form = LoginForm()
 
     if request.method == 'POST':
+        try:
 
-        # # Automatic renewal for potential future development.
-    
-        customer = stripe.Customer.create(
-            email=customer_email,
-            name=request.session['fullname'],
-            payment_method=payment_method_id,
-            invoice_settings={
-                'default_payment_method': payment_method_id
-            }
-        )
-        print(customer, 'customer')
-        sub = stripe.Subscription.create(
-            customer=customer.id,
-            items=[
-                {
-                    'plan': stripe_plan_id
-                },
-            ]
-        )
+            # # Automatic renewal for potential future development.
+        
+            customer = stripe.Customer.create(
+                email=customer_email,
+                name=request.session['fullname'],
+                payment_method=payment_method_id,
+                invoice_settings={
+                    'default_payment_method': payment_method_id
+                }
+            )
+            print(customer, 'customer')
+            sub = stripe.Subscription.create(
+                customer=customer.id,
+                items=[
+                    {
+                        'plan': stripe_plan_id
+                    },
+                ],
+                cancel_at_period_end = True,
+            )
+        except stripe.error.CardError as e:
+            print('ERROR', e)
+
+        except stripe.error.StripeError as e:
+            # Display a very generic error to the user, and maybe send
+            # yourself an email
+            print('ERROR', e)
+            
+
         latest_invoice = stripe.Invoice.retrieve(sub.latest_invoice)
         # Generates an instance of the SPNA member once invoice is paid.
         if latest_invoice.paid:
@@ -221,6 +249,8 @@ def payment(request):
             user.refresh_from_db()
             user.first_name=get_fname(fn)
             user.last_name=get_sname(fn)
+            user.spnamember.sub_id=sub.id
+            user.spnamember.stripe_id=customer.id
             user.spnamember.subscription=request.session['subscription']
             user.spnamember.fullname=request.session['fullname']
             user.spnamember.phone=request.session['phone']
@@ -239,51 +269,52 @@ def payment(request):
             return render(request, 'account/login.html', context)
         
         else:
-            ret = stripe.PaymentIntent.confirm(
-                latest_invoice.payment_intent,
-            )
-            # 3D Secure
-            if ret.status == 'requires_action':
-                intent = stripe.PaymentIntent.retrieve(
-                    latest_invoice.payment_intent
+            try:
+                ret = stripe.PaymentIntent.confirm(
+                    latest_invoice.payment_intent,
                 )
-                user = User.objects.get(email=request.session['email'])
-                user.refresh_from_db()
-                fn = request.session['fullname']
-                user.first_name=get_fname(fn)
-                user.last_name=get_sname(fn)
-                user.spnamember.subscription=request.session['subscription']
-                user.spnamember.fullname=request.session['fullname']
-                user.spnamember.phone=request.session['phone']
-                user.spnamember.country=request.session['country']
-                user.spnamember.postcode=request.session['postcode']
-                user.spnamember.town_or_city=request.session['town_or_city']
-                user.spnamember.street_address1=request.session['street_address1']
-                user.spnamember.nursery=request.session['nursery']
-                user.save()
-                # messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
-                
-                context = {
-                    'payment_intent_secret': intent.client_secret,
-                    'STRIPE_PUBLISHABLE_KEY': stripe_public_key,
-                }
-           
-                return render(request, 'member/3dsec.html', context)
-
+                # 3D Secure
+                if ret.status == 'requires_action':
+                    intent = stripe.PaymentIntent.retrieve(
+                        latest_invoice.payment_intent
+                    )
+                    user = User.objects.get(email=request.session['email'])
+                    user.refresh_from_db()
+                    fn = request.session['fullname']
+                    user.first_name=get_fname(fn)
+                    user.last_name=get_sname(fn)
+                    user.spnamember.subscription=request.session['subscription']
+                    user.spnamember.fullname=request.session['fullname']
+                    user.spnamember.phone=request.session['phone']
+                    user.spnamember.country=request.session['country']
+                    user.spnamember.postcode=request.session['postcode']
+                    user.spnamember.town_or_city=request.session['town_or_city']
+                    user.spnamember.street_address1=request.session['street_address1']
+                    user.spnamember.nursery=request.session['nursery']
+                    user.save()
+                    # messages.success(request, f'Successfully created User {user.spnamember.fullname}.')
+                    
+                    context = {
+                        'payment_intent_secret': intent.client_secret,
+                        'STRIPE_PUBLISHABLE_KEY': stripe_public_key,
+                    }
             
-            messages.success(request, 'Successfully paid?')
-    
-            context = {
-                'form':log_form,
-            }
+                    return render(request, 'member/3dsec.html', context)
+            except stripe.error.StripeError as e:
+                messages.warning(request, 'The card was declined. Please try again.')
+                return redirect('subscribe')
 
-            return render(request, 'account/login.html', context)
+
+        context = {
+            'form':log_form,
+        }
+
+        return render(request, 'account/login.html', context)
         
 
     else:
         messages.info(request, 'payment page through payment view')
         return render(request, 'member/payment.html')
-
 
 
 # ORIGINAL VIEWS BELOW

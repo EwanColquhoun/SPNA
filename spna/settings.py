@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-_ylo1*@ojc-7wbhp(ys6d+x^79x(n)$=8++s=-w99-6b5t=*g4
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu39b.gitpod.io']
-CSRF_TRUSTED_ORIGINS = ["https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu39b.gitpod.io"]
+CSRF_TRUSTED_ORIGINS = ["https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu40.gitpod.io"]
 
 SITE_ID = 1
 
@@ -40,7 +40,7 @@ SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'

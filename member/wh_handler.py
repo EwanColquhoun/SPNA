@@ -42,4 +42,4 @@ def set_paid_until(request, charge):
         user.spnamember.has_paid(current_date=datetime.date.today())
    
     else:
-        pass
+        messages.error(request, 'No customer with this payment intent exists. Please contact Admin.')

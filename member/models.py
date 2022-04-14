@@ -62,6 +62,8 @@ class SPNAMember(models.Model):
     subscription = models.CharField(max_length=16, choices=PLAN, default=1, null=False, blank=False)
     paid_until = models.DateField(null=True, blank=True)
     paid = models.BooleanField(null=True, blank=True, default=False)
+    stripe_id = models.CharField(max_length=255)
+    sub_id = models.CharField(max_length=255)
     objects = UserManager()
 
     def __str__(self):

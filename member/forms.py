@@ -1,6 +1,7 @@
 from django import forms
 from django_countries import countries
 from django_summernote.widgets import SummernoteWidget
+from django.core.exceptions import NON_FIELD_ERRORS
 
 from allauth.account.forms import SignupForm
 from .models import Document, SPNAMember
@@ -61,7 +62,8 @@ class CustomSignupForm(SignupForm):
         'password2',
     ]
 
-    
+  
+
     def save(self, request):
 
         # Ensure you call the parent class's save.
@@ -84,7 +86,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = SPNAMember
-        exclude = ('user', 'subscription', 'paid_until')
+        exclude = ('user', 'subscription', 'paid_until', 'paid', 'stripe_id', 'sub_id')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

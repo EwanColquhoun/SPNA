@@ -90,9 +90,11 @@
                                         <a id="contact-button" data-bs-toggle="modal" data-bs-target="#myModal" href="#myModal">Contact</a>
                                     </li>
                                     {% if request.user.is_authenticated %}
+                                        {% if request.user.spnamember.paid %}
                                         <li class="nav-item">
                                             <a href="{% url 'member_area' %}">Members Area</a>
                                         </li>
+                                        {% endif %}
                                     {% endif %}
                                     {% if request.user.is_authenticated %}
                                         {% if request.user.is_superuser %}
