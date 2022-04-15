@@ -55,6 +55,12 @@
     transition: 500ms;
 }
 
+/* ----------Profile page-------------- */
+
+#profile-body-section li {
+ list-style-type: none;
+}
+
 /* ----------Payments page------------- */
 
 #payment-body-section {

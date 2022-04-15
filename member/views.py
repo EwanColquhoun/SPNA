@@ -4,6 +4,7 @@ from datetime import datetime
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.conf import settings
@@ -62,12 +63,17 @@ def profile_view(request):
     context = {
         'form': form,
         'member': member,
+        'STRIPE_PUBLIC_KEY': stripe_public_key,
     }
 
     return render(request, template, context)
 
 
+@require_POST
 def cancel_subscription(request):
+    """
+    A view to cancel the logged in user's subscription.
+    """
     try:
         stripe.api_key = stripe_secret_key
         sub = request.user.spnamember.sub_id
@@ -82,6 +88,36 @@ def cancel_subscription(request):
     return render(request, 'home/index.html')
 
 
+@require_POST
+def update_payment_method(request):
+    """
+    A view to update the logged in users default payment method.
+    """
+
+    try:
+        new_pm = request.POST['payment_method_id']
+        cus = request.user.spnamember.stripe_id
+        sub = request.user.spnamember.sub_id
+
+        stripe.api_key = stripe_secret_key
+        stripe.PaymentMethod.attach(new_pm, customer=cus,)
+        
+        stripe.Customer.modify(cus, invoice_settings={"default_payment_method": new_pm},)
+
+        print(new_pm, 'new payment method')
+        print(cus, 'cus')
+
+        stripe.Subscription.modify(sub, default_payment_method=new_pm)
+
+        messages.success(request, 'Your card details have been updated for the next payment.')
+        return redirect(reverse('profile'))
+
+    except Exception as e:
+        messages.error(request, f'There has been an error. Please contact the SPNA. Error={e}.')
+        return redirect(reverse('profile'))
+    
+
+
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
@@ -93,21 +129,6 @@ def delete_document(request, document_id):
     doc.delete()
     messages.success(request, 'Document deleted successfully!')
     return HttpResponseRedirect(reverse('member_area'))
-
-
-# A trial to get it to work with stripe payments below.
-# @csrf_protect
-# def membership(request):
-#     """
-#     a signup form view
-#     """
-#     form = CustomSignupForm()
-
-#     context = {
-#         'form': form,
-#     }
-
-#     return render(request, 'member/subscribe.html', context)
 
 
 def secure(request):

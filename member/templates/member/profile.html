@@ -5,6 +5,14 @@
     <link rel="stylesheet" type="text/css" href="{% static 'member/css/member.css' %}">
 {% endblock %}
 
+{% block extra_js %}
+{{block.super}}
+<script type="text/javascript" src="{% static 'member/js/profile.js' %}"></script>
+<script>
+    cardUpdate('{{STRIPE_PUBLIC_KEY}}', '{{member.user.email}}');
+</script>
+{% endblock extra_js %}
+
 {% block extra_title %}- Profile{% endblock %}
 
 {% block page_header %}
@@ -40,7 +48,7 @@
             <hr class="d-block p-1 mx-auto admin-hr">
 
             <div class="col-12 col-md-6 col-lg-5 p-2 mx-auto">
-                <h3>Current Details</h3>
+                <h3>Current details</h3>
                 <div>
                     <ul>
                         <li>Nursery:        {{member.nursery}}</li>
@@ -51,14 +59,31 @@
                         <li>Phone:          {{member.phone}}</li>
                         <li>Subscription:   {{member.subscription}}</li>
                         <li>Renewal date:   {{member.paid_until}}</li>
+                        <li>   {{member.stripe_id}}</li>
                     </ul>
+                </div>
+                <div class="mt-3 my-auto">
+                    <h3>Update payment details</h3>
+                    <form id="update-payment-form" action="{% url 'update_payment_method' %}" method="post">
+                        {% csrf_token %}
+                        <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+                        <button id="submit-updated-payment" class="btn spna-btn mt-3">
+                            <div class="spinner hidden" id="spinner"></div>
+                            <span id="button-text" class="">Update</span>
+                        </button>
+                        <p id="card-error" role="alert"></p>
+                        <p class="result-message hidden">
+                            Update succeeded, new card will be used in the next billing cycle.
+                        </p>
+                    </form>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-5 p-2 mx-auto">
                 <h3>Update your details</h3>
                 <form action="{% url 'profile' %}" method="POST">
-                    {% csrf_token%}
+                    {% csrf_token %}
                     {{ form|crispy }}
+
                     <div class="p-2 d-block d-md-flex justify-content-between">
                         <button class="btn spna-btn m-1" type="submit">Update</button>
                         <a href="{% url 'account_email' %}" class="btn btn-success m-1">Change Email</a>
