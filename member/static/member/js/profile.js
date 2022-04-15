@@ -10,7 +10,8 @@ function cardUpdate(stripe_publishable_key, customer_email) {
             fontSize: '16px',
             '::placeholder': {
                 color: '#aab7c4'
-            }
+            },
+            border: "1px solid #ced4da"
         },
         invalid: {
             color: '#dc3545',
@@ -47,8 +48,6 @@ function cardUpdate(stripe_publishable_key, customer_email) {
           var errorElement = document.getElementById('card-errors');
           errorElement.textContent = result.error.message;
         } else {
-            // let spinner = document.getElementById('loading-overlay')
-            // spinner.style.display = 'block'
             let pm = stripe.createPaymentMethod({
             type: 'card',
             card: card,
@@ -76,7 +75,7 @@ function cardUpdate(stripe_publishable_key, customer_email) {
                 form.submit();
             };
             });
-          }  // Create Payment Method END
+          }
         })
     });
     });

@@ -57,6 +57,14 @@ def profile_view(request):
             form.save()
             messages.success(request, 'Profile updated successfully')
 
+    cus = request.user.spnamember.stripe_id
+    sub = request.user.spnamember.sub_id
+
+    stripe.api_key = stripe_secret_key
+    pm = stripe.Customer.list_payment_methods(cus, type="card",)
+    print(pm)
+    default_pm = pm.data[0].card    
+
     form = ProfileForm(instance=member)
 
     template = 'member/profile.html'
@@ -64,6 +72,7 @@ def profile_view(request):
         'form': form,
         'member': member,
         'STRIPE_PUBLIC_KEY': stripe_public_key,
+        'pm': default_pm,
     }
 
     return render(request, template, context)
