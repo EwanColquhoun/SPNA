@@ -93,7 +93,9 @@
                             #### #### #### {{pm.last4}} <br>
                             Expiry:{{pm.exp_month}}/{{pm.exp_year}}</p>
                     </div>
-                    <h3>Update payment details</h3>
+                    <div>
+                        <h3>Update payment details</h3>
+                    </div>
                     <form id="update-payment-form" action="{% url 'update_payment_method' %}" method="post">
                         {% csrf_token %}
                         <div id="card-element"><!--Stripe.js injects the Card Element--></div>
@@ -101,6 +103,9 @@
                             <div class="spinner hidden" id="spinner"></div>
                             <span id="button-text" class="">Update</span>
                         </button>
+                        <div>
+                            <p class="text-muted">Payments verified using  <a href="https://stripe.com/gb" target="_blank"><img class="d-inline-block" src="{{ spna }}/media/stripe/stripe-logo-small.png" width="100px"alt="Stripe logo small"></img></a>
+                        </div>
                         <p id="card-error" role="alert"></p>
                         <p class="result-message hidden">
                             Update succeeded, new card will be used in the next billing cycle.
