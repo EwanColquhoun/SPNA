@@ -11,7 +11,6 @@ function cardUpdate(stripe_publishable_key, customer_email) {
             '::placeholder': {
                 color: '#aab7c4'
             },
-            border: "1px solid #ced4da"
         },
         invalid: {
             color: '#dc3545',

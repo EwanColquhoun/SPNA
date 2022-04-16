@@ -3,7 +3,7 @@ from django.views import generic
 from django.contrib import messages
 from .models import Articles
 from .forms import ArticleForm
-
+from contact.forms import ContactForm
 
 class ArticleList(generic.ListView):
     """
@@ -31,7 +31,10 @@ class ArticleList(generic.ListView):
 def initiatives_view(request):
     """A view to return initiatives page """
     
+    form = ContactForm()
     template = 'news/initiatives.html'
-    context = {}
+    context = {
+        'contact_form':form
+    }
 
     return render(request, template, context)

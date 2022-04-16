@@ -36,7 +36,7 @@ function card(stripe_publishable_key, customer_email) {
             fontSize: '16px',
             '::placeholder': {
                 color: '#aab7c4'
-            }
+            },
         },
         invalid: {
             color: '#dc3545',

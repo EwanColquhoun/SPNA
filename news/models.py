@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import UserManager
 
 class Articles(models.Model):
     """
@@ -16,6 +16,7 @@ class Articles(models.Model):
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     campaign = models.BooleanField(default=False, null=True, blank=True)
+    objects = UserManager()
 
     def __str__(self):
         return str(self.title)

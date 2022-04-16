@@ -50,7 +50,7 @@
                                 <th>Nursery</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Date Joined</th>
+                                <th>Expiry Date</th>
                                 <th>All <input id="members-select-all" type="checkbox" ></th>
                             </tr>
                             {% for user in users %}
@@ -67,7 +67,7 @@
                                         {{user.spnamember.phone|truncatechars:5}}
                                     </button>
                                 </td>
-                                <td>{{user.date_joined|date:"d M y" }}</td>
+                                <td>{% if user.spnamember.paid %}{{user.spnamember.paid_until|date:"d M y" }}{% else %}Expired{% endif %}</td>
                                 <td><input type="checkbox" id="select" class="member-select-box select-box" name="email" value="{{user.email}}"></td>
 
                             </tr>

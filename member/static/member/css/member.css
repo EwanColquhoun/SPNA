@@ -57,14 +57,62 @@
 
 /* ----------Profile page-------------- */
 
-#profile-body-section li {
- list-style-type: none;
+#update-payment-form #card-element {
+  border: 1px solid #ced4da;
+  border-radius: 4px 4px 0 0 ;
+  padding: 12px;
+  height: 44px;
+  width: 100%;
+  background: white;
+}
+
+#current-details-table {
+  table-layout:fixed;
+  width:100%;
+}
+
+#current-details-table tr {
+  border: 1px solid #ced4da;
+  border-radius: 4px 4px 0 0 ;
+  padding: 12px;
+  height: 44px;
+  width: 100%;
+  background: white;
+}
+
+/* #payment-table td {
+  padding: 5px;
+  overflow: auto;
+  text-align: left;
+  width: 30vw;
+} */
+
+.mw-50 {
+  width: 140px;
+}
+
+.black-text {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
 }
 
 /* ----------Payments page------------- */
 
 #payment-body-section {
   height: 100vh;
+}
+
+#payment-table {
+  width: 30vw;
+  min-width: 500px;
+  align-self: center;
+  box-shadow: 0px 0px 0px 0.5px rgb(50 50 93 / 10%), 0px 2px 5px 0px rgb(50 50 93 / 10%), 0px 1px 1.5px 0px rgb(0 0 0 / 7%);
+  border-radius: 7px;
+  padding: 40px;
+  margin: inherit;
+  table-layout:auto;
 }
 
 .current-card {
@@ -83,16 +131,6 @@
   border-radius: 0.25rem;
 }
 
-#update-payment-form #card-element {
-  border: 1px solid #ced4da;
-  border-radius: 4px 4px 0 0 ;
-  padding: 12px;
-  height: 44px;
-  width: 100%;
-  background: white;
-}
-
-
 
 /* ----------3d secure page------------- */
 #join-body-section {
@@ -105,68 +143,68 @@
     box-sizing: border-box;
   }
   
-  #payment-form {
-    width: 30vw;
-    min-width: 500px;
-    align-self: center;
-    box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
-      0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
-    border-radius: 7px;
-    padding: 40px;
-    margin: inherit;
-  }
-  
-  #payment-form input {
-    border-radius: 6px;
-    margin-bottom: 6px;
-    padding: 12px;
-    border: 1px solid rgba(50, 50, 93, 0.1);
-    height: 44px;
-    font-size: 16px;
-    width: 100%;
-    background: white;
-  }
-
-  .payment-variables {
-    box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
+#payment-form {
+  width: 30vw;
+  min-width: 500px;
+  align-self: center;
+  box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
     0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
-    border-radius: 5px;
-    background: whitesmoke;
-    font-size: larger;
-  }
-  
-  .result-message {
-    line-height: 22px;
-    font-size: 16px;
-  }
-  
-  .result-message a {
-    color: #37698e;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  #card-error {
-    color: rgb(105, 115, 134);
-    text-align: left;
-    font-size: 13px;
-    line-height: 17px;
-    margin-top: 12px;
-  }
-  
-  #paymentform #card-element {
-    border-radius: 4px 4px 0 0 ;
-    padding: 12px;
-    border: 1px solid rgba(50, 50, 93, 0.1);
-    height: 44px;
-    width: 100%;
-    background: white;
-  }
-  
+  border-radius: 7px;
+  padding: 40px;
+  margin: inherit;
+}
+
+#payment-form input {
+  border-radius: 6px;
+  margin-bottom: 6px;
+  padding: 12px;
+  border: 1px solid rgba(50, 50, 93, 0.1);
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  background: white;
+}
+
+.payment-variables {
+  box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
+  0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+  border-radius: 5px;
+  background: whitesmoke;
+  font-size: larger;
+}
+
+.result-message {
+  line-height: 22px;
+  font-size: 16px;
+}
+
+.result-message a {
+  color: #37698e;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hidden {
+  display: none;
+}
+
+#card-error {
+  color: rgb(105, 115, 134);
+  text-align: left;
+  font-size: 13px;
+  line-height: 17px;
+  margin-top: 12px;
+}
+
+#paymentform #card-element {
+  border-radius: 4px 4px 0 0 ;
+  padding: 12px;
+  border: 1px solid rgba(50, 50, 93, 0.1);
+  height: 44px;
+  width: 100%;
+  background: white;
+}
+
   /* spinner/processing state, errors */
 .spinner,
 .spinner:before,
@@ -266,8 +304,10 @@
   
 
 @media only screen and (max-width: 600px) {
-    #payment-form {
+    #payment-form, 
+    #payment-table {
       min-width: -webkit-fill-available;
+      padding: 5px;
     }
   }
  

@@ -42,10 +42,23 @@
 <section id="payment-body-section" class="bg-ant-white text-blue">
     <div class="row g-0 w-100 pb-5">
         <div class="col-12 col-md-10 mx-auto my-auto text-center pt-3">
-            <p>Payment for account email: <span class="payment-variables">{{customer_email}}.</span></p>
-            <p>Total to be charged will be <span class="payment-variables bold">{% if plan == 'Monthly' %} £10{% elif plan == 'Six Monthly' %} £55{% else %} £100{% endif %}.</span></p>
+            <h2>Confirm Subscription Details</h2>
+            <table id="payment-table" class="bg-whitesmoke mt-3">
+                <tr>
+                    <td class="p-1 overflow-auto text-left">Plan:</td>
+                    <td class="black-text p-1 overflow-auto">{% if plan == 'Monthly' %} £10 Monthly{% elif plan == 'Six Monthly' %} £55 Every 6 months{% else %} £100 Yearly{% endif %}.</td>
+                </tr>
+                <tr>
+                    <td class="p-1 overflow-auto text-left">Fullname:</td>
+                    <td class="black-text p-1 overflow-auto">{{fullname}}</td>
+                </tr>   
+                <tr>
+                    <td class="p-1 overflow-auto text-left">Email:</td>
+                    <td class="black-text p-1 overflow-auto">{{customer_email}}</td>
+                </tr>              
+            </table>
         </div>
-        <div class="col-12 col-md-10 mx-auto my-auto">
+        <div class="col-12 col-md-10 mx-auto mt-3">
             <!-- need to display cost, stripe tag, other ui improvements -->
           <!-- stripe card element form -->
             <form action="{% url 'payment' %}" method="POST" class="bg-whitesmoke" id="payment-form">
@@ -60,7 +73,7 @@
                 <input type="hidden" id="customer_email" value="{{customer_email}}" name="customer_email">
                 <input type="hidden" id="automatic" value="{{automatic}}" name="automatic">
                 <input type="hidden" id="fullname" value="{{fullname}}" name="fullname">
-                <button id="submit-button">
+                <button id="submit-button" class="btn spna-btn">
                     <div class="spinner hidden" id="spinner"></div>
                     <span id="button-text">Pay now</span>
                 </button>

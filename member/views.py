@@ -50,6 +50,7 @@ def profile_view(request):
         return redirect(reverse('home'))
 
     member = get_object_or_404(SPNAMember, user=request.user)
+    default_pm = ''
 
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=member)
@@ -57,13 +58,13 @@ def profile_view(request):
             form.save()
             messages.success(request, 'Profile updated successfully')
 
-    cus = request.user.spnamember.stripe_id
-    sub = request.user.spnamember.sub_id
-
-    stripe.api_key = stripe_secret_key
-    pm = stripe.Customer.list_payment_methods(cus, type="card",)
-    print(pm)
-    default_pm = pm.data[0].card    
+    if not request.user.is_superuser:
+        cus = request.user.spnamember.stripe_id
+        sub = request.user.spnamember.sub_id
+        stripe.api_key = stripe_secret_key
+        pm = stripe.Customer.list_payment_methods(cus, type="card",)
+        print(pm)
+        default_pm = pm.data[0].card    
 
     form = ProfileForm(instance=member)
 
@@ -122,7 +123,7 @@ def update_payment_method(request):
         return redirect(reverse('profile'))
 
     except Exception as e:
-        messages.error(request, f'There has been an error. Please contact the SPNA. Error={e}.')
+        messages.error(request, 'Card declined. Please check the details and try again.')
         return redirect(reverse('profile'))
     
 

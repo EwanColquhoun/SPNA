@@ -16,5 +16,5 @@ def post_contact(request):
         messages.success(request, "Contact form submitted, we will be intouch shortly. Thank you.")
         contact_email(contactform.instance)
     else:
-        messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+        messages.error(request, 'Failed to send. Please try again.')
     return redirect(reverse('home'))

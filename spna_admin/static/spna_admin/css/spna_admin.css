@@ -39,12 +39,14 @@
 
 .base-table {
     width: 100%;
+    table-layout:fixed;
 }
 
 .base-table,
 .base-table td,
 .base-table th {
     border: 1px solid lightslategray;
+    overflow: auto;
 }
 
 .email-tt {
