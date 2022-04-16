@@ -27,6 +27,9 @@ ul {
 
 /* ------------------------------ Base */
 
+.header-container {
+    padding-top: 50px;
+}
 
 .overlay {
     position: absolute;
@@ -441,7 +444,7 @@ footer a {
     }
 
     .header-container {
-        padding-top: 140px;
+        padding-top: 100px;
     }
 }
 
@@ -456,14 +459,28 @@ footer a {
         width: 100%;
     }
 
-    #login-title-section .title-text,
+    /* #login-title-section .title-text,
     #logout-title-section .title-text,
     #email-title-section .title-text,
     #reset-title-section .title-text,
-    #join-title-section .title-text {
+    #join-title-section .title-text,
+    #about-title,
+    #hero-text, */
+    .title-text {
     position: absolute;
     top: 32%;
     left: 10%;
+    font-size: xx-large;
+    }
+
+    .sub-title,
+    #quote-section span {
+        font-size: smaller;
+    }
+    
+    #camp-row .sub-title {
+    font-size: x-large;
+    padding-top: 50px;
 }
 }
 
