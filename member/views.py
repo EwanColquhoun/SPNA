@@ -342,8 +342,11 @@ def payment(request):
         
 
     else:
-        messages.info(request, 'payment page through payment view')
-        return render(request, 'member/payment.html')
+        form = CustomSignupForm()
+        context = {
+            'form': form,
+            }
+        return render(request, 'member/subscribe.html', context)
 
 
 # ORIGINAL VIEWS BELOW

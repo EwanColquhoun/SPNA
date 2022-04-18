@@ -20,9 +20,6 @@ delete_buttons.forEach((button) => {
 // stripe
 function card(stripe_publishable_key, customer_email) {
     document.addEventListener("DOMContentLoaded", function(event){
-    // var stripePublicKey = document.querySelector('#stripe_public_key').value;
-    // var customer_email = document.querySelector('#customer_email').value;
-    // var form = document.getElementById('payment-form');
     let cS = document.getElementById('client_secret');
     let clientSecret = cS.getAttribute('value')
     var stripe = Stripe(stripe_publishable_key);
@@ -55,7 +52,7 @@ function card(stripe_publishable_key, customer_email) {
                 </span>
                 <span>${event.error.message}</span>
             `;
-            $(errorDiv).html(html);
+            errorDiv.innerHtml(html);
         } else {
             errorDiv.textContent = '';
         }
@@ -70,8 +67,8 @@ function card(stripe_publishable_key, customer_email) {
           var errorElement = document.getElementById('card-errors');
           errorElement.textContent = result.error.message;
         } else {
-            let spinner = document.getElementById('loading-overlay')
-            spinner.style.display = 'block'
+            let spinner = document.getElementById('loading-overlay');
+            spinner.style.display = 'block';
             stripe.createPaymentMethod({
                 type: 'card',
                 card: card,
@@ -80,7 +77,7 @@ function card(stripe_publishable_key, customer_email) {
             },
             }).then(function(payment_method_result){ 
             if (payment_method_result.error) {
-                spinner.style.display = 'none'
+                spinner.style.display = 'none';
 
                 var errorElement = document.getElementById('card-errors');
                 errorElement.textContent = payment_method_result.error.message;
@@ -95,81 +92,81 @@ function card(stripe_publishable_key, customer_email) {
                 form.appendChild(hiddenInput);
                 // Submit the form
                 form.submit();
-                payWithCard();
-            };
+                // payWithCard(stripe, card, clientSecret);
+            }
             });
               // Create Payment Method END
         }
-      })
+      });
     });
     });
-};
+}
 
 
-var payWithCard = function(stripe, card, clientSecret) {
-  loading(true);
-  stripe
-    .confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: card
-      },
-      billing_details: {
-                    email: customer_email,
-                    name: fullname,
-                },
-    })
-    .then(function(result) {
-      if (result.error) {
-        spinner.style.display = 'none'
-        // Show error to your customer
-        showError(result.error.message);
-      } else {
-        // The payment succeeded!
-        orderComplete();
-      }
-    });
-};
+// var payWithCard = function(stripe, card, clientSecret) {
+//   loading(true);
+//   stripe
+//     .confirmCardPayment(clientSecret, {
+//       payment_method: {
+//         card: card
+//       },
+//       billing_details: {
+//                     email: customer_email,
+//                     name: fullname,
+//                 },
+//     })
+//     .then(function(result) {
+//       if (result.error) {
+//         spinner.style.display = 'none'
+//         // Show error to your customer
+//         showError(result.error.message);
+//       } else {
+//         // The payment succeeded!
+//         orderComplete();
+//       }
+//     });
+// };
 
 /* ------- UI helpers ------- */
 
 // Shows a success message when the payment is complete
-var orderComplete = function() {
-    loading(false);
-    spinner.style.display = 'none'
-    document.querySelector("#submit-button").disabled = true;
-    // window.location.assign("https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu39b.gitpod.io/accounts/login/")
-    customAlert = document.createElement('div')
-    customAlert.setAttribute('class', 'alert alert-success alert-dismissible fade show')
-    customAlert.innerHTML = `
-        Thank you for your payment. Please visit the members area for more information.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`
-    document.appendChild(customAlert)
+// var orderComplete = function() {
+//     loading(false);
+//     spinner.style.display = 'none'
+//     document.querySelector("#submit-button").disabled = true;
+//     // window.location.assign("https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu39b.gitpod.io/accounts/login/")
+//     customAlert = document.createElement('div')
+//     customAlert.setAttribute('class', 'alert alert-success alert-dismissible fade show')
+//     customAlert.innerHTML = `
+//         Thank you for your payment. Please visit the members area for more information.
+//         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`
+//     document.appendChild(customAlert)
     
-};
+// };
 
 // Show the customer the error from Stripe if their card fails to charge
-var showError = function(errorMsgText) {
-  loading(false);
-  var errorMsg = document.querySelector("#card-error");
-  errorMsg.textContent = errorMsgText;
-  setTimeout(function() {
-    errorMsg.textContent = "";
-  }, 4000);
-};
+// var showError = function(errorMsgText) {
+//   loading(false);
+//   var errorMsg = document.querySelector("#card-error");
+//   errorMsg.textContent = errorMsgText;
+//   setTimeout(function() {
+//     errorMsg.textContent = "";
+//   }, 4000);
+// };
 
 // Show a spinner on payment submission
-var loading = function(isLoading) {
-  if (isLoading) {
-    // Disable the button and show a spinner
-    document.querySelector("button").disabled = true;
-    document.querySelector("#spinner").classList.remove("hidden");
-    document.querySelector("#button-text").classList.add("hidden");
-  } else {
-    document.querySelector("button").disabled = false;
-    document.querySelector("#spinner").classList.add("hidden");
-    document.querySelector("#button-text").classList.remove("hidden");
-  }
-};
+// var loading = function(isLoading) {
+//   if (isLoading) {
+//     // Disable the button and show a spinner
+//     document.querySelector("button").disabled = true;
+//     document.querySelector("#spinner").classList.remove("hidden");
+//     document.querySelector("#button-text").classList.add("hidden");
+//   } else {
+//     document.querySelector("button").disabled = false;
+//     document.querySelector("#spinner").classList.add("hidden");
+//     document.querySelector("#button-text").classList.remove("hidden");
+//   }
+// };
 
 // Stripe token handler
 // function stripeTokenHandler(token) {
