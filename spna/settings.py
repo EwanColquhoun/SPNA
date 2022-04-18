@@ -62,7 +62,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'django_summernote',
     'django_countries',
-    'django_storages',
+    'storages',
     'crispy_forms',
 
     # custom
