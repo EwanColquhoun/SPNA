@@ -77,7 +77,7 @@
                             <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button w-100">
                                 <div id="news-image-holder">
                                     {% if not article.image %}
-                                    <div class="image-holder" style="background-image: url({{spna}}/media/original/cropped-SPNA_logo_icon.png)">
+                                    <div class="image-holder" style="background-image: url({{ MEDIA_URL }}original/cropped-SPNA_logo_icon.png)">
                                     </div>
                                     {% else %}
                                     <div class="image-holder" style="background-image: url({{ article.image.url }})">

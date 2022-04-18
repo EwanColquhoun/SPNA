@@ -46,7 +46,7 @@
                 <div id="topnav" class="row pt-lg-2 d-none d-lg-flex g-0">
                     <div class="col-12 col-md-8 mx-auto my-auto py-1 py-lg-0">
                         <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                            <img src="media/logo.png" alt="SPNA Logo">
+                            <img src="{{ MEDIA_URL }}logo.png" alt="SPNA Logo">
                         </a>
                     </div>
 
@@ -65,7 +65,7 @@
                     <div class="col-12 col-lg-12 mx-auto">
                         <nav class="navbar navbar-expand-lg my-auto bg-blue h-100 w-100" id="navbarNav">
                             <div class="d-lg-none">
-                                <span><a href="{% url 'home' %}"><img src="media/logo.png" alt="SPNA Logo"></a>
+                                <span><a href="{% url 'home' %}"><img src="{{ MEDIA_URL }}logo.png" alt="SPNA Logo"></a>
                                 </span>
                             </div>
                             <button id="navbar-button" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -229,7 +229,7 @@
                 <div id="footer-row" class="row g-0">
                     <div class="col-12 col-lg-8">
                         <div class="d-none d-lg-inline-block">
-                            <img class="pl-3" src="media/original/cropped-SPNA_logo_icon.png" width="100px" height="100px" alt="Cropped SPNA logo">
+                            <img class="pl-3" src="{{ MEDIA_URL }}original/cropped-SPNA_logo_icon.png" width="100px" height="100px" alt="Cropped SPNA logo">
                         </div>
                         <div class="d-block d-lg-inline-block text-center align-middle">
                             <p class="footer-logo text-blue text-center">Scottish Private Nursery Association 
