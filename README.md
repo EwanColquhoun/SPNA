@@ -241,7 +241,15 @@ Please refer to [**_here_**](TESTING.md) for more information on testing.
 ### Setting up the App within Heroku:
 
 1. Navigate to "Settings" and scroll down to "config vars".
-2. There are a number of config vars for this project, API_KEY, CLOUDINARY_URL, DATABASE_URL, EMAIL_PASSWORD and a SECRET_KEY.
+2. There are a number of config vars for this project, USE_AWS, DATABASE_URL, SECRET_KEY and numerous Stripe Variables:
+    - [
+        STRIPE_PUBLISHABLE_KEY,
+        STRIPE_SECRET_KEY,
+        STRIPE_WEBHOOK_SIGNING_KEY,
+        STRIPE_PLAN_MONTHLY_ID,
+        STRIPE_PLAN_SIXMONTHLY_ID,
+        STRIPE_PLAN_YEARLY_ID,
+    ].
 3. The config vars are specific to the local project. They are usually unique and often provided by the respective API in use.
 ![Config Vars](media/readme-images/config-vars.png)
 
@@ -283,7 +291,7 @@ The method for cloning a project from GitHub is below:
 2. To install all the required libraries and modules for the project you will need to install those listed in the requirements.txt file. This is achieved using the following prompt;
     > pip install -r requirements.txt
 
-3. There are a number of environmental variables for this project, API_KEY, CLOUDINARY_URL, DATABASE_URL, EMAIL_PASSWORD and a SECRET_KEY.
+3. There are a number of environmental variables for this project, API_KEY, DATABASE_URL, SECRET_KEY and the Stripe variables.
     
     To set these up locally, create a file called env.py (will contain sensitive information so ensure the data is not publically viewable). Within that file you will need to import os and create the respective variables.
 
