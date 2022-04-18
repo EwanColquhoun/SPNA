@@ -46,13 +46,13 @@ def webhook(request):
 
     data = request_data['data']
     event_type = request_data['type']
-    print(event_type, 'TYPE')
+    # print(event_type, 'TYPE')
 
     # data_object = data['object']
 
     if event_type =='invoice.paid':
         # Code to action when payment is all good (user login, update user paid until etc)
-        print('Success!', data)
+        # print('Success!', data)
         set_paid_until(request, event.data.object)
 
     if event_type == 'invoice.payment_failed':

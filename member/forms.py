@@ -3,6 +3,7 @@ from django_countries import countries
 from django_summernote.widgets import SummernoteWidget
 from django.core.exceptions import NON_FIELD_ERRORS
 
+
 from allauth.account.forms import SignupForm
 from .models import Document, SPNAMember
 
@@ -88,11 +89,11 @@ class ProfileForm(forms.ModelForm):
         model = SPNAMember
         exclude = ('user', 'subscription', 'paid_until', 'paid', 'stripe_id', 'sub_id')
 
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['street_address1'].label = 'Street Address'
-
-
+        
 
 class DocumentForm(forms.ModelForm):
     """Article form management."""

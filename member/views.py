@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.conf import settings
 
 from allauth.account.views import SignupView
-from allauth.account.forms import LoginForm
+from allauth.account.forms import LoginForm, SignupForm
 from allauth.account.utils import complete_signup
 from allauth.exceptions import ImmediateHttpResponse
 
@@ -67,10 +67,12 @@ def profile_view(request):
         default_pm = pm.data[0].card    
 
     form = ProfileForm(instance=member)
+    # userForm = SignupForm()
 
     template = 'member/profile.html'
     context = {
         'form': form,
+        # 'userForm':userForm,
         'member': member,
         'STRIPE_PUBLIC_KEY': stripe_public_key,
         'pm': default_pm,

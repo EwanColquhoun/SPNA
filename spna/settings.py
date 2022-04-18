@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = ['localhost', 'scottishpna.herokuapp.com']
-CSRF_TRUSTED_ORIGINS = ["https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu40.gitpod.io"]
+CSRF_TRUSTED_ORIGINS = ["https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu40.gitpod.io", "https://scottishpna.herokuapp.com/"]
 
 SITE_ID = 1
 

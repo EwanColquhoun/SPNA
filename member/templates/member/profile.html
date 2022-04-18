@@ -118,6 +118,7 @@
                 <form action="{% url 'profile' %}" method="POST">
                     {% csrf_token %}
                     {{ form|crispy }}
+                    <!-- {{ userForm|crispy }} -->
 
                     <div class="p-2 d-block d-md-flex justify-content-between">
                         <button class="btn spna-btn m-1" type="submit">Update</button>
