@@ -25,7 +25,6 @@ function card(stripe_publishable_key, customer_email) {
     // var form = document.getElementById('payment-form');
     let cS = document.getElementById('client_secret');
     let clientSecret = cS.getAttribute('value')
-    console.log(clientSecret)
     var stripe = Stripe(stripe_publishable_key);
     var elements = stripe.elements();
     var style = {
@@ -44,7 +43,6 @@ function card(stripe_publishable_key, customer_email) {
         }
     };
     var card = elements.create('card', {style: style});
-    console.log('card', card)
     card.mount('#card-element');
 
     // Handle realtime validation errors on the card element
@@ -69,7 +67,6 @@ function card(stripe_publishable_key, customer_email) {
 
         stripe.createToken(card).then(function(result) {
         if (result.error) {
-            console.log('error but close')
           var errorElement = document.getElementById('card-errors');
           errorElement.textContent = result.error.message;
         } else {
