@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
-# import dj_database_url
+import dj_database_url
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
@@ -183,6 +183,9 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': dj_database_url.parse('postgres://ylclkqlszjtvth:fe82555d26c961409f5fb659227dddab50bc4cc9e1d5bdadc3e2467ee83249ce@ec2-52-212-228-71.eu-west-1.compute.amazonaws.com:5432/da8i8agc61uhbi')
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
