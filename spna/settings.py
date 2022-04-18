@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-_ylo1*@ojc-7wbhp(ys6d+x^79x(n)$=8++s=-w99-6b5t=*g4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu39b.gitpod.io']
+ALLOWED_HOSTS = ['localhost', 'scottishpna.herokuapp.com']
 CSRF_TRUSTED_ORIGINS = ["https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu40.gitpod.io"]
 
 SITE_ID = 1
@@ -176,16 +176,19 @@ WSGI_APPLICATION = 'spna.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
-# DATABASES = {
-#     'default': dj_database_url.parse('postgres://ylclkqlszjtvth:fe82555d26c961409f5fb659227dddab50bc4cc9e1d5bdadc3e2467ee83249ce@ec2-52-212-228-71.eu-west-1.compute.amazonaws.com:5432/da8i8agc61uhbi')
-# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
