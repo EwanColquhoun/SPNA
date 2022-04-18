@@ -29,7 +29,7 @@ function _3dsec(stripe_publishable_key, pi_secret) {
 
         } else {
           // The payment has succeeded. Display a success message.
-          window.location.href = 'https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu40.gitpod.io/account/login/'
+          window.location.href = 'https://scottishpna.herokuapp.com/accounts/login/'
         }
       });
     }); // DOMContentLoaded

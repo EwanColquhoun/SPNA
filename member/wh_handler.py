@@ -11,7 +11,7 @@ def set_paid_until(request, charge):
     """
     Updates the spnamember model with a new paid until value.
     """
-    print('setpaid until')
+    # print('setpaid until')
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
     pi = stripe.PaymentIntent.retrieve(charge.payment_intent)
@@ -35,7 +35,7 @@ def set_paid_until(request, charge):
             # print(user, 'user')
         except Exception as e:
           
-            print('except no user')
+            messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{e}. Please contact Admin.')
             return False
 
         user.spnamember.set_paid_until(current_period_end)
