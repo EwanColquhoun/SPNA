@@ -261,7 +261,6 @@ def payment(request):
                         'plan': stripe_plan_id
                     },
                 ],
-                cancel_at_period_end = True,
             )
         except stripe.error.CardError as e:
             print('ERROR', e)
