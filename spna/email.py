@@ -16,7 +16,7 @@ def contact_email(contact):
         Email - {contact.email}
         Message - {contact.message}
         Click here to visit the admin site
-        https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu38.gitpod.io/spna_admin/
+        https://scottishpna.herokuapp.com/spna_admin/
         Thanks.""",
         None,
         ['info@scottishpna.org'],
@@ -33,13 +33,12 @@ def register_email(user):
         f"""
         NEW MEMBER,
         You have a new member request from {user.first_name}
-        Username - {user.username}
-        First Name - {user.first_name}
-        Last Name - {user.last_name}
+        Full Name - {user.spnamember.fullname}
         Email - {user.email}
-        Message - {user.message}
+        Phone - {user.spnamember.phone}
+        Nursery - {user.spnamember.nursery}
         Click here to visit the admin site
-        https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu38.gitpod.io/spna_admin/
+        https://scottishpna.herokuapp.com/spna_admin/
         Thanks.""",
         None,
         ['info@scottishpna.org'],

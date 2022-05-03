@@ -29,8 +29,6 @@
     color: black;
     font-size: 50px;
     font-family: 'Caveat', cursive;
-    /* letter-spacing: 4px;
-    line-height: 2px; */
 }
 
 .doc-title {
@@ -80,13 +78,6 @@
   background: white;
 }
 
-/* #payment-table td {
-  padding: 5px;
-  overflow: auto;
-  text-align: left;
-  width: 30vw;
-} */
-
 .mw-50 {
   width: 140px;
 }
@@ -134,9 +125,10 @@
 
 /* ----------3d secure page------------- */
 #join-body-section {
-  height: 100vh;
-
+  height: 100%;
+  margin-bottom: 200px;
 }
+
 /* STRIPE */
 /* Variables */
 * {

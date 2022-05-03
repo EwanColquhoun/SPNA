@@ -9,6 +9,8 @@ import stripe
 import json
 
 
+stripe_secret_key = settings.STRIPE_SECRET_KEY
+stripe_public_key = settings.STRIPE_PUBLISHABLE_KEY
 endpoint_secret = settings.STRIPE_WEBHOOK_SIGNING_KEY
 
 @require_POST
