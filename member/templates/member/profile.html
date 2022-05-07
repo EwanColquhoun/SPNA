@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'member/css/member.css' %}">
+    <link prefetch rel="stylesheet" type="text/css" href="{% static 'member/css/member.css' %}">
 {% endblock %}
 
 {% block extra_js %}
@@ -125,7 +125,8 @@
                         <a href="{% url 'account_email' %}" class="btn btn-success m-1">Change Email</a>
                         {% if request.user.spnamember.paid %}
                             {% if not request.user.is_superuser %}
-                        <a href="{% url 'cancel_subscription' %}" class="btn btn-danger m-1">Cancel Subscription</a>
+
+                        <button data-bs-toggle="modal" data-bs-target="#delete-sub-modal" class="btn btn-danger m-1">Cancel Subscription</button>
                             {% endif %}
                         {% endif %}
                     </div>

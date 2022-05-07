@@ -27,7 +27,8 @@ been added and some removed as the design process progressed.
             * [Navigation bar](<#navigation-bar>)
             * [Footer](<#footer>)
         * [**About Us**](<#about-us-page>)
-        * [**Initiatives | Campaigns**](<#initiatives-campaigns-page>)
+        * [**News Page**](<#news-page>)
+        * [**Initiatives and Campaigns**](<#initiatives-and-campaigns-page>)
         * [**Contact Modal**](<#contact-modal>)
         * [**Members Area**](<#members-area-page>)
         * [**SPNA Admin Page**](<#spna-admin-page>)
@@ -61,8 +62,7 @@ As a **USER** I want to **GOAL** so that i can **RESULT**.
 * As an **ADMIN** I want to **LINK TO SOCIAL MEDIA SITES** so that I can **INCREASE THE MEMBERSHIP**.
 
 
-The above user stories were created in conjunction with the Client and their deveopment progress monitored in an agile environment. The project tab of github was used to help with this task.
-
+The above user stories were created in conjunction with the Client and their deveopment progress monitored in an agile environment. The project tab of github was used to help with this task. The MoSCoW method was used to define acceptance criteria for each user story. This gave some guidance as to what was going to be required at each stage of the applications development. 
 
 [Back to top](<#contents>)
 
@@ -89,6 +89,10 @@ The above user stories were created in conjunction with the Client and their dev
 
     ![contact page wireframe](media/readme-images/contact.png)
 
+* Members page
+
+    ![members page wireframe](media/readme-images/contact.png)
+
 * SPNA Admin page
 
     ![SPNA Admin page wireframe](media/readme-images/spna-admin.png)
@@ -96,7 +100,6 @@ The above user stories were created in conjunction with the Client and their dev
 * Sign Up page
 
     ![Sign Up page wireframe](media/readme-images/signup.png)
-
 
 
 [Back to top](<#contents>)
@@ -121,9 +124,15 @@ The above user stories were created in conjunction with the Client and their dev
 [Back to top](<#contents>)
 
 # Data Model
+The models are as follows;
+    * Custom user model (SPNAMember)
+        - Builds on the Django user model but with specific nursery, SPNA and stripe details relating to payment.
+    * Contact details (Contact)
+        - Adds the contact details from the contact form to the database.
+    * Articles (Articles)
+        - Adds articles for the news page into the database.
   
 <!-- ![Data Model](media/readme-images/dataModel.png) -->
-
 
 [Back to top](<#contents>)
 # Features
@@ -131,24 +140,24 @@ The above user stories were created in conjunction with the Client and their dev
 ## Existing Features
 
 ### Home Page
-
+* Contains some basic introductory information about the SPNA.
+All pages contain:
   * #### Navigation Bar
 
+    * A basic, responsive navbar is included. It contains all the pertinent pages for users, logged in users and admin.
    
     <!-- <details><summary>Screenshots</summary>
 
     </details>
      -->
 
-[Back to top](<#contents>)
-
   * #### Footer
-    * A basic, semi-transparent footer displaying copyright information.
+    * A basic footer showing the SPNA logo, SPNA email address for instant communications, a link to the social sites and copyright information.
 
 [Back to top](<#contents>)
 
 ### About Us page
-
+* The About us page contains information about the SPNA. It also has an animated section on the guiding principles of the SPNA.
 
 <!-- <details><summary>Screenshots</summary>
 
@@ -156,7 +165,18 @@ The above user stories were created in conjunction with the Client and their dev
 
 [Back to top](<#contents>)
 
-### Initiatives | Campaigns page
+### News page
+* Contains articles uploaded by the admin for any site user to view. The articles are informative and specific to the SPNA or early years learning. 
+Each article is displayed in a card that expands into a large modal for ease of viewing when clicked on. 
+
+<!-- <details><summary>Screenshots</summary>
+
+</details> -->
+
+[Back to top](<#contents>)
+
+### Initiatives and Campaigns page
+* This page has all the information on the Initiatives and Capmaigns that the SPNA are undertaking. It has a card that expands on hover for each of the initiatives and campaigns. Initially the campaigns were made to be changed frequently but on futher consultation with the client they deemed this unnessessary as there wont be many changes. 
 <!-- 
 <details><summary>Screenshots</summary>
 
@@ -165,18 +185,18 @@ The above user stories were created in conjunction with the Client and their dev
 [Back to top](<#contents>)
 
 ### Contact Modal
+* When a User submits a contact request the application does a number of things. It logs the contact to the database for a record and it also emails the Admin with the details of the contact. Initially all contacts are marked as 'unreplied' (not replied). This gives the Admin a quick reference to see the status of the contact.
 
-* #### Contact Form
-    * When a User submits a contact request the application does a number of things. It logs the contact to the database for a record and it also emails the Admin with the details of the contact. Initially all contacts are marked as 'unreplied' (not replied). This gives the Admin a quick reference to see the status of the contact.
+<details><summary>Screenshots</summary>
 
-    <details><summary>Screenshots</summary>
-
-    <!-- ![Contact](media/readme-images/contact-deployed.png) -->
-    </details>
+<!-- ![Contact](media/readme-images/contact-deployed.png) -->
+</details>
 
 [Back to top](<#contents>)
 
 ### Members Area page
+* The members area is populated with documents that would be of interest to the members. The documents have been split into three categories (at the Client's request) to represent their type. They are, Media releases, Media mentions and Letters to and from government. The documents are visible in the browser with a pdf viewer and are downloadable.
+The documents are stored in the database as an instance of a model and are uploaded by admin from either the SPNA Admin page (Client) or the Django admin page (Developer).
 <!-- 
 <details><summary>Screenshots</summary>
 
@@ -185,12 +205,40 @@ The above user stories were created in conjunction with the Client and their dev
 [Back to top](<#contents>)
 
 ### SPNA Admin Page
-
-
+* The SPNA Admin page is a custom made page to enable to client to manage the site with ease. It contains all the admin features in one location for enhanced UX.
+The SPNA admin page has; 
+    * A members list containing;
+        * Full name
+        * Nursery
+        * Email (expandable if not visible)
+        * Phone (expandable if not visible)
+        * Expiry date
+        * Select box (selects the member's email address and populates the 'To' field in the email interface)
+    * A contact list containing;
+        * Date
+        * Name
+        * Email (expandable if not visible)
+        * Phone (expandable if not visible)
+        * Message (expandable if not visible)
+        * Delete button (Deletes the contact from the database)
+        * Select box (selects the member's email address and populates the 'To' field in the email interface)
+        - The contact list initially populates a contact with a red background signally that the contact has not been replied to. Once an email has been send to the contact's email address through the email interface the background changes to green. This is to enhance the awareness of the admin to the contact status.
+    * A button to download the members list as a CSV.
+    * An email interface to allow the admin to send emails to either selected addresses or manually populated ones.
+    * Add an Article (News) field
+        * Title field
+        * Content field
+        * Image field.
+    * Add a Members document field.
+        * Document title field
+        * Document category selection
+        * An upload field for the admin as all members documents are produced offline in pdf format.
+These features were discussed at length with the client and implemented with the optimum ease of useage in mind. This page is only visible to the admin or other superusers (currently none).
 
 [Back to top](<#contents>)
 
 ## Future Features 
+* The client would like to have the ability to hide the email addresses from the other members. This is something that due to currnet time contraints just wasn't possible in this release. It will be implemented in the next release. 
 
 [Back to top](<#contents>)
 

@@ -82,7 +82,7 @@ def profile_view(request):
     return render(request, template, context)
 
 
-@require_POST
+@login_required
 def cancel_subscription(request):
     """
     A view to cancel the logged in user's subscription.
@@ -326,6 +326,8 @@ def payment(request):
                     user.spnamember.nursery=request.session['nursery']
                     user.save()
                     register_email(user)
+
+                    perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
 
                     context = {
                         'payment_intent_secret': intent.client_secret,

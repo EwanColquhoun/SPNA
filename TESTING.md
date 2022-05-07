@@ -161,7 +161,7 @@ Here are the results from The Flying Scotsmen test;
 ![Lighthouse home](media/readme-images/lh-home.png) -->
 
 <br>
-This part of the testing process showed up that the site was slow to load. All the images were compressed and the 'prefectch' function was added to the link elements in the head of the INDEX.page. This sped up the loading time and increased the performance rating.
+This part of the testing process showed up that the site was slow to load. All the images were compressed and the 'prefetch' function was added to the link elements in the head of the INDEX.page. This sped up the loading time and increased the performance rating.
 
 ### Peer review
 <!-- The Flying Scotsmen Application has been tested by Peers both in the software development field and external to it. The feedback has generally been positive but with minor points cropping up from time to time. A common one has been 'Server Errors(500)' whilst trying to register or send a contact message. This was found to have been caused by the command to send the email associated with the request. The fix was to change the security settings on the gmail account registered to the application to allow access from low security applications and two factor login and the email side. This poses no problems for the user, it means that the admin of the functional email address would need to complete the extra login steps. -->
