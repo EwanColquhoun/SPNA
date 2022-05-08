@@ -104,7 +104,7 @@
                             <span id="button-text" class="">Update</span>
                         </button>
                         <div>
-                            <p class="text-muted">Cards verified using  <a href="https://stripe.com/gb" target="_blank"><img class="d-inline-block" src="{% get_media_prefix %}stripe/stripe-logo-small.png" width="100px"alt="Stripe logo small"></img></a>
+                            <p class="text-muted">Cards verified with <a href="https://stripe.com/gb" target="_blank"><img class="d-inline-block" src="{% get_media_prefix %}stripe/stripe-logo-small.png" width="100px"alt="Stripe logo small"></img></a>
                         </div>
                         <p id="card-error" role="alert"></p>
                         <p class="result-message hidden">
@@ -122,15 +122,19 @@
 
                     <div class="p-2 d-block d-md-flex justify-content-between">
                         <button class="btn spna-btn m-1" type="submit">Update</button>
+                    </div>
+                </form>
                         <a href="{% url 'account_email' %}" class="btn btn-success m-1">Change Email</a>
                         {% if request.user.spnamember.paid %}
                             {% if not request.user.is_superuser %}
-
-                        <button data-bs-toggle="modal" data-bs-target="#delete-sub-modal" class="btn btn-danger m-1">Cancel Subscription</button>
+                                {% if request.user.spnamember.has_cancelled and request.user.spnamember.paid %}
+                                    <a href="{% url 'renew' %}" class="btn btn-info m-1" >Continue Subscription </a>
+                                    <p class="small text-black text-center p-2 bg-info rounded-1">To continue your subscription from the next billing date with existing payment details.</p>
+                                {% else %}
+                                    <button data-bs-toggle="modal" data-bs-target="#delete-sub-modal" class="btn btn-danger m-1">Cancel Subscription</button>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
-                    </div>
-                </form>
             </div>
         </div>
     </div>

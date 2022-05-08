@@ -32,6 +32,7 @@ been added and some removed as the design process progressed.
         * [**Contact Modal**](<#contact-modal>)
         * [**Members Area**](<#members-area-page>)
         * [**SPNA Admin Page**](<#spna-admin-page>)
+        * [**Profile Page**](<#profile-page>)
     * [**Future Features**](<#future-features>)
 * [**Technologies Used**](<#technologies-used>)
 * [**Testing**](<#testing>)

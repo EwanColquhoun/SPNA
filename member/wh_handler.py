@@ -40,6 +40,35 @@ def set_paid_until(request, charge):
 
         user.spnamember.set_paid_until(current_period_end)
         user.spnamember.has_paid(current_date=datetime.date.today())
+        print(user.spnamember.paid, 'user')
    
     else:
         messages.error(request, 'No customer with this payment intent exists. Please contact Admin.')
+
+
+
+def sub_cancelled(request, charge):
+    """Changes the 'paid' option of the SPNA member when subscription is deleted."""
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    cust = stripe.PaymentIntent.retrieve(charge.customer)
+
+    # print(pi.customer, 'picustomer')
+    if cust:
+        customer = stripe.Customer.retrieve(cust)
+        email = customer.email
+        # print(customer, 'customer')
+        if customer:
+            try:
+                user = User.objects.get(email=email)
+                # print(user, 'user')
+            except Exception as e:
+            
+                messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{e}. Please contact Admin.')
+                return False
+
+        # user.spnamember.set_paid_until(current_period_end)
+        user.spnamember.paid=False
+
+    else:
+        messages.error(request, 'No customer with this subscription exists. Please contact Admin.')

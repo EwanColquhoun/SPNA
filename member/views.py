@@ -17,7 +17,7 @@ from allauth.exceptions import ImmediateHttpResponse
 from .models import Document, SPNAMember, Plan
 from .forms import CustomSignupForm, ProfileForm
 from .signals import get_fname, get_sname
-from spna.email import register_email
+from spna.email import register_email, cancel_email, cancel_email_to_member
 
 
 stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -64,7 +64,6 @@ def profile_view(request):
         sub = request.user.spnamember.sub_id
         stripe.api_key = stripe_secret_key
         pm = stripe.Customer.list_payment_methods(cus, type="card",)
-        print(pm)
         default_pm = pm.data[0].card    
 
     form = ProfileForm(instance=member)
@@ -81,6 +80,33 @@ def profile_view(request):
 
     return render(request, template, context)
 
+@login_required
+def renew_subscription(request):
+    """
+    A view to renew the logged in user's subscription, 
+    providing the are still in a billing period.
+    """
+    try:
+        stripe.api_key = stripe_secret_key
+        sub = request.user.spnamember.sub_id
+        stripe.Subscription.modify(
+            sub,
+            cancel_at_period_end=False)
+        # Need to change these email to be renewal emails.
+        cancel_email(request.user)
+        # Need to change these email to be renewal emails.
+        cancel_email_to_member(request.user)
+        member = get_object_or_404(SPNAMember, user=request.user)
+        member.has_cancelled=False
+        member.save()
+        # customer.cancel_subscription(at_period_end=True)
+        # request.user.spnamember.paid = False
+        messages.success(request, f'Your subscription will continue as normal from {request.user.spnamember.paid_until}.')
+    except Exception as e:
+        messages.error(request, f'There has been an error. Please contact the SPNA. Error={e}.')
+
+    return redirect(reverse('profile'))
+
 
 @login_required
 def cancel_subscription(request):
@@ -90,10 +116,16 @@ def cancel_subscription(request):
     try:
         stripe.api_key = stripe_secret_key
         sub = request.user.spnamember.sub_id
-        stripe.Subscription.delete(sub)
-
+        stripe.Subscription.modify(
+            sub,
+            cancel_at_period_end=True)
+        cancel_email(request.user)
+        cancel_email_to_member(request.user)
+        member = get_object_or_404(SPNAMember, user=request.user)
+        member.has_cancelled=True
+        member.save()
         # customer.cancel_subscription(at_period_end=True)
-        request.user.spnamember.paid = False
+        # request.user.spnamember.paid = False
         messages.success(request, f'Your subscription will end at the end of the next billing period: {request.user.spnamember.paid_until}.')
     except Exception as e:
         messages.error(request, f'There has been an error. Please contact the SPNA. Error={e}.')
@@ -117,9 +149,6 @@ def update_payment_method(request):
         
         stripe.Customer.modify(cus, invoice_settings={"default_payment_method": new_pm},)
 
-        print(new_pm, 'new payment method')
-        print(cus, 'cus')
-
         stripe.Subscription.modify(sub, default_payment_method=new_pm)
 
         messages.success(request, 'Your card details have been updated for the next payment.')
@@ -129,8 +158,6 @@ def update_payment_method(request):
         messages.error(request, 'Card declined. Please check the details and try again.')
         return redirect(reverse('profile'))
     
-
-
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)

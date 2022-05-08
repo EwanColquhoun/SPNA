@@ -2,7 +2,7 @@ from django.conf import settings
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import HttpResponse
-from .wh_handler import set_paid_until
+from .wh_handler import set_paid_until, sub_cancelled
 # from member.views import payment_failed
 
 import stripe
@@ -54,7 +54,7 @@ def webhook(request):
 
     if event_type =='invoice.paid':
         # Code to action when payment is all good (user login, update user paid until etc)
-        # print('Success!', data)
+        print('Success!')
         set_paid_until(request, event.data.object)
 
     if event_type == 'invoice.payment_failed':
@@ -67,6 +67,7 @@ def webhook(request):
     if event_type == 'customer.subscription.deleted':
         # handle subscription canceled automatically based
         # upon your subscription settings. Or if the user cancels it.
-        print(data, 'cust_deleted')
+        sub_cancelled(request, event.data.object)
+        print('cust_deleted')
     
     return HttpResponse(status=200)

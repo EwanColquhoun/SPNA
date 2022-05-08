@@ -71,6 +71,7 @@ class SPNAMember(models.Model):
     paid = models.BooleanField(null=True, blank=True, default=False)
     stripe_id = models.CharField(max_length=255)
     sub_id = models.CharField(max_length=255)
+    has_cancelled = models.BooleanField(default=False)
     objects = UserManager()
 
     def __str__(self):

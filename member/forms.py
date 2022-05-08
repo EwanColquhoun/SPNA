@@ -87,7 +87,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = SPNAMember
-        exclude = ('user', 'subscription', 'paid_until', 'paid', 'stripe_id', 'sub_id')
+        exclude = ('user', 'subscription', 'paid_until', 'paid', 'stripe_id', 'sub_id', 'has_cancelled')
 
 
     def __init__(self, *args, **kwargs):
