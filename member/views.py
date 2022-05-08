@@ -14,7 +14,7 @@ from allauth.account.forms import LoginForm, SignupForm
 from allauth.account.utils import complete_signup, perform_login
 from allauth.exceptions import ImmediateHttpResponse
 
-from .models import Document, SPNAMember
+from .models import Document, SPNAMember, Plan
 from .forms import CustomSignupForm, ProfileForm
 from .signals import get_fname, get_sname
 from spna.email import register_email
@@ -179,13 +179,16 @@ def subscribe(request):
 
             if plan == 'Monthly':
                 spi = settings.STRIPE_PLAN_MONTHLY_ID
-                amount = '1000'
+                spna_plan = Plan.objects.get(pk=1)
+                amount = spna_plan.amount
             elif plan == 'Six Monthly':
                 spi = settings.STRIPE_PLAN_SIXMONTHLY_ID
-                amount = '5500'
+                spna_plan = Plan.objects.get(pk=2)
+                amount = spna_plan.amount            
             else:
                 spi = settings.STRIPE_PLAN_YEARLY_ID
-                amount = '10000'
+                spna_plan = Plan.objects.get(pk=3)
+                amount = spna_plan.amount
 
             automatic = True
 
@@ -200,12 +203,12 @@ def subscribe(request):
             context = {
                 'customer_email': request.POST.get('email'),
                 'fullname': request.POST.get('fullname'),
-                'plan': plan,
                 'STRIPE_PUBLIC_KEY': stripe_public_key,
                 'secret_key': payment_intent.client_secret,
                 'payment_intent_id': payment_intent.id,
                 'automatic': automatic,
                 'stripe_plan_id': spi,
+                'spna_plan': spna_plan,
             }
 
             return render(request, 'member/payment.html', context)

@@ -1,7 +1,12 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin, User
-from .models import Document, SPNAMember
+from .models import Document, SPNAMember, Plan
 
+
+@admin.register(Plan)
+class PlanAdmin(admin.ModelAdmin):
+    search_fields = ['name', 'amount']
+    list_display = ('id', 'name', 'amount')
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):

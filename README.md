@@ -235,6 +235,19 @@ The SPNA admin page has;
         * An upload field for the admin as all members documents are produced offline in pdf format.
 These features were discussed at length with the client and implemented with the optimum ease of useage in mind. This page is only visible to the admin or other superusers (currently none).
 
+### Profile Page
+The Profile page is viewable for members to view their own membership details. It contains
+    * Current Details
+        * Nursery, Email, Address, Subscription and renewal date.
+    * Update details 
+        * A form to update Nursery, Name, Address and Phone details
+        * The form has buttons to change their email and to cancel the subscription
+    * Current payment card display
+        * Displays the last 4 and expiry date
+    * Update payment details form
+        * Essentially creates a new payment method for the member and updates the Stripe user profile for the next billing sequence.
+
+
 [Back to top](<#contents>)
 
 ## Future Features 

@@ -9,6 +9,13 @@ from django.db import models
 
 # Create your models here.
 
+class Plan(models.Model):
+    """ Creates the subscription plans in the backend for security."""
+    name = models.CharField(max_length=256)
+    amount = models.IntegerField()
+    disp_amount = models.IntegerField(default='0')
+    objects = UserManager()
+
 
 class Document(models.Model):
     """

@@ -46,7 +46,7 @@
             <table id="payment-table" class="bg-whitesmoke mt-3">
                 <tr>
                     <td class="p-1 overflow-auto text-left">Plan:</td>
-                    <td class="black-text p-1 overflow-auto">{% if plan == 'Monthly' %} £10 Monthly{% elif plan == 'Six Monthly' %} £55 Every 6 months{% else %} £100 Yearly{% endif %}.</td>
+                    <td class="black-text p-1 overflow-auto">£{{spna_plan.disp_amount}} {{spna_plan.name}}</td>
                 </tr>
                 <tr>
                     <td class="p-1 overflow-auto text-left">Fullname:</td>
