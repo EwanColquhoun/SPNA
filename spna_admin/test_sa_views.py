@@ -5,7 +5,9 @@ from django.contrib.auth.models import User
 from news.models import Articles
 from contact.models import Contact
 
-class Test_SPNA_Admin_Views(TestCase):
+
+class TestSpnaAdminViews(TestCase):
+    """Tests the main functions on the SPNA Admin page"""
 
     def setUp(self):
         """Creates an instance of a Superuser for checking admin functions/views."""
@@ -22,6 +24,32 @@ class Test_SPNA_Admin_Views(TestCase):
         response = self.client.get('/spna_admin/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'spna_admin/spna_admin.html')
+
+    def test_can_add_article(self):
+        existing_articles = Articles.objects.all().count()
+        self.assertEqual(existing_articles, 0)
+        test_article = Articles.objects.create(
+            title='Test Article', content='Test article content', )
+        new_article = Articles.objects.filter(id=test_article.id)
+        self.assertEqual(len(new_article), 1)
+
+    def test_can_send_email_form(self):
+        """Tests the send email view"""
+        contact = Contact.objects.create(
+            name='Email test contact',
+            email='contact@email.com',
+            message='Test contact message')
+
+        email = {
+            'email_to': 'contact@email.com',
+            'email_subject': 'Test Subject',
+            'email_body': 'Test email body'}
+        replied = contact.replied
+        self.assertFalse(replied)
+        response = self.client.post('/spna_admin/send/', email)
+        self.assertRedirects(response, '/spna_admin/')
+        updated_contact = Contact.objects.filter(id=contact.id)[0]
+        self.assertTrue(updated_contact.replied)
 
     def test_can_delete_article(self):
         test_article = Articles.objects.create(

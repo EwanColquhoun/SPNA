@@ -8,12 +8,13 @@ def export_qs_to_csv(model_class = None):
     """
     Gets the model and related fields and inputs them into a csv for SPNA admin.
     """
-
+    # Fields at request of client. No payment details allowed.
     fields = [
+        'user',
         'user__email',
         'user__first_name',
         'user__last_name',
-        'user',
+        'user__date_joined',
         'nursery',
         'fullname',
         'street_address1',
@@ -23,7 +24,6 @@ def export_qs_to_csv(model_class = None):
         'phone',
         'subscription',
         'paid_until',
-        'user__date_joined',
     ]
 
     # Generate the csv file with datetime
