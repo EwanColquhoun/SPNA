@@ -43,7 +43,7 @@ class CustomSignupForm(SignupForm):
     street_address1 = forms.CharField(max_length=40, required=False)
     town_or_city = forms.CharField(max_length=40, required=False)
     postcode = forms.CharField(max_length=40, required=False)  
-    country = forms.ChoiceField(choices=COUNTRY_CHOICES, required=True)
+    country = forms.ChoiceField(choices=COUNTRY_CHOICES, required=False)
     phone = forms.CharField(max_length=15, required=False)
     subscription = forms.ChoiceField(choices=PLAN, required=True)
 
@@ -104,11 +104,6 @@ class DocumentForm(forms.ModelForm):
         """
         model = Document
         fields = ('title', 'category', 'doc',)
-        # widgets = {
-        #     'content': SummernoteWidget(),
-        #     'image': CustomClearableFileInput()
-        # }
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

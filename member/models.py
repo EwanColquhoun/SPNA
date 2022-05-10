@@ -64,7 +64,7 @@ class SPNAMember(models.Model):
     street_address1 = models.CharField(max_length=80, null=False, blank=False)
     town_or_city = models.CharField(max_length=40, null=False, blank=False)
     postcode = models.CharField(max_length=20, null=True, blank=True)
-    country = CountryField(blank_label='Country', null=False, blank=False)
+    country = CountryField(blank_label='Country', null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
     subscription = models.CharField(max_length=16, choices=PLAN, default=1, null=False, blank=False)
     paid_until = models.DateField(null=True, blank=True)
