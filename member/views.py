@@ -53,12 +53,6 @@ def profile_view(request):
     member = get_object_or_404(SPNAMember, user=request.user)
     default_pm = ''
 
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=member)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Profile updated successfully')
-
     if not request.user.is_superuser:
         cus = request.user.spnamember.stripe_id
         sub = request.user.spnamember.sub_id
@@ -66,19 +60,34 @@ def profile_view(request):
         pm = stripe.Customer.list_payment_methods(cus, type="card",)
         default_pm = pm.data[0].card    
 
-    form = ProfileForm(instance=member)
-    # userForm = SignupForm()
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=member)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully')
 
+        form = ProfileForm(instance=member)
+
+        template = 'member/profile.html'
+        context = {
+            'form': form,
+            'member': member,
+            'STRIPE_PUBLIC_KEY': stripe_public_key,
+            'pm': default_pm,
+        }
+
+        return render(request, template, context)
+    
+    form = ProfileForm(instance=member)
     template = 'member/profile.html'
     context = {
-        'form': form,
-        # 'userForm':userForm,
-        'member': member,
-        'STRIPE_PUBLIC_KEY': stripe_public_key,
-        'pm': default_pm,
-    }
-
+            'form': form,
+            'member': member,
+            'STRIPE_PUBLIC_KEY': stripe_public_key,
+            'pm': default_pm,
+        }
     return render(request, template, context)
+
 
 @login_required
 def renew_subscription(request):
