@@ -13,13 +13,13 @@ class TestNonSuperUserAccess(TestCase):
     def test_member_area_view(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'home/index.html')
         self.assertTemplateNotUsed(response, 'member/member-area.html')
+        # self.assertRedirects(response, '/accounts/login/?next=/member/')
 
     def test_profile_view(self):
         response = self.client.get('/member/profile/')
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, 'home')
+        self.assertRedirects(response, '/accounts/login/?next=/member/profile/')
         self.assertTemplateNotUsed(response, 'member/profile.html')
 
 
@@ -31,19 +31,9 @@ class TestSuperUserAccess(TestCase):
         self.user = User.objects.create_superuser(
             username='UserForTest',
             email='email@emailtest.com',
-            password='',
+            password='secret',
         )
-        self.user.set_password('secret')
-        # self.spnamember = SPNAMember.objects.create(
-        #     user=self.user,
-        #     fullname='TestMember',
-        #     nursery='TestNursery',
-        #     subscription='Monthly',
-        #     paid='True',
-        #     street_address1='Test Address',
-        #     town_or_city='Test Town',
-        # )
-        
+        self.user.spnamember.paid = True
         self.user.save()
         self.client = Client()
         self.client.login(username='UserForTest', password='secret')
@@ -56,7 +46,7 @@ class TestSuperUserAccess(TestCase):
 
     def test_profile_view(self):
         response = self.client.get('/member/profile/')
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, 'home')
-        # self.assertTemplateUsed(response, 'home/index.html')
-        self.assertTemplateNotUsed(response, 'member/profile.html')
+        self.assertEqual(response.status_code, 200)
+        # self.assertRedirects(response, 'home')
+        self.assertTemplateUsed(response, 'member/profile.html')
+        # self.assertTemplateNotUsed(response, 'member/profile.html')
