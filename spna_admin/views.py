@@ -55,6 +55,10 @@ def delete_contact(request, contact_id):
     """
     Deletes the contact when called.
     """
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry only SPNA Admin can access this page.")
+        return redirect(reverse('home'))
+        
     contact = get_object_or_404(Contact, id=contact_id)
     contact.delete()
     messages.success(request, 'Contact deleted successfully!')

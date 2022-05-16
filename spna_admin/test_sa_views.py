@@ -1,9 +1,12 @@
 from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User
+from unittest.mock import MagicMock
 
 from news.models import Articles
+from member.models import Document
 from contact.models import Contact
+from spna_admin.get_csv import export_qs_to_csv
 
 
 class TestSpnaAdminViews(TestCase):
@@ -72,6 +75,50 @@ class TestSpnaAdminViews(TestCase):
         self.assertEqual(len(current_contacts), 0)
 
 
+class TestNonSuperUserAccess(TestCase):
+    """Tests the views to ensure that a non superuser can't access them"""
+
+    def test_spna_admin_view(self):
+        response = self.client.get('/spna_admin/')
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateNotUsed(response, 'spna_admin/spna_admin.html')
+
+    def test_user_cannot_edit_article_view(self):
+        test_article = Articles.objects.create(
+            title='Test Article', content='Great news about the Django tests', )
+        response = self.client.get(f'/spna_admin/edit/{test_article.id}')
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateNotUsed(response, 'spna_admin/edit_article.html')
+
+    def test_user_cannot_delete_article_view(self):
+        test_article = Articles.objects.create(
+            title='Test Article', content='Great news about the Django tests', )
+        response = self.client.post(f'/spna_admin/delete/article/{test_article.id}')
+        self.assertEqual(response.status_code, 302)
+        current_articles = Articles.objects.filter(id=test_article.id)
+        self.assertEqual(len(current_articles), 1)
+
+    def test_user_cannot_add_article_view(self):
+        test_article = {
+            'title':'Test Article',
+            'content':'A spam article from a user'
+        }
+        response = self.client.post('/spna_admin/add/article/', test_article)
+        self.assertEqual(response.status_code, 302)
+        current_articles = Articles.objects.all()
+        self.assertEqual(len(current_articles), 0)
+    
+    def test_user_cannot_add_document_view(self):
+        test_doc = {
+            'title':'Test Document',
+            'content':'A spam document from a user'
+        }
+        response = self.client.post('/spna_admin/add/document/', test_doc)
+        self.assertEqual(response.status_code, 302)
+        current_docs = Document.objects.all()
+        self.assertEqual(len(current_docs), 0)
+
+
 class TestSuperUserAccess(TestCase):
     """Tests to ensure sensitive views are superuser access only"""
 
@@ -80,4 +127,11 @@ class TestSuperUserAccess(TestCase):
         response = self.client.get('/spna_admin/csv/')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/accounts/login/?next=/spna_admin/csv/')
-        self.assertNotIn(response, 'export_qs_to_csv') # NEED to change this as it fails!
+        
+
+    def test_no_spna_admin_access(self):
+        """SPNA_admin access only for superusers"""
+        response = self.client.get('/spna_admin/')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/accounts/login/?next=/spna_admin/')
+        self.assertTemplateNotUsed('/spna_admin/spna_admin.html')

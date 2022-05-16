@@ -22,6 +22,8 @@ class TestNonSuperUserAccess(TestCase):
         self.assertRedirects(response, '/accounts/login/?next=/member/profile/')
         self.assertTemplateNotUsed(response, 'member/profile.html')
 
+    
+
 
 class TestSuperUserAccess(TestCase):
     """Tests the superuser access"""
@@ -47,6 +49,31 @@ class TestSuperUserAccess(TestCase):
     def test_profile_view(self):
         response = self.client.get('/member/profile/')
         self.assertEqual(response.status_code, 200)
-        # self.assertRedirects(response, 'home')
         self.assertTemplateUsed(response, 'member/profile.html')
-        # self.assertTemplateNotUsed(response, 'member/profile.html')
+
+
+class TestNotPaidSpnaMemberAccess(TestCase):
+    """Tests to validate the spnamember.paid criteria"""
+
+    def setUp(self):
+        """Creates an instance of a Superuser for checking admin functions/views."""
+        self.user = User.objects.create_superuser(
+            username='UserForTest',
+            email='email@emailtest.com',
+            password='secret',
+        )
+        self.user.save()
+        self.client = Client()
+        self.client.login(username='UserForTest', password='secret')
+
+    def test_not_paid_profile_view(self):
+        response = self.client.get('/member/profile/')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+        self.assertTemplateNotUsed(response, 'member/profile.html')
+
+    def test_not_paid_member_view(self):
+        response = self.client.get('/member/')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+        self.assertTemplateNotUsed(response, 'member/member-area.html')
