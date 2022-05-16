@@ -22,8 +22,6 @@ class TestNonSuperUserAccess(TestCase):
         self.assertRedirects(response, '/accounts/login/?next=/member/profile/')
         self.assertTemplateNotUsed(response, 'member/profile.html')
 
-    
-
 
 class TestSuperUserAccess(TestCase):
     """Tests the superuser access"""
@@ -35,6 +33,7 @@ class TestSuperUserAccess(TestCase):
             email='email@emailtest.com',
             password='secret',
         )
+        self.user.spnamember.nursery = 'Initial Nursery'
         self.user.spnamember.paid = True
         self.user.save()
         self.client = Client()
@@ -51,6 +50,18 @@ class TestSuperUserAccess(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'member/profile.html')
 
+    def test_update_profile_view(self):
+        data={
+            'nursery':'Updated Nursery',
+            'fullname':'Joe Test',
+            'street_address1':'Number 1',
+            'town_or_city':'Test Street',
+        }
+        response = self.client.post('/member/profile/', data)
+        self.assertEqual(response.status_code, 200)
+        updated_user = User.objects.filter(id=self.user.id)[0]
+        self.assertEqual(updated_user.spnamember.nursery, 'Updated Nursery')
+    
 
 class TestNotPaidSpnaMemberAccess(TestCase):
     """Tests to validate the spnamember.paid criteria"""

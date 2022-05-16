@@ -93,7 +93,6 @@ class SPNAMember(models.Model):
             paid_until = date_or_timestamp
 
         self.paid_until = paid_until
-        print('paid until', self.paid_until)
         self.save()
 
     def has_paid(
@@ -109,3 +108,4 @@ class SPNAMember(models.Model):
             self.paid = True
 
         self.save()
+        return self.paid # added in for testing.
