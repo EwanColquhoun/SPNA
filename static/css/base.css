@@ -329,13 +329,15 @@ footer a {
 }
 
 #modal-delete-button,
-#cont-modal-delete-button {
+#cont-modal-delete-button,
+#doc-modal-delete-button {
     background-color: red;
     color: whitesmoke;
     border-radius: 5px;
 }
 
 #modal-delete-button:hover,
+#doc-modal-delete-button:hover,
 #cont-modal-delete-button:hover {
     background-color: whitesmoke;
     color: red;

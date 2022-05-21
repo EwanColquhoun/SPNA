@@ -3,16 +3,16 @@
 
 const modal_buttons = document.getElementById('delete-modal-buttons');
 const delete_buttons = document.querySelectorAll('.delete-doc-button');
-let modal = document.querySelector('#delete-modal')
+let modal = document.querySelector('#delete-doc-modal')
 
 if (delete_buttons.length !== 0) {
 delete_buttons.forEach((button) => {
     button.addEventListener('click', function () {
-    const document_id = button.getAttribute('data-name');
-    let modalButton = document.querySelector('#modal-delete-button')
+    let document_id = button.getAttribute('data-name');
+    let modalButton = document.querySelector('#doc-modal-delete-button')
 
     modal.addEventListener('shown.bs.modal', function () {
-        modalButton.setAttribute('href', `/member/delete/${document_id}`);
+        modalButton.setAttribute('href', `/spna_admin/delete/document/${document_id}`);
     });
 });
 })};
