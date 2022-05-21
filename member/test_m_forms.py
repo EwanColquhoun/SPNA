@@ -1,6 +1,5 @@
 from django.test import TestCase
 from django.test.client import Client, RequestFactory
-
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from .forms import ProfileForm, DocumentForm, EmailForm, CustomSignupForm
@@ -118,7 +117,6 @@ class TestDocumentForm(TestCase):
             'category':'1',
         }
         form = DocumentForm(form_data, other_data)
-        print(form.errors)
         self.assertTrue(form.is_valid())
 
     def test_document_form_not_valid(self):

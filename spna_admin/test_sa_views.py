@@ -1,7 +1,9 @@
+from unittest.mock import MagicMock
+
 from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User
-from unittest.mock import MagicMock
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 from news.models import Articles
 from news.forms import ArticleForm
@@ -104,15 +106,23 @@ class TestSpnaAdminSuperuserViews(TestCase):
         current_contacts = Articles.objects.filter(id=test_contact.id)
         self.assertEqual(len(current_contacts), 0)
 
-    # def test_can_add_document(self):
-    #     existing_doc = Document.objects.all().count()
-    #     self.assertEqual(existing_doc, 0)
-    #     form = DocumentForm({
-    #         'title':'Test Document', 
-    #         'doc':'testdoc.pdf', })
-    #     self.client.post('/spna_admin/add/document/', form.data)
-    #     total_docs = Document.objects.all().count()
-    #     self.assertEqual(total_docs, 1)
+    def test_can_add_document(self):
+        existing_doc = Document.objects.all().count()
+        self.assertEqual(existing_doc, 0)
+        doc = SimpleUploadedFile(
+            "test_document.txt",
+            b"Document contents for test"
+        )
+        form = DocumentForm({
+            'title':'A Test Document',
+            'category':'1',
+            'doc':doc,
+        })
+        print(form.errors)
+        self.client.post('/spna_admin/add/document/', form.data)
+        self.assertTrue(form.is_valid)
+        total_docs = Document.objects.all().count()
+        self.assertEqual(total_docs, 1)
 
 
 class TestNonSuperUserAccess(TestCase):
