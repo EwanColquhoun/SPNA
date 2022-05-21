@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, reverse, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
+
 from news.forms import ArticleForm
 from news.models import Articles
 from contact.models import Contact
@@ -48,6 +50,20 @@ def delete_article(request, article_id):
     messages.success(request, 'Article deleted successfully!')
     return HttpResponseRedirect(reverse('news'))
 
+@login_required
+@staff_member_required
+def delete_document(request, document_id):
+    """
+    Deletes the document when called.
+    """
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry only SPNA Admin can access this page.")
+        return redirect(reverse('home'))
+
+    document = get_object_or_404(Document, id=document_id)
+    document.delete()
+    messages.success(request, 'Document deleted successfully!')
+    return HttpResponseRedirect(reverse('members_area'))
 
 @login_required
 @staff_member_required
@@ -135,6 +151,7 @@ def add_article(request):
 
 @login_required
 @staff_member_required
+@require_POST
 def add_document(request):
     """
     A view to add documents from the spna_admin page.
@@ -143,16 +160,16 @@ def add_document(request):
         messages.error(request, "Sorry only Admin can access this page.")
         return redirect(reverse('home'))
 
-    if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Document successfully added!')
-            return redirect(reverse('spna_admin'))
-        else:
-            messages.error(request, 'Failed to add document. Please ensure the form is valid.')
+    # if request.method == 'POST':
+    form = DocumentForm(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Document successfully added!')
+        return redirect(reverse('spna_admin'))
     else:
-        form = DocumentForm()
+        messages.error(request, 'Failed to add document. Please ensure the form is valid.')
+    # else:
+    #     form = DocumentForm()
 
     users = User.objects.all()
 

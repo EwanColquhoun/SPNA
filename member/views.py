@@ -168,16 +168,16 @@ def update_payment_method(request):
         return redirect(reverse('profile'))
     
 
-@login_required
-@user_passes_test(lambda u: u.is_superuser)
-def delete_document(request, document_id):
-    """
-    Deletes the document when called.
-    """
-    doc = get_object_or_404(Document, id=document_id)
-    doc.delete()
-    messages.success(request, 'Document deleted successfully!')
-    return HttpResponseRedirect(reverse('member_area'))
+# @login_required
+# @user_passes_test(lambda u: u.is_superuser)
+# def delete_document(request, document_id):
+#     """
+#     Deletes the document when called.
+#     """
+#     doc = get_object_or_404(Document, id=document_id)
+#     doc.delete()
+#     messages.success(request, 'Document deleted successfully!')
+#     return HttpResponseRedirect(reverse('member_area'))
 
 
 def secure(request):

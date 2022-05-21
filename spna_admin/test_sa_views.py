@@ -1,5 +1,3 @@
-from unittest.mock import MagicMock
-
 from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User
@@ -10,7 +8,6 @@ from news.forms import ArticleForm
 from member.models import Document
 from member.forms import DocumentForm
 from contact.models import Contact
-from spna_admin.get_csv import export_qs_to_csv
 
 
 class TestSpnaAdminSuperuserViews(TestCase):
@@ -118,7 +115,6 @@ class TestSpnaAdminSuperuserViews(TestCase):
             'category':'1',
             'doc':doc,
         })
-        print(form.errors)
         self.client.post('/spna_admin/add/document/', form.data)
         self.assertTrue(form.is_valid)
         total_docs = Document.objects.all().count()

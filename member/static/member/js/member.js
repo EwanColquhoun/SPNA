@@ -2,7 +2,7 @@
 
 
 const modal_buttons = document.getElementById('delete-modal-buttons');
-const delete_buttons = document.querySelectorAll('.delete-button');
+const delete_buttons = document.querySelectorAll('.delete-doc-button');
 let modal = document.querySelector('#delete-modal')
 
 if (delete_buttons.length !== 0) {

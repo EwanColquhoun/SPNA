@@ -3,13 +3,7 @@ import datetime
 
 from django.http import HttpResponse
 
-
-def export_qs_to_csv(model_class = None):
-    """
-    Gets the model and related fields and inputs them into a csv for SPNA admin.
-    """
-    # Fields at request of client. No payment details allowed.
-    fields = [
+fields_list = [
         'user',
         'user__email',
         'user__first_name',
@@ -25,6 +19,13 @@ def export_qs_to_csv(model_class = None):
         'subscription',
         'paid_until',
     ]
+
+def export_qs_to_csv(model_class = None):
+    """
+    Gets the model and related fields and inputs them into a csv for SPNA admin.
+    """
+    # Fields at request of client. No payment details allowed.
+    fields = fields_list
 
     # Generate the csv file with datetime
     timestamp = datetime.date.today()

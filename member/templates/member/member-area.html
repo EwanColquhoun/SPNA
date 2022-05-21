@@ -105,7 +105,7 @@
                         {% if request.user.is_authenticated %}
                             {% if request.user.is_superuser %}
                                 <div>
-                                    <a class="delete-doc-button p-2" data-bs-toggle="modal" data-name="{{doc.id}}" data-bs-target="#delete-modal" href="#delete-doc-modal"><i class="fas fa-trash"></i></a>
+                                    <a class="delete-doc-button p-2" data-bs-toggle="modal" data-name="{{doc.id}}" data-bs-target="#delete-doc-modal"><i class="fas fa-trash"></i></a>
                                 </div>
                             {% endif %}
                         {% endif %}                        

@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.spna_admin, name='spna_admin'),
     path('delete/article/<article_id>', views.delete_article, name='delete_article'),
     path('delete/contact/<contact_id>', views.delete_contact, name='delete_contact'),
+    path('delete/document/<document_id>', views.delete_document, name='delete_document'),
     path('edit/<article_id>', views.edit_article, name='edit_article'),
     path('add/article/', views.add_article, name='add_article'),
     path('add/document/', views.add_document, name='add_document'),
