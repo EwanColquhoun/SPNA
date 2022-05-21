@@ -17,8 +17,6 @@ class ArticleForm(forms.ModelForm):
             'content': SummernoteWidget(),
             'image': CustomClearableFileInput()
         }
-        # image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

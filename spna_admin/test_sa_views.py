@@ -4,12 +4,14 @@ from django.contrib.auth.models import User
 from unittest.mock import MagicMock
 
 from news.models import Articles
+from news.forms import ArticleForm
 from member.models import Document
+from member.forms import DocumentForm
 from contact.models import Contact
 from spna_admin.get_csv import export_qs_to_csv
 
 
-class TestSpnaAdminViews(TestCase):
+class TestSpnaAdminSuperuserViews(TestCase):
     """Tests the main functions on the SPNA Admin page"""
 
     def setUp(self):
@@ -28,13 +30,6 @@ class TestSpnaAdminViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'spna_admin/spna_admin.html')
 
-    def test_can_add_article(self):
-        existing_articles = Articles.objects.all().count()
-        self.assertEqual(existing_articles, 0)
-        test_article = Articles.objects.create(
-            title='Test Article', content='Test article content', )
-        new_article = Articles.objects.filter(id=test_article.id)
-        self.assertEqual(len(new_article), 1)
 
     def test_can_send_email_form(self):
         """Tests the send email view"""
@@ -53,6 +48,41 @@ class TestSpnaAdminViews(TestCase):
         self.assertRedirects(response, '/spna_admin/')
         updated_contact = Contact.objects.filter(id=contact.id)[0]
         self.assertTrue(updated_contact.replied)
+
+    def test_can_add_article(self):
+        existing_articles = Articles.objects.all().count()
+        self.assertEqual(existing_articles, 0)
+        form = ArticleForm({
+            'title':'Test Article', 
+            'content':'Test article content', })
+        self.client.post('/spna_admin/add/article/', form.data)
+        total_articles = Articles.objects.all().count()
+        self.assertEqual(total_articles, 1)
+
+    def test_article_form_invalid_view(self):
+        form = ArticleForm({
+            'title':'', 
+            'content':'Test article content', })
+        response = self.client.post('/spna_admin/add/article/', form.data)
+        self.assertTemplateUsed('/spna_admin/edit_article.html')
+        total_articles = Articles.objects.all().count()
+        self.assertEqual(total_articles, 0)
+        self.assertEqual(response.status_code, 200)
+    
+    def test_can_edit_article(self):
+        article = Articles.objects.create(
+            title='Test Article', content='Great news about the Django tests', )
+        total_articles = Articles.objects.all().count()
+        self.assertEqual(total_articles, 1)
+        form_data = {
+            'title':'Edited Test Article',
+            'content':'Edited content',
+        }
+        response = self.client.post(f'/spna_admin/edit/{article.id}', form_data)
+        self.assertRedirects(response, '/news/')
+        edited_article = Articles.objects.get(id=article.id)
+        self.assertEqual(edited_article.title, 'Edited Test Article')
+        self.assertEqual(article.id, edited_article.id)
 
     def test_can_delete_article(self):
         test_article = Articles.objects.create(
@@ -73,6 +103,16 @@ class TestSpnaAdminViews(TestCase):
         self.assertRedirects(response, '/spna_admin/')
         current_contacts = Articles.objects.filter(id=test_contact.id)
         self.assertEqual(len(current_contacts), 0)
+
+    # def test_can_add_document(self):
+    #     existing_doc = Document.objects.all().count()
+    #     self.assertEqual(existing_doc, 0)
+    #     form = DocumentForm({
+    #         'title':'Test Document', 
+    #         'doc':'testdoc.pdf', })
+    #     self.client.post('/spna_admin/add/document/', form.data)
+    #     total_docs = Document.objects.all().count()
+    #     self.assertEqual(total_docs, 1)
 
 
 class TestNonSuperUserAccess(TestCase):
@@ -119,7 +159,7 @@ class TestNonSuperUserAccess(TestCase):
         self.assertEqual(len(current_docs), 0)
 
 
-class TestSuperUserAccess(TestCase):
+class TestSecureSuperUserAccess(TestCase):
     """Tests to ensure sensitive views are superuser access only"""
 
     def test_csv_access(self):

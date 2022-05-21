@@ -78,7 +78,6 @@ def edit_article(request, article_id):
     article = get_object_or_404(Articles, id=article_id)
 
     if request.method == 'POST':
-        # form = ArticleForm(instance=article)
         form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
             form.save()

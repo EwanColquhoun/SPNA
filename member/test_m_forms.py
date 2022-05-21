@@ -1,7 +1,12 @@
 from django.test import TestCase
-from django.test.client import Client
+from django.test.client import Client, RequestFactory
+
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 from .forms import ProfileForm, DocumentForm, EmailForm, CustomSignupForm
+from .models import Document
+
+import os
 
 
 class TestCustomSignupForm(TestCase):
@@ -96,3 +101,33 @@ class TestEmailForm(TestCase):
         self.assertFalse(form.is_valid())
         self.assertIn('email_body', form.errors.keys())
         self.assertEqual(form.errors['email_body'][0], 'This field is required.')
+
+
+class TestDocumentForm(TestCase):
+
+    def test_document_form_valid(self):
+        doc = SimpleUploadedFile(
+            "test_document.txt",
+            b"Document contents for test"
+        )
+        other_data = {
+            'doc':doc,
+        }
+        form_data = {
+            'title':'A Test Document',
+            'category':'1',
+        }
+        form = DocumentForm(form_data, other_data)
+        print(form.errors)
+        self.assertTrue(form.is_valid())
+
+    def test_document_form_not_valid(self):
+        form = DocumentForm({
+            'title':'A Test Document',
+            'doc':'',
+            'category':'1',
+        })
+        self.assertFalse(form.is_valid())
+        self.assertIn('doc', form.errors.keys())
+        self.assertEqual(form.errors['doc'][0], 'This field is required.')
+            
