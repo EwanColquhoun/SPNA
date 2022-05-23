@@ -31,6 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
+# DEBUG=False
 
 ALLOWED_HOSTS = ['localhost', 'scottishpna.herokuapp.com']
 CSRF_TRUSTED_ORIGINS = ["https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu45.gitpod.io", "https://scottishpna.herokuapp.com/"]
