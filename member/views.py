@@ -16,7 +16,7 @@ from allauth.exceptions import ImmediateHttpResponse
 
 from .models import Document, SPNAMember, Plan
 from .forms import CustomSignupForm, ProfileForm
-from .signals import get_fname, get_sname
+# from .signals import get_fname, get_sname
 from spna.email import register_email, cancel_email, cancel_email_to_member
 
 
@@ -316,8 +316,8 @@ def payment(request):
             fn = request.session['fullname']
             user = User.objects.get(email=request.session['email'])
             user.refresh_from_db()
-            user.first_name=get_fname(fn)
-            user.last_name=get_sname(fn)
+            user.first_name=SPNAMember.get_fname(fn)
+            user.last_name=SPNAMember.get_sname(fn)
             user.spnamember.sub_id=sub.id
             user.spnamember.stripe_id=customer.id
             user.spnamember.subscription=request.session['subscription']
@@ -353,8 +353,8 @@ def payment(request):
                     user = User.objects.get(email=request.session['email'])
                     user.refresh_from_db()
                     fn = request.session['fullname']
-                    user.first_name=get_fname(fn)
-                    user.last_name=get_sname(fn)
+                    user.first_name=SPNAMember.get_fname(fn)
+                    user.last_name=SPNAMember.get_sname(fn)
                     user.spnamember.subscription=request.session['subscription']
                     user.spnamember.fullname=request.session['fullname']
                     user.spnamember.phone=request.session['phone']

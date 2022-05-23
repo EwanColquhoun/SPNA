@@ -6,15 +6,15 @@ const delete_buttons = document.querySelectorAll('.delete-doc-button');
 let modal = document.querySelector('#delete-doc-modal')
 
 if (delete_buttons.length !== 0) {
-delete_buttons.forEach((button) => {
-    button.addEventListener('click', function () {
-    let document_id = button.getAttribute('data-name');
-    let modalButton = document.querySelector('#doc-modal-delete-button')
+    delete_buttons.forEach((button) => {
+        button.addEventListener('click', function () {
+        let document_id = button.getAttribute('data-name');
+        let modalButton = document.querySelector('#modal-delete-button')
 
-    modal.addEventListener('shown.bs.modal', function () {
-        modalButton.setAttribute('href', `/spna_admin/delete/document/${document_id}`);
+        modal.addEventListener('shown.bs.modal', function () {
+            modalButton.setAttribute('href', `/spna_admin/delete/document/${document_id}`);
+        });
     });
-});
 })};
 
 // stripe

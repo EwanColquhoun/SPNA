@@ -109,3 +109,24 @@ class SPNAMember(models.Model):
 
         self.save()
         return self.paid # added in for testing.
+
+    def get_fname(fullname):
+        try:
+            fname = fullname.split(' ', 1)[0]
+        except:
+            fname = fullname
+            raise ValueError(f"There must be a space between first and last names. {fullname}")
+        return fname
+
+    def get_sname(fullname):
+        try:
+            if ' ' in fullname:
+                sname = fullname.split(' ', 1)[1]
+                return sname
+            else:
+                sname = ''
+                return sname
+        except:
+            sname = fullname
+            raise ValueError(f"Your surname cannot be determined. {fullname}")
+        return sname
