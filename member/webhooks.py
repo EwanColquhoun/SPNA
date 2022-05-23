@@ -49,8 +49,8 @@ def webhook(request):
 
     if event_type =='invoice.paid':
         # Code to action when payment is all good (user login, update user paid until etc)
-        welcome_email_to_member(request.user)
         set_paid_until(request, event.data.object)
+        # welcome_email_to_member(request.user)
 
     if event_type == 'invoice.payment_failed':
         # If the payment fails or the customer does not have a valid payment method,

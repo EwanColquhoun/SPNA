@@ -98,7 +98,7 @@ def welcome_email_to_member(user):
     send_mail(
         'Welcome to the SPNA',
         f"""
-        Hi {user.spnamember.fullname},
+        Hi {user.first_name},
 
         Welcome to the Scottish Private Nursery Association (SPNA). We are delighted to have you on board.
         We are always looking for member contributions or feedback, so please don't hesitate to get in touch

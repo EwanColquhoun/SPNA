@@ -14,10 +14,15 @@ from allauth.account.forms import LoginForm, SignupForm
 from allauth.account.utils import complete_signup, perform_login
 from allauth.exceptions import ImmediateHttpResponse
 
-from spna.email import register_email, cancel_email, cancel_email_to_member, payment_error_admin
+from spna.email import (
+    register_email,
+    cancel_email,
+    cancel_email_to_member,
+    payment_error_admin,
+    welcome_email_to_member)
+
 from .models import Document, SPNAMember, Plan
 from .forms import CustomSignupForm, ProfileForm
-
 
 stripe_secret_key = settings.STRIPE_SECRET_KEY
 stripe_public_key = settings.STRIPE_PUBLISHABLE_KEY
@@ -317,9 +322,9 @@ def payment(request):
             user.spnamember.street_address1=request.session['street_address1']
             user.spnamember.nursery=request.session['nursery']
             user.save()
-            messages.success(request, f'Successfully created user {user.spnamember.fullname}.')
 
             perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
+            welcome_email_to_member(request.user)
 
             context = {
                 'form':log_form,
