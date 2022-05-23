@@ -14,10 +14,9 @@ from allauth.account.forms import LoginForm, SignupForm
 from allauth.account.utils import complete_signup, perform_login
 from allauth.exceptions import ImmediateHttpResponse
 
+from spna.email import register_email, cancel_email, cancel_email_to_member, payment_error_admin
 from .models import Document, SPNAMember, Plan
 from .forms import CustomSignupForm, ProfileForm
-# from .signals import get_fname, get_sname
-from spna.email import register_email, cancel_email, cancel_email_to_member
 
 
 stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -101,18 +100,13 @@ def renew_subscription(request):
         stripe.Subscription.modify(
             sub,
             cancel_at_period_end=False)
-        # Need to change these email to be renewal emails.
-        cancel_email(request.user)
-        # Need to change these email to be renewal emails.
-        cancel_email_to_member(request.user)
         member = get_object_or_404(SPNAMember, user=request.user)
         member.has_cancelled=False
         member.save()
-        # customer.cancel_subscription(at_period_end=True)
-        # request.user.spnamember.paid = False
         messages.success(request, f'Your subscription will continue as normal from {request.user.spnamember.paid_until}.')
-    except Exception as e:
-        messages.error(request, f'There has been an error. Please contact the SPNA. Error={e}.')
+    except Exception as err:
+        messages.error(request, f'There has been an error. Please contact the SPNA. Error={err}.')
+        payment_error_admin(request, err)
 
     return redirect(reverse('profile'))
 
@@ -133,11 +127,10 @@ def cancel_subscription(request):
         member = get_object_or_404(SPNAMember, user=request.user)
         member.has_cancelled=True
         member.save()
-        # customer.cancel_subscription(at_period_end=True)
-        # request.user.spnamember.paid = False
         messages.success(request, f'Your subscription will end at the end of the next billing period: {request.user.spnamember.paid_until}.')
-    except Exception as e:
-        messages.error(request, f'There has been an error. Please contact the SPNA. Error={e}.')
+    except Exception as err:
+        messages.error(request, f'There has been an error. Please contact the SPNA. Error={err}.')
+        payment_error_admin(request, err)
 
     return render(request, 'home/index.html')
 
@@ -163,8 +156,8 @@ def update_payment_method(request):
         messages.success(request, 'Your card details have been updated for the next payment.')
         return redirect(reverse('profile'))
 
-    except Exception as e:
-        messages.error(request, 'Card declined. Please check the details and try again.')
+    except Exception as err:
+        messages.error(request, f'Card declined. Please check the details and try again. {err}')
         return redirect(reverse('profile'))
     
 
@@ -184,15 +177,12 @@ def secure(request):
     """ 
     A view to show on 3d secure payment
     """
-    
-    # messages.success(request, f'Welcome {user.fullname} to the SPNA.')
     return render(request, 'member/3dsec.html')
 
 
 def subscribe(request):
-    # This view creates a payment intent..!
     """
-    This view is activated from the 'Sign Up' button.
+    This view is activated from the 'Sign Up' button. Creates the payment intent.
     """
 
     if request.method == 'POST':
@@ -281,9 +271,6 @@ def payment(request):
 
     if request.method == 'POST':
         try:
-
-            # # Automatic renewal for potential future development.
-        
             customer = stripe.Customer.create(
                 email=customer_email,
                 name=request.session['fullname'],
@@ -301,13 +288,14 @@ def payment(request):
                     },
                 ],
             )
-        except stripe.error.CardError as e:
-            print('ERROR', e)
+        except stripe.error.CardError as err:
+            messages.error(request, f"There was a problem with the card details. Please try again. {err}")
 
-        except stripe.error.StripeError as e:
+        except stripe.error.StripeError as err:
             # Display a very generic error to the user, and maybe send
             # yourself an email
-            print('ERROR', e)
+            payment_error_admin(request, err)
+            messages.error(request, f"Sorry we have encountered a problem. Please try again later. {err}")
             
 
         latest_invoice = stripe.Invoice.retrieve(sub.latest_invoice)
@@ -329,7 +317,6 @@ def payment(request):
             user.spnamember.street_address1=request.session['street_address1']
             user.spnamember.nursery=request.session['nursery']
             user.save()
-            register_email(user)
             messages.success(request, f'Successfully created user {user.spnamember.fullname}.')
 
             perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)

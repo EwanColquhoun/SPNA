@@ -1,46 +1,36 @@
-import stripe
 import datetime
 from django.contrib.auth.models import User
-
 from django.contrib import messages
 from django.conf import settings
-from .models import SPNAMember
+
+from spna.email import cancel_email, cancel_email_to_member
+
+import stripe
 
 
 def set_paid_until(request, charge):
     """
     Updates the spnamember model with a new paid until value.
     """
-    # print('setpaid until')
-
     stripe.api_key = settings.STRIPE_SECRET_KEY
     pi = stripe.PaymentIntent.retrieve(charge.payment_intent)
 
-    # print(pi.customer, 'picustomer')
     if pi.customer:
         customer = stripe.Customer.retrieve(pi.customer)
         email = customer.email
-        # print(customer, 'customer')
         if customer:
             sub = stripe.Subscription.list(limit=1, customer=customer.id)
-            # subscr = stripe.Subscription.retrieve(
-            #      customer['subscription'].data[0].id
-            # )
-            # print(subscr, 'subcr')
             current_period_end = sub.data[0]['current_period_end']
-            # print(current_period_end, 'sub')
 
         try:
             user = User.objects.get(email=email)
-            # print(user, 'user')
-        except Exception as e:
+        except RuntimeError as err:
           
-            messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{e}. Please contact Admin.')
+            messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
             return False
 
         user.spnamember.set_paid_until(current_period_end)
         user.spnamember.has_paid(current_date=datetime.date.today())
-        print(user.spnamember.paid, 'user')
    
     else:
         messages.error(request, 'No customer with this payment intent exists. Please contact Admin.')
@@ -53,22 +43,20 @@ def sub_cancelled(request, charge):
     stripe.api_key = settings.STRIPE_SECRET_KEY
     cust = stripe.PaymentIntent.retrieve(charge.customer)
 
-    # print(pi.customer, 'picustomer')
     if cust:
         customer = stripe.Customer.retrieve(cust)
         email = customer.email
-        # print(customer, 'customer')
         if customer:
             try:
                 user = User.objects.get(email=email)
-                # print(user, 'user')
-            except Exception as e:
+            except RuntimeError as err:
             
-                messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{e}. Please contact Admin.')
+                messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
                 return False
 
-        # user.spnamember.set_paid_until(current_period_end)
         user.spnamember.paid=False
+        cancel_email(request.user)
+        cancel_email_to_member(request.user)
 
     else:
         messages.error(request, 'No customer with this subscription exists. Please contact Admin.')
