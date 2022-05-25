@@ -92,7 +92,6 @@ function card(stripe_publishable_key, customer_email) {
                 form.appendChild(hiddenInput);
                 // Submit the form
                 form.submit();
-                // payWithCard(stripe, card, clientSecret);
             }
             });
               // Create Payment Method END

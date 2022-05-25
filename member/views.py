@@ -265,11 +265,7 @@ def payment(request):
 
     payment_intent_id = request.POST['payment_intent_id']
     payment_method_id = request.POST['payment_method_id']
-    print(payment_intent_id, 'intent')
-
     stripe_plan_id = request.POST['stripe_plan_id']
-    print(stripe_plan_id, 'plan_id')
-
     customer_email = request.POST['customer_email']
     stripe.api_key = stripe_secret_key
     log_form = LoginForm()
@@ -325,7 +321,7 @@ def payment(request):
 
             perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
             welcome_email_to_member(request.user)
-
+            messages.success(request, f'Successfully created SPNA Member {user.spnamember.fullname}.')
             context = {
                 'form':log_form,
             }
@@ -358,7 +354,7 @@ def payment(request):
                     user.save()
                     register_email(user)
 
-                    perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
+                    # perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
 
                     context = {
                         'payment_intent_secret': intent.client_secret,
@@ -366,8 +362,8 @@ def payment(request):
                     }
             
                     return render(request, 'member/3dsec.html', context)
-            except stripe.error.StripeError as e:
-                messages.warning(request, 'The card was declined. Please try again.')
+            except stripe.error.StripeError as err:
+                messages.warning(request, f'The card was declined. Please try again. {err}')
                 return redirect('subscribe')
 
 

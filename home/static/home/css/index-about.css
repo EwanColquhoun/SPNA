@@ -37,6 +37,12 @@
     letter-spacing: 1px;
 }
 
+/* --------------------------- Overview section */
+
+/* #overview-image-div {
+    max-height: 30vh;
+} */
+
 /* -----------------ABOUT PAGE--------------- */
 /* ------------------------- About-hero Section */
 #about-hero {
@@ -54,9 +60,7 @@
     left: 11%;
 }
 
-
 /* ------------------------- Guiding Section */
-
 
 /* Carousel from https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=thumbnail-carousel-with-content */
 

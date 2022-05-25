@@ -26,10 +26,16 @@ function _3dsec(stripe_publishable_key, pi_secret) {
           $("#3ds_result").html(htmlString);
           spinner.style.display = 'none'
 
-
         } else {
           // The payment has succeeded. Display a success message.
-          window.location.href = 'https://scottishpna.herokuapp.com/accounts/login/'
+          htmlString = 
+            `<p class="text-success"><strong>Payment accepted.</strong> Please continue to the SPNA site</p>
+            <div class="text-center p-5">
+              <a id="redirect-button" href="/" class="btn spna-btn">SPNA Home</a>
+            </div>`
+          $("#3ds_result").html(htmlString);
+          spinner.style.display = 'none'
+          // window.location.href = 'https://scottishpna.herokuapp.com/accounts/login/'
         }
       });
     }); // DOMContentLoaded
