@@ -21,7 +21,6 @@ if os.path.isfile('env.py'):
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -34,7 +33,7 @@ DEBUG = 'DEVELOPMENT' in os.environ
 # DEBUG=False
 
 ALLOWED_HOSTS = ['localhost', 'scottishpna.herokuapp.com']
-CSRF_TRUSTED_ORIGINS = ["https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu45.gitpod.io", "https://scottishpna.herokuapp.com/"]
+CSRF_TRUSTED_ORIGINS = ["https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu45.gitpod.io", "https://scottishpna.herokuapp.com"]
 
 SITE_ID = 1
 
@@ -106,7 +105,6 @@ SUMMERNOTE_CONFIG = {
         'width': '100%',
         'height': '360',
     }
-
 }
 
 TEMPLATES = [
@@ -146,13 +144,10 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 # EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 DEFAULT_FROM_EMAIL = "info@scottishpna.org"
 
-
 # Allauth
 # ACCOUNT_ADAPTER = 'member.adapter.MyAccountAdapter'
 # AUTH_USER_MODEL = 'member.SPNAMember'
 ACCOUNT_FORMS = {'signup': 'member.forms.CustomSignupForm'}
-
-
 
 # for the messages
 

@@ -61,8 +61,11 @@ def profile_view(request):
         cus = request.user.spnamember.stripe_id
         sub = request.user.spnamember.sub_id
         stripe.api_key = stripe_secret_key
-        pm = stripe.Customer.list_payment_methods(cus, type="card",)
-        default_pm = pm.data[0].card    
+        if cus:
+            p_method = stripe.Customer.list_payment_methods(cus, type="card",)
+            default_pm = p_method.data[0].card
+        else:
+            default_pm = False
 
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=member)
@@ -228,7 +231,7 @@ def subscribe(request):
             payment_intent = stripe.PaymentIntent.create(
                 amount=amount,
                 setup_future_usage='on_session',
-                currency='GBP',
+                currency='GBP',                
             )
 
             context = {
@@ -354,18 +357,23 @@ def payment(request):
                     user.save()
                     register_email(user)
 
-                    # perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
+                    perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
 
+                    stripe.PaymentIntent.confirm(
+                        latest_invoice.payment_intent,
+                        return_url="https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu45.gitpod.io/member/",
+                    )
+                    messages.success(request, 'This is a test message')
                     context = {
                         'payment_intent_secret': intent.client_secret,
                         'STRIPE_PUBLISHABLE_KEY': stripe_public_key,
                     }
             
                     return render(request, 'member/3dsec.html', context)
+                    
             except stripe.error.StripeError as err:
                 messages.warning(request, f'The card was declined. Please try again. {err}')
                 return redirect('subscribe')
-
 
         context = {
             'form':log_form,
