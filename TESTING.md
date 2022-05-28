@@ -63,39 +63,43 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 
 [Back to top](<#contents>)
 ## Browser Compatibility
-<!-- * The Flying Scotsmen application has been tested on Chrome, Edge, Safari and Firefox. During development the various webkits were used with the existing CSS to help prevent browser compatability issues. The Animate CSS library was used to help make the animations functional on all browsers.  -->
+* The SPNA site has been tested on Chrome, Edge, Safari and Firefox. During development the various webkits were used with the existing CSS to help prevent browser compatability issues.
 
 [Back to top](<#contents>)
 ## Testing User Stories
-<!-- * As a USER I can MAKE A BOOKING so that I CAN USE THE GROUP AIRCRAFT TO FLY.
-    - Once you are registered and approved by the Admin. The User can then access the Booking page by the Navigation menus. On the Bookings page the Approved User can then make bookings. 
 
-* As a USER I want to VIEW A CALENDAR OF BOOKINGS so that I CAN SEE AVAILABILITY OF AIRCRAFT.
-    - Once you are registered and approved by the Admin. The User can then access the Calendar page by the Navigation menus. On the Calendar page the Approved User can view all the bookings that have been both approved and awaiting approval.  
+* As a **USER** I want to **KNOW MORE ABOUT THE SPNA** so that I can **DETERMINE IF I WANT TO JOIN**.
+    - These is information on the *Admin Page* and the *Home page*. If more information is required there is the *Contact form* accessible from any page. 
 
-* As a USER I want to CANCEL A BOOKING so that I HAVE FLEXIBILITY WHEN BOOKING.
-    - On both the Booking page and the Calendar page the user can click on a 'Delete booking' icon. They will then be prompted to check that they want to proceed with the cancellation. 
+* As a **USER** I want to **JOIN THE SPNA** so that I can **BENIFIT FROM MEMBER PREVILAGES**.
+    - There is a *Join page* with a *Sign Up* form.
 
-* As a USER I want to EDIT A BOOKING so that I CAN CHANGE MY BOOKING DETAILS.
-    - On both the Booking page and the Calendar page the user can click on an 'edit booking' icon and be taken to the edit-booking page to amend their booking.
+* As a **USER** I want to **SEE WHAT NEWS ARITCLES RELATING TO THE SPNA** so that I can **BE MORE INFORMED ABOUT THEIR ACTIVITIES**.
+    - The latest news articles related to the SPNA are on the *News page*.
 
-* As a USER I want to REGISTER WITH THE SITE so thank I CAN MAKE BOOKINGS.
-    - On the home page there is a link to a Register page. Here the user can submit a form making a case to join the group. That information is then passed to the Admin for approval.
+* As a **USER** I want to **KNOW WHAT CAMPAIGNS THE SPNA ARE INVOLVED WITH** so that I can **LEARN AND VIEW THEIR CAUSES**.
+    - As well as the *News page* there is also the *Initiatives and Campaigns page, Initiatives section*.
 
-* As a USER I want to SEE WHAT AIRCRAFT THE GROUP OPERATES so that I CAN DECIDE IF I REGISTER.
-    - On the home page there is some information about the group and the aircraft they operate. It gives the user a basic understanding of what the aircraft capabilities are.
+* As a **USER** I want to **KNOW WHAT INITIATIVES THE SPNA ARE RUNNING** so that I can **DO MY PART AND HELP**.
+    - As well as the *News page* there is also the *Initiatives and Campaigns page, Campaigns section*.
 
-* As a USER I want to LOGIN so that I CAN VIEW, MAKE AND EDIT MY BOOKINGS.
-    - From any page a Login page can be accessed by the bottom most button in the navigation menus. This will take the User to a login page, or if they are already logged in, if clicked, it will log the user out.
+* As a **USER** I want to **CONTACT THE SPNA** so that I can **DIRECT ANY ENQUIRES APPROPRIATELY**.
+    - The *Contact modal* is accessible on every page of the SPNA website.
 
-* As an ADMIN I want to VIEW BOOKINGS so that I CAN MAKE SURE THE AIRCRAFT ARE AVAILABLE.
-    - Once logged into the Admin page of the site the Admin can approve, view, amend, and cancel the bookings.
+* As an **ADMIN** I want to **TAKE PAYMENTS** so that I can **BUILD UP A REVENUE STREAM FROM MEMBERS**.
+    - There is a payments system setup using *Stripe* payments. It allows the User to select their desired subscription plan.
 
-* As an ADMIN I want to EDIT BOOKINGS so that I CAN CONTACT THE USERS IF THE CONDITIONS CHANGE.
-    - Once logged into the Admin page of the site the Admin can approve, view, amend, and cancel the bookings.
+* As an **ADMIN** I want to **COLLECT MEMBER DETAILS** so that I can **CONTACT THEM REGARDING UPDATES AND NEWS**.
+    - The contact details of the members are accessible via the *SPNA Admin page*. There is also a downloadable list of member details in CSV format for ease of cross application use (mail merge, spreadsheets etc).
 
-* As an ADMIN I want to BOOK SLOTS so that THE AIRCRAFT HAVE PREPOPULATED SLOTS FOR MAINTAINANCE.
-    - In the Admin page the Admin has access to all the inner workings of the booking system. If the group gets more aircraft, the Admin can add these on with little effort. If more slots become available, again, the Admin can add more slots. If Admin needs to book an aircraft out for maintance or test flights this is also possible on both the Admin site and the main site once logged in as Admin. -->
+* As an **ADMIN** I want to **UPDATE THE NEWS ARTICLES** so that I can **KEEP THE WEBSITE NEWS PAGE CURRENT**.
+    - On the *SPNA Admin page* there is the ability to add an article. As a superuser the Admin also has access to the *Edit an Article page*. This allows edited articles to be uploaded.
+
+* As an **ADMIN** I want to **UPDATE THE MEMBER DOCUMENTS** so that I can **LET THE MEMBERS KNOW THE LATEST INFORMATION**.
+    - On the *SPNA Admin page* there is the ability to upload documents for the members. Documents can be deleted by the Admin on the *Members page* by the means of a button on each document.
+
+* As an **ADMIN** I want to **LINK TO SOCIAL MEDIA SITES** so that I can **INCREASE THE MEMBERSHIP**.
+    - There are social links in the *Footer* to the SPNA Facebook business page.
 
 [Back to top](<#contents>)
 ## Known Bugs

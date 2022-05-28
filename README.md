@@ -7,9 +7,9 @@ I was approached by the Client, one of the SPNA founders to see if I could make 
 This site has been designed and created with the end user (the Client) in mind. In conjunction with the Client many new features have 
 been added and some removed as the design process progressed. 
 
-<!-- ![live site screenshot](media/readme-images/liveSite.png) -->
+![live site screenshot](media/readme-images/live_site.jpeg)
 
-<!-- The live site can be viewed [here!](https://spna.herokuapp.com/) -->
+The live site can be viewed [here!](https://scottishpna.herokuapp.com/)
 
 # Contents
 
@@ -62,46 +62,102 @@ As a **USER** I want to **GOAL** so that i can **RESULT**.
 * As an **ADMIN** I want to **UPDATE THE MEMBER DOCUMENTS** so that I can **LET THE MEMBERS KNOW THE LATEST INFORMATION**.
 * As an **ADMIN** I want to **LINK TO SOCIAL MEDIA SITES** so that I can **INCREASE THE MEMBERSHIP**.
 
-
 The above user stories were created in conjunction with the Client and their deveopment progress monitored in an agile environment. The project tab of github was used to help with this task. The MoSCoW method was used to define acceptance criteria for each user story. This gave some guidance as to what was going to be required at each stage of the applications development. 
 
 [Back to top](<#contents>)
 
 ## Wireframes
- <!-- NEED TO ADD MOBILE WIREFRAMES -->
 
 * Home page 
 
+    <details><summary>Screenshots</summary>
+
     ![home page wireframe](media/readme-images/home.png)
+    </details>
 
 * About Us page
 
+    <details><summary>Screenshots</summary>
+
     ![About us page wireframe](media/readme-images/about-us.png)
+    </details>    
 
 * News page
 
+    <details><summary>Screenshots</summary>
+
     ![News page wireframe](media/readme-images/news.png)
+    </details>    
 
 * Initiatives|Campaigns page
 
+    <details><summary>Screenshots</summary>
+
     ![campaigns page wireframe](media/readme-images/init.png)
+    </details>    
 
 * Contact page
 
+    <details><summary>Screenshots</summary>
+    
     ![contact page wireframe](media/readme-images/contact.png)
+    </details>
 
 * Members page
 
-    ![members page wireframe](media/readme-images/contact.png)
+    <details><summary>Screenshots</summary>
+
+    ![members page wireframe](media/readme-images/member.png)
+    </details>
+    
 
 * SPNA Admin page
 
+    <details><summary>Screenshots</summary>
+
     ![SPNA Admin page wireframe](media/readme-images/spna-admin.png)
+    </details>
+    
 
 * Sign Up page
 
-    ![Sign Up page wireframe](media/readme-images/signup.png)
+    <details><summary>Screenshots</summary>
 
+    ![Sign Up page wireframe](media/readme-images/signup.png)
+    </details>
+    
+
+* Tablet Wireframes
+
+    The SPNA website is fully responsive. There are minimal changes when viewed on a table (iPad) sized display. The major change is with the navigation bar (navbar) on the smaller tablets and mobile devices. I have attached an example wireframe of how the navbar will look on these smaller screens. 
+
+   <details><summary>Screenshots</summary>
+
+    ![home page tablet wireframe](media/readme-images/home-tablet.png)
+    </details>
+    
+
+* Mobile Wireframes
+
+    In addition to the above navbar there are minor differences on a few pages and I have included them below. It mainly involves the arranging of news articles and SPNA Admin forms. 
+
+
+    <details><summary>Screenshots</summary>
+
+    * News:
+    ![News page wireframe](media/readme-images/news-mobile.png)
+
+    * SPNA Admin:
+    ![Admin page wireframe](media/readme-images/spnaadmin-mobile.png)
+
+    * Member Area:
+    ![Member-mobile page wireframe](media/readme-images/member-mobile.png)
+    </details>
+
+* Design progress notes
+
+    During the design and development phases the client had wished for the Initiatives and Campaigns page to be as one. This was easy to impliment and didn't detract from other important features. They also expressed a wish for a profile page for the User to access and change their information. With further discussion we agreed a list of must have, could have and won't have features at the initial release. 
+    The list comprised: Address and nursery details, subscription detail as must have. A could have feature was the ability to update payment details. These features I managed to implement and in addition, with consultation with the client I also created a way to cancel and then renew the subscription. The client liked this idea so it has remained. 
 
 [Back to top](<#contents>)
 
@@ -128,10 +184,14 @@ The above user stories were created in conjunction with the Client and their dev
 The models are as follows;
     * Custom user model (SPNAMember)
         - Builds on the Django user model but with specific nursery, SPNA and stripe details relating to payment.
+    * Plan (Plan)
+        - Ensures the subscription plan details are in the backend for enhanced security (changing price, expiry etc).
     * Contact details (Contact)
         - Adds the contact details from the contact form to the database.
     * Articles (Articles)
         - Adds articles for the news page into the database.
+    * Documents (Documents)
+        - Adds member documents for the members' area.
   
 <!-- ![Data Model](media/readme-images/dataModel.png) -->
 
@@ -140,68 +200,84 @@ The models are as follows;
 
 ## Existing Features
 
-### Home Page
-* Contains some basic introductory information about the SPNA.
 All pages contain:
   * #### Navigation Bar
 
     * A basic, responsive navbar is included. It contains all the pertinent pages for users, logged in users and admin.
-   
-    <!-- <details><summary>Screenshots</summary>
+    <details><summary>Screenshots</summary>
 
+    * Navigation Bar
+    ![Navbar](media/readme-images/navbar.jpeg)
+
+    * Navigation Bar open
+    ![Navbar Open](media/readme-images/navbar-open.jpeg)
+    
+    * Navigation Responsive Expanded (Admin logged in)
+    ![Navbar Expanded](media/readme-images/navbar-expanded.jpeg)
     </details>
-     -->
 
   * #### Footer
     * A basic footer showing the SPNA logo, SPNA email address for instant communications, a link to the social sites and copyright information.
+
+### Home Page
+* Contains some basic introductory information about the SPNA.
+   <details><summary>Screenshots</summary>
+
+    ![Spna Home](media/readme-images/home.jpeg)
+    </details>
 
 [Back to top](<#contents>)
 
 ### About Us page
 * The About us page contains information about the SPNA. It also has an animated section on the guiding principles of the SPNA.
 
-<!-- <details><summary>Screenshots</summary>
+    <details><summary>Screenshots</summary>
 
-</details> -->
+    ![About page](media/readme-images/about.jpeg)
+    </details>
 
 [Back to top](<#contents>)
 
 ### News page
 * Contains articles uploaded by the admin for any site user to view. The articles are informative and specific to the SPNA or early years learning. 
-Each article is displayed in a card that expands into a large modal for ease of viewing when clicked on. 
+Each article is displayed in a card that expands into a large modal for ease of viewing when clicked on.
 
-<!-- <details><summary>Screenshots</summary>
+<details><summary>Screenshots</summary>
 
-</details> -->
+![News page](media/readme-images/news.jpeg)
+![News article modal](media/readme-images/news-open.jpeg)
+</details>
 
 [Back to top](<#contents>)
 
 ### Initiatives and Campaigns page
 * This page has all the information on the Initiatives and Capmaigns that the SPNA are undertaking. It has a card that expands on hover for each of the initiatives and campaigns. Initially the campaigns were made to be changed frequently but on futher consultation with the client they deemed this unnessessary as there wont be many changes. 
-<!-- 
-<details><summary>Screenshots</summary>
 
-</details> -->
+    <details><summary>Screenshots</summary>
+
+    ![Initiative Page](media/readme-images/initiatives.jpeg)
+    </details>
 
 [Back to top](<#contents>)
 
 ### Contact Modal
 * When a User submits a contact request the application does a number of things. It logs the contact to the database for a record and it also emails the Admin with the details of the contact. Initially all contacts are marked as 'unreplied' (not replied). This gives the Admin a quick reference to see the status of the contact.
 
-<details><summary>Screenshots</summary>
+    <details><summary>Screenshots</summary>
 
-<!-- ![Contact](media/readme-images/contact-deployed.png) -->
-</details>
+    ![Contact Modal](media/readme-images/contact.jpeg)
+    </details>
 
 [Back to top](<#contents>)
 
 ### Members Area page
 * The members area is populated with documents that would be of interest to the members. The documents have been split into three categories (at the Client's request) to represent their type. They are, Media releases, Media mentions and Letters to and from government. The documents are visible in the browser with a pdf viewer and are downloadable.
-The documents are stored in the database as an instance of a model and are uploaded by admin from either the SPNA Admin page (Client) or the Django admin page (Developer).
-<!-- 
+The documents are stored in the database as an instance of a Document model and are uploaded by admin from either the SPNA Admin page (Client) or the Django admin page (Developer).
+
 <details><summary>Screenshots</summary>
 
-</details> -->
+![Members area](media/readme-images/members_area.jpeg)
+</details>
 
 [Back to top](<#contents>)
 
@@ -236,6 +312,12 @@ The SPNA admin page has;
         * An upload field for the admin as all members documents are produced offline in pdf format.
 These features were discussed at length with the client and implemented with the optimum ease of useage in mind. This page is only visible to the admin or other superusers (currently none).
 
+<details><summary>Screenshots</summary>
+
+![Spna Admin](media/readme-images/spna_admin.jpeg)
+</details>
+
+[Back to top](<#contents>)
 ### Profile Page
 The Profile page is viewable for members to view their own membership details. It contains
     * Current Details
@@ -248,6 +330,10 @@ The Profile page is viewable for members to view their own membership details. I
     * Update payment details form
         * Essentially creates a new payment method for the member and updates the Stripe user profile for the next billing sequence.
 
+<details><summary>Screenshots</summary>
+
+![Profile page](media/readme-images/profile.jpeg)
+</details>
 
 [Back to top](<#contents>)
 
