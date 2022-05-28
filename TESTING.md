@@ -34,9 +34,10 @@ After some minor re-formatting the script passed the JSHint tests. There are som
 
 [Back to top](<#contents>)
 ## Automated testing with Jest and Unittest
+The automated testing for The SPNA was completed using the Django built in test library Unittest, more specifically the TestCase class. The tests cover forms, models, views and other specific custom functions. Overall test coverage is at 76% for the Python based files. There are a number of lines of code associate with Stripe payments. These haven't been tested with the application as they are verified internally to Stripe.
 
-<!-- The automated testing for The Flying Scotsmen was completed using the Django built in test library Unittest, more specifically the TestCase class. The tests cover form, models and views. Overall test coverage is at 87% for the Python based files. 
-Jest was used for the testing with JavaScript. There are a number of external sources used (Google Maps, Flatpickr, Bootstrap) so I haven't endeavoured to test those items within my code. The coverage of the script file as a whole is at 38%. -->
+The automated testing for the Javascript files has been completed with Jest. There are minimal custom function for the SPNA. A number of the functions are Stripe specific and as above they haven't been tested within this application. Overall the tests cover <!--XXXX %?--> of the SPNA javascript files.
+<!-- Need to write test for the js in spna_admin -->
 
 * UnitTest for Django
     * UnitTest is built into Django. The documentation is located on the [Django](https://docs.djangoproject.com/en/4.0/topics/testing/overview/#running-tests) website. There is good documentaion for coverage located [here](https://docs.djangoproject.com/en/4.0/internals/contributing/writing-code/unit-tests/#code-coverage).
