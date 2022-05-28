@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', function() {
 })
 
 // Variables
-let emailList = [];
+// let emailList = [];
 // let emailField = document.querySelector('#id_email_to');
 // let selectButtons = document.querySelectorAll('.select-box');
 // Moved the below out of their functions for testing..
