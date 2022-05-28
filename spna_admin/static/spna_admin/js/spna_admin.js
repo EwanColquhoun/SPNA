@@ -97,3 +97,5 @@ delete_buttons.forEach((button) => {
     });
 });
 })};
+
+export {selectButton, checkAllContacts, checkAllMembers}

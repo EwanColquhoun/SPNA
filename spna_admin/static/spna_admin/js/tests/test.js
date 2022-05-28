@@ -3,7 +3,7 @@
  * @jest-environment jsdom
 */
 
-import * as spna from "./spna_admin.js";
+import * as spna from "../spna_admin.js";
 
 describe("Select box test", () => {
     // beforeAll(() => {

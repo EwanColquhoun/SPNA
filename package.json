@@ -1,9 +1,18 @@
 {
   "devDependencies": {
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0"
   },
+  "jest": {
+    "verbose": true
+  },
   "scripts": {
+    "type": "commonjs",
     "test": "jest"
+  },
+  "dependencies": {
+    "babel-jest": "^28.1.0"
   }
 }
