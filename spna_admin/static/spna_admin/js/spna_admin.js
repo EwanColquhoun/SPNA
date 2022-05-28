@@ -10,21 +10,24 @@ window.addEventListener('DOMContentLoaded', function() {
     csa.addEventListener('change', checkAllContacts)
 })
 
-
 // Variables
-// let emailList = [];
+let emailList = [];
+// let emailField = document.querySelector('#id_email_to');
+// let selectButtons = document.querySelectorAll('.select-box');
 // Moved the below out of their functions for testing..
-// let cbs = document.querySelectorAll('.member-select-box');
-// let cbc = document.querySelectorAll('.contact-select-box');
+// let mbs = document.querySelectorAll('.member-select-box');
+// let cbs = document.querySelectorAll('.contact-select-box');
 
 
-// Activated the checkbox to autopopulate email_to field
+
+// Activated the individual checkbox to autopopulate email_to field
 function selectButton() {
     let emailList = [];
     let emailField = document.querySelector('#id_email_to');
     let selectButtons = document.querySelectorAll('.select-box');
+
     selectButtons.forEach((person) => {
-                console.log('selectbutton')
+        console.log('selectbutton')
         person.addEventListener('change', function () {
             if (person.checked) {
                 let addy = person.getAttribute('value')
@@ -49,7 +52,7 @@ function checkAllMembers() {
 
         if(mbs[i].type == 'checkbox') {
             mbs[i].checked = this.checked;
-             if (mbs[i].checked) {
+            if (mbs[i].checked) {
                 let addy = mbs[i].getAttribute('value')
                 emailList.push(addy);
             } else {
@@ -68,14 +71,14 @@ function checkAllContacts() {
 
     for(var i=0; i < cbs.length; i++) {
         if(cbs[i].type == 'checkbox') {
-        cbs[i].checked = this.checked;
-         if (cbs[i].checked) {
-                let addy = cbs[i].getAttribute('value')
-                console.log(addy)
-                emailList.push(addy);
-            } else {
-                emailList.pop(-1)
-            }
+            cbs[i].checked = this.checked;
+            if (cbs[i].checked) {
+                    let addy = cbs[i].getAttribute('value')
+                    console.log(addy)
+                    emailList.push(addy);
+                } else {
+                    emailList.pop(-1)
+                }
         };
         emailField.value = emailList
         }

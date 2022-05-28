@@ -26,10 +26,22 @@ describe("Select box test", () => {
         document.body.innerHTML = `
             <tr>
                 <td>
+                    <input id="members-select-all" type="checkbox" >
+                </td>
+                <td>
+                    <input id="contacts-select-all" type="checkbox" >
+                </td>
+                <td>
                     <input type="checkbox" id="select1" class="member-select-box select-box" name="email" value="testemail@email.com">
                 </td>
                 <td>
-                    <input type="checkbox" id="select2" class="member-select-box select-box" name="email" value="noEmail">
+                    <input type="checkbox" id="select2" class="member-select-box select-box" name="email" value="allemails@email.com">
+                </td>
+                  <td>
+                    <input type="checkbox" id="select3" class="contact-select-box member-select-box select-box" name="email" value="third@email.com">
+                </td>
+                <td>
+                    <input type="checkbox" id="select4" class="contact-select-box member-select-box select-box" name="email" value="fourth@email.com">
                 </td>
             </tr>
             <div class="text-center">
@@ -38,14 +50,52 @@ describe("Select box test", () => {
             `
     })
 
-    test("Check members select boxes", () => {
+    test("Check Select All boxes", () => {
         const spy = jest.spyOn(spna, 'selectButton')
         let emailField = document.querySelector('#id_email_to');
-        let selectButtonTest = document.querySelectorAll('.select-box')
-        // let emailList = []
+
+        var cbs = document.querySelectorAll('.contact-select-box');
+        var mbs = document.querySelectorAll('.member-select-box');
+    
         spna.selectButton()
-        selectButtonTest[0].click()
-        let attr = selectButtonTest[0]['checked']
+        mbs[0].click()
+        cbs[0].click()
+        let attr = mbs[0]['checked']
+        let attr2 = cbs[0]['checked']
+        expect(spy).toHaveBeenCalled();
+        expect(attr).toBeTruthy();
+        expect(attr2).toBeTruthy();
+        // let emailList = spna.selectButton.emailList
+        let emailList = emailField.value;
+        let mail = emailList.toString(emailList)
+        expect(mail).toMatch("testemail@email.com,third@email.com")
+    })
+
+    test("Check Contact select boxes", () => {
+        const spy = jest.spyOn(spna, 'checkAllContacts')
+        let emailField = document.querySelector('#id_email_to');
+        let selectAll = document.getElementById('contacts-select-all')
+
+        selectAll.addEventListener('change', spna.checkAllContacts)
+        spna.checkAllContacts()
+        selectAll.click()
+        let attr = selectAll['checked']
+        expect(spy).toHaveBeenCalled();
+        expect(attr).toBeTruthy();
+        let emailList = emailField.value;
+        let mail = emailList.toString(emailList)
+        expect(mail).toMatch("third@email.com,fourth@email.com")
+    })
+
+    test("Check Member select boxes", () => {
+        const spy = jest.spyOn(spna, 'checkAllMembers')
+        let emailField = document.querySelector('#id_email_to');
+        let selectAll = document.getElementById('members-select-all')
+        selectAll.addEventListener('change', spna.checkAllMembers)
+
+        spna.checkAllMembers()
+        selectAll.click()
+        let attr = selectAll['checked']
         expect(spy).toHaveBeenCalled();
         expect(attr).toBeTruthy();
         let emailList = emailField.value;
