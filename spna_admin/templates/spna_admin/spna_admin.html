@@ -46,29 +46,31 @@
                 <div class="table-holder">
                     <table class="base-table bg-ant-white">
                             <tr>
-                                <th>Full Name</th>
-                                <th>Nursery</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Expiry Date</th>
-                                <th>All <input id="members-select-all" type="checkbox" ></th>
+                                <th class="text-center">Full Name</th>
+                                <th class="text-center">Nursery</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Phone</th>
+                                <th class="text-center">Expiry Date</th>
+                                <th class="text-center">All <input id="members-select-all" type="checkbox" ></th>
                             </tr>
                             {% for user in users %}
                             <tr>
-                                <td>{{user.spnamember.fullname}}</td>
-                                <td>{{user.spnamember.nursery}}</td>
-                                <td>
+                                <td class="text-center">{{user.spnamember.fullname}}</td>
+                                <td class="text-center">{{user.spnamember.nursery}}</td>
+                                <td class="text-center">
                                     <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.email}}">
                                         {{user.email|truncatechars:15}}
                                     </button>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.phone}}">
                                         {{user.spnamember.phone|truncatechars:5}}
                                     </button>
                                 </td>
-                                <td>{% if user.spnamember.paid %}{{user.spnamember.paid_until|date:"d M y" }}{% else %}Expired{% endif %}</td>
-                                <td><input type="checkbox" id="select" class="member-select-box select-box" name="email" value="{{user.email}}"></td>
+                                <td class="text-center">{% if user.spnamember.paid %}{{user.spnamember.paid_until|date:"d M y" }}{% else %}Expired{% endif %}</td>
+                                <td class="text-center">
+                                    <input type="checkbox" id="select" class="member-select-box select-box" name="email" value="{{user.email}}">
+                                </td>
 
                             </tr>
                             {% endfor %}
@@ -92,37 +94,43 @@
 
                     <table class="base-table">
                         <tr>
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Message</th>
-                            <th>Delete</th>
-                            <th>All <input id="contacts-select-all" type="checkbox" ></th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Phone</th>
+                            <th class="text-center">Message</th>
+                            <th class="text-center">Delete</th>
+                            <th class="text-center">All <input id="contacts-select-all" type="checkbox" ></th>
                         </tr>
                         {% for contact in contacts %}
                         <tr class="{% if contact.replied %}bg-green{% else %}bg-red{% endif %}">
-                            <td>{{contact.created|date:"d M y" }}</td>
-                            <td>{{contact.name}}</td>
-                            <td> 
+                            <td class="text-center">{{contact.created|date:"d M y" }}</td>
+                            <td class="text-center">{{contact.name}}</td>
+                            <td class="text-center"> 
                                 <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{contact.email}}">
                                     {{contact.email|truncatechars:15}}
                                 </button>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{contact.phone_number}}">
                                     {{contact.phone_number|truncatechars:5}}
                                 </button>
                             </td>
-                            <td> 
+                            <td class="text-center"> 
                                 <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{contact.message|safe}}">
                                     {{contact.message|safe|truncatechars:30}}
                                 </button>
                             </td>
-                            <td> 
+                            <td class="text-center"> 
                                 <a class="delete-cont-button p-2" data-bs-toggle="modal" data-name="{{contact.id}}" data-bs-target="#delete-cont-modal" href="#delete-cont-modal"><i class="fas fa-trash"></i></a>
                             </td>
-                            <td><input type="checkbox" id="select" name="email" class="contact-select-box select-box" value="{{contact.email}}"></td>
+                            <td class="text-center">
+                                <input type="checkbox" id="select" name="email" class="contact-select-box select-box" value="{{contact.email}}">
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td>No Contact requests.</td>
                         </tr>
                         {% endfor %}
                         

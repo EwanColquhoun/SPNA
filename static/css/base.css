@@ -371,6 +371,7 @@ footer a {
 
 #myModal .modal-content {
     flex-direction: row;
+    max-height: 100%;
 }
 
 /*For ios devices to enable modal scrolling*/

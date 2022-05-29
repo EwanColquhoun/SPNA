@@ -10,8 +10,7 @@
 * [Known Bugs](<#known-bugs>)
 * [Additional Testing](<#additional-testing>)
 
-<!-- ToDo - Acceptance criteria for user stories testing,
-    - tests themselves.
+<!-- ToDo - Linters for python and js. CSS Validators. Lighthouse
  -->
 
 ## Code Validation
@@ -36,20 +35,19 @@ After some minor re-formatting the script passed the JSHint tests. There are som
 ## Automated testing with Jest and Unittest
 The automated testing for The SPNA was completed using the Django built in test library Unittest, more specifically the TestCase class. The tests cover forms, models, views and other specific custom functions. Overall test coverage is at 76% for the Python based files. There are a number of lines of code associate with Stripe payments. These haven't been tested with the application as they are verified internally to Stripe.
 
-The automated testing for the Javascript files has been completed with Jest. There are minimal custom function for the SPNA. A number of the functions are Stripe specific and as above they haven't been tested within this application. Overall the tests cover <!--XXXX %?--> of the SPNA javascript files.
-<!-- Need to write test for the js in spna_admin -->
+The automated testing for the Javascript files has been completed with Jest. There are minimal custom function for the SPNA. A number of the functions are Stripe specific and as above they haven't been tested within this application. Overall the tests cover 75% of the spna_admin.js file. 
 
 * UnitTest for Django
     * UnitTest is built into Django. The documentation is located on the [Django](https://docs.djangoproject.com/en/4.0/topics/testing/overview/#running-tests) website. There is good documentaion for coverage located [here](https://docs.djangoproject.com/en/4.0/internals/contributing/writing-code/unit-tests/#code-coverage).
 
-<!-- ![Unittest Validation](media/readme-images/unittest.png)
+![Unittest Validation](media/readme-images/unittest.jpeg)
 
-![Coverage report](media/readme-images/coverage.png) -->
+![Coverage report](media/readme-images/coverage.jpeg)
 
 * Jest for JavaScript
     * Your application needs to be set up to use Jest for testing. There is good documentation on the [Jest](https://jestjs.io/docs/getting-started) website. 
-<!-- 
-![Jest Validation](media/readme-images/jest.png) -->
+
+![Jest Validation](media/readme-images/jest.jpeg)
 
 [Back to top](<#contents>)
 ## Responsiveness Test

@@ -378,13 +378,13 @@ Please refer to [**_here_**](TESTING.md) for more information on testing.
 5. Click "New" and select "create new app" from the drop-down menu. This is found in the upper right portion of the window. 
 6. Provide a unique name for your application and select your region.
 7. Click "Create App".
-![New app image](media/readme-images/new-app.png)
+![New app image](media/readme-images/new-app.jpeg)
 
 ### **To use the Heroku Postgres database:**
 
 1. Navigate to the "Resources" tab. Once there, in the search box type "Postgres". 
 2. You will then be able to attach this to the App you have just created.
-![Heroku Postgres image](media/readme-images/postgres.png)
+![Heroku Postgres image](media/readme-images/database-heroku.jpeg)
 
 ### Setting up the App within Heroku:
 
@@ -399,7 +399,7 @@ Please refer to [**_here_**](TESTING.md) for more information on testing.
         STRIPE_PLAN_YEARLY_ID,
     ].
 3. The config vars are specific to the local project. They are usually unique and often provided by the respective API in use.
-![Config Vars](media/readme-images/config-vars.png)
+![Config Vars](media/readme-images/config-vars.jpeg)
 
 ### App Deployment:
 
@@ -411,20 +411,23 @@ Please refer to [**_here_**](TESTING.md) for more information on testing.
     - Automatic Deployment: This will prompt Heroku to re-build your app each time you push your code to GitHub.
     - Manual Deployment: This will only prompt Heroku to build your app when you manually tell it to do so. 
 6. Ensure the correct branch is selected "master/Main", and select the deployment method that you desire.
-![Heroku deployment](media/readme-images/deploy.png)
+![Heroku deployment](media/readme-images/deploy.jpeg)
+
+#### *App Deployment* **UPDATED** 
+Heroku have recently (early 2022) changed their deployment methods due to a security breach. At the time of writing the method above was reinstated, however there is also a way to deploy using the Heroku CLI. There is more information [here](https://devcenter.heroku.com/articles/git#prerequisites-install-git-and-the-heroku-cli)
 
 ### **To fork the repository on GitHub:**
 A copy of the GitHub Repository can be made by forking the repository. This copy can be viewed and changes can be made to the copy without affecting the original repository. Take the following steps to fork the repository;
 1. Log in to **GitHub** and locate the [repository](https://github.com/EwanColquhoun/spna).
 2. On the right hand side of the page inline with the repository name is a button called **'Fork'**, click on the button to create a copy of the original repository in your GitHub Account.
-![GitHub forking process image](media/readme-images/forking.png)
+![GitHub forking process image](media/readme-images/forking.jpeg)
 
 ### **To create a local clone of this project:**
 The method for cloning a project from GitHub is below:
 
 1. Under the repository’s name, click on the **code** tab.
 2. In the **Clone with HTTPS** section, click on the clipboard icon to copy the given URL.
-![Cloning image](media/readme-images/clone.png)
+![Cloning image](media/readme-images/cloning.jpeg)
 3. In your IDE of choice, open **Git Bash**.
 4. Change the current working directory to the location where you want the cloned directory to be made.
 5. Type **git clone**, and then paste the URL copied from GitHub.
@@ -434,18 +437,14 @@ The method for cloning a project from GitHub is below:
 
 * Once the clone is accessed locally you need to set up the database, create a superuser, create the environmental variables, migrate the models into the database and install the dependencies from the requirements.txt file. 
 1. The default database included with Django is a SQLite variation of MYSQL. If you have preferred database you will need to edit the location of the Database in the settings file of your app.
-![Database setup](media/readme-images/database.png)
+![Database setup](media/readme-images/database.jpeg)
 
 2. To install all the required libraries and modules for the project you will need to install those listed in the requirements.txt file. This is achieved using the following prompt;
     > pip install -r requirements.txt
 
 3. There are a number of environmental variables for this project, API_KEY, DATABASE_URL, SECRET_KEY and the Stripe variables.
     
-    To set these up locally, create a file called env.py (will contain sensitive information so ensure the data is not publically viewable). Within that file you will need to import os and create the respective variables.
-
-    ![Env Var](media/readme-images/envvar.png)
-
-    The variables can then be accessed within your local code.
+    To set these up locally, create a file called env.py (will contain sensitive information so ensure the data is not publically viewable). Within that file you will need to import os and create the respective variables. The variables can then be accessed within your local code.
 
 4. Once you have the database set up you will need to mirgate the models over to it. This is done with the following command line prompts;
     > python3 manage.py makemigrations --dry-run 
@@ -464,7 +463,6 @@ The method for cloning a project from GitHub is below:
 6. You are set up and should be able to run the project with the following command;
     > python3 manage.py runserver
 
-
 [Back to top](<#contents>)
 
 # Credits
@@ -481,7 +479,7 @@ The method for cloning a project from GitHub is below:
 [Back to top](<#contents>)
 
 # Acknowledgements
-The site was completed as a Portfolio 5 Project piece for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). As such I would like to thank my mentor [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), the Slack community, and all at the Code Institute for their help and support. 
+The site was completed as a Portfolio 5 Project piece for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). As such I would like to thank my mentor [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), the Slack community, and all at the Code Institute for their help and support. I would also like to that the Client, The Scottish Private Nursery Association for the opportunity to work on this project together.
 
 Ewan Colquhoun 2022.
 

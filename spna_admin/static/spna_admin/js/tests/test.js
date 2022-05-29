@@ -6,11 +6,6 @@
 import * as spna from "../spna_admin.js";
 
 // describe("Select box test", () => {
-//     // beforeAll(() => {
-//     //     document.body.innerHTML = `
-//     //         <input type="password" name="password1" placeholder="Password" autocomplete="new-password" required id="id_password1">
-//     //         <input type="password" name="password2" placeholder="Password Again" autocomplete="new-password" required id="id_password2">`
-//     // })
 
 //     beforeAll(() => {
 //         let fs = require("fs");
@@ -65,7 +60,6 @@ describe("Select box test", () => {
         expect(spy).toHaveBeenCalled();
         expect(attr).toBeTruthy();
         expect(attr2).toBeTruthy();
-        // let emailList = spna.selectButton.emailList
         let emailList = emailField.value;
         let mail = emailList.toString(emailList)
         expect(mail).toMatch("testemail@email.com,third@email.com")

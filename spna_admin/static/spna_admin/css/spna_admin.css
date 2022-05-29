@@ -69,3 +69,10 @@
     opacity: 0.6;
     border-radius: 10px;
 }
+
+
+/* @media (min-width: 774px) {
+    #admin-header {
+        height: 20vh;
+    }
+} */

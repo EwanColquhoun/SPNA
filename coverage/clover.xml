@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1653766965451" clover="3.2.0">
-  <project timestamp="1653766965451" name="All files">
+<coverage generated="1653814741498" clover="3.2.0">
+  <project timestamp="1653814741498" name="All files">
     <metrics statements="55" coveredstatements="41" conditionals="12" coveredconditionals="9" methods="10" coveredmethods="5" elements="77" coveredelements="55" complexity="0" loc="55" ncloc="55" packages="1" files="1" classes="1"/>
     <file name="spna_admin.js" path="/workspace/SPNA/spna_admin/static/spna_admin/js/spna_admin.js">
       <metrics statements="55" coveredstatements="41" conditionals="12" coveredconditionals="9" methods="10" coveredmethods="5"/>
