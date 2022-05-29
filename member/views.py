@@ -218,7 +218,7 @@ def subscribe(request):
             elif plan == 'Six Monthly':
                 spi = settings.STRIPE_PLAN_SIXMONTHLY_ID
                 spna_plan = Plan.objects.get(pk=2)
-                amount = spna_plan.amount            
+                amount = spna_plan.amount        
             else:
                 spi = settings.STRIPE_PLAN_YEARLY_ID
                 spna_plan = Plan.objects.get(pk=3)
