@@ -308,8 +308,8 @@ def payment(request):
             fn = request.session['fullname']
             user = User.objects.get(email=request.session['email'])
             user.refresh_from_db()
-            user.first_name=SPNAMember.get_fname(fn)
-            user.last_name=SPNAMember.get_sname(fn)
+            user.first_name=user.spnamember.get_fname(fn)
+            user.last_name=user.spnamember.get_sname(fn)
             user.spnamember.sub_id=sub.id
             user.spnamember.stripe_id=customer.id
             user.spnamember.subscription=request.session['subscription']
@@ -344,8 +344,8 @@ def payment(request):
                     user = User.objects.get(email=request.session['email'])
                     user.refresh_from_db()
                     fn = request.session['fullname']
-                    user.first_name=SPNAMember.get_fname(fn)
-                    user.last_name=SPNAMember.get_sname(fn)
+                    user.first_name=user.spnamember.get_fname(fn)
+                    user.last_name=user.spnamember.get_sname(fn)
                     user.spnamember.subscription=request.session['subscription']
                     user.spnamember.fullname=request.session['fullname']
                     user.spnamember.phone=request.session['phone']
