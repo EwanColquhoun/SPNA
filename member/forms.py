@@ -1,8 +1,6 @@
 from django import forms
 from django_countries import countries
 from django_summernote.widgets import SummernoteWidget
-from django.core.exceptions import NON_FIELD_ERRORS
-
 
 from allauth.account.forms import SignupForm
 from .models import Document, SPNAMember
@@ -39,13 +37,16 @@ class CustomSignupForm(SignupForm):
 
     fullname = forms.CharField(max_length=40, required=True)
     nursery = forms.CharField(max_length=40, required=True,
-                            help_text='Please enter the name of the Nursery you are affiliated with.')
+                            help_text='Please enter the name of the '
+                            'Nursery you are affiliated with.')
     street_address1 = forms.CharField(max_length=40, required=False)
     town_or_city = forms.CharField(max_length=40, required=False)
-    postcode = forms.CharField(max_length=40, required=False)  
+    postcode = forms.CharField(max_length=40, required=False)
     country = forms.ChoiceField(choices=COUNTRY_CHOICES, required=False)
     phone = forms.CharField(max_length=15, required=False)
-    subscription = forms.ChoiceField(choices=PLAN, required=True)
+    subscription = forms.ChoiceField(choices=PLAN, required=True,
+                                    help_text='For access to member'
+                                    ' documents and SPNA Membership')
 
 
     field_order = [
@@ -63,13 +64,11 @@ class CustomSignupForm(SignupForm):
         'password2',
     ]
 
-  
-
     def save(self, request):
 
         # Ensure you call the parent class's save.
         # .save() returns a user object.
-        
+
         user = super().save(request)
         user.spnamember.fullname = self.cleaned_data['fullname']
         user.spnamember.nursery = self.cleaned_data['nursery']
@@ -87,13 +86,21 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = SPNAMember
-        exclude = ('user', 'subscription', 'paid_until', 'paid', 'stripe_id', 'sub_id', 'has_cancelled')
+        exclude = (
+            'user',
+            'subscription',
+            'paid_until',
+            'paid',
+            'stripe_id',
+            'sub_id',
+            'has_cancelled'
+            )
 
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['street_address1'].label = 'Street Address'
-        
+
 
 class DocumentForm(forms.ModelForm):
     """Article form management."""

@@ -7,7 +7,6 @@ from spna.email import contact_email
 from .forms import ContactForm
 
 
-# Create your views here.
 @require_POST
 def post_contact(request):
     """A view to manage contact requests"""

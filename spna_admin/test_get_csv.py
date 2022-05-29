@@ -24,5 +24,3 @@ class TestGetCsvVariables(TestCase):
             'paid_until',
         ]
         self.assertEqual(fields, text)
-
-    

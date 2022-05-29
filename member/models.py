@@ -1,13 +1,9 @@
 import datetime
 from datetime import date
 from django.contrib.auth.models import User, UserManager
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django_countries.fields import CountryField
-from django.conf import settings
 from django.db import models
+from django_countries.fields import CountryField
 
-# Create your models here.
 
 class Plan(models.Model):
     """ Creates the subscription plans in the backend for security."""
@@ -43,7 +39,7 @@ class Document(models.Model):
     def __str__(self):
         return str(self.title)
 
-    
+
 class SPNAMember(models.Model):
     """
     Extends the default User into the Member class

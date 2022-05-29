@@ -22,15 +22,15 @@ def spna_admin(request):
         messages.error(request, "Sorry only SPNA Admin can access this page.")
         return redirect(reverse('home'))
 
-    emailForm = EmailForm()
-    docForm = DocumentForm()
+    email_form = EmailForm()
+    doc_form = DocumentForm()
     form = ArticleForm()
     users = User.objects.all()
     contacts = Contact.objects.all()
 
     context = {
-        'emailForm': emailForm,
-        'docForm': docForm,
+        'emailForm': email_form,
+        'docForm': doc_form,
         'form': form,
         'users': users,
         'contacts': contacts,
@@ -74,7 +74,7 @@ def delete_contact(request, contact_id):
     if not request.user.is_superuser:
         messages.error(request, "Sorry only SPNA Admin can access this page.")
         return redirect(reverse('home'))
-        
+
     contact = get_object_or_404(Contact, id=contact_id)
     contact.delete()
     messages.success(request, 'Contact deleted successfully!')
@@ -90,7 +90,7 @@ def edit_article(request, article_id):
     if not request.user.is_superuser:
         messages.error(request, "Sorry only SPNA Admin can access this page.")
         return redirect(reverse('home'))
-    
+
     article = get_object_or_404(Articles, id=article_id)
 
     if request.method == 'POST':
@@ -184,7 +184,7 @@ def add_document(request):
 
 @login_required
 @staff_member_required
-def get_csv_of_users(request):
+def get_csv_of_users(): # Removed 'request' as an arg.. test please!
     """
     Gets a csv of the spnamember model
     """
@@ -213,7 +213,7 @@ def send_admin_email_view(request):
                         contact.replied = True
                         contact.created = contact.created
                         contact.save()
-                 
+
             return redirect(reverse('spna_admin'))
         else:
             messages.error(request, 'Failed to send email. Please ensure the form is valid.')
@@ -229,4 +229,3 @@ def send_admin_email_view(request):
     }
 
     return render(request, template, context)
-    

@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.views import generic
-from django.contrib import messages
-from .models import Articles
-from .forms import ArticleForm
+
 from contact.forms import ContactForm
+from .models import Articles
+
 
 class ArticleList(generic.ListView):
     """
@@ -17,7 +17,7 @@ class ArticleList(generic.ListView):
 
 def initiatives_view(request):
     """A view to return initiatives page """
-    
+
     form = ContactForm()
     template = 'news/initiatives.html'
     context = {
