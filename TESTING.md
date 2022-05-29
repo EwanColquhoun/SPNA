@@ -56,9 +56,11 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 
 |        | Moto G4 | Galaxy S5 | iPhone 5 | iPad | iPad Pro | Display <1200px | Display >1200px |
 |--------|---------|-----------|----------|------|----------|-----------------|-----------------|
-| Render | pass    | pass      | pass     | pass | pass     | pass            | pass            |
+| Render | pass    | pass      | pass     | pass | pass *    | pass            | pass            |
 | Images | pass    | pass      | pass     | pass | pass     | pass            | pass            |
 | Links  | pass    | pass      | pass     | pass | pass     | pass            | pass            |
+
+* Testing responsiveness on the iPad pro raised some bugs with the scrolling of the modals. These were rectified with some different CSS. After testing I noticed that it wasnt't just restricted to the SPNA application and many other commercial sites have similar (unaddressed) issues.
 
 [Back to top](<#contents>)
 ## Browser Compatibility
@@ -103,19 +105,14 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 [Back to top](<#contents>)
 ## Known Bugs
 * ### Resolved
-    <!-- There were a number of bugs that were overcome during the development process. 
-    1. The availability panel on the calendar page. The Calendar in the template tags isn't recognised by the availability section so it was difficult to find the problem and then develop a fix. The fix was to position it absolutley to the page and not the other block elements.
 
-    2. I wanted to add a message to be associated with the new user on the sign-up page. I tried submitting it as a separate form but that wasn't the ideal solution. The fix was to modify the default User class. Then modify the default sign-up form. 
-
-
-    3. During testing a console error relating to 'Module is not recognised'. After some investigation it was discovered that there were incompatibility issuse with the script.js and the script.jest.js files.
+    1. During testing a console error relating to 'Module is not recognised'. After some investigation it was discovered that there were incompatibility issuse with the script.js and the spna_admin.test.js files.
     <br>
     Initially I attemped to remove 'module.exports = {myFunctions}' and replace it with 'export {myFunctions}'. This removed the console error but caused the test file to fail (see next bug!).
 
-    ![Module error](media/readme-images/module-error.png)
+    <!-- ![Module error](media/readme-images/module-error.png) -->
 
-    4. Now that the module error was removed. The next task was to get the script.test.js file to run and pass all tests. This was a bit more complicated, the problem seems widespread and the fixes seem very dependent on the rest of the code setup. After trying numerous 'fixes' ranging from renaming the .js files to .mjs files to setting up jest.config.js files.
+    2. Now that the module error was removed. The next task was to get the spna_admin.test.js file to run and pass all tests. This was a bit more complicated, the problem seems widespread and the fixes seem very dependent on the rest of the code setup. After trying numerous 'fixes' ranging from renaming the .js files to .mjs files to setting up jest.config.js files.
     The ultimate fix in this case was to create a babel.config.js file and to include the following;
     <br>
     <br>
@@ -135,7 +132,9 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
         ],
         };
 
-    The issue seems to stem from the transferring of the common JS into a format readable by ES Modules. Jest/Babel seems to need configuring to accept the ES6 variation of JS.  -->
+    The issue seems to stem from the transferring of the common JS into a format readable by ES Modules. Jest/Babel seems to need configuring to accept the ES6 variation of JS.
+
+
 
 * ### Unresolved
     <!-- * At the time of writing there is one bug that might detract from the User Experience over the long term. On the Bookings page, currently all the bookings are displayed with the latest being at the top. As the number of bookings increase, the application will continue to display all the existing bookings. This will eventually take up memory and thus time. The most recent bookings are readily visible. For convenience it would be nice to only display the previous 6 months bookings for example. 

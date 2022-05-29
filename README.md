@@ -40,7 +40,8 @@ The live site can be viewed [here!](https://scottishpna.herokuapp.com/)
 * [**Credits**](<#credits>)
     * [**Content**](<#content>)
     * [**Media**](<#media>)
-*  [**Acknowledgements**](<#acknowledgements>)
+* [**Social Links**](<#social-links>)
+* [**Acknowledgements**](<#acknowledgements>)
 
 
 # User Experience (UX)
@@ -357,6 +358,7 @@ The Profile page is viewable for members to view their own membership details. I
 * [DrawSQL](https://drawsql.app/) - for the database diagram.
 * [IconFinder](https://www.iconfinder.com/) - for favicon.
 * [Jest](https://jestjs.io/) - Testing framework for JavaScript.
+* [Facebook](https://facebook.com) - Creating the SPNA business page.
 
 [Back to top](<#contents>)
 
@@ -477,6 +479,13 @@ The method for cloning a project from GitHub is below:
 * [Unsplash](https://unsplash.com/) - Stock Nursery Photos
 
 [Back to top](<#contents>)
+
+# Social Links
+The Scottish PNA has a Facebook business site managed my myself. [SPNA Facebook](https://www.facebook.com/ScottishPNA). It is accessible through the link in the footer and also by scanning the QR code on the contact form.
+<!-- Need to get QR code working -->
+<img src="/qr-code.png" alt="SPNA Facebook QR code" height="80px" width="80px"></img>
+
+![Facebook SPNA page](media/readme-images/facebook.jpeg)
 
 # Acknowledgements
 The site was completed as a Portfolio 5 Project piece for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). As such I would like to thank my mentor [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), the Slack community, and all at the Code Institute for their help and support. I would also like to that the Client, The Scottish Private Nursery Association for the opportunity to work on this project together.
