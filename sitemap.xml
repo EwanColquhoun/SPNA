@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>http://scottishpna.herokuapp.com/</loc>
+  <lastmod>2022-06-04T09:41:02+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://scottishpna.herokuapp.com/accounts/password/reset/</loc>
+  <lastmod>2022-06-04T09:41:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://scottishpna.herokuapp.com/accounts/login/</loc>
+  <lastmod>2022-06-04T09:41:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://scottishpna.herokuapp.com/member/subscribe/</loc>
+  <lastmod>2022-06-04T09:41:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://scottishpna.herokuapp.com/about/</loc>
+  <lastmod>2022-06-04T09:41:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://scottishpna.herokuapp.com/news/</loc>
+  <lastmod>2022-06-04T09:41:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://scottishpna.herokuapp.com/news/initiatives/</loc>
+  <lastmod>2022-06-04T09:41:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://scottishpna.herokuapp.com/spna_admin/delete/document/</loc>
+  <lastmod>2022-06-04T09:41:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://scottishpna.herokuapp.com/spna_admin/delete/article/</loc>
+  <lastmod>2022-06-04T09:41:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://scottishpna.herokuapp.com/spna_admin/delete/contact/</loc>
+  <lastmod>2022-06-04T09:41:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://scottishpna.herokuapp.com/accounts/login/?next=/member/cancel/</loc>
+  <lastmod>2022-06-04T09:41:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://scottishpna.herokuapp.com/summernote/editor/id_message/</loc>
+  <lastmod>2022-06-04T09:41:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+
+</urlset>
