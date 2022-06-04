@@ -5,15 +5,13 @@
 <!doctype html>
 <html lang="en">
     <head>
-
         {% block meta %}
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name='description' content="The Scottish Private Nursery Association is an operating association for private nurseries operating in Scotland">
-        <meta name="keywords" content="Scotland, Childcare, Early-years, Nursery, Association, Care">
+        <meta name="keywords" content="Scotland, childcare, early-years, nursery, association, children, learning, grass roots, membership">
         {% endblock %}
-
 
         {% block corecss %}
         <link prefetch rel="stylesheet"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
@@ -125,7 +123,6 @@
             </div>
         </header>
 
-            
         <!-- Contact Modal -->
         <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
@@ -158,7 +155,6 @@
         </div>  
 
         <!-- Delete Document Modal -->
-
         <div class="modal fade" id="delete-doc-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -177,9 +173,7 @@
             </div>
         </div>
     
-
         <!-- Delete Article Modal -->
-    
         <div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -199,7 +193,6 @@
         </div>
 
         <!-- Delete Contact Modal -->
-    
         <div class="modal fade" id="delete-cont-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -218,8 +211,7 @@
             </div>
         </div>
 
-          <!-- Delete Subscription Modal -->
-    
+        <!-- Delete Subscription Modal -->
         <div class="modal fade" id="delete-sub-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -240,14 +232,12 @@
 
         <!-- Messages Container -->
         {% if messages %}
-
             {% for message in messages %}
             <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
                 {{ message | safe }} 
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             {% endfor %}
-       
         {% endif %}
 
         {% block page_header %}
@@ -257,7 +247,6 @@
         {% endblock %}
 
         <!-- BTT Button -->
-
         <div class="btt-button shadow rounded-3 ">
             <a id="btt-link"class="btt-link d-flex h-100">
                 <i id="btt-arrow" class="fas fa-arrow-up text-black mx-auto my-auto"></i>
@@ -265,7 +254,6 @@
         </div>
 
         <!-- Footer -->
-
         <footer class=" fixed-bottom">
             <div id="footer" class="container-fluid bg-blue">
                 <div id="footer-row" class="row g-0">
@@ -284,7 +272,8 @@
                     </div>
                     <div class="col-12 col-lg-4 text-center my-auto mx-auto">
                         <ul class="social-networks text-blue">
-                            <li><a href="https://www.facebook.com/ScottishPNA" target="_blank" rel="noopener" aria-label="Visit our Facebook page (opens in a new tab)"><i class="fab fa-facebook-f socials"></i></a></li>
+                            <li><a href="https://www.facebook.com/ScottishPNA" class="socials" target="_blank" rel="noopener" aria-label="Visit our Facebook page (opens in a new tab)"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="https://www.gov.scot/policies/early-education-and-care/" class="socials" target="_blank" rel="noopener" aria-label="Link to the scottish government childcare page">gov.scot</a></li>
                             <!-- <li class="d-none d-lg-inline-block"><img src="{% get_media_prefix%}qr-code.png" alt="A QR code to the facebook page" height="50px" width="50px"></li> -->
                             <!-- <li><a href="https://www.linkedin.com/in/ewan-colquhoun-2b3535213/" target="_blank" rel="noopener" aria-label="Visit our LinkedIn page (opens in a new tab)"><i class="fab fa-linkedin-in socials"></i></a></li> -->
                         </ul>
@@ -292,18 +281,14 @@
                 </div>
                 <div id="inner-lower-footer" class="row">
                     <div class="col-12 text-center">
-                        <span class="text-muted">&copy 2022 E.Colquhoun  </span>
+                        <span class="text-muted">&copy 2022 E.Colquhoun | <a href="https://www.privacypolicygenerator.info/live.php?token=cq6yVuA7P1JMIN7gPPh7RXMo1xDmhY6m" target="_blank" rel="noopener">Privacy Policy</a></span>
                     </div>
                 </div>
             </div>
         </footer>
         
         <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-
-       
         {% block postloadjs %}
-         
         {% endblock %}
-        
     </body>
 </html>

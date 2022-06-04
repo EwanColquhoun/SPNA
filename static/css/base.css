@@ -170,7 +170,6 @@ footer a {
     height: fit-content;
 }
 
-
 #inner-lower-footer {
     background-color: aliceblue;
     max-height: max-content;
@@ -248,7 +247,6 @@ footer a {
     opacity: 1;
     transition: 1000ms ;
 }
-
 
 /* ------------------------------- bootstrap toasts */
 #msg {

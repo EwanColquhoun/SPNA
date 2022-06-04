@@ -36,13 +36,14 @@ The live site can be viewed [here!](https://scottishpna.herokuapp.com/)
         * [**Profile Page**](<#profile-page>)
         * [**Error Page**](<#error-page>)
     * [**Future Features**](<#future-features>)
+* [**Social Links**](<#social-links>)
+* [**Business Model**](<#business-model>)
 * [**Technologies Used**](<#technologies-used>)
 * [**Testing**](<#testing>)
 * [**Deployment**](<#deployment>)
 * [**Credits**](<#credits>)
     * [**Content**](<#content>)
     * [**Media**](<#media>)
-* [**Social Links**](<#social-links>)
 * [**Acknowledgements**](<#acknowledgements>)
 
 
@@ -160,6 +161,7 @@ The above user stories were created in conjunction with the Client and their dev
 * Design progress notes
 
     During the design and development phases the client had wished for the Initiatives and Campaigns page to be as one. This was easy to impliment and didn't detract from other important features. They also expressed a wish for a profile page for the User to access and change their information. With further discussion we agreed a list of must have, could have and won't have features at the initial release. 
+    <br>
     The list comprised: Address and nursery details, subscription detail as must have. A could have feature was the ability to update payment details. These features I managed to implement and in addition, with consultation with the client I also created a way to cancel and then renew the subscription. The client liked this idea so it has remained. 
 
 [Back to top](<#contents>)
@@ -184,7 +186,7 @@ The above user stories were created in conjunction with the Client and their dev
 [Back to top](<#contents>)
 
 # Data Model
-The models are as follows;
+- The models are as follows;
     * Custom user model (SPNAMember)
         - Builds on the Django user model but with specific nursery, SPNA and stripe details relating to payment.
     * Plan (Plan)
@@ -196,7 +198,7 @@ The models are as follows;
     * Documents (Documents)
         - Adds member documents for the members' area.
   
-<!-- ![Data Model](media/readme-images/dataModel.png) -->
+![Data Model](media/readme-images/data-model.jpeg)
 
 [Back to top](<#contents>)
 # Features
@@ -204,7 +206,7 @@ The models are as follows;
 ## Existing Features
 
 ### Base Template
-    All pages contain:
+- All pages contain:
   * #### Navigation Bar
 
     * A basic, responsive navbar is included. It contains all the pertinent pages for users, logged in users and admin.
@@ -357,6 +359,15 @@ The photo below is from the Page not found error page.
 
 [Back to top](<#contents>)
 
+# Social Links
+The Scottish PNA has a Facebook business site managed my myself. [SPNA Facebook](https://www.facebook.com/ScottishPNA). It is accessible through the link in the footer. Or at the time of writing, by searching on Facebook for ScottishPNA.
+
+![Facebook SPNA page](media/readme-images/facebook.jpeg)
+
+# Business Model
+The SPNA business model is based on a Business to Consumer (B2C) interaction. The consumer wants to become a member of the association (SPNA) to gain insight into the support available and to join an officially recognised association in the childcare field. 
+The membership is base on a subscription model using Stripe payments. There are three durations of membership to choose from; monthly, 6 monthly and yearly with an appropriate pricing structure. 
+
 # Technologies Used
 * [Python](https://docs.python.org/3/contents.html) - primary language of the application.
 * [HTML5](https://html.spec.whatwg.org/) - provides the content and structure for the website.
@@ -493,11 +504,6 @@ The method for cloning a project from GitHub is below:
 * [Unsplash](https://unsplash.com/) - Stock Nursery Photos
 
 [Back to top](<#contents>)
-
-# Social Links
-The Scottish PNA has a Facebook business site managed my myself. [SPNA Facebook](https://www.facebook.com/ScottishPNA). It is accessible through the link in the footer. Or at the time of writing, by searching on Facebook for ScottishPNA.
-
-![Facebook SPNA page](media/readme-images/facebook.jpeg)
 
 # Acknowledgements
 The site was completed as a Portfolio 5 Project piece for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). As such I would like to thank my mentor [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), the Slack community, and all at the Code Institute for their help and support. I would also like to that the Client, The Scottish Private Nursery Association for the opportunity to work on this project together.
