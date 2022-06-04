@@ -28,3 +28,6 @@ urlpatterns = [
     path('spna_admin/', include('spna_admin.urls')),
     path('member/', include('member.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'spna.views.page_not_found'
+handler500 = 'spna.views.server_not_found'

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}- Not Found{% endblock %}
+
+{% block page_header %}
+    <div class="container-fluid header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+<section class="title-section bg-light-blue">
+    <div class="container-fluid h-100 w-100 text-center">
+        <div class="overlay">
+            <div class="row h-100 w-100">
+                <div class="col-12 text-center my-auto">
+                    <h1 class="title-text">SPNA Page Not Found</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="admin-dashboard" class="bg-light-blue">
+    <div class="container-fluid">
+        <div class="row h-100">
+            <div class="col-12 text-center">
+                <p class="p-3">The page you are looking for is not found or has moved.</p>
+                <p class="p-3">Click <a href="{% url 'home' %}"><strong class="text-blue">here</strong></a> to navigate to the SPNA Home page</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
