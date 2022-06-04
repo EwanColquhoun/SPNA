@@ -23,9 +23,10 @@ The live site can be viewed [here!](https://scottishpna.herokuapp.com/)
 * [**Data Model**](<#data-model>)
 * [**Features**](<#features>)
     * [**Existing Features**](<#existing-features>)
-        * [**Home**](<#home-page>)
+        * [**Base Template**](<#base-template>)
             * [Navigation bar](<#navigation-bar>)
             * [Footer](<#footer>)
+        * [**Home**](<#home-page>)
         * [**About Us**](<#about-us-page>)
         * [**News Page**](<#news-page>)
         * [**Initiatives and Campaigns**](<#initiatives-and-campaigns-page>)
@@ -33,6 +34,7 @@ The live site can be viewed [here!](https://scottishpna.herokuapp.com/)
         * [**Members Area**](<#members-area-page>)
         * [**SPNA Admin Page**](<#spna-admin-page>)
         * [**Profile Page**](<#profile-page>)
+        * [**Error Page**](<#error-page>)
     * [**Future Features**](<#future-features>)
 * [**Technologies Used**](<#technologies-used>)
 * [**Testing**](<#testing>)
@@ -201,7 +203,8 @@ The models are as follows;
 
 ## Existing Features
 
-All pages contain:
+### Base Template
+    All pages contain:
   * #### Navigation Bar
 
     * A basic, responsive navbar is included. It contains all the pertinent pages for users, logged in users and admin.
@@ -334,6 +337,17 @@ The Profile page is viewable for members to view their own membership details. I
 <details><summary>Screenshots</summary>
 
 ![Profile page](media/readme-images/profile.jpeg)
+</details>
+
+[Back to top](<#contents>)
+
+### Error Page
+There are two custom error pages. One for the 404 Page not found error and one for the 500 Server error.
+They give the user notification of an error and links to all the main pages of the SPNA site.
+The photo below is from the Page not found error page.
+<details><summary>Screenshots</summary>
+
+![Error page](media/readme-images/error-page.jpeg)
 </details>
 
 [Back to top](<#contents>)
@@ -481,9 +495,7 @@ The method for cloning a project from GitHub is below:
 [Back to top](<#contents>)
 
 # Social Links
-The Scottish PNA has a Facebook business site managed my myself. [SPNA Facebook](https://www.facebook.com/ScottishPNA). It is accessible through the link in the footer and also by scanning the QR code on the contact form.
-<!-- Need to get QR code working -->
-<img src="/qr-code.png" alt="SPNA Facebook QR code" height="80px" width="80px"></img>
+The Scottish PNA has a Facebook business site managed my myself. [SPNA Facebook](https://www.facebook.com/ScottishPNA). It is accessible through the link in the footer. Or at the time of writing, by searching on Facebook for ScottishPNA.
 
 ![Facebook SPNA page](media/readme-images/facebook.jpeg)
 
