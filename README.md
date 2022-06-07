@@ -1,7 +1,7 @@
 # Scottish Private Nursery Association SPNA
 
 The Scottish Private Nursery Association is an operating association for private nurseries operating in Scotland. 
-The SPNA provides a body to the Private nursery owners and staff that can rely on and to help and support when required. 
+The SPNA provides a body to the Private nursery owners and staff that they can rely on and to help and support when required. 
 I was approached by the Client, one of the SPNA founders to see if I could make their updated website a bit more admin user friendly.
 
 This site has been designed and created with the end user (the Client) in mind. In conjunction with the Client many new features have 
@@ -51,10 +51,10 @@ The live site can be viewed [here!](https://scottishpna.herokuapp.com/)
 
 ## User Stories
 
-As a **USER** I want to **GOAL** so that i can **RESULT**.
+As a **USER** I want to **GOAL** so that I can **RESULT**.
 
 * As a **USER** I want to **KNOW MORE ABOUT THE SPNA** so that I can **DETERMINE IF I WANT TO JOIN**.
-* As a **USER** I want to **JOIN THE SPNA** so that I can **BENIFIT FROM MEMBER PREVILAGES**.
+* As a **USER** I want to **JOIN THE SPNA** so that I can **BENEFIT FROM MEMBER PRIVILAGES**.
 * As a **USER** I want to **SEE WHAT NEWS ARITCLES RELATING TO THE SPNA** so that I can **BE MORE INFORMED ABOUT THEIR ACTIVITIES**.
 * As a **USER** I want to **KNOW WHAT CAMPAIGNS THE SPNA ARE INVOLVED WITH** so that I can **LEARN AND VIEW THEIR CAUSES**.
 * As a **USER** I want to **KNOW WHAT INITIATIVES THE SPNA ARE RUNNING** so that I can **DO MY PART AND HELP**.
@@ -160,7 +160,7 @@ The above user stories were created in conjunction with the Client and their dev
 
 * Design progress notes
 
-    During the design and development phases the client had wished for the Initiatives and Campaigns page to be as one. This was easy to impliment and didn't detract from other important features. They also expressed a wish for a profile page for the User to access and change their information. With further discussion we agreed a list of must have, could have and won't have features at the initial release. 
+    During the design and development phases the client had wished for the Initiatives and Campaigns page to be as one. This was easy to implement and didn't detract from other important features. They also expressed a wish for a profile page for the User to access and change their information. With further discussion we agreed a list of must have, could have and won't have features at the initial release. 
     <br>
     The list comprised: Address and nursery details, subscription detail as must have. A could have feature was the ability to update payment details. These features I managed to implement and in addition, with consultation with the client I also created a way to cancel and then renew the subscription. The client liked this idea so it has remained. 
 
@@ -257,7 +257,7 @@ Each article is displayed in a card that expands into a large modal for ease of 
 [Back to top](<#contents>)
 
 ### Initiatives and Campaigns page
-* This page has all the information on the Initiatives and Capmaigns that the SPNA are undertaking. It has a card that expands on hover for each of the initiatives and campaigns. Initially the campaigns were made to be changed frequently but on futher consultation with the client they deemed this unnessessary as there wont be many changes. 
+* This page has all the information on the initiatives and campaigns that the SPNA are undertaking. It has a card that expands on hover for each of the initiatives and campaigns. Initially the campaigns were made to be changed frequently but on futher consultation with the client they deemed this unnessessary as there wont be many changes. 
 
     <details><summary>Screenshots</summary>
 
@@ -277,7 +277,7 @@ Each article is displayed in a card that expands into a large modal for ease of 
 [Back to top](<#contents>)
 
 ### Members Area page
-* The members area is populated with documents that would be of interest to the members. The documents have been split into three categories (at the Client's request) to represent their type. They are, Media releases, Media mentions and Letters to and from government. The documents are visible in the browser with a pdf viewer and are downloadable.
+* The members' area is populated with documents that would be of interest to the members. The documents have been split into three categories (at the Client's request) to represent their type. They are, Media releases, Media mentions and Letters to and from government. The documents are visible in the browser with a pdf viewer and are downloadable.
 The documents are stored in the database as an instance of a Document model and are uploaded by admin from either the SPNA Admin page (Client) or the Django admin page (Developer).
 
 <details><summary>Screenshots</summary>
@@ -288,8 +288,8 @@ The documents are stored in the database as an instance of a Document model and 
 [Back to top](<#contents>)
 
 ### SPNA Admin Page
-* The SPNA Admin page is a custom made page to enable to client to manage the site with ease. It contains all the admin features in one location for enhanced UX.
-The SPNA admin page has; 
+* The SPNA Admin page is a custom made page to enable the client to manage the site with ease. It contains all the admin features in one location for enhanced UX.
+The SPNA admin page has:
     * A members list containing;
         * Full name
         * Nursery
@@ -305,17 +305,17 @@ The SPNA admin page has;
         * Message (expandable if not visible)
         * Delete button (Deletes the contact from the database)
         * Select box (selects the member's email address and populates the 'To' field in the email interface)
-        - The contact list initially populates a contact with a red background signally that the contact has not been replied to. Once an email has been send to the contact's email address through the email interface the background changes to green. This is to enhance the awareness of the admin to the contact status.
+        - The contact list initially populates a contact with a red background signalling that the contact has not been replied to. Once an email has been send to the contact's email address through the email interface the background changes to green. This is to enhance the awareness of the admin to the contact status.
     * A button to download the members list as a CSV.
     * An email interface to allow the admin to send emails to either selected addresses or manually populated ones.
     * Add an Article (News) field
         * Title field
         * Content field
         * Image field.
-    * Add a Members document field.
+    * Add a Member's document field.
         * Document title field
         * Document category selection
-        * An upload field for the admin as all members documents are produced offline in pdf format.
+        * An upload field for the admin as all members' documents are produced offline in pdf format.
 These features were discussed at length with the client and implemented with the optimum ease of useage in mind. This page is only visible to the admin or other superusers (currently none).
 
 <details><summary>Screenshots</summary>
@@ -325,14 +325,14 @@ These features were discussed at length with the client and implemented with the
 
 [Back to top](<#contents>)
 ### Profile Page
-The Profile page is viewable for members to view their own membership details. It contains
+The Profile page is viewable for members to view their own membership details. It contains:
     * Current Details
         * Nursery, Email, Address, Subscription and renewal date.
     * Update details 
         * A form to update Nursery, Name, Address and Phone details
         * The form has buttons to change their email and to cancel the subscription
     * Current payment card display
-        * Displays the last 4 and expiry date
+        * Displays the last 4 digits and expiry date
     * Update payment details form
         * Essentially creates a new payment method for the member and updates the Stripe user profile for the next billing sequence.
 
@@ -366,7 +366,7 @@ The Scottish PNA has a Facebook business site managed my myself. [SPNA Facebook]
 
 # Business Model
 The SPNA business model is based on a Business to Consumer (B2C) interaction. The consumer wants to become a member of the association (SPNA) to gain insight into the support available and to join an officially recognised association in the childcare field. 
-The membership is base on a subscription model using Stripe payments. There are three durations of membership to choose from; monthly, 6 monthly and yearly with an appropriate pricing structure. 
+The membership is based on a subscription model using Stripe payments. There are three durations of membership to choose from; monthly, 6 monthly and yearly with an appropriate pricing structure. 
 
 # Technologies Used
 * [Python](https://docs.python.org/3/contents.html) - primary language of the application.
@@ -506,7 +506,7 @@ The method for cloning a project from GitHub is below:
 [Back to top](<#contents>)
 
 # Acknowledgements
-The site was completed as a Portfolio 5 Project piece for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). As such I would like to thank my mentor [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), the Slack community, and all at the Code Institute for their help and support. I would also like to that the Client, The Scottish Private Nursery Association for the opportunity to work on this project together.
+The site was completed as a Portfolio 5 Project piece for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). I would like to thank my mentor [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), the Slack community, and all at the Code Institute for their help and support. I would like to thank the team of testers (Family and friends, you know who you are!) for their help and and keen eye for spelling and grammar errors. I would also like to thank the Client, The Scottish Private Nursery Association for the opportunity to work on this project together.
 
 Ewan Colquhoun 2022.
 
