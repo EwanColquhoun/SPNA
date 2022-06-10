@@ -49,7 +49,8 @@ def webhook(request):
 
     if event_type == 'invoice.paid':
         # Code to action when payment is all good (user login, update user paid until etc)
-        wh_set_paid_until(request, event.data.object)
+        if event.data.object.payment_intent:
+            wh_set_paid_until(request, event.data.object)
         # welcome_email_to_member(request.user)
 
     if event_type == 'customer.subscription.updated':

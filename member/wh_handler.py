@@ -50,17 +50,13 @@ def update_paid_until(request, event):
         if customer:
             try:
                 user = User.objects.get(email=email)
+                user.spnamember.set_paid_until(expiry)
             except RuntimeError as err:
             
                 messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
                 return False
-
-        user.spnamember.set_paid_until(expiry)
-        print(user.spnamember.paid_until, 'new paid unitl?')
     else:
         messages.error(request, 'No customer with this subscription exists. Please contact Admin.')
-
-
 
 def sub_cancelled(request, charge):
     """Changes the 'paid' option of the SPNA member when subscription is deleted."""
