@@ -141,3 +141,24 @@ class EmailForm(forms.Form):
         self.email_subject = data['email_subject']
         self.email_body = data['email_body']
         return self
+
+
+class UpgradeForm(forms.Form):
+    """A form to update the subscription"""
+
+    M = 'Monthly'
+    M6 = 'Six Monthly'
+    Y = 'Yearly'
+
+    PLAN = (
+        (M, '£10 monthly'),
+        (M6, '£55 six monthly'),
+        (Y, '£100 yearly'),
+    )
+
+    new_plan = forms.ChoiceField(choices=PLAN, required=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['new_plan'].label = 'Chosen Subscription'
+   

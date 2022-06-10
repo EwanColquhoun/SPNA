@@ -22,7 +22,7 @@ from spna.email import (
     welcome_email_to_member)
 
 from .models import Document, SPNAMember, Plan
-from .forms import CustomSignupForm, ProfileForm
+from .forms import CustomSignupForm, ProfileForm, UpgradeForm
 
 stripe_secret_key = settings.STRIPE_SECRET_KEY
 stripe_public_key = settings.STRIPE_PUBLISHABLE_KEY
@@ -74,9 +74,11 @@ def profile_view(request):
             messages.success(request, 'Profile updated successfully')
 
         form = ProfileForm(instance=member)
+        upgrade_form = UpgradeForm()
 
         template = 'member/profile.html'
         context = {
+            'upgrade_form': upgrade_form,
             'form': form,
             'member': member,
             'STRIPE_PUBLIC_KEY': stripe_public_key,
@@ -85,15 +87,69 @@ def profile_view(request):
 
         return render(request, template, context)
     
+    upgrade_form = UpgradeForm()
     form = ProfileForm(instance=member)
     template = 'member/profile.html'
     context = {
+            'upgrade_form': upgrade_form,
             'form': form,
             'member': member,
             'STRIPE_PUBLIC_KEY': stripe_public_key,
             'pm': default_pm,
         }
     return render(request, template, context)
+
+
+@login_required
+def upgrade_subscription(request):
+    """
+    A view to change the logged in user's subscription.
+    """
+    plan =request.POST.get('new_plan')
+
+    if plan == 'Monthly':
+        spi = settings.STRIPE_PLAN_MONTHLY_ID
+        spna_plan = Plan.objects.get(pk=1)
+        amount = spna_plan.amount
+    elif plan == 'Six Monthly':
+        spi = settings.STRIPE_PLAN_SIXMONTHLY_ID
+        spna_plan = Plan.objects.get(pk=2)
+        amount = spna_plan.amount        
+    else:
+        spi = settings.STRIPE_PLAN_YEARLY_ID
+        spna_plan = Plan.objects.get(pk=3)
+        amount = spna_plan.amount
+
+    print(amount, 'amount')
+
+    try:
+        stripe.api_key = stripe_secret_key
+        sub = request.user.spnamember.sub_id
+        subscription = stripe.Subscription.retrieve(sub)
+        print(subscription['items']['data'][0].id,)
+        stripe.Subscription.modify(
+            subscription.id,
+            payment_behavior='pending_if_incomplete',
+            proration_behavior='always_invoice',
+            items=[{
+                'id': subscription['items']['data'][0].id,
+                'price': spi,
+            }]
+        )
+        member = get_object_or_404(SPNAMember, user=request.user)
+        member.subscription = spna_plan.name
+        member.save()
+        messages.success(request, f'Your subscription will continue as normal from {request.user.spnamember.paid_until}.')
+    except Exception as err:
+        messages.error(request, f'There has been an error. Please contact the SPNA. Error={err}.')
+        payment_error_admin(request, err)
+
+    return redirect(reverse('profile'))
+
+
+
+
+
 
 
 @login_required

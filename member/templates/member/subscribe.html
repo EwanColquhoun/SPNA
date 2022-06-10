@@ -36,7 +36,6 @@
             <p class="p-2">Already have an account? Then please <a href="{% url 'account_login' %}">sign in</a>.</p>
         </div>
         <div class="col-10 col-md-8 p-2 p-sm-5 h-100 mx-auto">
-            
             <form class="signup" id="signup_form" method="post" action="{% url 'subscribe' %}">
                 {% csrf_token %}
                 {{ form|crispy }}
@@ -57,7 +56,6 @@
                     <button class="spna-btn btn p-2" type="submit">Continue to Payment</button>
                 </div>
             </form>
-            
         </div>
     </div>
 </section>

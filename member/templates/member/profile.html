@@ -82,10 +82,21 @@
                             <td class="p-2 mw-50">Renewal Date:</td>
                             <td class="black-text p-1 overflow-auto">{{member.paid_until}}</td>
                         </tr>
-
-
-                        
                 </table>
+
+                <div class="mt-3 my-auto">
+                    <div>
+                        <h3>Change Subscription</h3>
+                    </div>
+                    <div>
+                        <form id="upgrade-subscription-form" action="{% url 'upgrade' %}" method="POST">
+                            {% csrf_token %}
+                            {{ upgrade_form|crispy }}
+                            <button class="spna-btn btn mt-3">Update</button>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="mt-3 my-auto">
                     <div>
                         <h3>Current Payment Card</h3>

@@ -16,6 +16,6 @@ urlpatterns = [
     path('profile/', views.profile_view, name='profile'),
     path('cancel/', views.cancel_subscription, name='cancel_subscription'),
     path('renew/', views.renew_subscription, name='renew'),
+    path('upgrade/', views.upgrade_subscription, name='upgrade'),
     path('update_payment_method/', views.update_payment_method, name='update_payment_method'),
-
 ]
