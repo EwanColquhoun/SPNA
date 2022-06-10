@@ -3,7 +3,7 @@ from django_countries import countries
 from django_summernote.widgets import SummernoteWidget
 
 from allauth.account.forms import SignupForm
-from .models import Document, SPNAMember
+from .models import Document, SPNAMember, Plan
 
 
 class CustomSignupForm(SignupForm):
@@ -146,19 +146,26 @@ class EmailForm(forms.Form):
 class UpgradeForm(forms.Form):
     """A form to update the subscription"""
 
+    # C = 'Current'
     M = 'Monthly'
     M6 = 'Six Monthly'
     Y = 'Yearly'
 
     PLAN = (
+        # (C, 'No Change'),
         (M, '£10 monthly'),
         (M6, '£55 six monthly'),
         (Y, '£100 yearly'),
     )
 
-    new_plan = forms.ChoiceField(choices=PLAN, required=True)
+    name = forms.ChoiceField(choices=PLAN, required=True)
+
+    class Meta:
+        model = Plan
+        fields = ('name',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['new_plan'].label = 'Chosen Subscription'
+        self.fields['name'].label = 'Chosen Subscription'
+        # self.fields['name'].default = request.user.spnamember.subscription.                                
    

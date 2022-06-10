@@ -116,6 +116,32 @@ def welcome_email_to_member(user):
         fail_silently=True,
     )
 
+def upgrade_email_to_member(user):
+    """
+    Sends the admin an email when the member cancels sub.
+    """
+    send_mail(
+        'SPNA Subscription changed',
+        f"""
+        Hi {user.first_name},
+
+        The change to your subscription has been successful. 
+        
+        Your plan is now: {user.spnamember.subscription} that expires on {user.spnamember.paid_until}
+        If you did not request a change please contact us at: info@scottishpna.org
+
+
+        Kind regards,
+
+        The SPNA team.
+
+        """,
+        None,
+        [{user.email}],
+        fail_silently=True,
+    )
+
+
 def failed_payment_to_member(user):
     """
     Sends the member an email when their payment fails.

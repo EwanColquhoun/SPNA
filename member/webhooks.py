@@ -7,8 +7,8 @@ from django.shortcuts import HttpResponse
 
 import stripe
 
-from .wh_handler import set_paid_until, sub_cancelled
-from spna.email import failed_payment_to_member, welcome_email_to_member
+from .wh_handler import wh_set_paid_until, sub_cancelled, update_paid_until
+from spna.email import failed_payment_to_member, welcome_email_to_member, upgrade_email_to_member
 
 
 stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -47,10 +47,15 @@ def webhook(request):
     data = request_data['data']
     event_type = request_data['type']
 
-    if event_type =='invoice.paid':
+    if event_type == 'invoice.paid':
         # Code to action when payment is all good (user login, update user paid until etc)
-        set_paid_until(request, event.data.object)
+        wh_set_paid_until(request, event.data.object)
         # welcome_email_to_member(request.user)
+
+    if event_type == 'customer.subscription.updated':
+        # Code to action when subscription is updated and paid (user login, update user paid until etc)
+        update_paid_until(request, event.data.object)
+        # upgrade email?
 
     if event_type == 'invoice.payment_failed':
         # If the payment fails or the customer does not have a valid payment method,

@@ -8,7 +8,7 @@ from spna.email import cancel_email, cancel_email_to_member
 import stripe
 
 
-def set_paid_until(request, charge):
+def wh_set_paid_until(request, charge):
     """
     Updates the spnamember model with a new paid until value.
     """
@@ -34,6 +34,31 @@ def set_paid_until(request, charge):
    
     else:
         messages.error(request, 'No customer with this payment intent exists. Please contact Admin.')
+
+
+def update_paid_until(request, event):
+    """Updates the paid until date when the subscription is changed."""
+    
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    sub = stripe.Subscription.retrieve(event.id)
+    cust = sub.customer
+    expiry = sub.current_period_end
+
+    if cust:
+        customer = stripe.Customer.retrieve(cust)
+        email = customer.email
+        if customer:
+            try:
+                user = User.objects.get(email=email)
+            except RuntimeError as err:
+            
+                messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
+                return False
+
+        user.spnamember.set_paid_until(expiry)
+        print(user.spnamember.paid_until, 'new paid unitl?')
+    else:
+        messages.error(request, 'No customer with this subscription exists. Please contact Admin.')
 
 
 

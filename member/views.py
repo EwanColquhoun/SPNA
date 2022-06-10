@@ -105,7 +105,7 @@ def upgrade_subscription(request):
     """
     A view to change the logged in user's subscription.
     """
-    plan =request.POST.get('new_plan')
+    plan =request.POST.get('name')
 
     if plan == 'Monthly':
         spi = settings.STRIPE_PLAN_MONTHLY_ID
@@ -119,8 +119,8 @@ def upgrade_subscription(request):
         spi = settings.STRIPE_PLAN_YEARLY_ID
         spna_plan = Plan.objects.get(pk=3)
         amount = spna_plan.amount
-
-    print(amount, 'amount')
+    # else:
+    #     messages.error(request, 'Please ensure the correct subscription is chosen.')
 
     try:
         stripe.api_key = stripe_secret_key
@@ -139,7 +139,9 @@ def upgrade_subscription(request):
         member = get_object_or_404(SPNAMember, user=request.user)
         member.subscription = spna_plan.name
         member.save()
-        messages.success(request, f'Your subscription will continue as normal from {request.user.spnamember.paid_until}.')
+        print(member.spnamember.subscription, 'subscription')
+        print(member.spnamember.paid_until, 'pu')
+        messages.success(request, 'Your subscription has been changed.')
     except Exception as err:
         messages.error(request, f'There has been an error. Please contact the SPNA. Error={err}.')
         payment_error_admin(request, err)
