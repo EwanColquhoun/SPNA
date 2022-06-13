@@ -38,7 +38,6 @@
     </head>
 
     <body>
-     
         <header class="fixed-top bg-blue">
             <div class="container-fluid">
 
@@ -131,19 +130,10 @@
                         <h5 class="modal-title" id="staticBackdropLabel">Contact Form</h5>
                         <button type="button" class="btn-close modal-close-button" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <!-- contact form to go here -->
                     <div class="modal-body col-12 bg-whitesmoke">
-                    
                         <form action="{% url 'post_contact' %}" method="POST">
-                            
-                            
                             {% csrf_token %}
-                            
                             {{ contact_form|crispy }}
-                            
-                            
-                            <!-- <button type="submit" id="toastbtn" class="btn btn-primary">Submit</button> -->
-                            
                             <div class="modal-footer bg-light-blue">
                                 <button type="button" class="btn btn-secondary modal-close-button" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" id="toastbtn" class="btn spna-btn">Submit</button>
@@ -167,7 +157,7 @@
                     </div>
                     <div class="modal-footer" id="delete-modal-buttons">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a id="doc-modal-delete-button" aria-label="Delete" href="/spna_admin/delete/document/{{document.id}}" class="btn btn-back delete-button">DELETE</a>
+                        <a id="doc-modal-delete-button" aria-label="Delete" href="/spna_admin/delete/document/{{doc.id}}" class="btn btn-back delete-button">DELETE</a>
                     </div>
                 </div>
             </div>

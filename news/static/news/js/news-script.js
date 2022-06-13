@@ -21,6 +21,5 @@ articleModal.addEventListener('show.bs.modal', function (event) {
     modalBody.innerHTML = content
     modalImage.innerHTML = image
 
-
 })
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, reverse, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.decorators.http import require_POST
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
@@ -45,6 +45,10 @@ def delete_article(request, article_id):
     """
     Deletes the article when called.
     """
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry only SPNA Admin can access this page.")
+        return redirect(reverse('home'))
+
     article = get_object_or_404(Articles, id=article_id)
     article.delete()
     messages.success(request, 'Article deleted successfully!')
@@ -52,7 +56,7 @@ def delete_article(request, article_id):
 
 @login_required
 @staff_member_required
-def delete_document(request, document_id):
+def delete_document(request, doc_id):
     """
     Deletes the document when called.
     """
@@ -60,10 +64,23 @@ def delete_document(request, document_id):
         messages.error(request, "Sorry only SPNA Admin can access this page.")
         return redirect(reverse('home'))
 
-    document = get_object_or_404(Document, id=document_id)
+    document = get_object_or_404(Document, id=doc_id)
     document.delete()
     messages.success(request, 'Document deleted successfully!')
-    return HttpResponseRedirect(reverse('members_area'))
+    return HttpResponseRedirect(reverse('member_area'))
+
+    
+# @login_required
+# @user_passes_test(lambda u: u.is_superuser)
+# def delete_document(request, document_id):
+#     """
+#     Deletes the document when called.
+#     """
+#     doc = get_object_or_404(Document, id=document_id)
+#     doc.delete()
+#     messages.success(request, 'Document deleted successfully!')
+#     return HttpResponseRedirect(reverse('member_area'))
+
 
 @login_required
 @staff_member_required
@@ -79,7 +96,6 @@ def delete_contact(request, contact_id):
     contact.delete()
     messages.success(request, 'Contact deleted successfully!')
     return HttpResponseRedirect(reverse('spna_admin'))
-
 
 @login_required
 @staff_member_required
@@ -180,7 +196,6 @@ def add_document(request):
     }
 
     return render(request, template, context)
-
 
 @login_required
 @staff_member_required
