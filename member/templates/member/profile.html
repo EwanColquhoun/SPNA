@@ -84,6 +84,9 @@
                         </tr>
                 </table>
 
+                
+                <hr class="d-block p-1 mx-auto admin-hr">
+
                 <div class="mt-3 my-auto">
                     <div>
                         <h3>Change Subscription</h3>
@@ -97,6 +100,8 @@
                     </div>
                 </div>
 
+                <hr class="d-block p-1 mx-auto admin-hr">
+
                 <div class="mt-3 my-auto">
                     <div>
                         <h3>Current Payment Card</h3>
@@ -105,7 +110,7 @@
                             Expiry:{{pm.exp_month}}/{{pm.exp_year}}</p>
                     </div>
                     <div>
-                        <h3>Update payment details</h3>
+                        <p>Update payment details:</p>
                     </div>
                     <form id="update-payment-form" action="{% url 'update_payment_method' %}" method="post">
                         {% csrf_token %}
@@ -123,6 +128,9 @@
                         </p> -->
                     </form>
                 </div>
+                
+                <hr class="d-block d-md-none p-1 mx-auto admin-hr">
+
             </div>
             <div class="col-12 col-md-6 col-lg-5 p-2 mx-auto">
                 <h3>Update your details</h3>

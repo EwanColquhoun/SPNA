@@ -190,10 +190,6 @@ body.modal-open {
     height: 10rem;
 }
 
-#campaign-body {
-    height: 100vhvh;
-}
-
 #camp-row {
     background: url('/media/jumping-kids.jpg') no-repeat center;
     background-color: rgba(41, 90, 37, 0.5);
@@ -201,3 +197,11 @@ body.modal-open {
     padding: 3%;
     padding-bottom: 10rem;
 }
+
+#camp-titles {
+    z-index: 2;
+}
+
+#camp-titles .title-text {
+    top:4%;
+} 
