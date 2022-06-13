@@ -65,8 +65,6 @@ describe("Select box test", () => {
         expect(mail).toMatch("testemail@email.com,third@email.com")
         cbs[0].click()
         expect(mail).toMatch("testemail@email.com")
-
-
     })
 
     test("Check Contact select boxes", () => {

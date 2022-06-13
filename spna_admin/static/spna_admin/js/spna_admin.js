@@ -1,39 +1,31 @@
 window.addEventListener('DOMContentLoaded', function() {
-    checkAllContacts()
-    checkAllMembers()
     selectButton()
-    // Moved the below to the window.add... They were below (outside the brackets). Check for deployment.
-    let msa = document.getElementById('members-select-all')
-    msa.addEventListener('change', checkAllMembers)
-
     let csa = document.getElementById('contacts-select-all')
     csa.addEventListener('change', checkAllContacts)
+    let msa = document.getElementById('members-select-all')
+    msa.addEventListener('change', checkAllMembers)
 })
-
 // Variables
 let emailList = [];
-let emailField = document.querySelector('#id_email_to');
-let selectButtons = document.querySelectorAll('.select-box');
+// let emailField = document.querySelector('#id_email_to');
+// let selectButtons = document.querySelectorAll('.select-box');
 // Moved the below out of their functions for testing..
 // let mbs = document.querySelectorAll('.member-select-box');
 // let cbs = document.querySelectorAll('.contact-select-box');
 
-
-
 // Activated the individual checkbox to autopopulate email_to field
 function selectButton() {
     // let emailList = [];
-    // let emailField = document.querySelector('#id_email_to');
-    // let selectButtons = document.querySelectorAll('.select-box');
+    let emailField = document.querySelector('#id_email_to');
+    let selectButtons = document.querySelectorAll('.select-box');
 
     selectButtons.forEach((person) => {
-        console.log('selectbutton')
+        let addy = person.getAttribute('value')
         person.addEventListener('change', function () {
             if (person.checked) {
-                let addy = person.getAttribute('value')
                 emailList.push(addy);
             } else {
-                emailList.pop(-1)
+                emailList.shift(addy)
             }
             emailField.value = emailList
         });
@@ -45,18 +37,17 @@ function selectButton() {
 // Select box for all members
 function checkAllMembers() {
     var mbs = document.querySelectorAll('.member-select-box');
-    // let emailField = document.querySelector('#id_email_to')
+    let emailField = document.querySelector('#id_email_to')
     // let emailList = []
 
     for(var i=0; i < mbs.length; i++) {
-
         if(mbs[i].type == 'checkbox') {
-            mbs[i].checked = this.checked;
+            mbs[i].checked= this.checked;
+            let addy = mbs[i].getAttribute('value')
             if (mbs[i].checked) {
-                let addy = mbs[i].getAttribute('value')
                 emailList.push(addy);
             } else {
-                emailList.pop(-1)
+                emailList.shift(addy)
             }
         };
         emailField.value = emailList
@@ -66,19 +57,18 @@ function checkAllMembers() {
 // Selectbox for all contacts
 function checkAllContacts() {
     var cbs = document.querySelectorAll('.contact-select-box');
-    // let emailField = document.querySelector('#id_email_to')
+    let emailField = document.querySelector('#id_email_to')
     // let emailList = []
 
     for(var i=0; i < cbs.length; i++) {
         if(cbs[i].type == 'checkbox') {
             cbs[i].checked = this.checked;
+            let addy = cbs[i].getAttribute('value')
             if (cbs[i].checked) {
-                    let addy = cbs[i].getAttribute('value')
-                    console.log(addy)
-                    emailList.push(addy);
-                } else {
-                    emailList.pop(-1)
-                }
+                emailList.push(addy);
+            } else {
+                emailList.shift(addy)
+            }
         };
         emailField.value = emailList
         }
