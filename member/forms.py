@@ -146,13 +146,11 @@ class EmailForm(forms.Form):
 class UpgradeForm(forms.Form):
     """A form to update the subscription"""
 
-    # C = 'Current'
     M = 'Monthly'
     M6 = 'Six Monthly'
     Y = 'Yearly'
 
     PLAN = (
-        # (C, 'No Change'),
         (M, '£10 monthly'),
         (M6, '£55 six monthly'),
         (Y, '£100 yearly'),
@@ -166,6 +164,4 @@ class UpgradeForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['name'].label = 'Chosen Subscription'
-        # self.fields['name'].default = request.user.spnamember.subscription.                                
-   
+        self.fields['name'].label = 'Upgrade to:'

@@ -1,25 +1,23 @@
 import stripe
 
-from datetime import datetime
-from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404, redirect, HttpResponse
-from django.contrib.auth.decorators import login_required, user_passes_test
-from django.views.decorators.csrf import csrf_protect
+from django.shortcuts import render, reverse, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.conf import settings
 
-from allauth.account.views import SignupView
-from allauth.account.forms import LoginForm, SignupForm
-from allauth.account.utils import complete_signup, perform_login
-from allauth.exceptions import ImmediateHttpResponse
+from allauth.account.forms import LoginForm
+from allauth.account.utils import perform_login
 
 from spna.email import (
     register_email,
     cancel_email,
     cancel_email_to_member,
     payment_error_admin,
-    welcome_email_to_member)
+    welcome_email_to_member,
+    upgrade_email_to_member,
+    test_email)
 
 from .models import Document, SPNAMember, Plan
 from .forms import CustomSignupForm, ProfileForm, UpgradeForm
@@ -27,10 +25,9 @@ from .forms import CustomSignupForm, ProfileForm, UpgradeForm
 stripe_secret_key = settings.STRIPE_SECRET_KEY
 stripe_public_key = settings.STRIPE_PUBLISHABLE_KEY
 
-
 @login_required
 def member_area(request):
-    """ 
+    """
     A view to return the members area
     """
     if not request.user.spnamember.paid:
@@ -54,12 +51,13 @@ def profile_view(request):
         messages.error(request, "Sorry only SPNA Members can access this page.")
         return redirect(reverse('home'))
 
+    test_email()
+
     member = get_object_or_404(SPNAMember, user=request.user)
     default_pm = ''
 
     if not request.user.is_superuser:
         cus = request.user.spnamember.stripe_id
-        sub = request.user.spnamember.sub_id
         stripe.api_key = stripe_secret_key
         if cus:
             p_method = stripe.Customer.list_payment_methods(cus, type="card",)
@@ -86,7 +84,7 @@ def profile_view(request):
         }
 
         return render(request, template, context)
-    
+
     upgrade_form = UpgradeForm()
     form = ProfileForm(instance=member)
     template = 'member/profile.html'
@@ -111,25 +109,19 @@ def upgrade_subscription(request):
     if plan == 'Monthly':
         spi = settings.STRIPE_PLAN_MONTHLY_ID
         spna_plan = Plan.objects.get(pk=1)
-        #amount = spna_plan.amount
     elif plan == 'Six Monthly':
         spi = settings.STRIPE_PLAN_SIXMONTHLY_ID
         spna_plan = Plan.objects.get(pk=2)
-        #amount = spna_plan.amount        
     else:
         spi = settings.STRIPE_PLAN_YEARLY_ID
         spna_plan = Plan.objects.get(pk=3)
-        #amount = spna_plan.amount
-    # else:
-    #     messages.error(request, 'Please ensure the correct subscription is chosen.')
 
     if request.user.spnamember:
         sub = request.user.spnamember.sub_id
-        
+
         try:
             stripe.api_key = stripe_secret_key
             subscription = stripe.Subscription.retrieve(sub)
-            print(subscription['items']['data'][0].id,)
             stripe.Subscription.modify(
                 subscription.id,
                 payment_behavior='pending_if_incomplete',
@@ -142,12 +134,12 @@ def upgrade_subscription(request):
             member = get_object_or_404(SPNAMember, user=request.user)
             member.subscription = spna_plan.name
             member.save()
-            # print(member.spnamember.subscription, 'subscription')
-            # print(member.spnamember.paid_until, 'pu')
+            upgrade_email_to_member(member)
             messages.success(request, 'Your subscription has been changed. Please reload the page for updated details.')
         except Exception as err:
             messages.error(request, f'There has been an error. Please contact the SPNA. Error={err}.')
-            payment_error_admin(request, err)
+            trans = 'Upgrade'
+            payment_error_admin(request, err, trans)
 
     else:
         messages.info(request, 'Your details are missing from the database, please contact SPNA admin.')
@@ -155,15 +147,10 @@ def upgrade_subscription(request):
     return redirect(reverse('profile'))
 
 
-
-
-
-
-
 @login_required
 def renew_subscription(request):
     """
-    A view to renew the logged in user's subscription, 
+    A view to renew the logged in user's subscription,
     providing the are still in a billing period.
     """
     try:
@@ -178,7 +165,8 @@ def renew_subscription(request):
         messages.success(request, f'Your subscription will continue as normal from {request.user.spnamember.paid_until}.')
     except Exception as err:
         messages.error(request, f'There has been an error. Please contact the SPNA. Error={err}.')
-        payment_error_admin(request, err)
+        trans = 'Renew'
+        payment_error_admin(request, err, trans)
 
     return redirect(reverse('profile'))
 
@@ -202,7 +190,8 @@ def cancel_subscription(request):
         messages.success(request, f'Your subscription will end at the end of the next billing period: {request.user.spnamember.paid_until}.')
     except Exception as err:
         messages.error(request, f'There has been an error. Please contact the SPNA. Error={err}.')
-        payment_error_admin(request, err)
+        trans = 'Cancel'
+        payment_error_admin(request, err, trans)
 
     return render(request, 'home/index.html')
 
@@ -220,7 +209,7 @@ def update_payment_method(request):
 
         stripe.api_key = stripe_secret_key
         stripe.PaymentMethod.attach(new_pm, customer=cus,)
-        
+
         stripe.Customer.modify(cus, invoice_settings={"default_payment_method": new_pm},)
 
         stripe.Subscription.modify(sub, default_payment_method=new_pm)
@@ -230,23 +219,13 @@ def update_payment_method(request):
 
     except Exception as err:
         messages.error(request, f'Card declined. Please check the details and try again. {err}')
+        trans = 'Update payment'
+        payment_error_admin(request, err, trans)
         return redirect(reverse('profile'))
-    
-
-# @login_required
-# @user_passes_test(lambda u: u.is_superuser)
-# def delete_document(request, document_id):
-#     """
-#     Deletes the document when called.
-#     """
-#     doc = get_object_or_404(Document, id=document_id)
-#     doc.delete()
-#     messages.success(request, 'Document deleted successfully!')
-#     return HttpResponseRedirect(reverse('member_area'))
 
 
 def secure(request):
-    """ 
+    """
     A view to show on 3d secure payment
     """
     return render(request, 'member/3dsec.html')
@@ -282,7 +261,7 @@ def subscribe(request):
             elif plan == 'Six Monthly':
                 spi = settings.STRIPE_PLAN_SIXMONTHLY_ID
                 spna_plan = Plan.objects.get(pk=2)
-                amount = spna_plan.amount        
+                amount = spna_plan.amount
             else:
                 spi = settings.STRIPE_PLAN_YEARLY_ID
                 spna_plan = Plan.objects.get(pk=3)
@@ -295,7 +274,7 @@ def subscribe(request):
             payment_intent = stripe.PaymentIntent.create(
                 amount=amount,
                 setup_future_usage='on_session',
-                currency='GBP',                
+                currency='GBP',
             )
 
             context = {
@@ -314,7 +293,6 @@ def subscribe(request):
         else:
             messages.error(request, 'There was an error in the form. \
                 Please ensure the form has been correctly filled in.')
-            
             return redirect(reverse('subscribe'))
     else:
         form = CustomSignupForm()
@@ -330,7 +308,7 @@ def payment(request):
     A view to pay the SPNA, create a customer and an associated subscription.
     """
 
-    payment_intent_id = request.POST['payment_intent_id']
+    # payment_intent_id = request.POST['payment_intent_id']
     payment_method_id = request.POST['payment_method_id']
     stripe_plan_id = request.POST['stripe_plan_id']
     customer_email = request.POST['customer_email']
@@ -347,7 +325,6 @@ def payment(request):
                     'default_payment_method': payment_method_id
                 }
             )
-            print(customer, 'customer')
             sub = stripe.Subscription.create(
                 customer=customer.id,
                 items=[
@@ -362,9 +339,9 @@ def payment(request):
         except stripe.error.StripeError as err:
             # Display a very generic error to the user, and maybe send
             # yourself an email
-            payment_error_admin(request, err)
+            trans = 'Initial Payment'
+            payment_error_admin(request, err, trans)
             messages.error(request, f"Sorry we have encountered a problem. Please try again later. {err}")
-            
 
         latest_invoice = stripe.Invoice.retrieve(sub.latest_invoice)
         # Generates an instance of the SPNA member once invoice is paid.
@@ -387,14 +364,14 @@ def payment(request):
             user.save()
 
             perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
-            welcome_email_to_member(request.user)
+            welcome_email_to_member(user)
             messages.success(request, f'Successfully created SPNA Member {user.spnamember.fullname}.')
             context = {
                 'form':log_form,
             }
 
             return render(request, 'home/index.html', context)
-        
+
         else:
             try:
                 ret = stripe.PaymentIntent.confirm(
@@ -432,7 +409,6 @@ def payment(request):
                         'payment_intent_secret': intent.client_secret,
                         'STRIPE_PUBLISHABLE_KEY': stripe_public_key,
                     }
-            
                     return render(request, 'member/3dsec.html', context)
                     
             except stripe.error.StripeError as err:
@@ -444,7 +420,6 @@ def payment(request):
         }
 
         return render(request, 'account/login.html', context)
-        
 
     else:
         form = CustomSignupForm()

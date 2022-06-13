@@ -3,7 +3,10 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.conf import settings
 
-from spna.email import cancel_email, cancel_email_to_member
+from spna.email import (
+    cancel_email,
+    cancel_email_to_member,
+    failed_payment_to_member)
 
 import stripe
 
@@ -58,6 +61,7 @@ def update_paid_until(request, event):
     else:
         messages.error(request, 'No customer with this subscription exists. Please contact Admin.')
 
+
 def sub_cancelled(request, charge):
     """Changes the 'paid' option of the SPNA member when subscription is deleted."""
 
@@ -79,5 +83,25 @@ def sub_cancelled(request, charge):
         cancel_email(request.user)
         cancel_email_to_member(request.user)
 
+    else:
+        messages.error(request, 'No customer with this subscription exists. Please contact Admin.')
+
+
+def failed_payment(request, charge):
+    """Contacts the customer and admin in the event of a failed payment"""
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    cust = stripe.PaymentIntent.retrieve(charge.customer)
+
+    if cust:
+        customer = stripe.Customer.retrieve(cust)
+        email = customer.email
+        if customer:
+            try:
+                user = User.objects.get(email=email)
+                failed_payment_to_member(user)
+            except RuntimeError as err:
+                messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
+                return False
     else:
         messages.error(request, 'No customer with this subscription exists. Please contact Admin.')
