@@ -161,6 +161,10 @@ footer a {
     height: fit-content;
 }
 
+#privacy-policy {
+    padding: unset;
+}
+
 #inner-lower-footer {
     background-color: aliceblue;
     max-height: max-content;
@@ -447,6 +451,12 @@ footer a {
     }
 }
 
+@media (max-width: 992px) {
+    #social-holder {
+        align-items: center;
+    }
+}
+
 @media (min-width: 992px) {
     .fixed-top-desktop-only {
         position: fixed;
@@ -499,7 +509,8 @@ footer a {
     }
 
     #social-holder {
-        justify-content: center;
+        display: flex;
+        justify-content: space-evenly;
         align-items: center;
         margin: 0.2rem;
     }

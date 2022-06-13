@@ -69,19 +69,6 @@ def delete_document(request, doc_id):
     messages.success(request, 'Document deleted successfully!')
     return HttpResponseRedirect(reverse('member_area'))
 
-    
-# @login_required
-# @user_passes_test(lambda u: u.is_superuser)
-# def delete_document(request, document_id):
-#     """
-#     Deletes the document when called.
-#     """
-#     doc = get_object_or_404(Document, id=document_id)
-#     doc.delete()
-#     messages.success(request, 'Document deleted successfully!')
-#     return HttpResponseRedirect(reverse('member_area'))
-
-
 @login_required
 @staff_member_required
 def delete_contact(request, contact_id):
@@ -132,7 +119,6 @@ def edit_article(request, article_id):
 
     return render(request, template, context)
 
-
 @login_required
 @staff_member_required
 def add_article(request):
@@ -163,7 +149,6 @@ def add_article(request):
     }
 
     return render(request, template, context)
-
 
 @login_required
 @staff_member_required
@@ -199,13 +184,11 @@ def add_document(request):
 
 @login_required
 @staff_member_required
-def get_csv_of_users(): # Removed 'request' as an arg.. test please!
+def get_csv_of_users(request): # Removed 'request' as an arg.. test please!
     """
     Gets a csv of the spnamember model
     """
-
     return export_qs_to_csv(model_class = SPNAMember)
-
 
 @login_required
 @staff_member_required

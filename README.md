@@ -163,6 +163,8 @@ The above user stories were created in conjunction with the Client and their dev
     During the design and development phases the client had wished for the Initiatives and Campaigns page to be as one. This was easy to implement and didn't detract from other important features. They also expressed a wish for a profile page for the User to access and change their information. With further discussion we agreed a list of must have, could have and won't have features at the initial release. 
     <br>
     The list comprised: Address and nursery details, subscription detail as must have. A could have feature was the ability to update payment details. These features I managed to implement and in addition, with consultation with the client I also created a way to cancel and then renew the subscription. The client liked this idea so it has remained. 
+    <br>
+    As the project has progressed the Client and I weren't too happy with the amount of screen real estate the footer was taking up. I deceided to remove some of the elements at the screen size is reduced. It retains all of the features (minus the logo) but takes up alot less room.
 
 [Back to top](<#contents>)
 

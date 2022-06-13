@@ -1,4 +1,5 @@
-from django.core.mail import send_mail
+from django.core.mail import send_mail, send_mass_mail
+from django.conf import settings
 
 # Emails to Admin
 def contact_email(contact):
@@ -198,17 +199,16 @@ def send_admin_email(form):
     subject = form.email_subject
     msg = form.email_body.strip('<p>')  #does not work. need to strip characters or get rid of html tags.
     message = msg
-    from_email = 'info@scottishpna.org'
+    from_email = settings.DEFAULT_FROM_EMAIL
 
     addys = form.email_to
-    # print(type(addys), 'addys type')
     email_list = addys.strip('][').split(', ')
-    # print(type(email_list), 'email list type')
     recipient_list = email_list
 
+    message_one = (subject, message, from_email, recipient_list)
     # print(subject, message, from_email, recipient_list)
 
-    send_mail(subject, message, from_email, recipient_list)
+    send_mass_mail((message_one,), fail_silently=False)
 
 def test_email():
 

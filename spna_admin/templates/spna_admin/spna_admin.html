@@ -44,17 +44,17 @@
                     <h2 class="text-blue">Member Information</h2>
                 </div>
                 <div class="table-holder">
-                    <table class="base-table bg-ant-white">
+                    <table class="base-table">
                             <tr>
                                 <th class="text-center">Full Name</th>
                                 <th class="text-center">Nursery</th>
                                 <th class="text-center">Email</th>
                                 <th class="text-center">Phone</th>
-                                <th class="text-center">Expiry Date</th>
+                                <th class="text-center">Renewal</th>
                                 <th class="text-center">All <input id="members-select-all" type="checkbox" ></th>
                             </tr>
                             {% for user in users %}
-                            <tr>
+                            <tr class="bg-ant-white">
                                 <td class="text-center">{{user.spnamember.fullname}}</td>
                                 <td class="text-center">{{user.spnamember.nursery}}</td>
                                 <td class="text-center">

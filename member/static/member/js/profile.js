@@ -18,7 +18,6 @@ function cardUpdate(stripe_publishable_key, customer_email) {
         }
     };
     var card = elements.create('card', {style: style});
-    console.log('card', card)
     card.mount('#card-element');
 
     // Handle realtime validation errors on the card element
@@ -43,7 +42,6 @@ function cardUpdate(stripe_publishable_key, customer_email) {
 
         stripe.createToken(card).then(function(result) {
         if (result.error) {
-            console.log('error but close')
           var errorElement = document.getElementById('card-errors');
           errorElement.textContent = result.error.message;
         } else {
@@ -56,12 +54,9 @@ function cardUpdate(stripe_publishable_key, customer_email) {
             }).then(function(payment_method_result){ 
             if (payment_method_result.error) {
                 spinner.style.display = 'none'
-                console.log(pm, 'error')
                 var errorElement = document.getElementById('card-errors');
                 errorElement.textContent = payment_method_result.error.message;
             } else {
-                console.log(pm, 'valid')
-
                 var form = document.getElementById('update-payment-form');
                 var hiddenInput = document.createElement('input');
 
