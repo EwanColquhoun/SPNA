@@ -1,7 +1,5 @@
-// // Gets the delete modal working
+// // Gets the delete document modal working
 
-
-// const del_modal_buttons = document.getElementById('doc-modal-delete-button');
 const delete_buttons = document.querySelectorAll('.delete-doc-button');
 let modal = document.querySelector('#delete-doc-modal')
 console.log(delete_buttons)
