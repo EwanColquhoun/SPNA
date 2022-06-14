@@ -184,7 +184,7 @@ def add_document(request):
 
 @login_required
 @staff_member_required
-def get_csv_of_users(request): # Removed 'request' as an arg.. test please!
+def get_csv_of_users(request):
     """
     Gets a csv of the spnamember model
     """

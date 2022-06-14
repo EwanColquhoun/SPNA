@@ -67,7 +67,7 @@
                 <h2 class="news-title text-blue">News</h2>
             </div>
         </div>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div id="news-holder" class="row row-cols-1 row-cols-md-3 g-4">
             {% if article %}
                 {% for article in articles_list %}
                 <div class="p-3 p-md-2 p-lg-4 mb-0 mb-md-5 col-12 col-md-4 mx-auto">
@@ -77,10 +77,10 @@
                             <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button w-100">
                                 <div id="news-image-holder">
                                     {% if not article.image %}
-                                    <div class="image-holder" style="background-image: url({{ MEDIA_URL }}original/cropped-SPNA_logo_icon.png)">
+                                    <div class="image-holder" style="background: url({% get_media_prefix %}original/cropped-SPNA_logo_icon.png) no-repeat center">
                                     </div>
                                     {% else %}
-                                    <div class="image-holder" style="background-image: url({{ article.image.url }})">
+                                    <div class="image-holder" style="background: url({{ article.image.url }}) no-repeat center">
                                     </div>
                                     {% endif %}  
                                 </div>
