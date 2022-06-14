@@ -207,6 +207,13 @@ footer a {
     margin: auto;
 }
 
+.large-hr {
+    width: 60%;
+    color: #37698e;
+    margin: auto;
+    height: 5px;
+}
+
 #loading-overlay {
     display: none;
     position: fixed;

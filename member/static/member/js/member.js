@@ -2,17 +2,14 @@
 
 const delete_buttons = document.querySelectorAll('.delete-doc-button');
 let modal = document.querySelector('#delete-doc-modal')
-console.log(delete_buttons)
 
 if (delete_buttons.length !== 0) {
     delete_buttons.forEach((button) => {
         button.addEventListener('click', function () {
         let document_id = button.getAttribute('data-name');
         let modalButton = document.getElementById('doc-modal-delete-button')
-        console.log(document_id, 'doc.id')
 
         modal.addEventListener('shown.bs.modal', function () {
-            console.log(document_id)
             modalButton.setAttribute('href', `/spna_admin/delete/document/${document_id}`);
         });
     });
