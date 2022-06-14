@@ -94,6 +94,32 @@ def register_email(user):
         fail_silently=True,
     )
 
+def renewal_email(member):
+    """
+    Sends the admin an email when the member renews sub.
+    """
+    send_mail(
+        'Welcome back to the SPNA',
+        f"""
+        Hi {member.user.first_name},
+
+        Thank you for choosing to stay with the SPNA. You contributions and membership are important for the
+        association to enact change with Early years learning.
+        We are always looking for member contributions or feedback, so please don't hesitate to get in touch
+        with us at:
+            info@scottishpna.org
+
+
+        Kind regards,
+
+        The SPNA team.
+
+        """,
+        None,
+        [{member.user.email}, 'scottishpna@outlook.com'],
+        fail_silently=True,
+    )
+
 
 # Emails to Member
 def cancel_email_to_member(user):
@@ -114,7 +140,7 @@ def cancel_email_to_member(user):
 
         """,
         None,
-        [{user.email}],
+        [{user.email}, 'scottishpna@outlook.com'],
         fail_silently=True,
     )
 
@@ -139,7 +165,7 @@ def welcome_email_to_member(user):
 
         """,
         None,
-        [{user.email}],
+        [{user.email}, 'scottishpna@outlook.com'],
         fail_silently=True,
     )
 
@@ -164,7 +190,31 @@ def upgrade_email_to_member(member):
 
         """,
         None,
-        [{member.user.email}],
+        [{member.user.email}, 'scottishpna@outlook.com'],
+        fail_silently=True,
+    )
+
+def update_card_details_to_member(request):
+    """
+    Sends the member an email when their card details have been updated.
+    """
+    send_mail(
+        'SPNA Payment method changed',
+        f"""
+        Hi {request.user.first_name},
+
+        The change to your payment method has been successful. Thank you!
+
+        If you did not request a change please contact us at: info@scottishpna.org
+
+
+        Kind regards,
+
+        The SPNA team.
+
+        """,
+        None,
+        [{request.user.email}, 'scottishpna@outlook.com'],
         fail_silently=True,
     )
 
@@ -187,7 +237,7 @@ def failed_payment_to_member(user):
 
         """,
         None,
-        [{user.email}],
+        [{user.email}, 'scottishpna@outlook.com'],
         fail_silently=True,
     )
 

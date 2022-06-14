@@ -17,6 +17,8 @@ from spna.email import (
     payment_error_admin,
     welcome_email_to_member,
     upgrade_email_to_member,
+    update_card_details_to_member,
+    renewal_email,
     test_email)
 
 from .models import Document, SPNAMember, Plan
@@ -162,6 +164,7 @@ def renew_subscription(request):
         member = get_object_or_404(SPNAMember, user=request.user)
         member.has_cancelled=False
         member.save()
+        renewal_email(member)
         messages.success(request, f'Your subscription will continue as normal from {request.user.spnamember.paid_until}.')
     except Exception as err:
         messages.error(request, f'There has been an error. Please contact the SPNA. Error={err}.')
@@ -213,7 +216,7 @@ def update_payment_method(request):
         stripe.Customer.modify(cus, invoice_settings={"default_payment_method": new_pm},)
 
         stripe.Subscription.modify(sub, default_payment_method=new_pm)
-
+        update_card_details_to_member(request)
         messages.success(request, 'Your card details have been updated for the next payment.')
         return redirect(reverse('profile'))
 
@@ -396,13 +399,14 @@ def payment(request):
                     user.spnamember.street_address1=request.session['street_address1']
                     user.spnamember.nursery=request.session['nursery']
                     user.save()
+                    welcome_email_to_member(user)
                     register_email(user)
 
                     perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
 
                     stripe.PaymentIntent.confirm(
                         latest_invoice.payment_intent,
-                        return_url="https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu45.gitpod.io/member/",
+                        return_url="https://scottishpna.herokuapp.com/member/",
                     )
                     messages.success(request, 'This is a test message')
                     context = {

@@ -77,10 +77,10 @@
                             <button data-bs-toggle="modal" data-bs-target="#articleModal" class="modal-button w-100">
                                 <div id="news-image-holder">
                                     {% if not article.image %}
-                                    <div class="image-holder" style="background: url({% get_media_prefix %}original/cropped-SPNA_logo_icon.png) no-repeat center">
+                                    <div class="image-holder" style="background-image: url({% get_media_prefix %}original/cropped-SPNA_logo_icon.png)">
                                     </div>
                                     {% else %}
-                                    <div class="image-holder" style="background: url({{ article.image.url }}) no-repeat center">
+                                    <div class="image-holder" style="background-image: url({{ article.image.url }})">
                                     </div>
                                     {% endif %}  
                                 </div>

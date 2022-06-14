@@ -123,9 +123,6 @@
                             <p class="text-muted">Cards verified with <a href="https://stripe.com/gb" target="_blank"><img class="d-inline-block" src="{% get_media_prefix %}stripe/stripe-logo-small.png" width="100px"alt="Stripe logo small"></img></a>
                         </div>
                         <p id="card-error" role="alert"></p>
-                        <!-- <p class="result-message hidden">
-                            Update succeeded, new card will be used in the next billing cycle.
-                        </p> -->
                     </form>
                 </div>
                 
@@ -148,7 +145,7 @@
                         {% if not request.user.is_superuser %}
                             {% if request.user.spnamember.has_cancelled and request.user.spnamember.paid %}
                                 <a href="{% url 'renew' %}" class="btn btn-info mt-1" >Continue Subscription </a>
-                                <p class="small text-black text-center pt-2 pl-2 bg-info rounded-1">To continue your subscription from the next billing date with existing payment details.</p>
+                                <p class="small text-black text-center mt-2 pl-2 bg-info rounded-1">To continue your subscription from the next billing date with existing payment details.</p>
                             {% else %}
                                 <button data-bs-toggle="modal" data-bs-target="#delete-sub-modal" class="btn btn-danger mt-1 ml-2">Cancel Subscription</button>
                             {% endif %}
