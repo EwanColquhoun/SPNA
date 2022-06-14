@@ -1,13 +1,3 @@
-// htmlString = 
-//           `<p class="text-danger"><strong>Payment declined.</strong> Please try to sign up again using the button below</p>
-//           <div class="text-center p-5">
-//       <a id="redirect-button" href="/member/subscribe" class="btn spna-btn">Sign Up</a>
-//   </div>`
-// $("#3ds_result").html(htmlString);
-// let res = document.querySelector('#3ds_result')
-// res.textContent = htmlString + two
-// console.log(res)
-
 
 function _3dsec(stripe_publishable_key, pi_secret) {
     document.addEventListener("DOMContentLoaded", function(event){

@@ -5,6 +5,9 @@ btt.addEventListener('click', function(){
     window.scrollTo(0,0)
 })
 
+$(document).ready(function() {
+  jQuery.fn.carousel.Constructor.TRANSITION_DURATION = 5000  // 5 seconds
+});
 
 function alerts() {
   setTimeout(function () {
