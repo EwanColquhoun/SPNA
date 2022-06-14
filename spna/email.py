@@ -18,7 +18,7 @@ def contact_email(contact):
         https://scottishpna.herokuapp.com/spna_admin/
         Thanks.""",
         None,
-        ['info@scottishpna.org'],
+        ['info@scottishpna.org', 'scottishpna@outlook.com'],
         fail_silently=True,
     )
 
@@ -40,7 +40,7 @@ def cancel_email(user):
         https://scottishpna.herokuapp.com/spna_admin/
         Thanks.""",
         None,
-        ['info@scottishpna.org'],
+        ['info@scottishpna.org', 'scottishpna@outlook.com'],
         fail_silently=True,
     )
 
@@ -67,7 +67,7 @@ def payment_error_admin(request, error, payment):
         https://scottishpna.herokuapp.com/spna_admin/
         Thanks.""",
         None,
-        ['info@scottishpna.org'],
+        ['info@scottishpna.org', 'scottishpna@outlook.com'],
         fail_silently=True,
     )
 
@@ -90,7 +90,7 @@ def register_email(user):
         https://scottishpna.herokuapp.com/spna_admin/
         Thanks.""",
         None,
-        ['info@scottishpna.org'],
+        ['info@scottishpna.org', 'scottishpna@outlook.com'],
         fail_silently=True,
     )
 
@@ -218,6 +218,6 @@ def test_email():
         Hi, this is a test email
         """,
         None,
-        [{'ewancolquhoun@hotmail.com'}],
+        ['ewancolquhoun@hotmail.com', 'scottishpna@outlook.com'],
         fail_silently=True,
     )

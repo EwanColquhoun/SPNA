@@ -47,12 +47,14 @@ else:
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+    SERVER_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 # Allauth login particulars
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+ACCOUNT_USERNAME_REQUIRED = False
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
@@ -134,7 +136,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 # Allauth
 ACCOUNT_FORMS = {'signup': 'member.forms.CustomSignupForm'}
