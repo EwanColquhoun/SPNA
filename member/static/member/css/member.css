@@ -31,13 +31,12 @@
 
 .category-title {
     color: black;
-    font-size: 50px;
     font-family: 'Caveat', cursive;
 }
 
 .doc-title {
     color: black;
-    font-size: larger;
+    font-size: unset;
 }
 
 .doc-holder {
@@ -180,7 +179,7 @@
 }
 
 .result-message a {
-  color: #37698e;
+  color: #0f5081;
   font-weight: 600;
   text-decoration: none;
 }
@@ -281,7 +280,7 @@
   margin-bottom: 32px;
 }
 #payment-form button {
-  background: #37698e;
+  background: #0f5081;
   color: #ffffff;
   font-family: Arial, sans-serif;
   border-radius: 4px;
@@ -296,7 +295,7 @@
   width: 100%;
 }
 #payment-form button:hover {
-  background: #37698e;
+  background: #0f5081;
 }
 #payment-form button:disabled {
   opacity: 0.5;

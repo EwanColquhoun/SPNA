@@ -12,7 +12,6 @@ class ContactForm(forms.ModelForm):
         model = Contact
         fields = ('name', 'phone_number', 'email', 'message')
         widgets = {
-            'message': SummernoteWidget(),
             'email': forms.EmailInput(
                 attrs={'placeholder': 'you@youremail.com'}),
             'phone_number': forms.TextInput(

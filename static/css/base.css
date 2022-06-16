@@ -48,6 +48,17 @@ ul {
     height: 85px;   
 }
 
+.nav-item a {
+    text-decoration: none;
+    padding: 0 2rem;
+    color: #0f5081;
+}
+
+.nav-item .active {
+    color: black ;
+}
+
+
 .cover {
     min-height: 60px;
 }
@@ -59,13 +70,12 @@ ul {
 #navbar-button {
     margin: 0.25rem 1rem;
     border: unset;
-    color: #37698e;
+    color: #0f5081;
 }
 
-.nav-item a,
 footer a {
     text-decoration: none;
-    color: #37698e;
+    color: #0f5081;
     padding: 0 2rem;
 }
 
@@ -80,7 +90,7 @@ footer a {
 
 .menu-link {
     text-decoration: none;
-    color: #37698e;
+    color: #0f5081;
 }
 
 #allauth-menu {
@@ -94,7 +104,7 @@ footer a {
 }
 
 .bg-blue {
-    background-color: #96b1e0;
+    background-color: #bdd1f3;
 }
 
 .bg-light-grey {
@@ -106,7 +116,7 @@ footer a {
 }
 
 .text-blue {
-    color: #37698e;
+    color:#0f5081;
 }
 
 .text-whitesmoke {
@@ -123,7 +133,7 @@ footer a {
 }
 
 .bg-dark-blue {
-    background-color: #37698e;
+    background-color: #0f5081;
 }
 
 .bg-light-blue {
@@ -206,7 +216,7 @@ footer a {
     padding: 1.5rem;
     border-radius: 10px;
     z-index: 10000;
-    border: 2px solid #37698e;
+    border: 2px solid #0f5081;
 }
 
 .italic {
@@ -215,13 +225,13 @@ footer a {
 
 .small-hr {
     width: 40%;
-    color: #37698e;
+    color: #0f5081;
     margin: auto;
 }
 
 .large-hr {
     width: 60%;
-    color: #37698e;
+    color: #0f5081;
     margin: auto;
     height: 5px;
 }
@@ -334,7 +344,7 @@ footer a {
 }
 
 .inline-contact:hover {
-    color: #37698e;
+    color: #0f5081;
     transform: scale(1.1);
     transition: 200ms;
 }
@@ -345,16 +355,16 @@ footer a {
 
 .spna-btn {
     border-radius: 5px;
-    background: #37698e;
+    background: #0f5081;
     font-weight: 600;
     color: whitesmoke;
-    border: 1px solid #37698e;
+    border: 1px solid #0f5081;
     min-width: 10vw;
 }
 
 .spna-btn:hover {
     background: whitesmoke;
-    color: #37698e;
+    color: #0f5081;
     transition: 500ms;
 }
 

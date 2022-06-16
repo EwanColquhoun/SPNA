@@ -21,6 +21,7 @@ The live site can be viewed [here!](https://scottishpna.herokuapp.com/)
         *  [Typography](<#typography>)
         *  [Colour Scheme](<#colour-scheme>)
 * [**Data Model**](<#data-model>)
+* [**Design Development**](<#design-progress-notes>)
 * [**Features**](<#features>)
     * [**Existing Features**](<#existing-features>)
         * [**Base Template**](<#base-template>)
@@ -158,14 +159,6 @@ The above user stories were created in conjunction with the Client and their dev
     ![Member-mobile page wireframe](media/readme-images/member-mobile.png)
     </details>
 
-* Design progress notes
-
-    During the design and development phases the client had wished for the Initiatives and Campaigns page to be as one. This was easy to implement and didn't detract from other important features. They also expressed a wish for a profile page for the User to access and change their information. With further discussion we agreed a list of must have, could have and won't have features at the initial release. 
-    <br>
-    The list comprised: Address and nursery details, subscription detail as must have. A could have feature was the ability to update payment details. These features I managed to implement and in addition, with consultation with the client I also created a way to cancel and then renew the subscription. The client liked this idea so it has remained. 
-    <br>
-    As the project has progressed the Client and I weren't too happy with the amount of screen real estate the footer was taking up. I deceided to remove some of the elements at the screen size is reduced. It retains all of the features (minus the logo) but takes up alot less room.
-
 [Back to top](<#contents>)
 
 ## Site Structure
@@ -201,6 +194,17 @@ The above user stories were created in conjunction with the Client and their dev
         - Adds member documents for the members' area.
   
 ![Data Model](media/readme-images/data-model.jpeg)
+
+[Back to top](<#contents>)
+
+# Design progress notes
+- During the design and development phases the client had wished for the Initiatives and Campaigns page to be as one. This was easy to implement and didn't detract from other important features. They also expressed a wish for a profile page for the User to access and change their information. With further discussion we agreed a list of must have, could have and won't have features at the initial release. 
+- The list comprised: Address and nursery details, subscription detail as must have. A could have feature was the ability to update payment details. These features I managed to implement and in addition, with consultation with the client I also created a way to cancel and then renew the subscription. The client liked this idea so it has remained. 
+- As the project has progressed the Client and I weren't too happy with the amount of screen real estate the footer was taking up. I deceided to remove some of the elements at the screen size is reduced. It retains all of the features (minus the logo) but takes up alot less room.
+- Nearing the end of development a few inefficiencies crept into the site. On the News page with lots of article there was a lot of scrolling and certainly on a mobile device this didn't create a positive experience. One way around this was to remove the scroll element and content from the articles themselves and just incorporate a button to encourage the user to click to display a modal with the full content. Similarly in the members' area the documents were often hidden and mis-represented. the user can now click on the title and the document opens in a new window. The option to download the document remains. 
+- I have also added a FAQ section in the footer. This will open a modal with appropriate questions inside.
+
+    ![FAQ Modal](media/readme-images/faq.png)
 
 [Back to top](<#contents>)
 # Features
