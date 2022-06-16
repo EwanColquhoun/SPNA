@@ -3,6 +3,10 @@
 {% load i18n %}
 {% load account socialaccount %}
 
+{% load tags %}
+{% url 'profile_page' as profile %}
+{% url 'member_area_page' as member %}
+
 {% block content %}
 {% if request.user.is_active %}
 <div class="row">
@@ -14,15 +18,15 @@
 <div class="row">
     <div class="col pl-5">
         <nav>
-            <ul>
+            <ul class="menu-link">
                 <li>
-                    <a href="{% url 'profile' %}" class="menu-link">Profile</a>
+                    <a href="{{profile}}" class="{% active request profile %}">Profile</a>
                 </li>
                 <li>
-                    <a href="{% url 'member_area' %}" class="menu-link">Members Area</a>
+                    <a href="{{member}}" class="{% active request member %}">Members Area</a>
                 </li>
                 <li>
-                    <a href="{% url 'account_change_password' %}" class="menu-link">Change Password</a>
+                    <a href="{% url 'account_change_password' %}" class="{% if '/change/' in request.path %}active{% endif %}">Change Password</a>
                 </li>
             </ul>
         </nav>

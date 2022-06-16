@@ -1,17 +1,21 @@
 {% load static %}
 {% get_media_prefix %}
 {% load crispy_forms_tags %}
+{% load tags %}
 
-<!doctype html>
+{% url 'news_page' as news %}
+{% url 'profile_page' as profile %}
+{% url 'member_area_page' as member %}
+
+<!DOCTYPE html>
 <html lang="en">
     <head>
-        {% block meta %}
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name='description' content="The Scottish Private Nursery Association is an operating association for private nurseries operating in Scotland">
         <meta name="keywords" content="Scotland, childcare, early-years, nursery, association, children, learning, grass roots, membership">
-        {% endblock %}
+        <meta http-equiv="Cache-control" content="public" max-age="31536000">
 
         {% block corecss %}
         <link rel="stylesheet prefetch"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
@@ -54,7 +58,8 @@
                     <div class="col-12 col-md-2 mx-auto my-auto py-lg-0">
                         <div class="text-center other-nav" data-bs-toggle="dropdown">
                             <div><i class="fas fa-user fa-lg"></i></div>
-                            <p class="my-0 link-text">{% if request.user.is_authenticated %}<span class="italic">{{user.spnamember.fullname}}</span>{% else %}Join/Login{% endif %}</p>
+                            <p class="my-0 link-text">
+                                {% if request.user.is_authenticated %}<span class="italic">{{user.spnamember.fullname}}</span>{% else %}Join/Login{% endif %}</p>
                         </div>
                         <div id="menu-dropdown"class="dropdown-menu my-0 pl-2">                    
                             {% include 'includes/account/spna_login.html' %}
@@ -78,11 +83,11 @@
                                         <a href="{% url 'about' %}" class="{% if '/about/' in request.path %}active{% endif %}">About Us</a>
                                     </li>
                                     <li class="nav-item ">
-                                        <a href="{% url 'news' %}">News</a>
+                                        <a href="{{news}}" class="{% active request news %}">News</a>
                                     </li>
                                     <li class="nav-item">
                                         
-                                        <a href="{% url 'initiatives' %}">Initiatives | Campaigns</a>
+                                        <a href="{% url 'initiatives_page' %}" class="{% if '/initiatives/' in request.path %}active{% endif %}">Initiatives | Campaigns</a>
                                     </li>
                                     <li class="nav-item">
                                         <a id="contact-button" data-bs-toggle="modal" data-bs-target="#myModal" href="#myModal">Contact</a>
@@ -90,31 +95,33 @@
                                     {% if request.user.is_authenticated %}
                                         {% if request.user.spnamember.paid %}
                                         <li class="nav-item">
-                                            <a href="{% url 'member_area' %}">Members Area</a>
+                                            
+                                            <a href="{{member}}" class="{% active request member %}">Members Area</a>
                                         </li>
                                         {% endif %}
                                     {% endif %}
                                     {% if request.user.is_authenticated %}
                                         {% if request.user.is_superuser %}
                                         <li class="nav-item">
-                                            <a href="{% url 'spna_admin' %}">Admin</a>
+                                            <a href="{% url 'spna_admin' %}" class="{% if '/spna_admin/' in request.path %}active{% endif %}">Admin</a>
                                         </li>
                                         {% endif %}
                                         <li class="nav-item d-lg-none">
-                                            <a href="{% url 'profile' %}">Profile</a>
+                                            {% url 'profile' possible_attribute as url %}
+                                            <a href="{{profile}}" class="{% active request profile %}">Profile</a>
                                         </li>
                                         <li class="nav-item d-lg-none">
                                             <a href="{% url 'account_logout' %}">Logout</a>
                                         </li>
                                         <li class="nav-item d-lg-none">
-                                            <a href="{% url 'account_change_password' %}">Change Password</a>
+                                            <a href="{% url 'account_change_password' %}" class="{% if '/change/' in request.path %}active{% endif %}">Change Password</a>
                                         </li>
                                     {% else %}
                                     <li class="nav-item d-lg-none">
-                                        <a href="{% url 'subscribe' %}">Join</a>
+                                        <a href="{% url 'subscribe' %}" class="{% if '/subscribe/' in request.path %}active{% endif %}">Join</a>
                                     </li>
                                     <li class="nav-item d-lg-none">
-                                        <a href="{% url 'account_login' %}">Login</a>
+                                        <a href="{% url 'account_login' %}" class="{% if '/login/' in request.path %}active{% endif %}">Login</a>
                                     </li>
                                     {% endif %}
                                 </ul>
@@ -126,7 +133,7 @@
         </header>
 
         <!-- Contact Modal -->
-        <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Contact Mmdal" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content modal-body row g-0 text-blue">
                     <div class="modal-header col-12 bg-light-blue">
@@ -148,7 +155,7 @@
         </div>
 
         <!-- FAQ Modal -->
-        <div class="modal fade" id="faqModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="faqModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="FAQ modal" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content modal-body row g-0 text-blue">
                     <div class="modal-header col-12 bg-light-blue">
@@ -193,7 +200,7 @@
         </div>  
 
         <!-- Delete Document Modal -->
-        <div class="modal fade" id="delete-doc-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="delete-doc-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Delete document modal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -212,7 +219,7 @@
         </div>
     
         <!-- Delete Article Modal -->
-        <div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Delete article modal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -231,7 +238,7 @@
         </div>
 
         <!-- Delete Contact Modal -->
-        <div class="modal fade" id="delete-cont-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="delete-cont-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Delete contact modal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -250,7 +257,7 @@
         </div>
 
         <!-- Delete Subscription Modal -->
-        <div class="modal fade" id="delete-sub-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="delete-sub-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Delete subscription modal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -286,8 +293,8 @@
         {% endblock %}
 
         <!-- BTT Button -->
-        <div class="btt-button shadow rounded-3 ">
-            <a id="btt-link"class="btt-link d-flex h-100">
+        <div class="btt-button shadow rounded-3" aria-labelledby="Back to top">
+            <a id="btt-link"class="btt-link d-flex h-100" href="#" aria-label="Back to top button">
                 <i id="btt-arrow" class="fas fa-arrow-up text-black mx-auto my-auto"></i>
             </a>
         </div>
@@ -302,16 +309,16 @@
                         </div>
                         <div class="d-block d-lg-inline-block text-center align-middle">
                             <p class="footer-logo text-blue text-center d-none d-md-block">Scottish Private Nursery Association 
-                                <a class="p-2 p-md-0" href="mailto:communications@scottishpna.org"><i class="d-inline-block d-lg-none fas fa-envelope"></i></a>
+                                <a class="p-2 p-md-0" aria-label="Send an email link" href="mailto:communications@scottishpna.org"><i class="d-inline-block d-lg-none fas fa-envelope"></i></a>
                             </p>
                             <p class="d-none d-lg-inline-block">
-                                <a class="email-link" href="mailto:communications@scottishpna.org">communications@scottishpna.org</a>
+                                <a class="email-link" aria-label="Send an email link" href="mailto:communications@scottishpna.org">communications@scottishpna.org</a>
                             </p>
                         </div>
                     </div>
                     <div id="social-holder" class="col-12 col-lg-4 text-center d-flex">
                         <ul class="social-networks text-blue">
-                            <li><a class="socials d-inline-block d-md-none" href="mailto:communications@scottishpna.org"><i class="d-inline-block d-lg-none fas fa-envelope"></i></a></li>
+                            <li><a class="socials d-inline-block d-md-none" aria-label="Send an email link" href="mailto:communications@scottishpna.org"><i class="d-inline-block d-lg-none fas fa-envelope"></i></a></li>
                             <li><a href="https://www.facebook.com/ScottishPNA" class="socials" target="_blank" rel="noopener" aria-label="Visit our Facebook page (opens in a new tab)"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="https://www.gov.scot/policies/early-education-and-care/" class="socials" target="_blank" rel="noopener" aria-label="Link to the scottish government childcare page">gov.scot</a></li>
                         </ul>
@@ -319,7 +326,7 @@
                 </div>
                 <div id="inner-lower-footer" class="row">
                     <div class="col-12 text-center">
-                        <span class="text-muted">&copy 2022 E.Colquhoun | <a id="privacy-policy" href="https://www.privacypolicygenerator.info/live.php?token=cq6yVuA7P1JMIN7gPPh7RXMo1xDmhY6m" target="_blank" rel="noopener">Privacy Policy</a>
+                        <span><p class="d-inline-block p-0 m-0">&copy 2022 E.Colquhoun</p> | <a id="privacy-policy" href="https://www.privacypolicygenerator.info/live.php?token=cq6yVuA7P1JMIN7gPPh7RXMo1xDmhY6m" target="_blank" rel="noopener">Privacy Policy</a>
                             | <a class="p-0" id="faq-button" data-bs-toggle="modal" data-bs-target="#faqModal" href="#faqModal">FAQ</a></span>
                     </div>
                 </div>

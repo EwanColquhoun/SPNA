@@ -1,5 +1,5 @@
 #member-image-section {
-    background: url('/media/original/huddle.png') no-repeat center;
+    background: url('/media/huddle.png') no-repeat center;
     background-color: rgb(236, 136, 136);
     background-size: cover;
     height: 25vh;
@@ -26,7 +26,9 @@
 }
 
 .document {
-  min-height: 10rem;
+  min-height: 12rem;
+  border: 1px solid #0f5081;
+  border-radius: 5%;
 }
 
 .category-title {
@@ -37,6 +39,7 @@
 .doc-title {
     color: black;
     font-size: unset;
+    padding-top: 1em;
 }
 
 .doc-holder {
@@ -60,7 +63,7 @@
 .date-holder {
   bottom: 2%;
   margin: 0 auto;
-  width: 100%;
+  width: 90%;
 }
 /* ----------Profile page-------------- */
 

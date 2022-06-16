@@ -131,10 +131,9 @@
             </div>
             <div class="col-12 col-md-6 col-lg-5 p-2 mx-auto">
                 <h3>Update your details</h3>
-                <form action="{% url 'profile' %}" method="POST">
+                <form action="{% url 'profile_page' %}" method="POST">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <!-- {{ userForm|crispy }} -->
 
                     <div class="pt-2 d-block d-md-flex justify-content-between">
                         <button class="btn spna-btn mt-1" type="submit">Update</button>

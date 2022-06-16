@@ -1,5 +1,5 @@
 #news-image {
-    background: url('/media/original/bench-read.png') no-repeat center;
+    background: url('/media/bench-read.png') no-repeat center;
     background-color: #96b1e0;
     background-size: cover;
     height: 30vh;
@@ -57,7 +57,7 @@ body.modal-open {
 
 /* ------------ Initiatives Page----------------- */
 #initiatives-image {
-    background: url('/media/original/clapping.png') no-repeat center;
+    background: url('/media/clapping.png') no-repeat center;
     background-color: #96b1e0;
     background-size: cover;
     height: 30vh;

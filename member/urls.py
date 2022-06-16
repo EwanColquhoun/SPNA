@@ -5,7 +5,7 @@ from .webhooks import webhook
 from . import views
 
 urlpatterns = [
-    path('', views.member_area, name='member_area'),
+    path('', views.member_area, name='member_area_page'),
     # path('delete/<document_id>', views.delete_document, name='delete_document'),
 
     path('subscribe/', views.subscribe, name='subscribe'),
@@ -13,7 +13,7 @@ urlpatterns = [
 
     path('3dsec/', views.secure, name='3dsec'),
     path('stripe-webhooks/', webhook, name='webhook'),
-    path('profile/', views.profile_view, name='profile'),
+    path('profile/', views.profile_view, name='profile_page'),
     path('cancel/', views.cancel_subscription, name='cancel_subscription'),
     path('renew/', views.renew_subscription, name='renew'),
     path('upgrade/', views.upgrade_subscription, name='upgrade'),

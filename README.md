@@ -508,6 +508,7 @@ The method for cloning a project from GitHub is below:
 * The colour selection was compiled by [MyColorSpace](https://mycolor.space/) and [colorpeek](https://colorpeek.com/).
 * The icons came from [Font Awesome](https://fontawesome.com/).
 * Non custom code has been credited in situ.
+* Highlghted navigation menu from [Stack Overflow](https://stackoverflow.com/questions/340888/navigation-in-django).
 
 ### Media
 * [Unsplash](https://unsplash.com/) - Stock Nursery Photos
