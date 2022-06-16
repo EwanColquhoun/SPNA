@@ -192,7 +192,6 @@ footer a {
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    /* margin: 2rem; */
 }
 
 /* provides enhanced UX with feedback over the icons */
@@ -400,6 +399,7 @@ footer a {
     padding: 8px 0px;
 }
 
+#faqModal .modal-content,
 #myModal .modal-content {
     flex-direction: row;
     max-height: 100%;
