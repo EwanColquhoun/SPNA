@@ -1,5 +1,4 @@
 {% load static %}
-{% get_media_prefix %}
 {% load crispy_forms_tags %}
 {% load tags %}
 
@@ -10,12 +9,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        {% block meta %}
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport">
         <meta name='description' content="The Scottish Private Nursery Association is an operating association for private nurseries operating in Scotland">
         <meta name="keywords" content="Scotland, childcare, early-years, nursery, association, children, learning, grass roots, membership">
         <meta http-equiv="Cache-control" content="public" max-age="31536000">
+        {% endblock %}
+
 
         {% block corecss %}
         <link rel="stylesheet prefetch"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
