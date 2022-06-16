@@ -37,39 +37,31 @@
         </div>
         {% for doc in docs %}
             {% if doc.category == '1' %}
-                <div class="col-12 col-md-3 mx-auto my-auto">
+                <div class="document col-12 col-md-3 mx-auto my-auto position-relative">
                     <div class="doc-1-title" class="pt-4">
                         <h3 class="doc-title">
-                            <!-- need to style link but think this is a good compromise -->
                             <a target="_blank" href="{{doc.doc.url}}">{{doc.title}}</a>
                         </h3>
                         <hr class="small-hr"> 
+                    </div>
+                    <div class="doc-1-ancil pt-2 d-flex justify-content-around">
+                        <div class="pt-3">
+                            <a download href="{{doc.doc.url}}"><i class="fas fa-download"></i></a>
+                        </div>
+                        {% if request.user.is_authenticated %}
+                        {% if request.user.is_superuser %}
+                        <div>
+                            <a class="delete-doc-button p-2" data-bs-toggle="modal" data-name="{{doc.id}}" data-bs-target="#delete-doc-modal"><i class="fas fa-trash"></i></a>
+                        </div>
+                        {% endif %}
+                        {% endif %}   
+                    </div>
+                    <div class="date-holder position-absolute text-center">
                         <p class="text-muted pt-1">
                             <small>
                                 {{doc.date_uploaded | date:"d M, Y"}}
                             </small>
                         </p>
-                    </div>
-                    <div class="doc-holder">
-                        <!-- <object data="{{doc.doc.url}}" type="application/pdf" width="100%" height="100%">
-                            <p class="m-3">There is a problem with the PDF viewer.
-                                <br>Instead you can <a href="{{doc.doc.url}}">click here to
-                                download the PDF file.</a></p> -->
-                                <!-- <a target="_blank" href="{{doc.doc.url}}">Open file in new tab</a> -->
-                                
-                        </object>
-                    </div>
-                    <div class="doc-1-ancil pt-2 d-flex justify-content-around">
-                        <div>
-                            <a href="{{doc.doc.url}}"><i class="fas fa-download"></i></a>
-                        </div>
-                        {% if request.user.is_authenticated %}
-                            {% if request.user.is_superuser %}
-                                <div>
-                                    <a class="delete-doc-button p-2" data-bs-toggle="modal" data-name="{{doc.id}}" data-bs-target="#delete-doc-modal"><i class="fas fa-trash"></i></a>
-                                </div>
-                            {% endif %}
-                        {% endif %}   
                     </div>
                 </div>
                 <hr class="d-block p-1 m-2 d-md-none mx-auto">
@@ -83,39 +75,34 @@
 
         {% for doc in docs %}
             {% if doc.category == '2' %}
-                <div class="col-12 col-md-3 mx-auto my-auto">
-                    <div class="doc-2-title pt-4">
-                        <h3 class="doc-title">
-                            {{doc.title}}
-                        </h3>
-                        <hr class="small-hr"> 
-                        <p class="text-muted pt-1">
-                            <small>
-                                {{doc.date_uploaded | date:"d M, Y"}}
-                            </small>
-                        </p>
-                    </div>
-                    <div class="doc-holder">
-                        <object data="{{doc.doc.url}}" type="application/pdf" width="100%" height="100%">
-                            <p>Your web browser doesn't have a PDF plugin.
-                                Instead you can <a href="{{doc.doc.url}}">click here to
-                                download the PDF file.</a></p>
-                        </object>
-                    </div>
-                    <div class="doc-2-ancil pt-2 d-flex justify-content-around">
-                        <div>
-                            <a href="{{doc.doc.url}}"><i class="fas fa-download"></i></a>
-                        </div>
-                        {% if request.user.is_authenticated %}
-                            {% if request.user.is_superuser %}
-                                <div>
-                                    <a class="delete-doc-button p-2" data-bs-toggle="modal" data-name="{{doc.id}}" data-bs-target="#delete-doc-modal"><i class="fas fa-trash"></i></a>
-                                </div>
-                            {% endif %}
-                        {% endif %}                        
-                    </div>
+            <div class="document col-12 col-md-3 mx-auto my-auto position-relative">
+                <div class="doc-1-title" class="pt-4">
+                    <h3 class="doc-title">
+                        <a target="_blank" href="{{doc.doc.url}}">{{doc.title}}</a>
+                    </h3>
+                    <hr class="small-hr"> 
                 </div>
-                <hr class="d-block p-1 m-2 d-md-none mx-auto">
+                <div class="doc-1-ancil pt-2 d-flex justify-content-around">
+                    <div class="pt-3">
+                        <a download href="{{doc.doc.url}}"><i class="fas fa-download"></i></a>
+                    </div>
+                    {% if request.user.is_authenticated %}
+                    {% if request.user.is_superuser %}
+                    <div>
+                        <a class="delete-doc-button p-2" data-bs-toggle="modal" data-name="{{doc.id}}" data-bs-target="#delete-doc-modal"><i class="fas fa-trash"></i></a>
+                    </div>
+                    {% endif %}
+                    {% endif %}   
+                </div>
+                <div class="date-holder position-absolute text-center">
+                    <p class="text-muted pt-1">
+                        <small>
+                            {{doc.date_uploaded | date:"d M, Y"}}
+                        </small>
+                    </p>
+                </div>
+            </div>
+            <hr class="d-block p-1 m-2 d-md-none mx-auto">
             {% endif %}
         {% endfor %}
     </div>
@@ -126,39 +113,34 @@
 
         {% for doc in docs %}
             {% if doc.category == '3' %}
-                <div class="col-12 col-md-3 mx-auto my-auto pb-5">
-                    <div class="doc-3-title pt-4">
-                        <h3 class="doc-title">
-                            {{doc.title}}
-                        </h3>
-                        <hr class="small-hr"> 
-                        <p class="text-muted pt-1">
-                            <small>
-                                {{doc.date_uploaded | date:"d M, Y"}}
-                            </small>
-                        </p>
-                    </div>
-                    <div class="doc-holder">
-                        <object data="{{doc.doc.url}}" type="application/pdf" width="100%" height="100%">
-                            <p>Your web browser doesn't have a PDF plugin.
-                                Instead you can <a href="{{doc.doc.url}}">click here to
-                                download the PDF file.</a></p>
-                        </object>
-                    </div>
-                    <div class="doc-3-ancil pt-2 d-flex justify-content-around">
-                        <div>
-                            <a href="{{doc.doc.url}}"><i class="fas fa-download"></i></a>
-                        </div>
-                        {% if request.user.is_authenticated %}
-                            {% if request.user.is_superuser %}
-                                <div>
-                                    <a class="delete-doc-button p-2" data-bs-toggle="modal" data-name="{{doc.id}}" data-bs-target="#delete-doc-modal"><i class="fas fa-trash"></i></a>
-                                </div>
-                            {% endif %}
-                        {% endif %}   
-                    </div>
+            <div class="document col-12 col-md-3 mx-auto my-auto position-relative">
+                <div class="doc-1-title" class="pt-4">
+                    <h3 class="doc-title">
+                        <a target="_blank" href="{{doc.doc.url}}">{{doc.title}}</a>
+                    </h3>
+                    <hr class="small-hr"> 
                 </div>
-                <hr class="d-block p-1 m-2 d-md-none mx-auto">
+                <div class="doc-1-ancil pt-2 d-flex justify-content-around">
+                    <div class="pt-3">
+                        <a download href="{{doc.doc.url}}"><i class="fas fa-download"></i></a>
+                    </div>
+                    {% if request.user.is_authenticated %}
+                    {% if request.user.is_superuser %}
+                    <div>
+                        <a class="delete-doc-button p-2" data-bs-toggle="modal" data-name="{{doc.id}}" data-bs-target="#delete-doc-modal"><i class="fas fa-trash"></i></a>
+                    </div>
+                    {% endif %}
+                    {% endif %}   
+                </div>
+                <div class="date-holder position-absolute text-center">
+                    <p class="text-muted pt-1">
+                        <small>
+                            {{doc.date_uploaded | date:"d M, Y"}}
+                        </small>
+                    </p>
+                </div>
+            </div>
+            <hr class="d-block p-1 m-2 d-md-none mx-auto">
             {% endif %}
         {% endfor %}
     </div>
