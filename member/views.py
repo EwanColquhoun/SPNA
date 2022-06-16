@@ -18,8 +18,7 @@ from spna.email import (
     welcome_email_to_member,
     upgrade_email_to_member,
     update_card_details_to_member,
-    renewal_email,
-    test_email)
+    renewal_email)
 
 from .models import Document, SPNAMember, Plan
 from .forms import CustomSignupForm, ProfileForm, UpgradeForm
@@ -52,8 +51,6 @@ def profile_view(request):
     if not request.user.spnamember.paid:
         messages.error(request, "Sorry only SPNA Members can access this page.")
         return redirect(reverse('home'))
-
-    test_email()
 
     member = get_object_or_404(SPNAMember, user=request.user)
     default_pm = ''

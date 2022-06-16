@@ -86,7 +86,12 @@
                                 </div>
                                 <div class="card-body h-100">
                                     <h5 id="title" data-title="title" class="card-title title">{{ article.title }}</h5>
-                                    <div id="content-holder">
+                                    <!-- Below need styled but removes the need for scroll -->
+                                    <div>
+                                        <p>Click for article content...</p>
+                                    </div>
+                                    <!-- d-none needed to keep content for javascript and modal interaction -->
+                                    <div id="content-holder" class="d-none">
                                         <p id="content" data-content="content" class="card-text content overflow-auto">{{ article.content|safe }}</p>
                                     </div>
                                 </div>

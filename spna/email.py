@@ -1,8 +1,10 @@
 from django.core.mail import send_mail, send_mass_mail
 from django.conf import settings
 
+import re
+
 # Emails to Admin
-def contact_email(contact):
+def contact_email(contact, message):
     """
     Sends the admin an email when there is a new contact request.
     """
@@ -13,7 +15,7 @@ def contact_email(contact):
         You have a new contact request from {contact.name}
         Telephone - {contact.phone_number}
         Email - {contact.email}
-        Message - {contact.message}
+        Message - {message}
         Click here to visit the admin site
         https://scottishpna.herokuapp.com/spna_admin/
         Thanks.""",
@@ -242,13 +244,16 @@ def failed_payment_to_member(user):
     )
 
 # Email from Admin
-def send_admin_email(form):
+def send_admin_email(form, message):
     """
     Retrieves the form data and send email accordingly.
     """
     subject = form.email_subject
-    msg = form.email_body.strip('<p>')  #does not work. need to strip characters or get rid of html tags.
-    message = msg
+    # msg = form.email_body.strip('<p>')  #does not work. need to strip characters or get rid of html tags.
+    # message = strip_tags(msg)
+
+    print(message, 'message')
+
     from_email = settings.DEFAULT_FROM_EMAIL
 
     addys = form.email_to
@@ -256,18 +261,7 @@ def send_admin_email(form):
     recipient_list = email_list
 
     message_one = (subject, message, from_email, recipient_list)
-    # print(subject, message, from_email, recipient_list)
+    print('email', subject, message, from_email, recipient_list)
 
+    # send_mail(subject, message, from_email, recipient_list)
     send_mass_mail((message_one,), fail_silently=False)
-
-def test_email():
-
-    send_mail(
-        'SPNA - Failed payment method',
-        """
-        Hi, this is a test email
-        """,
-        None,
-        ['ewancolquhoun@hotmail.com', 'scottishpna@outlook.com'],
-        fail_silently=True,
-    )

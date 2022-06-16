@@ -332,7 +332,9 @@ The Profile page is viewable for members to view their own membership details. I
         * Nursery, Email, Address, Subscription and renewal date.
     * Update details 
         * A form to update Nursery, Name, Address and Phone details
-        * The form has buttons to change their email and to cancel the subscription
+        * The form has buttons to change their email and to cancel the subscription. When cancel subscription is selected it will end the access once the payment period has ended (end of the month, 6 months or year). Access to the site will be granted whilst within the payment period.
+    * Change their current subscription button.
+        * This form sends a request to Stripe and automatically bills the customer pro-rata.
     * Current payment card display
         * Displays the last 4 digits and expiry date
     * Update payment details form
@@ -501,6 +503,7 @@ The method for cloning a project from GitHub is below:
 * [Stack Overflow](https://stackoverflow.com/) for general hints and tips.
 * The colour selection was compiled by [MyColorSpace](https://mycolor.space/) and [colorpeek](https://colorpeek.com/).
 * The icons came from [Font Awesome](https://fontawesome.com/).
+* Non custom code has been credited in situ.
 
 ### Media
 * [Unsplash](https://unsplash.com/) - Stock Nursery Photos

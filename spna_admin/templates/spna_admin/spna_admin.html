@@ -103,7 +103,7 @@
                             <th class="text-center">All <input id="contacts-select-all" type="checkbox" ></th>
                         </tr>
                         {% for contact in contacts %}
-                        <tr class="{% if contact.replied %}bg-green{% else %}bg-red{% endif %}">
+                        <tr class="{% if contact.member and not contact.replied %}bg-ant-white{% elif contact.replied %}bg-green{% else %}bg-red{% endif %}">
                             <td class="text-center">{{contact.created|date:"d M y" }}</td>
                             <td class="text-center">{{contact.name}}</td>
                             <td class="text-center"> 
@@ -130,11 +130,26 @@
                         </tr>
                         {% empty %}
                         <tr>
-                            <td>No Contact requests.</td>
+                            <td class="text-center">No Contact requests.</td>
                         </tr>
                         {% endfor %}
                         
                     </table>
+                </div>
+                <div class="pt-3 d-flex align-items-center justify-content-center">
+                    <!-- Table key -->
+                    <div class="bg-ant-white key m-2"></div>
+                    <div>
+                        <span>Member</span>
+                    </div>
+                    <div class="bg-green key m-2"></div>
+                    <div>
+                        <span>Replied</span>
+                    </div>
+                    <div class="bg-red key m-2"></div>
+                    <div>
+                        <span>Not Replied</span>
+                    </div>
                 </div>
             </div>
 

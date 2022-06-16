@@ -54,14 +54,6 @@
     background: none;
 }
 
-.bg-green {
-    background-color: rgba(130, 216, 130, 0.3);
-}
-
-.bg-red {
-    background-color: rgba(245, 63, 63, 0.3);
-}
-
 .admin-hr,
 .email-hr {
     color: #37698e;
@@ -70,9 +62,8 @@
     border-radius: 10px;
 }
 
-
-/* @media (min-width: 774px) {
-    #admin-header {
-        height: 20vh;
-    }
-} */
+.key {
+    width: 20px;
+    height: 20px;
+    border: 1px solid lightslategray;
+}

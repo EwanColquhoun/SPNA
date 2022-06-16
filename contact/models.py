@@ -19,6 +19,8 @@ class Contact(models.Model):
     message = models.TextField(blank=False, null=False)
     replied = models.IntegerField(choices=REPLIED, default=False)
     created = models.DateTimeField(auto_now=True)
+    # to get the link between member and contact.
+    member = models.BooleanField(default=False, blank=False, null=True)
 
     objects = models.Manager()
 

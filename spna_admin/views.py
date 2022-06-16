@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, reverse, redirect
+from django.shortcuts import render, get_object_or_404, get_list_or_404, HttpResponseRedirect, reverse, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.decorators.http import require_POST
@@ -11,6 +11,7 @@ from contact.models import Contact
 from member.models import Document, SPNAMember
 from member.forms import DocumentForm, EmailForm
 from spna.email import send_admin_email
+from spna.helpers import strip_tags
 from .get_csv import export_qs_to_csv
 
 
@@ -26,14 +27,14 @@ def spna_admin(request):
     doc_form = DocumentForm()
     form = ArticleForm()
     users = User.objects.all()
-    contacts = Contact.objects.all()
+    # contacts = Contact.objects.all()
 
     context = {
         'emailForm': email_form,
         'docForm': doc_form,
         'form': form,
         'users': users,
-        'contacts': contacts,
+        # 'contacts': contacts,
     }
 
     return render(request, 'spna_admin/spna_admin.html', context)
@@ -196,21 +197,24 @@ def send_admin_email_view(request):
     """
     A method to handle the sending of admin emails.
     """
-    contacts = Contact.objects.all()
     if request.method == 'POST':
         form = EmailForm(request.POST)
         if form.is_valid():
+            msg = form['email_body'].data
+            message = strip_tags(msg)
             form.save()
-        #  call to send email
-            send_admin_email(form)
+            emails_str = form.email_to
+            emails = emails_str.split(',')
+
+            for email in emails:
+                contacts = get_list_or_404(Contact, email=email)
+                for contact in contacts:
+                    contact.replied = 2
+                    contact.save()
+
+            send_admin_email(form, message)
             messages.success(request, 'Email successfully sent!')
 
-            if Contact.objects.filter(email=form.data['email_to']).exists():
-                for contact in contacts:
-                    if contact.email == form.data['email_to']:
-                        contact.replied = True
-                        contact.created = contact.created
-                        contact.save()
 
             return redirect(reverse('spna_admin'))
         else:
