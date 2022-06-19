@@ -6,7 +6,6 @@ from . import views
 
 urlpatterns = [
     path('', views.member_area, name='member_area_page'),
-    # path('delete/<document_id>', views.delete_document, name='delete_document'),
 
     path('subscribe/', views.subscribe, name='subscribe'),
     path('payment/', views.payment, name='payment'),

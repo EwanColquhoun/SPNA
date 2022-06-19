@@ -70,6 +70,7 @@ def profile_view(request):
             form.save()
             messages.success(request, 'Profile updated successfully')
 
+        member = get_object_or_404(SPNAMember, user=request.user)
         form = ProfileForm(instance=member)
         upgrade_form = UpgradeForm()
 
@@ -143,7 +144,7 @@ def upgrade_subscription(request):
     else:
         messages.info(request, 'Your details are missing from the database, please contact SPNA admin.')
 
-    return redirect(reverse('profile'))
+    return redirect(reverse('profile_page'))
 
 
 @login_required
@@ -168,7 +169,7 @@ def renew_subscription(request):
         trans = 'Renew'
         payment_error_admin(request, err, trans)
 
-    return redirect(reverse('profile'))
+    return redirect(reverse('profile_page'))
 
 
 @login_required
@@ -215,13 +216,13 @@ def update_payment_method(request):
         stripe.Subscription.modify(sub, default_payment_method=new_pm)
         update_card_details_to_member(request)
         messages.success(request, 'Your card details have been updated for the next payment.')
-        return redirect(reverse('profile'))
+        return redirect(reverse('profile_page'))
 
     except Exception as err:
         messages.error(request, f'Card declined. Please check the details and try again. {err}')
         trans = 'Update payment'
         payment_error_admin(request, err, trans)
-        return redirect(reverse('profile'))
+        return redirect(reverse('profile_page'))
 
 
 def secure(request):

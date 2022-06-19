@@ -4,7 +4,7 @@ from django.conf import settings
 import re
 
 # Emails to Admin
-def contact_email(contact, message):
+def contact_email(contact):
     """
     Sends the admin an email when there is a new contact request.
     """
@@ -15,7 +15,7 @@ def contact_email(contact, message):
         You have a new contact request from {contact.name}
         Telephone - {contact.phone_number}
         Email - {contact.email}
-        Message - {message}
+        Message - {contact.message}
         Click here to visit the admin site
         https://scottishpna.herokuapp.com/spna_admin/
         Thanks.""",

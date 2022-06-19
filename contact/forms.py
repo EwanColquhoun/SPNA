@@ -13,7 +13,7 @@ class ContactForm(forms.ModelForm):
         fields = ('name', 'phone_number', 'email', 'message')
         widgets = {
             'email': forms.EmailInput(
-                attrs={'placeholder': 'you@youremail.com'}),
+                attrs={'placeholder': 'you@youremail.com', 'id': 'contact-email'}),
             'phone_number': forms.TextInput(
                 attrs={'placeholder': '+44 1234567890',
                        'rows': 1, 'cols': 15})
