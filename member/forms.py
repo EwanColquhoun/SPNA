@@ -125,6 +125,7 @@ class EmailForm(forms.Form):
     email_to = forms.CharField()
     email_subject = forms.CharField()
     email_body = forms.CharField(widget=SummernoteWidget())
+    # email_body = forms.CharField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

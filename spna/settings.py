@@ -27,6 +27,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 DEBUG = 'DEVELOPMENT' in os.environ
 # DEBUG = False
 
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
+mimetypes.add_type(".js", True)
+
 ALLOWED_HOSTS = ['localhost', 'scottishpna.herokuapp.com']
 CSRF_TRUSTED_ORIGINS = [
     "https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu47.gitpod.io",
