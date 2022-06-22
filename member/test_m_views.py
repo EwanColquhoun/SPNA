@@ -2,10 +2,6 @@ from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User
 
-from .models import SPNAMember
-
-from .forms import ProfileForm, DocumentForm, EmailForm, CustomSignupForm
-
 
 class TestNonSuperUserAccess(TestCase):
     """Tests the views to ensure that a non superuser can't access them"""
@@ -14,7 +10,6 @@ class TestNonSuperUserAccess(TestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateNotUsed(response, 'member/member-area.html')
-        # self.assertRedirects(response, '/accounts/login/?next=/member/')
 
     def test_profile_view(self):
         response = self.client.get('/member/profile/')
@@ -61,7 +56,7 @@ class TestSuperUserAccess(TestCase):
         self.assertEqual(response.status_code, 200)
         updated_user = User.objects.filter(id=self.user.id)[0]
         self.assertEqual(updated_user.spnamember.nursery, 'Updated Nursery')
-    
+
 
 class TestNotPaidSpnaMemberAccess(TestCase):
     """Tests to validate the spnamember.paid criteria"""

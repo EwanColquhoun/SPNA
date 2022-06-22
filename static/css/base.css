@@ -9,7 +9,6 @@ body {
     font-weight: 600;
     overflow-y: auto;
     padding-bottom: 50px;
-    /* height: 100vh; */
 }
 
 .container {
@@ -57,7 +56,6 @@ ul {
 .nav-item .active {
     color: black ;
 }
-
 
 .cover {
     min-height: 60px;
@@ -199,7 +197,6 @@ footer a {
 .social-networks > li {
     display: inline;
 }
-
 
 #social-holder {
     display: flex;
@@ -408,7 +405,7 @@ footer a {
     width: fit-content;
 }
 
-/* -------------Contact Modal-------------------- */
+/* -------------Contact & FAQ Modal-------------------- */
 
 .modal-body .form-group {
     padding: 8px 0px;
@@ -494,7 +491,6 @@ footer a {
 }
 
 /* -------------------------------- Media Queries */
-
 /* Slightly larger container on xl screens */
 @media (min-width: 1200px) {
     .container {

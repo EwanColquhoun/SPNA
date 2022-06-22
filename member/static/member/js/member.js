@@ -1,5 +1,4 @@
-// // Gets the delete document modal working
-
+// Gets the delete document modal working
 const delete_buttons = document.querySelectorAll('.delete-doc-button');
 let modal = document.querySelector('#delete-doc-modal')
 
@@ -15,6 +14,7 @@ if (delete_buttons.length !== 0) {
     });
 })};
 
+// Shows the matched passwords as green boxes for enhanced UX
 let password = document.querySelectorAll('#id_password1');
  if (password.length >= 1) {
     passwordMatch();
@@ -35,7 +35,6 @@ function passwordMatch() {
         }
     });
 }
-
 
 // stripe
 function card(stripe_publishable_key, customer_email) {
@@ -114,7 +113,6 @@ function card(stripe_publishable_key, customer_email) {
                 form.submit();
             }
             });
-              // Create Payment Method END
         }
       });
     });

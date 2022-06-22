@@ -35,7 +35,6 @@ class Document(models.Model):
     date_uploaded = models.DateTimeField(auto_now_add=True)
     objects = UserManager()
 
-
     def __str__(self):
         return str(self.title)
 
@@ -97,7 +96,6 @@ class SPNAMember(models.Model):
         return sname
 
 # Below methods from https://www.youtube.com/watch?v=Mw__Pw1iGgA
-
     def set_paid_until(self, date_or_timestamp):
         """
         Sets the paid until date based on stripe wh return
@@ -128,4 +126,3 @@ class SPNAMember(models.Model):
 
         self.save()
         return self.paid # added in for testing.
-

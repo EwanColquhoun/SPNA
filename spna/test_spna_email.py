@@ -4,13 +4,6 @@ from django.contrib.auth.models import User
 from django.core import mail
 
 from .email import (
-    register_email,
-    contact_email,
-    cancel_email,
-    cancel_email_to_member,
-    failed_payment_to_member,
-    send_admin_email,
-    payment_error_admin,
     welcome_email_to_member,
 )
 

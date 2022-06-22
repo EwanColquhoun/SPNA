@@ -1,10 +1,8 @@
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 
 from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User
-
-from .models import SPNAMember
 
 
 class TestSPNAModelMethods(TestCase):
@@ -26,7 +24,7 @@ class TestSPNAModelMethods(TestCase):
             self.user.spnamember.has_paid(),
             "Initial user should have empty paid_until attr"
         )
-    
+
     def test_different_date_values(self):
         current_date = date.today()
         _30days = timedelta(days=30)

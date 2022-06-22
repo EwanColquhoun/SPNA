@@ -21,11 +21,10 @@
             <div class="col"></div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block content %}
-
+<!-- Payment-Hero and title section -->
 <section id="member-image-section">
     <div class="overlay">
         <div class="container-fluid h-100">
@@ -38,7 +37,7 @@
     </div>
 </section>
 
-<!-- Stripe Card section -->
+<!-- Payment-Stripe Card section -->
 <section id="payment-body-section" class="bg-ant-white text-blue">
     <div class="row g-0 w-100 pb-5">
         <div class="col-12 col-md-10 mx-auto my-auto text-center pt-3">
@@ -73,14 +72,13 @@
                 <input type="hidden" id="automatic" value="{{automatic}}" name="automatic">
                 <input type="hidden" id="fullname" value="{{fullname}}" name="fullname">
                 <button id="submit-button" class="btn spna-btn">
-                    <div class="spinner hidden" id="spinner"></div>
                     <span id="button-text">Pay <strong>£{{spna_plan.disp_amount}} </strong>now</span>
                 </button>
             </form>
             <p class="text-muted text-center mt-1">Payments verified with <a href="https://stripe.com/gb" target="_blank"><img class="d-inline-block" src="{% get_media_prefix %}stripe/stripe-logo-small.png" width="100px"alt="Stripe logo small"></img></a></p>
             <p class="text-muted text-center w-50 mx-auto">
                 <small>
-                    By clicking 'Pay' you confirm you are happy for the SPNA throught STRIPE to save your card details for future payments according to your payment plan frequency - {{spna_plan.name}}.<br>
+                    By clicking 'Pay' you confirm you are happy for the SPNA, through STRIPE to save your card details for future payments according to your payment plan frequency - {{spna_plan.name}}.<br>
                     The amount you are charged will not change without your prior approval
                 </small>
             </p>
@@ -96,5 +94,4 @@
 {% endblock %}
 {% block postloadjs %}
 {{block.super}}
-
 {% endblock %}

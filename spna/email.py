@@ -1,8 +1,6 @@
 from django.core.mail import send_mail, send_mass_mail
 from django.conf import settings
 
-import re
-
 # Emails to Admin
 def contact_email(contact):
     """
@@ -248,7 +246,8 @@ def failed_payment_to_member(user):
         Hi {user.first_name},
 
         Please be advised that your payment has failed for your SPNA subscription. Please login to
-        scottishpna.herokuapp.com to update your payment methods on your profile page. Payments will take a few days to process. If you haven't received
+        scottishpna.herokuapp.com to update your payment methods on your profile page.
+        Payments will take a few days to process. If you haven't received
         a confirmation email after that time, please contact admin.
 
         Kind regards,

@@ -8,8 +8,3 @@ class ProfilesConfig(AppConfig):
 
     def ready(self):
         import member.signals
-
-
-# class MemberConfig(AppConfig):
-#     default_auto_field = 'django.db.models.BigAutoField'
-#     name = 'member'

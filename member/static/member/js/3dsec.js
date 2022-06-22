@@ -15,7 +15,6 @@ function _3dsec(stripe_publishable_key, pi_secret) {
               <a id="redirect-button" href="/member/subscribe" class="btn spna-btn">Sign Up</a>
             </div>`
           $("#3ds_result").html(htmlString);
-
         } else {
           // The payment has succeeded. Display a success message.
           spinner.style.display = 'none'
@@ -25,8 +24,8 @@ function _3dsec(stripe_publishable_key, pi_secret) {
               <a id="redirect-button" href="/" class="btn spna-btn">SPNA Home</a>
             </div>`
           $("#3ds_result").html(htmlString);
-          //  window.location.href = 'https://scottishpna.herokuapp.com/member/login/'
-           window.location.href = 'https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu47.gitpod.io/member/login/'
+          // Relocates to a log the user in once payment is successful.
+           window.location.href = 'https://scottishpna.herokuapp.com/member/login/'
         }
       });
     });

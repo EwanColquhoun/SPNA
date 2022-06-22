@@ -5,6 +5,7 @@ from .models import Document, SPNAMember, Plan
 
 @admin.register(Plan)
 class PlanAdmin(admin.ModelAdmin):
+    """Adds the plan for the Django admin site"""
     search_fields = ['name', 'amount']
     list_display = ('id', 'name', 'amount')
 
@@ -21,24 +22,8 @@ class DocumentAdmin(admin.ModelAdmin):
         'date_uploaded',
     )
     ordering = ('-date_uploaded',)
- 
 
-# @admin.register(SPNAMember)
-# class SPNAMemberAdmin(admin.ModelAdmin):
-#     """
-#     Member admin for the superuser(admin)
-#     """
-#     search_fields = ['fullname', 'email', 'nursery', 'town_or_city', 'country']
-#     list_display = (
-#         'fullname',
-#         'username',
-#         'email',
-#         'nursery',
-#         'town_or_city',
-#         'date_joined',
-#     )
-#     ordering = ('date_joined',)
- 
+
 class MemberInline(admin.StackedInline):
     """
     Adds SPNAMember inline with User model
@@ -48,12 +33,21 @@ class MemberInline(admin.StackedInline):
     verbose_name_plural = 'Member'
     fk_name = 'user'
 
+
 class CustomUserAdmin(UserAdmin):
     """
     Defines SPNAMember inline with User model
     """
     inlines = (MemberInline, )
-    list_display = ('username', 'email', 'date_joined', 'get_nursery', 'get_fullname' , 'get_subscription', 'get_paid_until', 'paid')
+    list_display = (
+        'username',
+        'email',
+        'date_joined',
+        'get_nursery',
+        'get_fullname' ,
+        'get_subscription',
+        'get_paid_until',
+        'paid')
     list_select_related = ('spnamember', )
     ordering = ('date_joined',)
 

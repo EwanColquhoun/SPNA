@@ -1,3 +1,5 @@
+/* -----------------NEWS PAGE--------------- */
+/* ------------------------- News-hero Section */
 #news-image {
     background: url('/media/images/bench-read.png') no-repeat center;
     background-color: #96b1e0;
@@ -24,6 +26,7 @@
     left: 11%;
 }
 
+/* ------------------------- News-Article Section */
 .article-content {
     overflow-y: scroll;
     height: 19rem;
@@ -78,7 +81,6 @@ body.modal-open {
 }
 
 /* Cards inspired from https://codepen.io/onediv/pen/nggJjz */
-
 .i-card {
     position: relative;
     min-height: 200px;

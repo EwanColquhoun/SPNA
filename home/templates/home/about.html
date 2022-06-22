@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block content %}
-
+<!-- Hero image and title -->
 <section id="about-hero">
     <div class="overlay">
         <div class="container-fluid h-100">
@@ -30,6 +30,7 @@
     </div>
 </section>
 
+<!-- About content section -->
 <section id="about-section">
     <div class="container-fluid">
         <div class="row text-center">
@@ -53,6 +54,7 @@
     </div>
 </section>
 
+<!-- About-Guiding Principles section -->
 <section id="guiding-section" class="bg-light-blue">
     <div class="container-fluid">
         <div class="row text-center">
@@ -152,6 +154,7 @@
     </div>
 </section>
 
+<!-- About-Governance section -->
 <section id="governace-section" class=" bg-ant-white">
     <div class="container-fluid">
         <div class="row">
@@ -177,6 +180,7 @@
     </div>
 </section>
 
+<!-- About-Tag line section -->
 <section id="tag-line-section">
     <div id="tag-line-container"class="container-fluid bg-dark-blue text-ant-white">
         <div class="row w-100">
@@ -190,6 +194,7 @@
     </div>
 </section>
 
+<!-- About-Quote from CEO section -->
 <section id="people-section">
     <div class="container container-fluid">
         <div class="row text-center">
@@ -221,8 +226,4 @@
 {% endblock %}
 
 {% block postloadjs %}
-{{ block.super }}
-
-    <script type="text/javascript" src="{% static 'home/js/about-script.js' %}"></script>
-
 {% endblock %}

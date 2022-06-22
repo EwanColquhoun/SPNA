@@ -65,10 +65,6 @@ class CustomSignupForm(SignupForm):
     ]
 
     def save(self, request):
-
-        # Ensure you call the parent class's save.
-        # .save() returns a user object.
-
         user = super().save(request)
         user.spnamember.fullname = self.cleaned_data['fullname']
         user.spnamember.nursery = self.cleaned_data['nursery']
@@ -95,7 +91,6 @@ class ProfileForm(forms.ModelForm):
             'sub_id',
             'has_cancelled'
             )
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -125,7 +120,6 @@ class EmailForm(forms.Form):
     email_to = forms.CharField()
     email_subject = forms.CharField()
     email_body = forms.CharField(widget=SummernoteWidget())
-    # email_body = forms.CharField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -157,7 +151,7 @@ class UpgradeForm(forms.Form):
         (Y, '£100 yearly'),
     )
 
-    name = forms.ChoiceField(choices=PLAN, required=True)
+    name = forms.ChoiceField(widget=forms.Select, choices=PLAN)
 
     class Meta:
         model = Plan

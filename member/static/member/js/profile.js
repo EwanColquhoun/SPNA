@@ -1,3 +1,4 @@
+// Handles card updates from the Profile page. Based on Stripe docs.
 function cardUpdate(stripe_publishable_key, customer_email) {
     document.addEventListener("DOMContentLoaded", function(event){
     var stripe = Stripe(stripe_publishable_key);

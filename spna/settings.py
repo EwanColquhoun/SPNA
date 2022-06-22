@@ -25,11 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 DEBUG = 'DEVELOPMENT' in os.environ
-# DEBUG = False
 
-import mimetypes
-mimetypes.add_type("text/css", ".css", True)
-mimetypes.add_type(".js", True)
+# import mimetypes
+# mimetypes.add_type("text/css", ".css", True)
+# mimetypes.add_type(".js", True)
 
 ALLOWED_HOSTS = ['localhost', 'scottishpna.herokuapp.com']
 CSRF_TRUSTED_ORIGINS = [
@@ -39,7 +38,6 @@ CSRF_TRUSTED_ORIGINS = [
 SITE_ID = 1
 
 # Email settings
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 if 'DEVELOPMENT' in os.environ:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
@@ -104,7 +102,6 @@ X_FRAME_OPTIONS = "SAMEORIGIN"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SUMMERNOTE_THEME = 'bs4'
-
 SUMMERNOTE_CONFIG = {
     'iframe': False,
 
@@ -242,7 +239,6 @@ if 'USE_AWS' in os.environ:
     # Override static and media URLs in production
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
-
 
 # STRIPE variables
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')

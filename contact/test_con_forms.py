@@ -1,10 +1,10 @@
 from django.test import TestCase
-from django.test.client import Client
 
 from .forms import ContactForm
 
 
 class TestContactForm(TestCase):
+    """Tests the contact form validities"""
 
     def test_name_is_required(self):
         form = ContactForm({'name': ''})
@@ -39,4 +39,3 @@ class TestContactForm(TestCase):
             'phone_number',
             'email',
             'message'))
-

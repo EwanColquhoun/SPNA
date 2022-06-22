@@ -1,8 +1,6 @@
 from django.test import TestCase
 from django.core import mail
-from django.test.client import Client
 
-from spna.email import contact_email
 from .forms import ContactForm
 
 
@@ -19,6 +17,7 @@ class TestContactView(TestCase):
         })
         self.assertEqual(len(mail.outbox), 0)
         response = self.client.post('/contact/contact/send', data)
+        self.assertRedirects(response, '/')
         self.assertEqual(len(mail.outbox), 1)
 
     def test_contact_does_not_post(self):

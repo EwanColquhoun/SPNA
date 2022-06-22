@@ -1,6 +1,5 @@
 /* -------------INDEX/HOME PAGE---------------- */
 /* ------------------------- Hero Section */
-
 #hero-image-section {
     background: url('/media/images/messyhands.png') no-repeat center;
     background-size: cover;
@@ -22,7 +21,6 @@
 }
 
 /* ------------------------- Quote Section */
-
 #quote-section {
     background-color: #233452;
     color: antiquewhite;
@@ -38,7 +36,6 @@
 }
 
 /* --------------------------- Overview section */
-
 #overview-image-div {
     background: url('/media/images/flower.png') no-repeat center;
     background-color: darkgreen;
@@ -65,9 +62,7 @@
 }
 
 /* ------------------------- Guiding Section */
-
 /* Carousel from https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=thumbnail-carousel-with-content */
-
 .carousel {
 	margin: 30px auto 60px;
 	padding: 0 80px;
