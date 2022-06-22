@@ -50,28 +50,46 @@ def payment_error_admin(request, error, payment):
     """
     Sends the admin an email when there is a payment error.
     """
-    send_mail(
-        'Payment error',
-        f"""
-        Payment error with Stripe,
+    try:
+        send_mail(
+            'Payment error',
+            f"""
+            Payment error with Stripe,
 
-        Full Name - {request.user.spnamember.fullname}
-        Email - {request.user.email}
-        Phone - {request.user.spnamember.phone}
-        Nursery - {request.user.spnamember.nursery}
-        Subscription Renewal date - {request.user.spnamember.paid_until}
+            Full Name - {request.user.spnamember.fullname}
+            Email - {request.user.email}
+            Phone - {request.user.spnamember.phone}
+            Nursery - {request.user.spnamember.nursery}
+            Subscription Renewal date - {request.user.spnamember.paid_until}
 
-        Type = {payment}
-        There was a problem with payment. Please check the stripe dashboard for more information:
-        Error: {error}
+            Type = {payment}
+            There was a problem with payment. Please check the stripe dashboard for more information:
+            Error: {error}
 
-        Click here to visit the admin site
-        https://scottishpna.herokuapp.com/spna_admin/
-        Thanks.""",
-        None,
-        ['info@scottishpna.org', 'scottishpna@outlook.com'],
-        fail_silently=True,
-    )
+            Click here to visit the admin site
+            https://scottishpna.herokuapp.com/spna_admin/
+            Thanks.""",
+            None,
+            ['info@scottishpna.org', 'scottishpna@outlook.com'],
+            fail_silently=True,
+        )
+    except AttributeError as err:
+        send_mail(
+            'Payment error',
+            f"""
+            Payment error with Stripe,
+
+            Type = {payment}
+            There was a problem with payment. Please check the stripe dashboard for more information:
+            Error: {err}
+
+            Click here to visit the admin site
+            https://scottishpna.herokuapp.com/spna_admin/
+            Thanks.""",
+            None,
+            ['info@scottishpna.org', 'scottishpna@outlook.com'],
+            fail_silently=True,
+        )
 
 def register_email(user):
     """

@@ -136,10 +136,9 @@ The responsive design tests were carried out manually with [Google Chrome DevToo
 
     The issue seems to stem from the transferring of the common JS into a format readable by ES Modules. Jest/Babel seems to need configuring to accept the ES6 variation of JS.
 
-
-
 * ### Unresolved
-    
+    1. There is a known bug when initially signing up. Once the signup and payment are completed the user is redirected to the 'home' page. As they are paid and authenticated the menu link to the members area should be visible in the NavBar. It isn't visible until the page is reset. As a short term workaround there has been another link to the Members' area in the dropdown mini menu in the top right of the page.
+    2. The second unresolved known bug is one on the profile page. When the user has a card that requires 3d Authentication the changing subscription and the update payment card views currently can't handle this. This is a fairly major limitation for certain cards but due to external factors with the application this hasn't been able to be resolved at this release. The main payment card page can accept 3d auth payments.
 
 [Back to top](<#contents>)
 ## Additional Testing

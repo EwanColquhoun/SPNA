@@ -354,7 +354,8 @@ footer a {
 }
 
 #sign-in-button {
-    width: 3rem;
+    min-width: 3rem;
+    width: 7rem;
 }
 
 .spna-btn {

@@ -1,6 +1,6 @@
 import stripe
 
-from django.shortcuts import render, reverse, get_object_or_404, redirect
+from django.shortcuts import render, reverse, get_object_or_404, redirect, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
@@ -97,7 +97,6 @@ def profile_view(request):
         }
     return render(request, template, context)
 
-
 @login_required
 @require_POST
 def upgrade_subscription(request):
@@ -118,7 +117,6 @@ def upgrade_subscription(request):
 
     if request.user.spnamember:
         sub = request.user.spnamember.sub_id
-
         try:
             stripe.api_key = stripe_secret_key
             subscription = stripe.Subscription.retrieve(sub)
@@ -131,9 +129,11 @@ def upgrade_subscription(request):
                     'price': spi,
                 }]
             )
+         
             member = get_object_or_404(SPNAMember, user=request.user)
             member.subscription = spna_plan.name
             member.save()
+            member.refresh_from_db()
             upgrade_email_to_member(member)
             messages.success(request, 'Your subscription has been changed. Please reload the page for updated details.')
         except Exception as err:
@@ -144,8 +144,7 @@ def upgrade_subscription(request):
     else:
         messages.info(request, 'Your details are missing from the database, please contact SPNA admin.')
 
-    return redirect(reverse('profile_page'))
-
+    return redirect('profile_page')
 
 @login_required
 def renew_subscription(request):
@@ -224,14 +223,6 @@ def update_payment_method(request):
         payment_error_admin(request, err, trans)
         return redirect(reverse('profile_page'))
 
-
-def secure(request):
-    """
-    A view to show on 3d secure payment
-    """
-    return render(request, 'member/3dsec.html')
-
-
 def subscribe(request):
     """
     This view is activated from the 'Sign Up' button. Creates the payment intent.
@@ -301,7 +292,6 @@ def subscribe(request):
             }
         return render(request, 'member/subscribe.html', context)
 
-
 def payment(request):
 
     """
@@ -333,13 +323,11 @@ def payment(request):
             )
         except stripe.error.CardError as err:
             messages.error(request, f"There was a problem with the card details. Please try again. {err}")
+            return redirect('subscribe')
 
         except stripe.error.StripeError as err:
-            # Display a very generic error to the user, and maybe send
-            # yourself an email
-            trans = 'Initial Payment'
-            payment_error_admin(request, err, trans)
             messages.error(request, f"Sorry we have encountered a problem. Please try again later. {err}")
+            return redirect('subscribe')
 
         latest_invoice = stripe.Invoice.retrieve(sub.latest_invoice)
         # Generates an instance of the SPNA member once invoice is paid.
@@ -369,13 +357,11 @@ def payment(request):
 
 
             perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
+            user.refresh_from_db()
             welcome_email_to_member(user)
             messages.success(request, f'Successfully created SPNA Member {user.spnamember.fullname}.')
-            context = {
-                'form':log_form,
-            }
 
-            return render(request, 'home/index.html', context)
+            return HttpResponseRedirect('/')
 
         else:
             try:
@@ -392,11 +378,7 @@ def payment(request):
                         username=request.session['email'],
                         password=request.session['password'],
                     )
-                    stripe.PaymentIntent.confirm(
-                        latest_invoice.payment_intent,
-                        return_url="https://scottishpna.herokuapp.com/",
-                    )
-                    user.refresh_from_db()
+                
                     user.email=request.session['email']
                     fn = request.session['fullname']
                     user.first_name=user.spnamember.get_fname(fn)
@@ -412,18 +394,18 @@ def payment(request):
                     user.spnamember.street_address1=request.session['street_address1']
                     user.spnamember.nursery=request.session['nursery']
                     user.save()
+                    user.refresh_from_db()
 
-                    welcome_email_to_member(user)
-                    register_email(user)
+                    # welcome_email_to_member(user)
+                    # register_email(user)
 
-                    perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
+                    # perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
 
                     context = {
                         'payment_intent_secret': intent.client_secret,
                         'STRIPE_PUBLISHABLE_KEY': stripe_public_key,
                     }
                     return render(request, 'member/3dsec.html', context)
-                    # return render(request, 'home/index.html', context)
                     
             except stripe.error.StripeError as err:
                 messages.warning(request, f'The card was declined. Please try again. {err}')
@@ -441,3 +423,24 @@ def payment(request):
             'form': form,
             }
         return render(request, 'member/subscribe.html', context)
+
+def secure(request):
+    """
+    A view to show on 3d secure payment
+    """
+    return render(request, 'member/3dsec.html')
+
+def member_login(request):
+    """
+    A view to log in after 3d auth passes
+    """
+    try:
+        user = get_object_or_404(User, email=request.session['email'])
+        welcome_email_to_member(user)
+        register_email(user)
+        perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
+        return redirect('/')
+    except ValueError as err:
+        messages.error(request, f'There has been an error logging you in. Please try again from the home page. Error: {err}')
+
+    return render(request, 'member/member-login.html')

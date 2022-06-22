@@ -95,7 +95,7 @@
                         <form id="upgrade-subscription-form" action="{% url 'upgrade' %}" method="POST">
                             {% csrf_token %}
                             {{ upgrade_form|crispy }}
-                            <button class="spna-btn btn mt-3">Update</button>
+                            <button id="update-card-button" class="spna-btn btn mt-3">Update</button>
                         </form>
                     </div>
                 </div>

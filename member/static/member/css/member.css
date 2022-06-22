@@ -29,6 +29,7 @@
   min-height: 12rem;
   border: 1px solid #0f5081;
   border-radius: 5%;
+  background-color: moccasin;
 }
 
 .category-title {
@@ -65,6 +66,11 @@
   margin: 0 auto;
   width: 90%;
 }
+
+.matched {
+  background-color: rgba(0, 255, 21, 0.425)
+}
+
 /* ----------Profile page-------------- */
 
 #update-payment-form #card-element {

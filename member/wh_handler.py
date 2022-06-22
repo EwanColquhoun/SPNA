@@ -28,8 +28,7 @@ def wh_set_paid_until(request, charge):
         try:
             user = User.objects.get(email=email)
         except RuntimeError as err:
-          
-            messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
+            messages.error(request, f'No User exists with this name. Error:{err}. Please contact Admin.')
             return False
 
         user.spnamember.set_paid_until(current_period_end)
@@ -43,23 +42,27 @@ def update_paid_until(request, event):
     """Updates the paid until date when the subscription is changed."""
     
     stripe.api_key = settings.STRIPE_SECRET_KEY
-    sub = stripe.Subscription.retrieve(event.id)
-    cust = sub.customer
-    expiry = sub.current_period_end
-
-    if cust:
-        customer = stripe.Customer.retrieve(cust)
-        email = customer.email
-        if customer:
-            try:
-                user = User.objects.get(email=email)
-                user.spnamember.set_paid_until(expiry)
-            except Exception as err:
-            
-                messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
-                return False
-    else:
-        messages.error(request, 'No customer with this subscription exists. Please contact Admin.')
+    print('updateED')
+    try:
+        sub = stripe.Subscription.retrieve(event.id)
+        cust = sub.customer
+        expiry = sub.current_period_end
+        if cust:
+            customer = stripe.Customer.retrieve(cust)
+            email = customer.email
+            if customer:
+                try:
+                    user = User.objects.get(email=email)
+                    user.spnamember.set_paid_until(expiry)
+                    user.save()
+                    print('INSIDE UPDATED')
+                except Exception as err:
+                    messages.error(request, f'No User exists with this name. Error:{err}. Please contact Admin.')
+                    return False
+        else:
+            messages.error(request, 'No customer with this subscription exists. Please contact Admin.')
+    except Exception as err:
+        messages.error(request, f"There is a problem updating the expiry date: {err}")
 
 
 def sub_cancelled(request, charge):
@@ -76,7 +79,7 @@ def sub_cancelled(request, charge):
                     user = User.objects.get(email=email)
                 except RuntimeError as err:
                 
-                    messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
+                    messages.error(request, f'No User exists with this name. Error:{err}. Please contact Admin.')
                     return False
 
             user.spnamember.paid=False
@@ -102,7 +105,7 @@ def failed_payment(request, charge):
                     user = User.objects.get(email=email)
                     failed_payment_to_member(user)
                 except RuntimeError as err:
-                    messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
+                    messages.error(request, f'No User exists with this name. Error:{err}. Please contact Admin.')
                     return False
         else:
             messages.error(request, 'No customer with this subscription exists. Please contact Admin.')

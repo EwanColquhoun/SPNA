@@ -46,9 +46,11 @@ def webhook(request):
         return HttpResponse(content=err, status=400)
 
     event_type = request_data['type']
+    print(event_type)
 
     if event_type == 'invoice.paid':
         # Code to action when payment is all good (user login, update user paid until etc)
+        # insert the login function herer
         if event.data.object.payment_intent:
             wh_set_paid_until(request, event.data.object)
 
@@ -62,6 +64,7 @@ def webhook(request):
         # an invoice.payment_failed event is sent, the subscription becomes past_due.
         # Use this webhook to notify your user that their payment has
         # failed and to retrieve new card details.
+        # maybe the logout function here?
         failed_payment(request, event.data.object)
 
     if event_type == 'customer.subscription.deleted':

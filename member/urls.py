@@ -17,4 +17,5 @@ urlpatterns = [
     path('renew/', views.renew_subscription, name='renew'),
     path('upgrade/', views.upgrade_subscription, name='upgrade'),
     path('update_payment_method/', views.update_payment_method, name='update_payment_method'),
+    path('login/', views.member_login, name='member_login'),
 ]

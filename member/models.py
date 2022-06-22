@@ -117,7 +117,7 @@ class SPNAMember(models.Model):
     def has_paid(
         self,
         current_date=datetime.date.today()
-    ):
+        ):
         """
         Defines if spnamember has paid according to stripe wh return
         """

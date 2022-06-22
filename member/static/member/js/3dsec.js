@@ -3,11 +3,11 @@ function _3dsec(stripe_publishable_key, pi_secret) {
     document.addEventListener("DOMContentLoaded", function(event){
       
       var stripe = Stripe(stripe_publishable_key);
-      // let redBut = document.getElementById('redirect-button')
       let spinner = document.getElementById('loading-overlay-secure')
     
       stripe.confirmCardPayment(pi_secret).then(function(result) {
         if (result.error) {
+          // Payment failed, displays an error message and relocation button
           spinner.style.display = 'none'
           htmlString = 
             `<p class="text-danger"><strong>Payment declined.</strong> Please try to sign up again using the button below</p>
@@ -25,9 +25,9 @@ function _3dsec(stripe_publishable_key, pi_secret) {
               <a id="redirect-button" href="/" class="btn spna-btn">SPNA Home</a>
             </div>`
           $("#3ds_result").html(htmlString);
-          // Need to work on the 3d secure relocation. It seems to appear twice.
-          // window.location.href = 'https://scottishpna.herokuapp.com/'
+          //  window.location.href = 'https://scottishpna.herokuapp.com/member/login/'
+           window.location.href = 'https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu47.gitpod.io/member/login/'
         }
       });
-    }); // DOMContentLoaded
+    });
 }

@@ -15,6 +15,28 @@ if (delete_buttons.length !== 0) {
     });
 })};
 
+let password = document.querySelectorAll('#id_password1');
+ if (password.length >= 1) {
+    passwordMatch();
+  }
+function passwordMatch() {
+    let password1 = document.getElementById('id_password1');
+    let password2 = document.getElementById('id_password2');
+
+    password2.addEventListener("input", function pMatch() {
+        if (password2.value === password1.value) {
+            password2.classList.add('matched');
+            password1.classList.add('matched');
+            return true;
+        } else {
+            password2.classList.remove('matched');
+            password1.classList.remove('matched');
+            return false;
+        }
+    });
+}
+
+
 // stripe
 function card(stripe_publishable_key, customer_email) {
     document.addEventListener("DOMContentLoaded", function(event){

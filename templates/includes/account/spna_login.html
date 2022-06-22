@@ -43,16 +43,16 @@
 <form class="login" method="POST" action="{% url 'account_login' %}">
     {% csrf_token %}
     <p>
-        <label for="id_login" class="d-block m-1">Login:</label>
-        <input type="text" class="m-1" name="login" placeholder="Username or e-mail" autocomplete="email" required="" id="id_login">
+        <label for="id_login_spna" class="d-block m-1">Login:</label>
+        <input type="text" class="m-1" name="login" placeholder="Username or e-mail" autocomplete="email" required="" id="id_login_spna">
     </p>
     <p>
-        <label for="id_password" class="d-block m-1">Password:</label>
-        <input type="password" class="m-1" name="password" placeholder="Password" autocomplete="current-password" required="" id="id_password">
+        <label for="id_password_spna" class="d-block m-1">Password:</label>
+        <input type="password" class="m-1" name="password" placeholder="Password" autocomplete="current-password" required="" id="id_password_spna">
     </p>
     <p">
-        <label for="id_remember" class="m-1 position-relative">Remember Me:</label>
-        <input type="checkbox" class="position-absolute float-right m-2" name="remember" id="id_remember">
+        <label for="id_remember_spna" class="m-1 position-relative">Remember Me:</label>
+        <input type="checkbox" class="position-absolute float-right m-2" name="remember" id="id_remember_spna">
     </p>
     {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
