@@ -241,8 +241,6 @@ def subscribe(request):
         form = CustomSignupForm(request.POST)
         if form.is_valid():
         # creates and saves user attributes into the session
-            user = form.save(request)
-            user.save()
             request.session['fullname'] = form.cleaned_data['fullname']
             request.session['email'] = form.cleaned_data['email']
             request.session['nursery'] = form.cleaned_data['nursery']
@@ -252,6 +250,7 @@ def subscribe(request):
             request.session['subscription'] = form.cleaned_data['subscription']
             request.session['town_or_city'] = form.cleaned_data['town_or_city']
             request.session['country'] = form.cleaned_data['country']
+            request.session['password'] = form.cleaned_data['password1']
 
             plan =request.POST.get('subscription')
 
@@ -270,7 +269,7 @@ def subscribe(request):
 
             automatic = True
 
-        # creates the intent
+            # creates the intent
             stripe.api_key = stripe_secret_key
             payment_intent = stripe.PaymentIntent.create(
                 amount=amount,
@@ -308,8 +307,6 @@ def payment(request):
     """
     A view to pay the SPNA, create a customer and an associated subscription.
     """
-
-    # payment_intent_id = request.POST['payment_intent_id']
     payment_method_id = request.POST['payment_method_id']
     stripe_plan_id = request.POST['stripe_plan_id']
     customer_email = request.POST['customer_email']
@@ -348,8 +345,14 @@ def payment(request):
         # Generates an instance of the SPNA member once invoice is paid.
         if latest_invoice.paid:
             fn = request.session['fullname']
-            user = User.objects.get(email=request.session['email'])
+
+            user = User.objects.create_user(
+                username=request.session['email'],
+                password=request.session['password'],
+            )
+
             user.refresh_from_db()
+            user.email=request.session['email']
             user.first_name=user.spnamember.get_fname(fn)
             user.last_name=user.spnamember.get_sname(fn)
             user.spnamember.sub_id=sub.id
@@ -364,6 +367,7 @@ def payment(request):
             user.spnamember.nursery=request.session['nursery']
             user.save()
 
+
             perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
             welcome_email_to_member(user)
             messages.success(request, f'Successfully created SPNA Member {user.spnamember.fullname}.')
@@ -377,17 +381,28 @@ def payment(request):
             try:
                 ret = stripe.PaymentIntent.confirm(
                     latest_invoice.payment_intent,
+                    return_url="https://scottishpna.herokuapp.com/",
                 )
                 # 3D Secure
                 if ret.status == 'requires_action':
                     intent = stripe.PaymentIntent.retrieve(
                         latest_invoice.payment_intent
                     )
-                    user = User.objects.get(email=request.session['email'])
+                    user = User.objects.create_user(
+                        username=request.session['email'],
+                        password=request.session['password'],
+                    )
+                    stripe.PaymentIntent.confirm(
+                        latest_invoice.payment_intent,
+                        return_url="https://scottishpna.herokuapp.com/",
+                    )
                     user.refresh_from_db()
+                    user.email=request.session['email']
                     fn = request.session['fullname']
                     user.first_name=user.spnamember.get_fname(fn)
                     user.last_name=user.spnamember.get_sname(fn)
+                    user.spnamember.sub_id=sub.id
+                    user.spnamember.stripe_id=customer.id
                     user.spnamember.subscription=request.session['subscription']
                     user.spnamember.fullname=request.session['fullname']
                     user.spnamember.phone=request.session['phone']
@@ -397,21 +412,18 @@ def payment(request):
                     user.spnamember.street_address1=request.session['street_address1']
                     user.spnamember.nursery=request.session['nursery']
                     user.save()
+
                     welcome_email_to_member(user)
                     register_email(user)
 
                     perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
 
-                    stripe.PaymentIntent.confirm(
-                        latest_invoice.payment_intent,
-                        return_url="https://scottishpna.herokuapp.com/member/",
-                    )
-                    messages.success(request, 'This is a test message')
                     context = {
                         'payment_intent_secret': intent.client_secret,
                         'STRIPE_PUBLISHABLE_KEY': stripe_public_key,
                     }
                     return render(request, 'member/3dsec.html', context)
+                    # return render(request, 'home/index.html', context)
                     
             except stripe.error.StripeError as err:
                 messages.warning(request, f'The card was declined. Please try again. {err}')

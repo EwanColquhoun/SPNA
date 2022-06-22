@@ -40,6 +40,7 @@
 .base-table {
     width: 100%;
     table-layout:fixed;
+    position: relative;
 }
 
 .base-table,
@@ -47,6 +48,12 @@
 .base-table th {
     border: 1px solid lightslategray;
     overflow: auto;
+}
+
+.base-table th {
+    position: sticky;
+    top: 0;
+    background-color: aliceblue;
 }
 
 .email-tt {

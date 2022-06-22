@@ -59,7 +59,6 @@
             </table>
         </div>
         <div class="col-12 col-md-10 mx-auto mt-3">
-            <!-- need to display cost, stripe tag, other ui improvements -->
           <!-- stripe card element form -->
             <form action="{% url 'payment' %}" method="POST" class="bg-whitesmoke" id="payment-form">
                 {% csrf_token %}
@@ -76,13 +75,9 @@
                 <button id="submit-button" class="btn spna-btn">
                     <div class="spinner hidden" id="spinner"></div>
                     <span id="button-text">Pay <strong>£{{spna_plan.disp_amount}} </strong>now</span>
-                    
                 </button>
             </form>
             <p class="text-muted text-center mt-1">Payments verified with <a href="https://stripe.com/gb" target="_blank"><img class="d-inline-block" src="{% get_media_prefix %}stripe/stripe-logo-small.png" width="100px"alt="Stripe logo small"></img></a>
-            <p class="result-message hidden">
-                Payment succeeded!
-            </p>
         </div>
         <div id="loading-overlay" class="col-12 text-center">
             <h1 class="text-light logo-font loading-spinner">

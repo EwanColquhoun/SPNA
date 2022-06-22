@@ -53,7 +53,7 @@ def delete_article(request, article_id):
     article = get_object_or_404(Articles, id=article_id)
     article.delete()
     messages.success(request, 'Article deleted successfully!')
-    return HttpResponseRedirect(reverse('news'))
+    return HttpResponseRedirect(reverse('news_page'))
 
 @login_required
 @staff_member_required
@@ -102,7 +102,7 @@ def edit_article(request, article_id):
         if form.is_valid():
             form.save()
             messages.success(request, f'Successfully changed {article.title}.')
-            return redirect(reverse('news'))
+            return redirect(reverse('news_page'))
         else:
             messages.error(request, 'Failed to add article. Please ensure the form is valid.')
     else:

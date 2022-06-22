@@ -6,11 +6,11 @@
 {% endblock %}
 
 {% block extra_js %}
-<script type="text/javascript" src="{% static 'member/js/3dsec.js' %}"></script>
+{% endblock %}
+<!-- <script type="text/javascript" src="{% static 'member/js/3dsec.js' %}"></script>
 <script>
   _3dsec('{{ STRIPE_PUBLISHABLE_KEY }}', '{{payment_intent_secret}}');
-</script>
-{% endblock %}
+</script> -->
 
 {% block extra_title %}- 3D Secure{% endblock %}
 

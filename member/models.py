@@ -73,6 +73,29 @@ class SPNAMember(models.Model):
     def __str__(self):
         return str(self.fullname)
 
+    def get_fname(self, fullname):
+        """Gets the first name from the fullname entry"""
+        try:
+            fname = fullname.split(' ', 1)[0]
+        except:
+            fname = fullname
+            raise ValueError(f"There must be a space between first and last names. {fullname}")
+        return fname
+
+    def get_sname(self, fullname):
+        """Gets the surname name from the fullname entry"""
+        try:
+            if ' ' in fullname:
+                sname = fullname.split(' ', 1)[1]
+                return sname
+            else:
+                sname = ''
+                return sname
+        except:
+            sname = fullname
+            raise ValueError(f"Your surname cannot be determined. {fullname}")
+        return sname
+
 # Below methods from https://www.youtube.com/watch?v=Mw__Pw1iGgA
 
     def set_paid_until(self, date_or_timestamp):
@@ -106,25 +129,3 @@ class SPNAMember(models.Model):
         self.save()
         return self.paid # added in for testing.
 
-    def get_fname(self, fullname):
-        """Gets the first name from the fullname entry"""
-        try:
-            fname = fullname.split(' ', 1)[0]
-        except:
-            fname = fullname
-            raise ValueError(f"There must be a space between first and last names. {fullname}")
-        return fname
-
-    def get_sname(self, fullname):
-        """Gets the surname name from the fullname entry"""
-        try:
-            if ' ' in fullname:
-                sname = fullname.split(' ', 1)[1]
-                return sname
-            else:
-                sname = ''
-                return sname
-        except:
-            sname = fullname
-            raise ValueError(f"Your surname cannot be determined. {fullname}")
-        return sname

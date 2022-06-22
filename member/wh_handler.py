@@ -54,7 +54,7 @@ def update_paid_until(request, event):
             try:
                 user = User.objects.get(email=email)
                 user.spnamember.set_paid_until(expiry)
-            except RuntimeError as err:
+            except Exception as err:
             
                 messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
                 return False
@@ -66,42 +66,45 @@ def sub_cancelled(request, charge):
     """Changes the 'paid' option of the SPNA member when subscription is deleted."""
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
-    cust = stripe.PaymentIntent.retrieve(charge.customer)
+    try:
+        cust = stripe.PaymentIntent.retrieve(charge.customer)
+        if cust:
+            customer = stripe.Customer.retrieve(cust)
+            email = customer.email
+            if customer:
+                try:
+                    user = User.objects.get(email=email)
+                except RuntimeError as err:
+                
+                    messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
+                    return False
 
-    if cust:
-        customer = stripe.Customer.retrieve(cust)
-        email = customer.email
-        if customer:
-            try:
-                user = User.objects.get(email=email)
-            except RuntimeError as err:
-            
-                messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
-                return False
-
-        user.spnamember.paid=False
-        cancel_email(request.user)
-        cancel_email_to_member(request.user)
-
-    else:
-        messages.error(request, 'No customer with this subscription exists. Please contact Admin.')
+            user.spnamember.paid=False
+            cancel_email(request.user)
+            cancel_email_to_member(request.user)
+        else:
+            messages.error(request, 'No customer with this subscription exists. Please contact Admin.')
+    except Exception as err:
+        messages.error(request, f"There is a payment error: {err}")
 
 
 def failed_payment(request, charge):
     """Contacts the customer and admin in the event of a failed payment"""
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
-    cust = stripe.PaymentIntent.retrieve(charge.customer)
-
-    if cust:
-        customer = stripe.Customer.retrieve(cust)
-        email = customer.email
-        if customer:
-            try:
-                user = User.objects.get(email=email)
-                failed_payment_to_member(user)
-            except RuntimeError as err:
-                messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
-                return False
-    else:
-        messages.error(request, 'No customer with this subscription exists. Please contact Admin.')
+    try:
+        cust = stripe.PaymentIntent.retrieve(charge.customer)
+        if cust:
+            customer = stripe.Customer.retrieve(cust)
+            email = customer.email
+            if customer:
+                try:
+                    user = User.objects.get(email=email)
+                    failed_payment_to_member(user)
+                except RuntimeError as err:
+                    messages.error(request, f'No User with name {user.spnamember.fullname}. Error:{err}. Please contact Admin.')
+                    return False
+        else:
+            messages.error(request, 'No customer with this subscription exists. Please contact Admin.')
+    except Exception as err:
+        messages.error(request, f"There is a payment error: {err}")

@@ -26,7 +26,7 @@ function _3dsec(stripe_publishable_key, pi_secret) {
             </div>`
           $("#3ds_result").html(htmlString);
           // Need to work on the 3d secure relocation. It seems to appear twice.
-          // window.location.href = 'https://scottishpna.herokuapp.com/accounts/login/'
+          // window.location.href = 'https://scottishpna.herokuapp.com/'
         }
       });
     }); // DOMContentLoaded

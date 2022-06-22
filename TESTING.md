@@ -39,6 +39,8 @@ The automated testing for the Javascript files has been completed with Jest. The
 
 * UnitTest for Django
     * UnitTest is built into Django. The documentation is located on the [Django](https://docs.djangoproject.com/en/4.0/topics/testing/overview/#running-tests) website. There is good documentaion for coverage located [here](https://docs.djangoproject.com/en/4.0/internals/contributing/writing-code/unit-tests/#code-coverage).
+    * You can run the tests from the command line with the following:
+    > coverage run --source='.' manage.py test
 
 ![Unittest Validation](media/readme-images/unittest.jpeg)
 
@@ -46,6 +48,8 @@ The automated testing for the Javascript files has been completed with Jest. The
 
 * Jest for JavaScript
     * Your application needs to be set up to use Jest for testing. There is good documentation on the [Jest](https://jestjs.io/docs/getting-started) website. 
+    * You can run the tests from the command line with the following:
+    > npm test
 
 ![Jest Validation](media/readme-images/jest.jpeg)
 

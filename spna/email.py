@@ -158,7 +158,7 @@ def welcome_email_to_member(user):
         Welcome to the Scottish Private Nursery Association (SPNA). We are delighted to have you on board.
         We are always looking for member contributions or feedback, so please don't hesitate to get in touch
         with us at:
-            info@spna.org
+            info@scottishpna.org
 
 
         Kind regards,
@@ -243,25 +243,15 @@ def failed_payment_to_member(user):
         fail_silently=True,
     )
 
-# Email from Admin
+# Email from SPNA_Admin page
 def send_admin_email(form, message):
     """
     Retrieves the form data and send email accordingly.
     """
     subject = form.email_subject
-    # msg = form.email_body.strip('<p>')  #does not work. need to strip characters or get rid of html tags.
-    # message = strip_tags(msg)
-
-    print(message, 'message')
-
     from_email = settings.DEFAULT_FROM_EMAIL
-
     addys = form.email_to
     email_list = addys.strip('][').split(', ')
     recipient_list = email_list
-
     message_one = (subject, message, from_email, recipient_list)
-    print('email', subject, message, from_email, recipient_list)
-
-    # send_mail(subject, message, from_email, recipient_list)
     send_mass_mail((message_one,), fail_silently=False)
