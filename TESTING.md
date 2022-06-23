@@ -146,13 +146,14 @@ The site was also tested using [Google Lighthouse](https://developers.google.com
 * Accessibility - Is the site acccessible for all users and how can it be improved.
 * Best Practices - Site conforms to industry best practices.
 * SEO - Search engine optimisation. Is the site optimised for search engine result rankings.
-<!-- 
-Here are the results from The Flying Scotsmen test;
 
-![Lighthouse home](media/readme-images/lh-home.png) -->
+Here are the results from SPNA Application test;
+ - The lower result for best practices appears to be caused by some external errors logged within google chrome issues panel.
+
+![Lighthouse home](media/readme-images/lh.png)
 
 <br>
-This part of the testing process showed up that the site was slow to load. All the images were compressed and the 'prefetch' function was added to the link elements in the head of the INDEX.page. This sped up the loading time and increased the performance rating.
+This part of the testing process showed up that the site was slow to load. All the images were compressed and the 'prefetch' function was added to the link elements in the head of the BASE.html This sped up the loading time and increased the performance rating.
 
 ### Peer review
 The SPNA site has been tested by many peers. Thank you to them all. They pointed out many bugs relevant to the specific device types and browsers they were using.
