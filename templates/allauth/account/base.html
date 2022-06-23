@@ -2,13 +2,6 @@
 <html lang="en">
 <html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="The Scottish Private Nursery Association is an operating association for private nurseries operating in Scotland">
-    <meta name="keywords" content="Scotland, childcare, early-years, nursery, association, children, learning, grass roots, membership">
-
-    <title>{% block head_title %}{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
   </head>
@@ -23,6 +16,7 @@
             <h3 class="text-blue">Account Menu:</h3>
             <ul class="menu-link">
               {% if user.is_authenticated %}
+              <li><a href="{% url 'account_change_password' %}" class="menu-link">Change Password</a></li>
               <li><a href="{% url 'account_email' %}" class="menu-link">Change E-mail</a></li>
               <li><a href="{% url 'account_logout' %}" class="menu-link">Sign Out</a></li>
               {% else %}

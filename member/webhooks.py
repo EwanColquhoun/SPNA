@@ -16,6 +16,7 @@ stripe_secret_key = settings.STRIPE_SECRET_KEY
 stripe_public_key = settings.STRIPE_PUBLISHABLE_KEY
 endpoint_secret = settings.STRIPE_WEBHOOK_SIGNING_KEY
 
+
 # Modified from stripe.com
 @require_POST
 @csrf_exempt
@@ -47,7 +48,8 @@ def webhook(request):
     event_type = request_data['type']
 
     if event_type == 'invoice.paid':
-        # Code to action when payment is all good (user login, update user paid until etc)
+        # Code to action when payment 
+        # is all good (user login, update user paid until etc)
         if event.data.object.payment_intent:
             wh_set_paid_until(request, event.data.object)
 
@@ -57,8 +59,10 @@ def webhook(request):
         update_paid_until(request, event.data.object)
 
     if event_type == 'invoice.payment_failed':
-        # If the payment fails or the customer does not have a valid payment method,
-        # an invoice.payment_failed event is sent, the subscription becomes past_due.
+        # If the payment fails or the customer does not
+        # have a valid payment method,
+        # an invoice.payment_failed event is sent, 
+        # the subscription becomes past_due.
         # Use this webhook to notify your user that their payment has
         # failed and to retrieve new card details.
         failed_payment(request, event.data.object)

@@ -1,6 +1,11 @@
 import stripe
 
-from django.shortcuts import render, reverse, get_object_or_404, redirect, HttpResponseRedirect
+from django.shortcuts import (
+    render,
+    reverse,
+    get_object_or_404,
+    redirect,
+    HttpResponseRedirect)
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
@@ -26,13 +31,15 @@ from .forms import CustomSignupForm, ProfileForm, UpgradeForm
 stripe_secret_key = settings.STRIPE_SECRET_KEY
 stripe_public_key = settings.STRIPE_PUBLISHABLE_KEY
 
+
 @login_required
 def member_area(request):
     """
     A view to return the members area
     """
     if not request.user.spnamember.paid:
-        messages.error(request, "Sorry only SPNA Members can access this page.")
+        messages.error(request, "Sorry only SPNA Members can \
+                       access this page.")
         return redirect(reverse('home'))
 
     docs = Document.objects.all()
@@ -49,7 +56,8 @@ def profile_view(request):
     A view to show the user profile.
     """
     if not request.user.spnamember.paid:
-        messages.error(request, "Sorry only SPNA Members can access this page.")
+        messages.error(request, "Sorry only SPNA Members can \
+                       access this page.")
         return redirect(reverse('home'))
 
     member = get_object_or_404(SPNAMember, user=request.user)
@@ -97,13 +105,14 @@ def profile_view(request):
             }
         return render(request, template, context)
 
+
 @login_required
 @require_POST
 def upgrade_subscription(request):
     """
     A view to change the logged in user's subscription.
     """
-    plan =request.POST.get('name')
+    plan = request.POST.get('name')
 
     if plan == 'Monthly':
         spi = settings.STRIPE_PLAN_MONTHLY_ID
@@ -135,17 +144,21 @@ def upgrade_subscription(request):
             member.refresh_from_db()
             upgrade_email_to_member(member)
             messages.success(request,
-                'Your subscription has been changed. Please reload the page for updated details.')
+                             'Your subscription has been changed. \
+                             Please reload the page for updated details.')
         except AttributeError as err:
             messages.error(request,
-                f'There has been an error. Please contact the SPNA. Error={err}.')
+                           f'There has been an error. Please contact the SPNA. \
+                            Error={err}.')
             trans = 'Upgrade'
             payment_error_admin(request, err, trans)
     else:
         messages.info(request,
-            'Your details are missing from the database, please contact SPNA admin.')
+                      'Your details are missing from the database, \
+                        please contact SPNA admin.')
 
     return redirect('profile_page')
+
 
 @login_required
 def renew_subscription(request):
@@ -160,14 +173,16 @@ def renew_subscription(request):
             sub,
             cancel_at_period_end=False)
         member = get_object_or_404(SPNAMember, user=request.user)
-        member.has_cancelled=False
+        member.has_cancelled = False
         member.save()
         renewal_email(member)
         messages.success(request,
-            f'Your subscription will continue as normal from {request.user.spnamember.paid_until}.')
+                         f'Your subscription will continue as \
+                            normal from {request.user.spnamember.paid_until}.')
     except AttributeError as err:
         messages.error(request,
-            f'There has been an error. Please contact the SPNA. Error={err}.')
+                       f'There has been an error. \
+                        Please contact the SPNA. Error={err}.')
         trans = 'Renew'
         payment_error_admin(request, err, trans)
 
@@ -188,14 +203,17 @@ def cancel_subscription(request):
         cancel_email(request.user)
         cancel_email_to_member(request.user)
         member = get_object_or_404(SPNAMember, user=request.user)
-        member.has_cancelled=True
+        member.has_cancelled = True
         member.save()
         messages.success(request,
-            f'Your subscription will end at the end of the next billing period: {request.user.spnamember.paid_until}.')
+                         f'Your subscription will end at the end of \
+                         the next billing period:\
+                         {request.user.spnamember.paid_until}.')
         return redirect('profile_page')
     except AttributeError as err:
         messages.error(request,
-            f'There has been an error. Please contact the SPNA. Error={err}.')
+                       f'There has been an error. \
+                        Please contact the SPNA. Error={err}.')
         trans = 'Cancel'
         payment_error_admin(request, err, trans)
 
@@ -214,27 +232,35 @@ def update_payment_method(request):
 
         stripe.api_key = stripe_secret_key
         stripe.PaymentMethod.attach(new_pm, customer=cus,)
-        stripe.Customer.modify(cus, invoice_settings={"default_payment_method": new_pm},)
+        stripe.Customer.modify(
+            cus,
+            invoice_settings={"default_payment_method": new_pm},)
         stripe.Subscription.modify(sub, default_payment_method=new_pm)
 
         update_card_details_to_member(request)
-        messages.success(request, 'Your card details have been updated for the next payment.')
+        messages.success(request,
+                         'Your card details have been updated for the \
+                            next payment.')
         return redirect(reverse('profile_page'))
 
     except AttributeError as err:
-        messages.error(request, f'Card declined. Please check the details and try again. {err}')
+        messages.error(request,
+                       f'Card declined. Please check the details and \
+                        try again. {err}')
         trans = 'Update payment'
         payment_error_admin(request, err, trans)
         return redirect(reverse('profile_page'))
 
+
 def subscribe(request):
     """
-    This view is activated from the 'Sign Up' button. Creates the payment intent.
+    This view is activated from the 'Sign Up' button. 
+    Creates the payment intent.
     """
     if request.method == 'POST':
         form = CustomSignupForm(request.POST)
         if form.is_valid():
-        # creates and saves user attributes into the session
+            # creates and saves user attributes into the session
             request.session['fullname'] = form.cleaned_data['fullname']
             request.session['email'] = form.cleaned_data['email']
             request.session['nursery'] = form.cleaned_data['nursery']
@@ -246,7 +272,7 @@ def subscribe(request):
             request.session['country'] = form.cleaned_data['country']
             request.session['password'] = form.cleaned_data['password1']
 
-            plan =request.POST.get('subscription')
+            plan = request.POST.get('subscription')
             # gets the plan selected from the request
             if plan == 'Monthly':
                 spi = settings.STRIPE_PLAN_MONTHLY_ID
@@ -286,7 +312,8 @@ def subscribe(request):
 
         else:
             messages.error(request, 'There was an error in the form. \
-                Please ensure the form has been correctly filled in.')
+                           Please ensure the form has been correctly\
+                             filled in.')
             return redirect(reverse('subscribe'))
     else:
         form = CustomSignupForm()
@@ -294,6 +321,7 @@ def subscribe(request):
             'form': form,
             }
         return render(request, 'member/subscribe.html', context)
+
 
 def payment(request):
     """
@@ -325,12 +353,14 @@ def payment(request):
             )
         except stripe.error.CardError as err:
             messages.error(request,
-                f"There was a problem with the card details. Please try again. {err}")
+                           f"There was a problem with the card details. \
+                            Please try again. {err}")
             return redirect('subscribe')
 
         except stripe.error.StripeError as err:
             messages.error(request,
-                f"Sorry we have encountered a problem. Please try again later. {err}")
+                           f"Sorry we have encountered a problem. \
+                            Please try again later. {err}")
             return redirect('subscribe')
 
         latest_invoice = stripe.Invoice.retrieve(sub.latest_invoice)
@@ -342,26 +372,30 @@ def payment(request):
                 password=request.session['password'],
             )
             user.refresh_from_db()
-            user.email=request.session['email']
-            user.first_name=user.spnamember.get_fname(full_name)
-            user.last_name=user.spnamember.get_sname(full_name)
-            user.spnamember.sub_id=sub.id
-            user.spnamember.stripe_id=customer.id
-            user.spnamember.subscription=request.session['subscription']
-            user.spnamember.fullname=request.session['fullname']
-            user.spnamember.phone=request.session['phone']
-            user.spnamember.country=request.session['country']
-            user.spnamember.postcode=request.session['postcode']
-            user.spnamember.town_or_city=request.session['town_or_city']
-            user.spnamember.street_address1=request.session['street_address1']
-            user.spnamember.nursery=request.session['nursery']
+            user.email = request.session['email']
+            user.first_name = user.spnamember.get_fname(full_name)
+            user.last_name = user.spnamember.get_sname(full_name)
+            user.spnamember.sub_id = sub.id
+            user.spnamember.stripe_id = customer.id
+            user.spnamember.subscription = request.session['subscription']
+            user.spnamember.fullname = request.session['fullname']
+            user.spnamember.phone = request.session['phone']
+            user.spnamember.country = request.session['country']
+            user.spnamember.postcode = request.session['postcode']
+            user.spnamember.town_or_city = request.session['town_or_city']
+            user.spnamember.street_address1 = request.session['street_address1']
+            user.spnamember.nursery = request.session['nursery']
             user.save()
 
-            perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
+            perform_login(request,
+                          user,
+                          settings.ACCOUNT_EMAIL_VERIFICATION,
+                          signup=False)
             user.refresh_from_db()
             welcome_email_to_member(user)
             messages.success(request,
-                f'Successfully created SPNA Member {user.spnamember.fullname}.')
+                             f'Successfully created SPNA\
+                                 Member {user.spnamember.fullname}.')
 
             return HttpResponseRedirect('/')
 
@@ -380,20 +414,20 @@ def payment(request):
                         username=request.session['email'],
                         password=request.session['password'],
                     )
-                    user.email=request.session['email']
+                    user.email = request.session['email']
                     full_name = request.session['fullname']
-                    user.first_name=user.spnamember.get_fname(full_name)
-                    user.last_name=user.spnamember.get_sname(full_name)
-                    user.spnamember.sub_id=sub.id
-                    user.spnamember.stripe_id=customer.id
-                    user.spnamember.subscription=request.session['subscription']
-                    user.spnamember.fullname=request.session['fullname']
-                    user.spnamember.phone=request.session['phone']
-                    user.spnamember.country=request.session['country']
-                    user.spnamember.postcode=request.session['postcode']
-                    user.spnamember.town_or_city=request.session['town_or_city']
-                    user.spnamember.street_address1=request.session['street_address1']
-                    user.spnamember.nursery=request.session['nursery']
+                    user.first_name = user.spnamember.get_fname(full_name)
+                    user.last_name = user.spnamember.get_sname(full_name)
+                    user.spnamember.sub_id = sub.id
+                    user.spnamember.stripe_id = customer.id
+                    user.spnamember.subscription = request.session['subscription']
+                    user.spnamember.fullname = request.session['fullname']
+                    user.spnamember.phone = request.session['phone']
+                    user.spnamember.country = request.session['country']
+                    user.spnamember.postcode = request.session['postcode']
+                    user.spnamember.town_or_city = request.session['town_or_city']
+                    user.spnamember.street_address1 = request.session['street_address1']
+                    user.spnamember.nursery = request.session['nursery']
                     user.save()
                     user.refresh_from_db()
 
@@ -403,11 +437,13 @@ def payment(request):
                     }
                     return render(request, 'member/3dsec.html', context)
             except stripe.error.StripeError as err:
-                messages.warning(request, f'The card was declined. Please try again. {err}')
+                messages.warning(request,
+                                 f'The card was declined. \
+                                    Please try again. {err}')
                 return redirect('subscribe')
 
         context = {
-            'form':log_form,
+            'form': log_form,
         }
 
         return render(request, 'account/login.html', context)
@@ -419,11 +455,13 @@ def payment(request):
             }
         return render(request, 'member/subscribe.html', context)
 
+
 def secure(request):
     """
     A view to show on 3d secure payment
     """
     return render(request, 'member/3dsec.html')
+
 
 def member_login(request):
     """
@@ -433,10 +471,14 @@ def member_login(request):
         user = get_object_or_404(User, email=request.session['email'])
         welcome_email_to_member(user)
         register_email(user)
-        perform_login(request, user, settings.ACCOUNT_EMAIL_VERIFICATION, signup=False)
+        perform_login(request,
+                      user,
+                      settings.ACCOUNT_EMAIL_VERIFICATION,
+                      signup=False)
         return redirect('/')
     except ValueError as err:
         messages.error(request,
-            f'There has been an error logging you in. Please try again from the home page. Error: {err}')
+                       f'There has been an error logging you in. \
+                        Please try again from the home page. Error: {err}')
 
     return render(request, 'member/member-login.html')

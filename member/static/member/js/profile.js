@@ -54,7 +54,6 @@ function cardUpdate(stripe_publishable_key, customer_email) {
             },
             }).then(function(payment_method_result){ 
             if (payment_method_result.error) {
-                spinner.style.display = 'none'
                 var errorElement = document.getElementById('card-errors');
                 errorElement.textContent = payment_method_result.error.message;
             } else {
@@ -68,10 +67,10 @@ function cardUpdate(stripe_publishable_key, customer_email) {
                 form.appendChild(hiddenInput);
                 // Submit the form
                 form.submit();
-            };
+            }
             });
           }
-        })
+        });
     });
     });
-};
+}

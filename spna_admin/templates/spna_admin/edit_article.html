@@ -15,12 +15,11 @@
             <div class="col"></div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block content %}
 
-
+<!-- Edit-article-Hero image and title section -->
 <section id="admin-header" class="title-section">
     <div class="container-fluid h-100 w-100 text-center">
         <div class="overlay">
@@ -33,13 +32,14 @@
     </div>
 </section>
 
+<!-- Edit-article-Body section -->
 <section id="admin-dashboard" class="bg-light-grey">
     <div class="row g-0 w-100 p-2 p-sm-5 bg-light-blue">
         <div class="col-12 col-md-6 mx-auto">
             <div class="">
                 <h2 class="p-3">Edit an Article</h2>
             </div>
-            <!-- Add news form -->
+            <!-- Add article form -->
             <form class="admin-form" action="{% url 'edit_article' article.id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 
@@ -59,14 +59,9 @@
             <div class="pt-3">
                 <a href="{% url 'news_page' %}"class="btn btn-secondary">Cancel</a>
             </div>
-
-
         </div>
     </div>
-
 </section>
-    
-
 {% endblock %}
 
 {% block postloadjs %}

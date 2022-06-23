@@ -15,10 +15,10 @@
             <div class="col"></div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block content %}
+<!-- SPNA-Admin-Hero image and title section -->
 <section id="admin-header" class="title-section">
     <div class="container-fluid h-100 w-100 text-center">
         <div class="overlay">
@@ -31,12 +31,13 @@
     </div>
 </section>
 
+<!-- SPNA-Admin-Dashboard section -->
 <section id="admin-dashboard" class="bg-light-blue">
     <div class="container-fluid">
 
         <div class="row">
             
-            <!-- Members -->
+            <!-- Members table-->
             <div class="col-12 col-lg-6 p-1 p-sm-3 mx-auto text-center">
                 <div class="member-table-head p-1 p-sm-3">
                     <h2 class="text-blue">Member Information</h2>
@@ -76,14 +77,14 @@
                         </table>
                 </div>
                 <div class="pt-3">
-                    <!-- Ges a CSV of members to download. -->
+                    <!-- Gets a CSV of members to download. -->
                     <a class="download-link" href="{% url 'get_csv' %}">Download Member List</a>
                 </div>
             </div>
 
             <hr class="d-block p-1 d-lg-none mx-auto admin-hr">
 
-            <!-- Contacts -->
+            <!-- Contacts table -->
             <div class="col-12 col-lg-6 p-1 p-sm-3 mx-auto text-center">
                 <div class="contact-table-head p-1 p-sm-3">
                     <h2 class="text-blue">Contact Information</h2>
@@ -131,7 +132,6 @@
                             <td class="text-center">No Contact requests.</td>
                         </tr>
                         {% endfor %}
-                        
                     </table>
                 </div>
                 <div class="pt-3 d-flex align-items-center justify-content-center">
@@ -212,7 +212,6 @@
         </div>
     </div>
 </section>
-    
 {% endblock %}
 
 {% block postloadjs %}

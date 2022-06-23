@@ -10,26 +10,24 @@
 * [Known Bugs](<#known-bugs>)
 * [Additional Testing](<#additional-testing>)
 
-<!-- ToDo - Linters for python and js. CSS Validators. Lighthouse
- -->
 
 ## Code Validation
-<!-- The Flying Scotsmen has be throughly tested. All the code has been run through the [W3C html validator](https://validator.w3.org/), the [W3C CSS validator](https://jigsaw.w3.org/css-validator/) and the [JavaScript JSHint validator](https://jshint.com/). 
+The SPNA application has be throughly tested. All the code has been run through the [W3C html validator](https://validator.w3.org/), the [W3C CSS validator](https://jigsaw.w3.org/css-validator/) and the [JavaScript JSHint validator](https://jshint.com/). 
 The code passed the W3C Validator barring all the django template tags. Outside of those, no errors were found.
-The CSS passed the W3C Validator passed once an error with the 'transition-timing-function' propery was corrected (from '1000ms' to 'ease-in').
-After some minor re-formatting the script passed the JSHint tests. There are some warnings about unused variables, however these are related to bootstrap, the googlemaps api and the flatpicker add-on. 
+The CSS passed the W3C Validator with no issues.
+After some minor re-formatting the scripts passed the JSHint tests. There are some warnings about unused variables, however these are related to bootstrap (see image).
 
 * CSS Validation
 
 ![W3C CSS Validation](media/readme-images/w3c-css.png)
 
-* Pep8 Validation for booking/views.py but same result for all custom .py files.
+* Pep8 Validation for member/wh_handler.py but similar results for all custom .py files.
 
 ![PEP8 Validation](media/readme-images/pep8.png)
 
 * JSHint results
 
-![JSHint Validation](media/readme-images/jshint.png) -->
+![JSHint Validation](media/readme-images/jshint.png)
 
 [Back to top](<#contents>)
 ## Automated testing with Jest and Unittest

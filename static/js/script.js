@@ -1,9 +1,9 @@
 // Back to top button
-let btt = document.getElementById('btt-link')
+let btt = document.getElementById('btt-link');
 
 btt.addEventListener('click', function(){
-    window.scrollTo(0,0)
-})
+    window.scrollTo(0,0);
+});
 
 function alerts() {
   setTimeout(function () {
@@ -15,4 +15,4 @@ function alerts() {
   }, 4000);
 }
 
-document.addEventListener('DOMContentLoaded', alerts())
+document.addEventListener('DOMContentLoaded', alerts());

@@ -1,6 +1,12 @@
-from django.shortcuts import render, get_object_or_404, get_list_or_404, HttpResponseRedirect, reverse, redirect
+from django.shortcuts import (
+    render,
+    get_object_or_404,
+    get_list_or_404,
+    HttpResponseRedirect,
+    reverse,
+    redirect)
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
@@ -27,16 +33,13 @@ def spna_admin(request):
     doc_form = DocumentForm()
     form = ArticleForm()
     users = User.objects.all()
-    # contacts = Contact.objects.all()
 
     context = {
         'emailForm': email_form,
         'docForm': doc_form,
         'form': form,
         'users': users,
-        # 'contacts': contacts,
     }
-
     return render(request, 'spna_admin/spna_admin.html', context)
 
 
@@ -55,6 +58,7 @@ def delete_article(request, article_id):
     messages.success(request, 'Article deleted successfully!')
     return HttpResponseRedirect(reverse('news_page'))
 
+
 @login_required
 @staff_member_required
 def delete_document(request, doc_id):
@@ -68,7 +72,8 @@ def delete_document(request, doc_id):
     document = get_object_or_404(Document, id=doc_id)
     document.delete()
     messages.success(request, 'Document deleted successfully!')
-    return HttpResponseRedirect(reverse('member_area'))
+    return HttpResponseRedirect(reverse('member_area_page'))
+
 
 @login_required
 @staff_member_required
@@ -84,6 +89,7 @@ def delete_contact(request, contact_id):
     contact.delete()
     messages.success(request, 'Contact deleted successfully!')
     return HttpResponseRedirect(reverse('spna_admin'))
+
 
 @login_required
 @staff_member_required
@@ -108,8 +114,6 @@ def edit_article(request, article_id):
     else:
         form = ArticleForm(instance=article)
         messages.info(request, f'You are editing {article.title}')
-
-
     users = User.objects.all()
     template = 'spna_admin/edit_article.html'
     context = {
@@ -117,8 +121,8 @@ def edit_article(request, article_id):
         'article': article,
         'form': form,
     }
-
     return render(request, template, context)
+
 
 @login_required
 @staff_member_required
@@ -148,8 +152,8 @@ def add_article(request):
         'form': form,
         'users': users,
     }
-
     return render(request, template, context)
+
 
 @login_required
 @staff_member_required
@@ -162,7 +166,6 @@ def add_document(request):
         messages.error(request, "Sorry only Admin can access this page.")
         return redirect(reverse('home'))
 
-    # if request.method == 'POST':
     form = DocumentForm(request.POST, request.FILES)
     if form.is_valid():
         form.save()
@@ -170,8 +173,6 @@ def add_document(request):
         return redirect(reverse('spna_admin'))
     else:
         messages.error(request, 'Failed to add document. Please ensure the form is valid.')
-    # else:
-    #     form = DocumentForm()
 
     users = User.objects.all()
 
@@ -183,13 +184,15 @@ def add_document(request):
 
     return render(request, template, context)
 
+
 @login_required
 @staff_member_required
 def get_csv_of_users(request):
     """
     Gets a csv of the spnamember model
     """
-    return export_qs_to_csv(model_class = SPNAMember)
+    return export_qs_to_csv(model_class=SPNAMember)
+
 
 @login_required
 @staff_member_required
@@ -214,8 +217,6 @@ def send_admin_email_view(request):
 
             send_admin_email(form, message)
             messages.success(request, 'Email successfully sent!')
-
-
             return redirect(reverse('spna_admin'))
         else:
             messages.error(request, 'Failed to send email. Please ensure the form is valid.')
@@ -229,5 +230,4 @@ def send_admin_email_view(request):
         'form': form,
         'users': users,
     }
-
     return render(request, template, context)

@@ -1,7 +1,6 @@
 {% extends "account/base.html" %}
 
 {% load i18n %}
-{% load account socialaccount %}
 
 {% load tags %}
 {% url 'profile_page' as profile %}
@@ -25,9 +24,6 @@
                 <li>
                     <a href="{{member_area}}" class="{% active request member_area %}">Members Area</a>
                 </li>
-                <li>
-                    <a href="{% url 'account_change_password' %}" class="{% if '/change/' in request.path %}active{% endif %}">Change Password</a>
-                </li>
             </ul>
         </nav>
     </div>
@@ -50,12 +46,12 @@
         <label for="id_password_spna" class="d-block m-1">Password:</label>
         <input type="password" class="m-1" name="password" placeholder="Password" autocomplete="current-password" required="" id="id_password_spna">
     </p>
-    <p">
+    <p>
         <label for="id_remember_spna" class="m-1 position-relative">Remember Me:</label>
         <input type="checkbox" class="position-absolute float-right m-2" name="remember" id="id_remember_spna">
     </p>
     {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
     {% endif %}
     <div class="pt-2 pb-2">
         <button class="primaryAction spna-btn btn" type="submit">{% trans "Sign In" %}</button>

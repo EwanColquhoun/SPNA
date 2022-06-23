@@ -21,7 +21,7 @@ def initiatives_view(request):
     form = ContactForm()
     template = 'news/initiatives.html'
     context = {
-        'contact_form':form
+        'contact_form': form,
     }
 
     return render(request, template, context)

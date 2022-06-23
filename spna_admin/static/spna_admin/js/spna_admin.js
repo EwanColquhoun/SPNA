@@ -8,15 +8,9 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 // Variables
 let emailList = [];
-// let emailField = document.querySelector('#id_email_to');
-// let selectButtons = document.querySelectorAll('.select-box');
-// Moved the below out of their functions for testing..
-// let mbs = document.querySelectorAll('.member-select-box');
-// let cbs = document.querySelectorAll('.contact-select-box');
 
 // Activated the individual checkbox to autopopulate email_to field
 function selectButton() {
-    // let emailList = [];
     let emailField = document.querySelector('#id_email_to');
     let selectButtons = document.querySelectorAll('.select-box');
 
@@ -39,7 +33,6 @@ function selectButton() {
 function checkAllMembers() {
     var mbs = document.querySelectorAll('.member-select-box');
     let emailField = document.querySelector('#id_email_to');
-    // let emailList = []
 
     for(var i=0; i < mbs.length; i++) {
         if(mbs[i].type == 'checkbox') {
@@ -59,7 +52,6 @@ function checkAllMembers() {
 function checkAllContacts() {
     var cbs = document.querySelectorAll('.contact-select-box');
     let emailField = document.querySelector('#id_email_to');
-    // let emailList = []
 
     for(var i=0; i < cbs.length; i++) {
         if(cbs[i].type == 'checkbox') {

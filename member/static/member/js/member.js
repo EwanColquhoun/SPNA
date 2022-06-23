@@ -1,18 +1,18 @@
 // Gets the delete document modal working
 const delete_buttons = document.querySelectorAll('.delete-doc-button');
-let modal = document.querySelector('#delete-doc-modal')
+let modal = document.querySelector('#delete-doc-modal');
 
 if (delete_buttons.length !== 0) {
     delete_buttons.forEach((button) => {
         button.addEventListener('click', function () {
         let document_id = button.getAttribute('data-name');
-        let modalButton = document.getElementById('doc-modal-delete-button')
+        let modalButton = document.getElementById('doc-modal-delete-button');
 
         modal.addEventListener('shown.bs.modal', function () {
             modalButton.setAttribute('href', `/spna_admin/delete/document/${document_id}`);
         });
     });
-})};
+})}
 
 // Shows the matched passwords as green boxes for enhanced UX
 let password = document.querySelectorAll('#id_password1');
@@ -40,7 +40,7 @@ function passwordMatch() {
 function card(stripe_publishable_key, customer_email) {
     document.addEventListener("DOMContentLoaded", function(event){
     let cS = document.getElementById('client_secret');
-    let clientSecret = cS.getAttribute('value')
+    let clientSecret = cS.getAttribute('value');
     var stripe = Stripe(stripe_publishable_key);
     var elements = stripe.elements();
     var style = {

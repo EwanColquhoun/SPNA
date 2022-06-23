@@ -8,333 +8,333 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    {% block meta %}
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name='description' content="The Scottish Private Nursery Association is an operating association for private nurseries operating in Scotland">
-    <meta name="keywords" content="Scotland, childcare, early-years, nursery, association, children, learning, grass roots, membership">
-    {% endblock %}
 
-    {% block corecss %}
-    <link rel="stylesheet prefetch"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Moon+Dance&family=Raleway:ital,wght@0,400;0,500;0,600;0,900;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet prefetch">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet prefetch" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    
-    <link rel="stylesheet prefetch" type="text/css" href="{% static 'css/base.css' %}"> 
-    {% endblock %}
-    
-    {% block extra_css %}
-    {% endblock %}
-    
-    {% block corejs %}
-    <script src="https://kit.fontawesome.com/48b20a3378.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    <script src="https://js.stripe.com/v3/"></script>
-    {% endblock %}
-    
-    {% block extra_js %}
-    {% endblock %}
-    
-    <title>SPNA {% block extra_title %}{% endblock %}</title>
-    <link rel='icon' type='image/png' href='{% get_media_prefix %}images/favicon-16.png' size="32x32">
-</head>
+    <head>
+        {% block meta %}
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name='description' content="The Scottish Private Nursery Association is an operating association for private nurseries operating in Scotland">
+        <meta name="keywords" content="Scotland, childcare, early-years, nursery, association, children, learning, grass roots, membership">
+        {% endblock %}
 
-<body>
-    <!-- Full width header -->
-    <header class="fixed-top bg-blue">
-        <div class="container-fluid">
+        {% block corecss %}
+        <link rel="stylesheet prefetch"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Moon+Dance&family=Raleway:ital,wght@0,400;0,500;0,600;0,900;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet prefetch">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet prefetch" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    
+        <link rel="stylesheet prefetch" type="text/css" href="{% static 'css/base.css' %}"> 
+        {% endblock %}
+        
+        {% block extra_css %}
+        {% endblock %}
+        
+        {% block corejs %}
+        <script src="https://kit.fontawesome.com/48b20a3378.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        {% endblock %}
+        
+        {% block extra_js %}
+        {% endblock %}
+        
+        <title>SPNA {% block extra_title %}{% endblock %}</title>
+        <link rel='icon prefetch' type='image/png' href='{% get_media_prefix %}images/favicon-16.png' sizes="32x32">
+    </head>
 
-            <div id="topnav" class="row pt-lg-2 d-none d-lg-flex g-0">
-                <div class="col-12 col-md-8 mx-auto my-auto py-1 py-lg-0">
-                    <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                        <img src="{% get_media_prefix %}images/logo.png" alt="SPNA Logo">
-                    </a>
+    <body>
+        <!-- Full width header -->
+        <header class="fixed-top bg-blue">
+            <div class="container-fluid">
+
+                <div id="topnav" class="row pt-lg-2 d-none d-lg-flex g-0">
+                    <div class="col-12 col-md-8 mx-auto my-auto py-1 py-lg-0">
+                        <a href="{% url 'home' %}" class="nav-link main-logo-link">
+                            <img src="{% get_media_prefix %}images/logo.png" alt="SPNA Logo">
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-md-2 mx-auto my-auto py-lg-0">
+                        <div class="text-center other-nav" data-bs-toggle="dropdown">
+                            <div><i class="fas fa-user fa-lg"></i></div>
+                            <p class="my-0 link-text">
+                                {% if request.user.is_authenticated %}<span class="italic">{{user.spnamember.fullname}}</span>{% else %}Join/Login{% endif %}</p>
+                        </div>
+                        <!-- Dropdown Navbar -->
+                        <div id="menu-dropdown" class="dropdown-menu my-0 pl-2">                    
+                            {% include 'includes/account/spna_login.html' %}
+                        </div>
+                    </div>        
                 </div>
 
-                <div class="col-12 col-md-2 mx-auto my-auto py-lg-0">
-                    <div class="text-center other-nav" data-bs-toggle="dropdown">
-                        <div><i class="fas fa-user fa-lg"></i></div>
-                        <p class="my-0 link-text">
-                            {% if request.user.is_authenticated %}<span class="italic">{{user.spnamember.fullname}}</span>{% else %}Join/Login{% endif %}</p>
-                    </div>
-                    <!-- Dropdown Navbar -->
-                    <div id="menu-dropdown"class="dropdown-menu my-0 pl-2">                    
-                        {% include 'includes/account/spna_login.html' %}
-                    </div>
-                </div>        
-            </div>
-
-            <!-- Expandable Navbar -->
-            <div class="row g-0 cover">
-                <div class="col-12 col-lg-12 mx-auto">
-                    <nav class="navbar navbar-expand-lg my-auto bg-blue h-100 w-100" id="navbarNav">
-                        <div class="d-lg-none">
-                            <span><a href="{% url 'home' %}"><img src="{% get_media_prefix %}images/logo.png" alt="SPNA Logo"></a>
-                            </span>
-                        </div>
-                        <button id="navbar-button" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"><i class="fas fa-caret-down text-ant-white"></i></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="main-nav">
-                            <ul class="navbar-nav my-auto sticky-top">
-                                <li class="nav-item">
-                                    <a href="{% url 'about' %}" class="{% if '/about/' in request.path %}active{% endif %}">About Us</a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a href="{{news}}" class="{% active request news %}">News</a>
-                                </li>
-                                <li class="nav-item">
-                                    
-                                    <a href="{% url 'initiatives_page' %}" class="{% if '/initiatives/' in request.path %}active{% endif %}">Initiatives | Campaigns</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a id="contact-button" data-bs-toggle="modal" data-bs-target="#myModal" href="#myModal">Contact</a>
-                                </li>
-                                {% if request.user.is_authenticated %}
-                                    {% if request.user.spnamember.paid %}
+                <!-- Expandable Navbar -->
+                <div class="row g-0 cover">
+                    <div class="col-12 col-lg-12 mx-auto">
+                        <nav class="navbar navbar-expand-lg my-auto bg-blue h-100 w-100" id="navbarNav">
+                            <div class="d-lg-none">
+                                <span>
+                                    <a href="{% url 'home' %}"><img src="{% get_media_prefix %}images/logo.png" alt="SPNA Logo"></a>
+                                </span>
+                            </div>
+                            <button id="navbar-button" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"><i class="fas fa-caret-down text-ant-white"></i></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="main-nav">
+                                <ul class="navbar-nav my-auto sticky-top">
                                     <li class="nav-item">
-                                        
-                                        <a href="{{member_area}}" class="{% active request member_area %}">Members Area</a>
+                                        <a href="{% url 'about' %}" class="{% if '/about/' in request.path %}active{% endif %}">About Us</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a href="{{news}}" class="{% active request news %}">News</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{% url 'initiatives_page' %}" class="{% if '/initiatives/' in request.path %}active{% endif %}">Initiatives | Campaigns</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a id="contact-button" data-bs-toggle="modal" data-bs-target="#myModal" href="#myModal">Contact</a>
+                                    </li>
+                                    {% if request.user.is_authenticated %}
+                                        {% if request.user.spnamember.paid %}
+                                        <li class="nav-item">
+                                            <a href="{{member_area}}" class="{% active request member_area %}">Members Area</a>
+                                        </li>
+                                        {% endif %}
+                                    {% endif %}
+                                    {% if request.user.is_authenticated %}
+                                        {% if request.user.is_superuser %}
+                                        <li class="nav-item">
+                                            <a href="{% url 'spna_admin' %}" class="{% if '/spna_admin/' in request.path %}active{% endif %}">Admin</a>
+                                        </li>
+                                        {% endif %}
+                                        <li class="nav-item d-lg-none">
+                                            <a href="{{profile}}" class="{% active request profile %}">Profile</a>
+                                        </li>
+                                        <li class="nav-item d-lg-none">
+                                            <a href="{% url 'account_logout' %}">Logout</a>
+                                        </li>
+                                        <li class="nav-item d-lg-none">
+                                            <a href="{% url 'account_change_password' %}" class="{% if '/change/' in request.path %}active{% endif %}">Change Password</a>
+                                        </li>
+                                    {% else %}
+                                    <li class="nav-item d-lg-none">
+                                        <a href="{% url 'subscribe' %}" class="{% if '/subscribe/' in request.path %}active{% endif %}">Join</a>
+                                    </li>
+                                    <li class="nav-item d-lg-none">
+                                        <a href="{% url 'account_login' %}" class="{% if '/login/' in request.path %}active{% endif %}">Login</a>
                                     </li>
                                     {% endif %}
-                                {% endif %}
-                                {% if request.user.is_authenticated %}
-                                    {% if request.user.is_superuser %}
-                                    <li class="nav-item">
-                                        <a href="{% url 'spna_admin' %}" class="{% if '/spna_admin/' in request.path %}active{% endif %}">Admin</a>
-                                    </li>
-                                    {% endif %}
-                                    <li class="nav-item d-lg-none">
-                                        <a href="{{profile}}" class="{% active request profile %}">Profile</a>
-                                    </li>
-                                    <li class="nav-item d-lg-none">
-                                        <a href="{% url 'account_logout' %}">Logout</a>
-                                    </li>
-                                    <li class="nav-item d-lg-none">
-                                        <a href="{% url 'account_change_password' %}" class="{% if '/change/' in request.path %}active{% endif %}">Change Password</a>
-                                    </li>
-                                {% else %}
-                                <li class="nav-item d-lg-none">
-                                    <a href="{% url 'subscribe' %}" class="{% if '/subscribe/' in request.path %}active{% endif %}">Join</a>
-                                </li>
-                                <li class="nav-item d-lg-none">
-                                    <a href="{% url 'account_login' %}" class="{% if '/login/' in request.path %}active{% endif %}">Login</a>
-                                </li>
-                                {% endif %}
-                            </ul>
-                        </div> 
-                    </nav>
+                                </ul>
+                            </div> 
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Contact Modal -->
+        <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content modal-body row g-0 text-blue">
+                    <div class="modal-header col-12 bg-light-blue">
+                        <h5 class="modal-title" id="staticBackdropLabel-contact">Contact Form</h5>
+                        <button type="button" class="btn-close modal-close-button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body col-12 bg-whitesmoke">
+                        <form action="{% url 'post_contact' %}" method="POST">
+                            {% csrf_token %}
+                            {{ contact_form|crispy }}
+                            <div class="modal-footer bg-light-blue">
+                                <button type="button" class="btn btn-secondary modal-close-button" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" id="toastbtn" class="btn spna-btn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
 
-    <!-- Contact Modal -->
-    <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Contact Mmdal" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content modal-body row g-0 text-blue">
-                <div class="modal-header col-12 bg-light-blue">
-                    <h5 class="modal-title" id="staticBackdropLabel">Contact Form</h5>
-                    <button type="button" class="btn-close modal-close-button" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- FAQ Modal -->
+        <div class="modal fade" id="faqModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="faqModal" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content modal-body row g-0 text-blue">
+                    <div class="modal-header col-12 bg-light-blue">
+                        <h5 class="modal-title" id="staticBackdropLabel-FAQ">Scottish Private Nursery Association FAQ</h5>
+                        <button type="button" class="btn-close modal-close-button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body col-12 bg-whitesmoke">
+                        <details class="pt-3"><summary>Why join the SPNA?</summary>
+                            <p class="text-black ml-2">
+                                Join the SPNA to gain access to specic documents pertinent to developments in the Early years learning sector. You and your nursery will also
+                                benefit from the collective experience of others in our sector.
+                            </p>
+                        </details>
+                        <details class="pt-3"><summary>What nurseries are eligible for support?</summary>
+                            <p class="text-black">
+                                All private nurseries in Scotland are eligible to become SPNA members. We have had to limit memberships to one per Nursery setting.
+                            </p>
+                        </details>
+                        <details class="pt-3"><summary>What happens when I change my subscription duration?</summary>
+                            <p class="text-black">
+                                Using the profile page (members only access) you can select to change your subscription to another duration.
+                                Once changed your account will be invoiced pro-rata. So if you have cahnged from 1 year to monthly. At the end of the
+                                period you have paid for (1 year in this example), the new amount (monthly) will be taken from the card on your account.
+                            </p>
+                        </details>
+                        <details class="pt-3"><summary>How do I cancel my subscription?</summary>
+                            <p class="text-black">
+                                On the profile page there is an option to cancel your subscription. Once pressed you will have access to the association and the
+                                members' area until the end of the billing period. There is a cooling off period (duration is based on your plan length). 
+                                If you change your mind, you can just log back in and click renew and this will re-commence your subscription.
+                            </p>
+                        </details>
+                        <details class="pt-3"><summary>I want to speak to someone at the SPNA</summary>
+                            <p class="text-black">
+                                It is only natural...! <br>
+                                Please email <a class="email-link" href="mailto:communications@scottishpna.org">communications@scottishpna.org</a> or <a class="email-link" href="mailto:info@scottishpna.org">info@scottishpna.org</a> to touch base and we will arrange a call back at your convenience.
+                            </p>
+                        </details>
+                    </div>
                 </div>
-                <div class="modal-body col-12 bg-whitesmoke">
-                    <form action="{% url 'post_contact' %}" method="POST">
-                        {% csrf_token %}
-                        {{ contact_form|crispy }}
-                        <div class="modal-footer bg-light-blue">
-                            <button type="button" class="btn btn-secondary modal-close-button" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" id="toastbtn" class="btn spna-btn">Submit</button>
+            </div>
+        </div>  
+
+        <!-- Delete Document Modal -->
+        <div class="modal fade" id="delete-doc-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-doc-modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title scots" id="staticBackdropLabel-del-doc">Delete Document</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
+                        <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this Document? <i class="fas fa-exclamation-triangle"></i></p>
+                    </div>
+                    <div class="modal-footer" id="delete-doc-modal-buttons">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a id="doc-modal-delete-button" aria-label="Delete" href="/spna_admin/delete/document/{{doc.id}}" class="btn btn-back delete-button">DELETE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Article Modal -->
+        <div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title scots" id="staticBackdropLabel-del-article">Delete Article</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
+                        <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this Article? <i class="fas fa-exclamation-triangle"></i></p>
+                    </div>
+                    <div class="modal-footer" id="delete-article-modal-buttons">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a id="modal-delete-button" aria-label="Delete" href="/spna_admin/delete/article/{{article.id}}" class="btn btn-back delete-button">DELETE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Contact Modal -->
+        <div class="modal fade" id="delete-cont-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-cont-modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title scots" id="staticBackdropLabel-del-contact">Delete Contact</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
+                        <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this Contact? <i class="fas fa-exclamation-triangle"></i></p>
+                    </div>
+                    <div class="modal-footer" id="delete-cont-modal-buttons">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a id="cont-modal-delete-button" aria-label="Delete" href="/spna_admin/delete/contact/{{contact.id}}" class="btn btn-back delete-button">DELETE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Subscription Modal -->
+        <div class="modal fade" id="delete-sub-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-sub-modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title scots" id="staticBackdropLabel-del-sub">Delete Subscription</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
+                        <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to cancel this subscription? <i class="fas fa-exclamation-triangle"></i></p>
+                    </div>
+                    <div class="modal-footer" id="delete-sub-modal-buttons">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a id="sub-modal-delete-button" aria-label="Delete" href="{% url 'cancel_subscription' %}" class="btn btn-back delete-button">STOP SUBSCRIPTION</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages Container -->
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                {{ message | safe }} 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block page_header %}
+        {% endblock %}
+
+        <!-- Main page content -->
+        {% block content %}
+        {% endblock %}
+
+        <!-- BTT Button -->
+        <div id="back-to-top" class="btt-button shadow rounded-3" aria-labelledby="back-to-top">
+            <a id="btt-link" class="btt-link d-flex h-100" href="#" aria-label="Back to top button">
+                <i id="btt-arrow" class="fas fa-arrow-up text-black mx-auto my-auto"></i>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer class=" fixed-bottom">
+            <div id="footer" class="container-fluid bg-blue">
+                <div id="footer-row" class="row g-0">
+                    <div class="col-12 col-lg-8">
+                        <div class="d-none d-lg-inline-block">
+                            <img class="pl-3" src="{% get_media_prefix %}images/cropped-SPNA_logo_icon.png" width="100" height="100" alt="Cropped SPNA logo">
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- FAQ Modal -->
-    <div class="modal fade" id="faqModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="FAQ modal" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content modal-body row g-0 text-blue">
-                <div class="modal-header col-12 bg-light-blue">
-                    <h5 class="modal-title" id="staticBackdropLabel">Scottish Private Nursery Association FAQ</h5>
-                    <button type="button" class="btn-close modal-close-button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body col-12 bg-whitesmoke">
-                    <details class="pt-3"><summary>Why join the SPNA?</summary>
-                        <p class="text-black ml-2">
-                            Join the SPNA to gain access to specic documents pertinent to developments in the Early years learning sector. You and your nursery will also
-                            benefit from the collective experience of others in our sector.
-                        </p>
-                    </details>
-                    <details class="pt-3"><summary>What nurseries are eligible for support?</summary>
-                        <p class="text-black">
-                            All private nurseries in Scotland are eligible to become SPNA members. We have had to limit memberships to one per Nursery setting.
-                        </p>
-                    </details>
-                    <details class="pt-3"><summary>What happens when I change my subscription duration?</summary>
-                        <p class="text-black">
-                            Using the profile page (members only access) you can select to change your subscription to another duration.
-                            Once changed your account will be invoiced pro-rata. So if you have cahnged from 1 year to monthly. At the end of the
-                            period you have paid for (1 year in this example), the new amount (monthly) will be taken from the card on your account.
-                        </p>
-                    </details>
-                    <details class="pt-3"><summary>How do I cancel my subscription?</summary>
-                        <p class="text-black">
-                            On the profile page there is an option to cancel your subscription. Once pressed you will have access to the association and the
-                            members' area until the end of the billing period. There is a cooling off period (duration is based on your plan length). 
-                            If you change your mind, you can just log back in and click renew and this will re-commence your subscription.
-                        </p>
-                    </details>
-                    <details class="pt-3"><summary>I want to speak to someone at the SPNA</summary>
-                        <p class="text-black">
-                            It is only natural...! <br>
-                            Please email <a class="email-link" href="mailto:communications@scottishpna.org">communications@scottishpna.org</a> or <a class="email-link" href="mailto:info@scottishpna.org">info@scottishpna.org</a> to touch base and we will arrange a call back at your convenience.
-                        </p>
-                    </details>
-                </div>
-            </div>
-        </div>
-    </div>  
-
-    <!-- Delete Document Modal -->
-    <div class="modal fade" id="delete-doc-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Delete document modal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title scots" id="staticBackdropLabel">Delete Document</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
-                    <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this Document? <i class="fas fa-exclamation-triangle"></i></p>
-                </div>
-                <div class="modal-footer" id="delete-modal-buttons">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a id="doc-modal-delete-button" aria-label="Delete" href="/spna_admin/delete/document/{{doc.id}}" class="btn btn-back delete-button">DELETE</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delete Article Modal -->
-    <div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Delete article modal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title scots" id="staticBackdropLabel">Delete Article</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
-                    <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this Article? <i class="fas fa-exclamation-triangle"></i></p>
-                </div>
-                <div class="modal-footer" id="delete-modal-buttons">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a id="modal-delete-button" aria-label="Delete" href="/spna_admin/delete/article/{{article.id}}" class="btn btn-back delete-button">DELETE</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delete Contact Modal -->
-    <div class="modal fade" id="delete-cont-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Delete contact modal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title scots" id="staticBackdropLabel">Delete Contact</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
-                    <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this Contact? <i class="fas fa-exclamation-triangle"></i></p>
-                </div>
-                <div class="modal-footer" id="delete-cont-modal-buttons">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a id="cont-modal-delete-button" aria-label="Delete" href="/spna_admin/delete/contact/{{contact.id}}" class="btn btn-back delete-button">DELETE</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delete Subscription Modal -->
-    <div class="modal fade" id="delete-sub-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Delete subscription modal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title scots" id="staticBackdropLabel">Delete Subscription</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="delete-modal-body d-flex justify-content-center mt-4 mb-4">
-                    <p><i class="fas fa-exclamation-triangle"></i> Are you sure you want to cancel this subscription? <i class="fas fa-exclamation-triangle"></i></p>
-                </div>
-                <div class="modal-footer" id="delete-cont-modal-buttons">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a id="cont-modal-delete-button" aria-label="Delete" href="{% url 'cancel_subscription' %}" class="btn btn-back delete-button">STOP SUBSCRIPTION</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Messages Container -->
-    {% if messages %}
-        {% for message in messages %}
-        <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
-            {{ message | safe }} 
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-    {% endif %}
-
-    {% block page_header %}
-    {% endblock %}
-
-    <!-- Main page content -->
-    {% block content %}
-    {% endblock %}
-
-    <!-- BTT Button -->
-    <div class="btt-button shadow rounded-3" aria-labelledby="Back to top">
-        <a id="btt-link"class="btt-link d-flex h-100" href="#" aria-label="Back to top button">
-            <i id="btt-arrow" class="fas fa-arrow-up text-black mx-auto my-auto"></i>
-        </a>
-    </div>
-
-    <!-- Footer -->
-    <footer class=" fixed-bottom">
-        <div id="footer" class="container-fluid bg-blue">
-            <div id="footer-row" class="row g-0">
-                <div class="col-12 col-lg-8">
-                    <div class="d-none d-lg-inline-block">
-                        <img class="pl-3" src="{% get_media_prefix %}images/cropped-SPNA_logo_icon.png" width="100px" height="100px" alt="Cropped SPNA logo">
+                        <div class="d-block d-lg-inline-block text-center align-middle">
+                            <p class="footer-logo text-blue text-center d-none d-md-block">Scottish Private Nursery Association 
+                                <a class="p-2 p-md-0" aria-label="Send an email link" href="mailto:communications@scottishpna.org"><i class="d-inline-block d-lg-none fas fa-envelope"></i></a>
+                            </p>
+                            <p class="d-none d-lg-inline-block">
+                                <a class="email-link" aria-label="Send an email link" href="mailto:communications@scottishpna.org">communications@scottishpna.org</a>
+                            </p>
+                        </div>
                     </div>
-                    <div class="d-block d-lg-inline-block text-center align-middle">
-                        <p class="footer-logo text-blue text-center d-none d-md-block">Scottish Private Nursery Association 
-                            <a class="p-2 p-md-0" aria-label="Send an email link" href="mailto:communications@scottishpna.org"><i class="d-inline-block d-lg-none fas fa-envelope"></i></a>
-                        </p>
-                        <p class="d-none d-lg-inline-block">
-                            <a class="email-link" aria-label="Send an email link" href="mailto:communications@scottishpna.org">communications@scottishpna.org</a>
-                        </p>
+                    <div id="social-holder" class="col-12 col-lg-4 text-center d-flex">
+                        <ul class="social-networks text-blue">
+                            <li><a class="socials d-inline-block d-md-none" aria-label="Send an email link" href="mailto:communications@scottishpna.org"><i class="d-inline-block d-lg-none fas fa-envelope"></i></a></li>
+                            <li><a href="https://www.facebook.com/ScottishPNA" class="socials" target="_blank" rel="noopener" aria-label="Visit our Facebook page (opens in a new tab)"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="https://www.gov.scot/policies/early-education-and-care/" class="socials" target="_blank" rel="noopener" aria-label="Link to the scottish government childcare page">gov.scot</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div id="social-holder" class="col-12 col-lg-4 text-center d-flex">
-                    <ul class="social-networks text-blue">
-                        <li><a class="socials d-inline-block d-md-none" aria-label="Send an email link" href="mailto:communications@scottishpna.org"><i class="d-inline-block d-lg-none fas fa-envelope"></i></a></li>
-                        <li><a href="https://www.facebook.com/ScottishPNA" class="socials" target="_blank" rel="noopener" aria-label="Visit our Facebook page (opens in a new tab)"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="https://www.gov.scot/policies/early-education-and-care/" class="socials" target="_blank" rel="noopener" aria-label="Link to the scottish government childcare page">gov.scot</a></li>
-                    </ul>
+                <div id="inner-lower-footer" class="row">
+                    <div class="col-12 text-center">
+                        <div><p class="d-inline-block p-0 m-0">&copy; 2022 E.Colquhoun</p> | <a id="privacy-policy" href="https://www.privacypolicygenerator.info/live.php?token=cq6yVuA7P1JMIN7gPPh7RXMo1xDmhY6m" target="_blank" rel="noopener">Privacy Policy</a>
+                            | <a class="p-0" id="faq-button" data-bs-toggle="modal" data-bs-target="#faqModal" href="#faqModal">FAQ</a></div>
+                    </div>
                 </div>
             </div>
-            <div id="inner-lower-footer" class="row">
-                <div class="col-12 text-center">
-                    <span><p class="d-inline-block p-0 m-0">&copy 2022 E.Colquhoun</p> | <a id="privacy-policy" href="https://www.privacypolicygenerator.info/live.php?token=cq6yVuA7P1JMIN7gPPh7RXMo1xDmhY6m" target="_blank" rel="noopener">Privacy Policy</a>
-                        | <a class="p-0" id="faq-button" data-bs-toggle="modal" data-bs-target="#faqModal" href="#faqModal">FAQ</a></span>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-    {% block postloadjs %}
-    {% endblock %}
-</body>
+        </footer>
+        
+        <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+        {% block postloadjs %}
+        {% endblock %}
+    </body>
 </html>

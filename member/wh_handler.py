@@ -10,6 +10,7 @@ from spna.email import (
     cancel_email_to_member,
     failed_payment_to_member)
 
+
 def wh_set_paid_until(request, charge):
     """Updates the spnamember model with a new paid until value."""
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -25,7 +26,8 @@ def wh_set_paid_until(request, charge):
             user = User.objects.get(email=email)
         except AttributeError as err:
             messages.error(request,
-                f'No User exists with this name. Error:{err}. Please contact Admin.')
+                           f'No User exists with this name. Error:{err}.\
+                             Please contact Admin.')
             return False
 
         user.spnamember.set_paid_until(current_period_end)
@@ -33,7 +35,8 @@ def wh_set_paid_until(request, charge):
 
     else:
         messages.error(request,
-            'No customer with this payment intent exists. Please contact Admin.')
+                       'No customer with this payment intent exists. \
+                        Please contact Admin.')
 
 
 def update_paid_until(request, event):
@@ -53,17 +56,23 @@ def update_paid_until(request, event):
                     user.save()
                 except AttributeError as err:
                     messages.error(request,
-                        f'No User exists with this name. Error:{err}. Please contact Admin.')
+                                   f'No User exists with this name. Error:{err}.\
+                                     Please contact Admin.')
                     return False
         else:
             messages.error(request,
-                'No customer with this subscription exists. Please contact Admin.')
+                           'No customer with this subscription exists. \
+                            Please contact Admin.')
     except AttributeError as err:
-        messages.error(request, f"There is a problem updating the expiry date: {err}")
+        messages.error(request,
+                       f"There is a problem updating the expiry date: {err}")
 
 
 def sub_cancelled(request, charge):
-    """Changes the 'paid' option of the SPNA member when subscription is deleted."""
+    """
+    Changes the 'paid' option of the SPNA member
+    when subscription is deleted.
+    """
     stripe.api_key = settings.STRIPE_SECRET_KEY
     try:
         cust = stripe.PaymentIntent.retrieve(charge.customer)
@@ -75,15 +84,17 @@ def sub_cancelled(request, charge):
                     user = User.objects.get(email=email)
                 except RuntimeError as err:
                     messages.error(request,
-                        f'No User exists with this name. Error:{err}. Please contact Admin.')
+                                   f'No User exists with this name. Error:{err}.\
+                                     Please contact Admin.')
                     return False
 
-            user.spnamember.paid=False
+            user.spnamember.paid = False
             cancel_email(request.user)
             cancel_email_to_member(request.user)
         else:
             messages.error(request,
-                'No customer with this subscription exists. Please contact Admin.')
+                           'No customer with this subscription exists. \
+                            Please contact Admin.')
     except AttributeError as err:
         messages.error(request, f"There is a payment error: {err}")
 
@@ -102,10 +113,12 @@ def failed_payment(request, charge):
                     failed_payment_to_member(user)
                 except RuntimeError as err:
                     messages.error(request,
-                        f'No User exists with this name. Error:{err}. Please contact Admin.')
+                                   f'No User exists with this name. \
+                                    Error:{err}. Please contact Admin.')
                     return False
         else:
             messages.error(request,
-                'No customer with this subscription exists. Please contact Admin.')
+                           'No customer with this subscription exists. \
+                            Please contact Admin.')
     except AttributeError as err:
         messages.error(request, f"There is a payment error: {err}")
