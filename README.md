@@ -513,18 +513,21 @@ The method for cloning a project from GitHub is below:
 
 # Credits
 ### Content
-
 * The font came from [Google Fonts](https://fonts.google.com/).
 * [Stack Overflow](https://stackoverflow.com/) for general hints and tips.
 * The colour selection was compiled by [MyColorSpace](https://mycolor.space/) and [colorpeek](https://colorpeek.com/).
 * The icons came from [Font Awesome](https://fontawesome.com/).
 * Non custom code has been credited in situ.
 * Highlghted navigation menu from [Stack Overflow](https://stackoverflow.com/questions/340888/navigation-in-django).
+* Text from scottishpna.org (see Plagiarism note below).
 
 ### Media
 * [Unsplash](https://unsplash.com/) - Stock Nursery Photos
 
 [Back to top](<#contents>)
+
+# A note on Plagiarism
+The project conception began when the developer was approached by the Client to produce a more user friendly version of a current website. As such, the developer has express permission of the Client to use the text from the current website. The text was written by the Client and the IP is owned by the Client. The Client specifically wanted the same text and similar color scheme on the new SPNA application.
 
 # Acknowledgements
 The site was completed as a Portfolio 5 Project piece for the Full Stack Software Developer (e-Commerce) Diploma at the [Code Institute](https://codeinstitute.net/). I would like to thank my mentor [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), the Slack community, and all at the Code Institute for their help and support. I would like to thank the team of testers (Family and friends, you know who you are!) for their help and and keen eye for spelling and grammar errors. I would also like to thank the Client, The Scottish Private Nursery Association for the opportunity to work on this project together.
