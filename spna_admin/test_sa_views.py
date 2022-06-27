@@ -29,7 +29,6 @@ class TestSpnaAdminSuperuserViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'spna_admin/spna_admin.html')
 
-
     def test_can_send_email_form(self):
         """Tests the send email view"""
         contact = Contact.objects.create(
@@ -52,7 +51,7 @@ class TestSpnaAdminSuperuserViews(TestCase):
         existing_articles = Articles.objects.all().count()
         self.assertEqual(existing_articles, 0)
         form = ArticleForm({
-            'title':'Test Article', 
+            'title':'Test Article',
             'content':'Test article content', })
         self.client.post('/spna_admin/add/article/', form.data)
         total_articles = Articles.objects.all().count()
@@ -60,14 +59,14 @@ class TestSpnaAdminSuperuserViews(TestCase):
 
     def test_article_form_invalid_view(self):
         form = ArticleForm({
-            'title':'', 
+            'title':'',
             'content':'Test article content', })
         response = self.client.post('/spna_admin/add/article/', form.data)
         self.assertTemplateUsed('/spna_admin/edit_article.html')
         total_articles = Articles.objects.all().count()
         self.assertEqual(total_articles, 0)
         self.assertEqual(response.status_code, 200)
-    
+
     def test_can_edit_article(self):
         article = Articles.objects.create(
             title='Test Article', content='Great news about the Django tests', )
@@ -95,7 +94,9 @@ class TestSpnaAdminSuperuserViews(TestCase):
 
     def test_can_delete_contact(self):
         test_contact = Contact.objects.create(
-            name='Test Contact Name', email='contact@email.com', message='Great news about the Django tests', )
+            name='Test Contact Name',
+            email='contact@email.com',
+            message='Great news about the Django tests', )
         existing_contacts = Contact.objects.filter(id=test_contact.id)
         self.assertEqual(len(existing_contacts), 1)
         response = self.client.get(f'/spna_admin/delete/contact/{test_contact.id}')
@@ -153,7 +154,7 @@ class TestNonSuperUserAccess(TestCase):
         self.assertEqual(response.status_code, 302)
         current_articles = Articles.objects.all()
         self.assertEqual(len(current_articles), 0)
-    
+
     def test_user_cannot_add_document_view(self):
         test_doc = {
             'title':'Test Document',
@@ -173,7 +174,6 @@ class TestSecureSuperUserAccess(TestCase):
         response = self.client.get('/spna_admin/csv/')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/accounts/login/?next=/spna_admin/csv/')
-        
 
     def test_no_spna_admin_access(self):
         """SPNA_admin access only for superusers"""

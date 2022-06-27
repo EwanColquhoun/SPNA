@@ -5,16 +5,6 @@
 
 import * as spna from "../spna_admin.js";
 
-// describe("Select box test", () => {
-
-//     beforeAll(() => {
-//         let fs = require("fs");
-//         let fileContents = fs.readFileSync("spna_admin/templates/spna_admin/spna_admin.html", "utf-8");
-//         document.open();
-//         document.write(fileContents);
-//         document.close();
-//     });
-
 describe("Select box test", () => {
     // Below html mocked as Jest doesn't recognise the email form where the id_email_to element lives.
     beforeAll(() => {
@@ -98,6 +88,4 @@ describe("Select box test", () => {
         let mail = emailList.toString(emailList)
         expect(mail).toMatch("testemail@email.com")
     })
-
 })
-

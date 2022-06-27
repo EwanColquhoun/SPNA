@@ -2,7 +2,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-
 {% block extra_css %}
 <link rel="stylesheet prefetch" type="text/css" href="{% static 'spna_admin/css/spna_admin.css' %}">
 {% endblock %}
@@ -42,7 +41,6 @@
             <!-- Add article form -->
             <form class="admin-form" action="{% url 'edit_article' article.id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                
                 {% for field in form %}
                     {% if field.name != 'image' %}
                         {{ field | as_crispy_field }}
@@ -52,7 +50,6 @@
                 {% endfor %}
                 <div>
                     <button class="btn btn-success">Submit Article</button>
-                    
                     <a id="delete-button" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#delete-modal"><i class="fas fa-trash">Delete</i></a>
                 </div>
             </form>
@@ -62,8 +59,4 @@
         </div>
     </div>
 </section>
-{% endblock %}
-
-{% block postloadjs %}
-    
 {% endblock %}

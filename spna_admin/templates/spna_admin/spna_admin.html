@@ -34,9 +34,8 @@
 <!-- SPNA-Admin-Dashboard section -->
 <section id="admin-dashboard" class="bg-light-blue">
     <div class="container-fluid">
-
         <div class="row">
-            
+
             <!-- Members table-->
             <div class="col-12 col-lg-6 p-1 p-sm-3 mx-auto text-center">
                 <div class="member-table-head p-1 p-sm-3">
@@ -44,37 +43,35 @@
                 </div>
                 <div class="table-holder">
                     <table class="base-table">
-                            <tr class="">
-                                <th class="text-center ">Full Name</th>
-                                <th class="text-center ">Nursery</th>
-                                <th class="text-center ">Email</th>
-                                <th class="text-center ">Phone</th>
-                                <th class="text-center ">Renewal</th>
-                                <th class="text-center ">All <input id="members-select-all" type="checkbox" ></th>
-                            </tr>
-                            {% for user in users %}
-                            <tr class="bg-ant-white">
-                                <td class="text-center">{{user.spnamember.fullname}}</td>
-                                <td class="text-center">{{user.spnamember.nursery}}</td>
-                                <td class="text-center">
-                                    <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.email}}">
-                                        {{user.email|truncatechars:15}}
-                                    </button>
-                                </td>
-                                <td class="text-center">
-                                    <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.phone}}">
-                                        {{user.spnamember.phone|truncatechars:5}}
-                                    </button>
-                                </td>
-                                <td class="text-center">{% if user.spnamember.paid %}{{user.spnamember.paid_until|date:"d M y" }}{% else %}Expired{% endif %}</td>
-                                <td class="text-center">
-                                    <input type="checkbox" id="select" class="member-select-box select-box" name="email" value="{{user.email}}">
-                                </td>
-
-                            </tr>
-                            {% endfor %}
-                            
-                        </table>
+                        <tr class="">
+                            <th class="text-center ">Full Name</th>
+                            <th class="text-center ">Nursery</th>
+                            <th class="text-center ">Email</th>
+                            <th class="text-center ">Phone</th>
+                            <th class="text-center ">Renewal</th>
+                            <th class="text-center ">All <input id="members-select-all" type="checkbox" ></th>
+                        </tr>
+                        {% for user in users %}
+                        <tr class="bg-ant-white">
+                            <td class="text-center">{{user.spnamember.fullname}}</td>
+                            <td class="text-center">{{user.spnamember.nursery}}</td>
+                            <td class="text-center">
+                                <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.email}}">
+                                    {{user.email|truncatechars:15}}
+                                </button>
+                            </td>
+                            <td class="text-center">
+                                <button type="button" class="email-tt" data-bs-toggle="tooltip" data-bs-placement="left" title="{{user.phone}}">
+                                    {{user.spnamember.phone|truncatechars:5}}
+                                </button>
+                            </td>
+                            <td class="text-center">{% if user.spnamember.paid %}{{user.spnamember.paid_until|date:"d M y" }}{% else %}Expired{% endif %}</td>
+                            <td class="text-center">
+                                <input type="checkbox" id="select" class="member-select-box select-box" name="email" value="{{user.email}}">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
                 </div>
                 <div class="pt-3">
                     <!-- Gets a CSV of members to download. -->
@@ -90,7 +87,6 @@
                     <h2 class="text-blue">Contact Information</h2>
                 </div>
                 <div class="table-holder">
-
                     <table class="base-table">
                         <tr>
                             <th class="text-center">Date</th>
@@ -150,7 +146,6 @@
                     </div>
                 </div>
             </div>
-
             <hr class="d-block p-1 d-md-none mx-auto admin-hr">
         </div>
 
@@ -174,7 +169,6 @@
         </div>
 
         <hr class="d-none d-md-block p-1 mx-auto email-hr">
-
         <hr class="d-block p-1 d-md-none mx-auto admin-hr">
 
         <div class="row">

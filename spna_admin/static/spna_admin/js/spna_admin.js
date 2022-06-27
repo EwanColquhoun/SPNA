@@ -1,4 +1,4 @@
-
+// Page init
 window.addEventListener('DOMContentLoaded', function() {
     selectButton();
     let csa = document.getElementById('contacts-select-all');
@@ -6,6 +6,7 @@ window.addEventListener('DOMContentLoaded', function() {
     let msa = document.getElementById('members-select-all');
     msa.addEventListener('change', checkAllMembers);
 });
+
 // Variables
 let emailList = [];
 

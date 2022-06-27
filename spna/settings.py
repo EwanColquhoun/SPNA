@@ -32,7 +32,7 @@ DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = ['localhost', 'scottishpna.herokuapp.com']
 CSRF_TRUSTED_ORIGINS = [
-    "https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-eu49.gitpod.io",
+    "https://localhost",
     "https://scottishpna.herokuapp.com"]
 
 SITE_ID = 1

@@ -1,6 +1,6 @@
 # Scottish Private Nursery Association SPNA
 
-The Scottish Private Nursery Association is an operating association for private nurseries operating in Scotland. 
+The Scottish Private Nursery Association is an association for private nurseries operating in Scotland. 
 The SPNA provides a body to the Private nursery owners and staff that they can rely on and to help and support when required. 
 I was approached by the Client, one of the SPNA founders to see if I could make their updated website a bit more admin user friendly.
 
@@ -46,7 +46,6 @@ The live site can be viewed [here!](https://scottishpna.herokuapp.com/)
     * [**Content**](<#content>)
     * [**Media**](<#media>)
 * [**Acknowledgements**](<#acknowledgements>)
-
 
 # User Experience (UX)
 
@@ -114,7 +113,6 @@ The above user stories were created in conjunction with the Client and their dev
 
     ![members page wireframe](media/readme-images/member.png)
     </details>
-    
 
 * SPNA Admin page
 
@@ -123,7 +121,6 @@ The above user stories were created in conjunction with the Client and their dev
     ![SPNA Admin page wireframe](media/readme-images/spna-admin.png)
     </details>
     
-
 * Sign Up page
 
     <details><summary>Screenshots</summary>
@@ -131,7 +128,6 @@ The above user stories were created in conjunction with the Client and their dev
     ![Sign Up page wireframe](media/readme-images/signup.png)
     </details>
     
-
 * Tablet Wireframes
 
     The SPNA website is fully responsive. There are minimal changes when viewed on a table (iPad) sized display. The major change is with the navigation bar (navbar) on the smaller tablets and mobile devices. I have attached an example wireframe of how the navbar will look on these smaller screens. 
@@ -141,11 +137,9 @@ The above user stories were created in conjunction with the Client and their dev
     ![home page tablet wireframe](media/readme-images/home-tablet.png)
     </details>
     
-
 * Mobile Wireframes
 
     In addition to the above navbar there are minor differences on a few pages and I have included them below. It mainly involves the arranging of news articles and SPNA Admin forms. 
-
 
     <details><summary>Screenshots</summary>
 
@@ -163,6 +157,16 @@ The above user stories were created in conjunction with the Client and their dev
 
 ## Site Structure
 
+* Layout
+    - The SPNA site is designed to be user friendly. All of the publically viewable pages are easily accessed from the navigation menu at the top of each page. There is an additional menu in the form of a dropdown on the right hand side of the navigation bar.
+    - A non registered user is able to contact the admin of the site with the contact form.
+* Access
+    - To gain access to the member area and the profile page you will need to be registered and paid up. This is a process initiated from the 'Sign Up' page. This can be accessedd from the dropdown menu or the navigation bar once it has been compressed onto a smaller screen.
+    - This is the only point to access the payment system. If the user navigates away from the page without completing the full process, there is no way to reinstate this and it has to be commenced from the start again.
+    - Once the payment has been successfully processed the Member is then created and access is then granted to the Member Area. The Member can also view their Profile page from the dropdown menu on the right hand side of the navigation bar. They can also do ancillary tasks such as; change email address, change password, and modify their subscription (based on their experience with the current memebers, the Client doesn't expect this feature to be used but they have said that it is a nice feature to have available.). 
+
+[Back to top](<#contents>)
+
 ## Design Choices
 
  * ### Typography
@@ -177,7 +181,6 @@ The above user stories were created in conjunction with the Client and their dev
     ![Color peek palate](media/readme-images/peek.png)
     ![MyColor space palate](media/readme-images/space.png)
 
- 
 [Back to top](<#contents>)
 
 # Data Model
@@ -203,10 +206,12 @@ The above user stories were created in conjunction with the Client and their dev
 - As the project has progressed the Client and I weren't too happy with the amount of screen real estate the footer was taking up. I deceided to remove some of the elements at the screen size is reduced. It retains all of the features (minus the logo) but takes up alot less room.
 - Nearing the end of development a few inefficiencies crept into the site. On the News page with lots of article there was a lot of scrolling and certainly on a mobile device this didn't create a positive experience. One way around this was to remove the scroll element and content from the articles themselves and just incorporate a button to encourage the user to click to display a modal with the full content. Similarly in the members' area the documents were often hidden and mis-represented. the user can now click on the title and the document opens in a new window. The option to download the document remains. 
 - I have also added a FAQ section in the footer. This will open a modal with appropriate questions inside.
+- Initially the applicataion was set up with email authentication for new members. The Client thought this wasn't appropriate for the SPNA and asked for it to be removed. I explained that the process was for security and to prevent erronious accounts,. A modified version will be reinstated in the next release.
 
     ![FAQ Modal](media/readme-images/faq.png)
 
 [Back to top](<#contents>)
+
 # Features
 
 ## Existing Features
@@ -330,6 +335,7 @@ These features were discussed at length with the client and implemented with the
 </details>
 
 [Back to top](<#contents>)
+
 ### Profile Page
 The Profile page is viewable for members to view their own membership details. It contains:
     * Current Details
@@ -373,8 +379,13 @@ The Scottish PNA has a Facebook business site managed my myself. [SPNA Facebook]
 ![Facebook SPNA page](media/readme-images/facebook.jpeg)
 
 # Business Model
-The SPNA business model is based on a Business to Consumer (B2C) interaction. The consumer wants to become a member of the association (SPNA) to gain insight into the support available and to join an officially recognised association in the childcare field. 
-The membership is based on a subscription model using Stripe payments. There are three durations of membership to choose from; monthly, 6 monthly and yearly with an appropriate pricing structure. 
+The SPNA business model is based on a Business to Consumer (B2C) interaction. The consumer wants to become a member of the association (SPNA) to gain insight into the support available and to join an officially recognised association in the childcare field.
+<br>
+The membership is based on a subscription model using Stripe payments. There are three durations of membership to choose from; monthly, 6 monthly and yearly with an appropriate pricing structure. The membership is set to automatically renew at the end of the period. <br>
+Through publically available records the SPNA has contacted the owners and management of Private Nurseries in Scotland to make them aware of the SPNA and encourage them to join and take advantage of the power achieved through a joint body of members. This has proven successful so far and will continue to raise the profile of the SPNA. In addition there is the Facebook page and there are plans for an Instagram page in the near future.
+
+
+[Back to top](<#contents>)
 
 # Technologies Used
 * [Python](https://docs.python.org/3/contents.html) - primary language of the application.

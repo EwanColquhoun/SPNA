@@ -20,6 +20,7 @@ fields_list = [
         'paid_until',
     ]
 
+# Based on this: https://stackoverflow.com/questions/29672477/django-export-current-queryset-to-csv-by-button-click-in-browser
 def export_qs_to_csv(model_class = None):
     """
     Gets the model and related fields and inputs them into a csv for SPNA admin.

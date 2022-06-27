@@ -1,9 +1,12 @@
+/* -----------------SPNA ADMIN PAGE--------------- */
+/* ------------------------- SPNA-Hero Section */
 #admin-header {
     background: url('/media/images/admin.jpg') no-repeat center;
     background-color: rgb(236, 136, 136);
     background-size: cover;
 }
 
+/* ------------------------- SPNA-Body Section */
 #admin-dashboard {
     height: fit-content;
 }
