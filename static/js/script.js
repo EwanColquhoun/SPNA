@@ -14,5 +14,3 @@ function alerts() {
     }
   }, 4000);
 }
-
-document.addEventListener('DOMContentLoaded', alerts());

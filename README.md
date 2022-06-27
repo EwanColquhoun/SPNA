@@ -279,6 +279,7 @@ Each article is displayed in a card that expands into a large modal for ease of 
 
 ### Contact Modal
 * When a User submits a contact request the application does a number of things. It logs the contact to the database for a record and it also emails the Admin with the details of the contact. Initially all contacts are marked as 'unreplied' (not replied). This gives the Admin a quick reference to see the status of the contact.
+* The contact modal also holds the newsletter signup form. It isn't ideal not being initially visible on the site, however the client didn't want the newsletter form at all. This is the compromise we came up with for now. The newsletters are all managed by the admin (Client) and actioned through another email database that they have access to.
 
     <details><summary>Screenshots</summary>
 
@@ -403,6 +404,7 @@ Through publically available records the SPNA has contacted the owners and manag
 * [IconFinder](https://www.iconfinder.com/) - for favicon.
 * [Jest](https://jestjs.io/) - Testing framework for JavaScript.
 * [Facebook](https://facebook.com) - Creating the SPNA business page.
+* [MailChimp](https://mailchimp.com/) - Creating the newsletter form.
 
 [Back to top](<#contents>)
 
@@ -519,7 +521,7 @@ The method for cloning a project from GitHub is below:
 * The icons came from [Font Awesome](https://fontawesome.com/).
 * Non custom code has been credited in situ.
 * Highlghted navigation menu from [Stack Overflow](https://stackoverflow.com/questions/340888/navigation-in-django).
-* Text from scottishpna.org (see Plagiarism note below).
+* Text from [scottishpna.org](scottishpna.org). See Plagiarism note below.
 
 ### Media
 * [Unsplash](https://unsplash.com/) - Stock Nursery Photos
