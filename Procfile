@@ -1,1 +1,0 @@
-web: gunicorn spna.wsgi:application
