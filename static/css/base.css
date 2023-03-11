@@ -184,6 +184,11 @@ footer a {
     height: fit-content;
 }
 
+#footer-row {
+    font-weight: 500;
+    max-height: 80px;
+}
+
 #privacy-policy {
     padding: unset;
 }
