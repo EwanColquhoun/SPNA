@@ -42,10 +42,14 @@ def member_area(request):
                        access this page.")
         return redirect(reverse('home'))
 
-    docs = Document.objects.all()
+    docs_1 = Document.objects.filter(category='1')
+    docs_2 = Document.objects.filter(category='2')
+    docs_3 = Document.objects.filter(category='3')
 
     context = {
-        'docs': docs,
+        'docs_1': docs_1,
+        'docs_2': docs_2,
+        'docs_3': docs_3,
     }
     return render(request, 'member/member-area.html', context)
 

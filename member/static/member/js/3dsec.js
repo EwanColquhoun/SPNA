@@ -26,7 +26,7 @@ function _3dsec(stripe_publishable_key, pi_secret) {
             </div>`;
           $("#3ds_result").html(htmlString);
           // Relocates to a log the user in once payment is successful.
-           window.location.href = 'https://scottishpna.herokuapp.com/member/login/';
+           window.location.href = 'https://spna.onrender.com/member/login/';
         }
       });
     });

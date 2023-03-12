@@ -36,8 +36,8 @@
         <div class="cat-title col-12 p-4">
             <h2 class="category-title">Media Release</h2>
         </div>
-        {% for doc in docs %}
-            {% if doc.category == '1' %}
+        {% for doc in docs_1 %}
+            <!-- {% if doc.category == '1' %} -->
                 <div class="document col-12 col-md-3 mx-auto my-auto position-relative">
                     <div class="doc-1-title" class="pt-4">
                         <h3 class="doc-title">
@@ -66,7 +66,9 @@
                     </div>
                 </div>
                 <hr class="d-block m-2 d-md-none mx-auto">
-            {% endif %}
+            <!-- {% endif %} -->
+            {% empty %}
+            <div class="col-12 col-md-3 mx-auto my-auto position-relative">Coming Soon...</div>
          {% endfor %}
     </div>
     <!-- Media Mentions -->
@@ -75,8 +77,8 @@
             <h2 class="category-title">Media Mentions</h2>
         </div>
 
-        {% for doc in docs %}
-            {% if doc.category == '2' %}
+        {% for doc in docs_2 %}
+            <!-- {% if doc.category == '2' %} -->
             <div class="document col-12 col-md-3 mx-auto my-auto position-relative">
                 <div class="doc-1-title" class="pt-4">
                     <h3 class="doc-title">
@@ -105,7 +107,9 @@
                 </div>
             </div>
             <hr class="d-block m-2 d-md-none mx-auto">
-            {% endif %}
+            <!-- {% endif %} -->
+            {% empty %}
+            <div class="col-12 col-md-3 mx-auto my-auto position-relative">Coming Soon...</div>
         {% endfor %}
     </div>
     <!-- Letters to and responses from Government -->
@@ -114,8 +118,8 @@
             <h2 class="category-title">Letters to and responses from Government</h2>
         </div>
 
-        {% for doc in docs %}
-            {% if doc.category == '3' %}
+        {% for doc in docs_3 %}
+            <!-- {% if doc.category == '3' %} -->
             <div class="document col-12 col-md-3 mx-auto my-auto position-relative">
                 <div class="doc-1-title" class="pt-4">
                     <h3 class="doc-title">
@@ -144,7 +148,9 @@
                 </div>
             </div>
             <hr class="d-block m-2 d-md-none mx-auto">
-            {% endif %}
+            <!-- {% endif %} -->
+            {% empty %}
+            <div class="col-12 col-md-3 mx-auto my-auto position-relative">Coming Soon...</div>
         {% endfor %}
     </div>
 </section>
