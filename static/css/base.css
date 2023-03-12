@@ -90,6 +90,10 @@ footer a {
     color: #0f5081;
 }
 
+.menu-link {
+    list-style: none;
+}
+
 #allauth-menu {
     list-style-type: unset;
 }
@@ -206,7 +210,7 @@ footer a {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
+    /* align-items: flex-end; */
 }
 
 /* provides enhanced UX with feedback over the icons */

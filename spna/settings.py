@@ -26,12 +26,16 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['localhost', 'spna.app.render.com']
+ALLOWED_HOSTS = [
+    'https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-us90.gitpod.io',
+    'localhost',
+    'spna.app.render.com']
 # Add Render.com URL to allowed hosts
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 CSRF_TRUSTED_ORIGINS = [
+    "https://8000-ewancolquhoun-spna-jrhwr7uwb6e.ws-us90.gitpod.io",
     "https://localhost",
     "https://scottishpna.herokuapp.com"]
 
