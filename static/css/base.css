@@ -8,7 +8,7 @@ body {
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
     overflow-y: auto;
-    padding-bottom: 50px;
+    padding-bottom: 48px;
 }
 
 .container {
@@ -210,7 +210,6 @@ footer a {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* align-items: flex-end; */
 }
 
 /* provides enhanced UX with feedback over the icons */
@@ -530,18 +529,14 @@ footer a {
         padding-top: 100px;
     }
 }
-
+/* 
  @media (min-width: 992px) {
     body {
         padding-bottom: 112px;
     }
- }
+ } */
 
 @media (max-width: 774px) {
-    #mc_embed_signup {
-        width: 100%;
-    }
-
     .title-text {
     position: absolute;
     top: 32%;
@@ -574,5 +569,11 @@ footer a {
 @media (max-width: 328px) {
     body {
         padding-bottom: 88px;
+    }
+}
+
+@media (max-width: 328px) {
+    footer a {
+        padding: 0 1.1rem;
     }
 }

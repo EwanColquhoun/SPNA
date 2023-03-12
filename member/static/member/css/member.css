@@ -11,7 +11,7 @@
 
 #member-text {
     position: absolute;
-    bottom: 30%;
+    bottom: 20%;
     right: 15%;
 }   
 
@@ -29,9 +29,9 @@
 }
 
 .document {
-  min-height: 12rem;
+  min-height: 10rem;
   border: 1px solid #0f5081;
-  border-radius: 5%;
+  border-radius: 5px;
   background-color: moccasin;
 }
 
